@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaRetail — Caso de Estudio IA Agéntica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ─────────────────────────────────────────
+     TOKENS
+  ───────────────────────────────────────── */
+  :root {
+    --ink:        #0f0e0c;
+    --paper:      #f5f0e8;
+    --paper2:     #ede8dc;
+    --rule:       #c8bfac;
+    --accent:     #c94a2a;
+    --accent2:    #e07a52;
+    --accent3:    #f5c06c;
+    --muted:      #7a7060;
+    --white:      #ffffff;
+    --tag-a:      #1a4a8c;
+    --tag-b:      #c94a2a;
+    --tag-c:      #2a7a5c;
+    --tag-d:      #7a3a8c;
+
+    --serif:      'Playfair Display', Georgia, serif;
+    --sans:       'DM Sans', sans-serif;
+    --mono:       'DM Mono', monospace;
+
+    --max:        860px;
+    --col-pad:    clamp(20px, 5vw, 60px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 17px; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.72;
+  }
+
+  /* ─────────────────────────────────────────
+     HEADER MASTHEAD
+  ───────────────────────────────────────── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 var(--col-pad);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 420px; height: 420px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .masthead-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 60px 0 56px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tag-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid;
+    border-radius: 2px;
+  }
+
+  .tag-curso { border-color: rgba(245,240,232,0.3); color: rgba(245,240,232,0.6); }
+  .tag-modulo { border-color: var(--accent2); color: var(--accent2); }
+
+  .masthead h1 {
+    font-family: var(--serif);
+    font-size: clamp(38px, 7vw, 72px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--accent2);
+  }
+
+  .masthead-meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .masthead-desc {
+    font-size: 18px;
+    line-height: 1.6;
+    color: rgba(245,240,232,0.75);
+    max-width: 640px;
+    font-weight: 300;
+  }
+
+  /* ─────────────────────────────────────────
+     NAV PILLS
+  ───────────────────────────────────────── */
+  .toc-strip {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 0 var(--col-pad);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .toc-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .toc-inner::-webkit-scrollbar { display: none; }
+
+  .toc-link {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    text-decoration: none;
+    padding: 14px 20px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .toc-link:hover { color: var(--accent2); border-bottom-color: var(--accent2); }
+
+  /* ─────────────────────────────────────────
+     MAIN LAYOUT
+  ───────────────────────────────────────── */
+  .page {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--col-pad) 80px;
+  }
+
+  /* ─────────────────────────────────────────
+     SECTION HEADER
+  ───────────────────────────────────────── */
+  .section {
+    margin-top: 72px;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4.5vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .rule { 
+    border: none; 
+    border-top: 1px solid var(--rule); 
+    margin: 32px 0; 
+  }
+
+  /* ─────────────────────────────────────────
+     TYPOGRAPHY
+  ───────────────────────────────────────── */
+  p { margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  strong { font-weight: 500; }
+
+  .lead {
+    font-size: 19px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: #2a2520;
+  }
+
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px 16px 24px;
+    background: rgba(201,74,42,0.05);
+    border-radius: 0 4px 4px 0;
+    margin: 24px 0;
+    font-size: 15.5px;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .callout strong { color: var(--ink); font-style: normal; }
+
+  /* ─────────────────────────────────────────
+     CONTEXT CARDS (quick facts)
+  ───────────────────────────────────────── */
+  .fact-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2px;
+    margin: 32px 0;
+    border: 1px solid var(--rule);
+  }
+
+  .fact {
+    padding: 20px;
+    background: var(--white);
+  }
+
+  .fact-num {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .fact-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─────────────────────────────────────────
+     SYSTEMS STACK (software stack visual)
+  ───────────────────────────────────────── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    margin: 24px 0;
+  }
+
+  .stack-item {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    padding: 16px;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .stack-item .si-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .stack-item .si-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .stack-item .si-desc {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ─────────────────────────────────────────
+     PAIN POINTS
+  ───────────────────────────────────────── */
+  .pain {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    background: var(--white);
+  }
+
+  .pain-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .pain-letter {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--white);
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  .pain-a .pain-letter { background: var(--accent); }
+  .pain-b .pain-letter { background: var(--tag-a); }
+  .pain-c .pain-letter { background: var(--tag-c); }
+
+  .pain-title-wrap .pain-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  .pain-title-wrap h3 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .pain-body { padding: 20px 24px; }
+
+  .pain-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 560px) { .pain-row { grid-template-columns: 1fr; } }
+
+  .pain-detail {
+    background: var(--paper2);
+    padding: 14px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .pain-detail .pd-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .pain-3r {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(201,74,42,0.06);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    font-size: 13.5px;
+  }
+
+  .pain-3r strong {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ─────────────────────────────────────────
+     TRINITY
+  ───────────────────────────────────────── */
+  .trinity {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin: 28px 0;
+    border: 1px solid var(--rule);
+  }
+
+  @media (max-width: 560px) { .trinity { grid-template-columns: 1fr; } }
+
+  .trinity-item {
+    padding: 28px 22px;
+    background: var(--white);
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .trinity-item:last-child { border-right: none; }
+
+  .trinity-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+
+  .trinity-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .trinity-name {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .trinity-desc { font-size: 13.5px; color: var(--muted); }
+
+  .trinity-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .trinity-item:nth-child(1) .trinity-tag { background: rgba(201,74,42,0.12); color: var(--accent); }
+  .trinity-item:nth-child(2) .trinity-tag { background: rgba(26,74,140,0.12); color: var(--tag-a); }
+  .trinity-item:nth-child(3) .trinity-tag { background: rgba(42,122,92,0.12); color: var(--tag-c); }
+
+  /* ─────────────────────────────────────────
+     TASK CARDS
+  ───────────────────────────────────────── */
+  .task {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: var(--white);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .task-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .task-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--rule);
+    flex-shrink: 0;
+    margin-top: -4px;
+  }
+
+  .task-meta .task-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .task-meta h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .task-meta .task-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .task-body { padding: 24px 28px; }
+
+  .task-questions {
+    list-style: none;
+    margin: 0;
+  }
+
+  .task-questions li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--paper2);
+    padding-left: 24px;
+    position: relative;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .task-questions li:last-child { border-bottom: none; }
+
+  .task-questions li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+
+  .task-hint {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: #fffbf5;
+    border: 1px solid #e0d4b0;
+    border-radius: 4px;
+    font-size: 13.5px;
+  }
+
+  .task-hint .th-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 6px;
+  }
+
+  .task-deliverable {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 14px 18px;
+    background: var(--paper);
+    border-radius: 4px;
+    font-size: 13.5px;
+  }
+
+  .task-deliverable .td-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .task-deliverable .td-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  /* ─────────────────────────────────────────
+     MATRIX VISUAL
+  ───────────────────────────────────────── */
+  .matrix-wrap {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 28px;
+    margin: 24px 0;
+    position: relative;
+  }
+
+  .matrix-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr;
+    grid-template-rows: 1fr 1fr 40px;
+    gap: 6px;
+    height: 280px;
+  }
+
+  .matrix-cell {
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    transition: transform 0.2s;
+    cursor: default;
+  }
+
+  .matrix-cell:hover { transform: scale(1.02); }
+
+  .matrix-cell .mc-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .mc-zone1 { background: #e8f4ec; border: 1px solid #a8d4b4; } /* Script */
+  .mc-zone2 { background: #fdf6e3; border: 1px solid #e8d58c; } /* Agente */
+  .mc-zone3 { background: #fde8e3; border: 1px solid #e8a898; } /* Ignorar */
+  .mc-zone4 { background: #e8eef8; border: 1px solid #a8b8d8; } /* Copiloto */
+
+  .matrix-axis-y {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .matrix-axis-x {
+    grid-column: 2 / 4;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .problem-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--white);
+    font-family: var(--serif);
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ─────────────────────────────────────────
+     DPO CHALLENGE — special section
+  ───────────────────────────────────────── */
+  .dpo-section {
+    background: var(--ink);
+    color: var(--paper);
+    margin: 72px calc(-1 * var(--col-pad));
+    padding: 60px var(--col-pad);
+  }
+
+  .dpo-inner { max-width: var(--max); margin: 0 auto; }
+
+  .dpo-section .section-label { color: var(--accent2); }
+  .dpo-section .section-title { color: var(--paper); }
+  .dpo-section p { color: rgba(245,240,232,0.75); }
+
+  .dpo-objections {
+    display: grid;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .dpo-obj {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 6px 6px 0;
+    padding: 20px 24px;
+  }
+
+  .dpo-obj-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 6px;
+  }
+
+  .dpo-obj h4 {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 8px;
+  }
+
+  .dpo-obj p {
+    font-size: 14px;
+    color: rgba(245,240,232,0.65);
+  }
+
+  .dpo-task {
+    margin-top: 36px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .dpo-task-header {
+    background: rgba(201,74,42,0.25);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .dpo-task-header .task-num { color: rgba(245,240,232,0.2); }
+  .dpo-task-header .task-label { color: var(--accent2); }
+  .dpo-task-header h3 { color: var(--paper); }
+  .dpo-task-header .task-time { color: rgba(245,240,232,0.4); }
+
+  .dpo-task-body {
+    padding: 24px 28px;
+  }
+
+  .dpo-task-body .task-questions li {
+    border-bottom-color: rgba(255,255,255,0.08);
+    color: rgba(245,240,232,0.8);
+  }
+
+  /* ─────────────────────────────────────────
+     FOOTER
+  ───────────────────────────────────────── */
+  footer {
+    background: var(--paper2);
+    border-top: 1px solid var(--rule);
+    padding: 40px var(--col-pad);
+    text-align: center;
+  }
+
+  .footer-inner { max-width: var(--max); margin: 0 auto; }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+
+  footer strong { color: var(--ink); }
+
+  /* ─────────────────────────────────────────
+     FLOW DIAGRAM (Task 2 hint)
+  ───────────────────────────────────────── */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 20px 0;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .flow-node {
+    flex: 1;
+    min-width: 110px;
+    text-align: center;
+    position: relative;
+  }
+
+  .flow-node-inner {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 12px 10px;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0 4px;
+    height: 100%;
+  }
+
+  .flow-node-inner .fn-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .flow-node-inner.fn-active {
+    background: rgba(201,74,42,0.08);
+    border-color: var(--accent);
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--rule);
+    font-size: 18px;
+    padding: 0 2px;
+    flex-shrink: 0;
+    margin-top: -4px;
+  }
+
+  /* ─────────────────────────────────────────
+     PRINT
+  ───────────────────────────────────────── */
+  @media print {
+    .toc-strip, .masthead::before { display: none; }
+    .dpo-section { margin: 40px 0; padding: 40px; }
+    .pain, .task, .matrix-wrap, .trinity { break-inside: avoid; }
+  }
+
+  /* ─────────────────────────────────────────
+     ANIMATIONS
+  ───────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .masthead-inner > * {
+    opacity: 0;
+    animation: fadeUp 0.6s forwards;
+  }
+  .masthead-inner > *:nth-child(1) { animation-delay: 0.05s; }
+  .masthead-inner > *:nth-child(2) { animation-delay: 0.15s; }
+  .masthead-inner > *:nth-child(3) { animation-delay: 0.25s; }
+  .masthead-inner > *:nth-child(4) { animation-delay: 0.35s; }
+  .masthead-inner > *:nth-child(5) { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ MASTHEAD ═══════════════════════════ -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="tag-row">
+      <span class="tag tag-curso">PADDB+37 · The Valley Barcelona</span>
+      <span class="tag tag-modulo">IA Agéntica · Módulo 3</span>
+    </div>
+    <h1>NovaRetail S.A.<br><em>El Black Friday</em><br>de los Agentes</h1>
+    <p class="masthead-desc">Un caso de estrategia para directivos. La tecnología ya existe. La pregunta es cuándo usarla, cómo gobernarla y qué precio tiene equivocarse.</p>
+    <div class="masthead-meta">
+      <span>📍 Madrid, España</span>
+      <span>⏱ 90 minutos de trabajo en equipo</span>
+      <span>🧠 4 tareas · 1 debate regulatorio</span>
+      <span>Framework: Test de las 3R + Matriz Agéntica</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════ TOC NAV ═══════════════════════════ -->
+<nav class="toc-strip">
+  <div class="toc-inner">
+    <a class="toc-link" href="#contexto">01 Contexto</a>
+    <a class="toc-link" href="#conflicto">02 El Conflicto</a>
+    <a class="toc-link" href="#dolores">03 Los 3 Dolores</a>
+    <a class="toc-link" href="#tareas">04 Tareas</a>
+    <a class="toc-link" href="#dpo">05 El DPO Para el Carro</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════ PAGE ═══════════════════════════ -->
+<main class="page">
+
+  <!-- ── CONTEXTO ── -->
+  <section class="section" id="contexto">
+    <div class="section-label">01 · Contexto</div>
+    <h2 class="section-title">La empresa que creció demasiado rápido</h2>
+
+    <p class="lead">NovaRetail es una empresa española con sede en Madrid, líder en e-commerce de electrónica de consumo y hogar. En tres años ha multiplicado por casi seis su facturación y ha cruzado fronteras. El éxito tiene un precio: su arquitectura tecnológica no ha crecido al mismo ritmo.</p>
+
+    <div class="fact-row">
+      <div class="fact">
+        <div class="fact-num">€15M</div>
+        <div class="fact-label">Facturación 2021</div>
+      </div>
+      <div class="fact">
+        <div class="fact-num">€85M</div>
+        <div class="fact-label">Facturación 2024</div>
+      </div>
+      <div class="fact">
+        <div class="fact-num">4</div>
+        <div class="fact-label">Mercados activos</div>
+      </div>
+      <div class="fact">
+        <div class="fact-num">5</div>
+        <div class="fact-label">Proveedores logísticos</div>
+      </div>
+      <div class="fact">
+        <div class="fact-num">40</div>
+        <div class="fact-label">Temporales contratados<br>el último Black Friday</div>
+      </div>
+    </div>
+
+    <p>La ventaja competitiva de NovaRetail siempre fue <strong>el toque humano y la velocidad de respuesta</strong>. Sin embargo, la expansión ha fragmentado su pila tecnológica en silos que no se hablan entre sí.</p>
+
+    <p><strong>El stack actual — el "monstruo":</strong></p>
+
+    <div class="stack-grid">
+      <div class="stack-item">
+        <span class="si-icon">🏭</span>
+        <span class="si-name">SAP (legacy)</span>
+        <span class="si-desc">Inventario y ERP</span>
+      </div>
+      <div class="stack-item">
+        <span class="si-icon">🛍️</span>
+        <span class="si-name">Shopify</span>
+        <span class="si-desc">Tienda online</span>
+      </div>
+      <div class="stack-item">
+        <span class="si-icon">🎧</span>
+        <span class="si-name">Zendesk</span>
+        <span class="si-desc">Soporte al cliente</span>
+      </div>
+      <div class="stack-item">
+        <span class="si-icon">🚚</span>
+        <span class="si-name">SEUR / DHL…</span>
+        <span class="si-desc">5 portales de tracking</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ── EL CONFLICTO ── -->
+  <section class="section" id="conflicto">
+    <div class="section-label">02 · El Conflicto</div>
+    <h2 class="section-title">Dos meses para el Black Friday. Un ultimátum.</h2>
+
+    <p class="lead">Manuel, el CTO, está preocupado. El año pasado el sistema colapsó tres veces. La dirección ya no acepta excusas.</p>
+
+    <div class="callout">
+      <strong>El CEO a Manuel:</strong> "No quiero más gente picando datos manualmente. Quiero que la tecnología trabaje sola. Tienes <strong>€200.000</strong> y hasta el lanzamiento para demostrarlo."
+    </div>
+
+    <div class="callout">
+      <strong>Manuel en el comité de dirección:</strong> "El departamento de Atención al Cliente tuvo que contratar 40 personas temporales para tareas que, siendo honesto, mi hijo de 8 años podría hacer si tuviera acceso a las cuatro pantallas a la vez."
+    </div>
+
+    <p>El problema no es de personas. Es de arquitectura. Cuatro sistemas que <strong>no comparten datos en tiempo real</strong>, cinco portales logísticos con APIs distintas y un proceso de sincronización de stock que depende de un CSV descargado una vez al día.</p>
+
+    <p><strong>La pregunta no es "¿usamos IA?"</strong> — la pregunta es cuál de los tres problemas críticos resolvemos primero, con qué tecnología, y cómo evitamos crear un problema mayor del que intentamos solucionar.</p>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ── LOS 3 DOLORES ── -->
+  <section class="section" id="dolores">
+    <div class="section-label">03 · Los Tres Puntos de Dolor</div>
+    <h2 class="section-title">No todos los problemas merecen la misma solución</h2>
+
+    <p class="lead">Antes de proponer cualquier solución, el equipo necesita clasificar los tres problemas usando el <strong>Test de las 3R</strong>: ¿Requiere Razonamiento? ¿Requiere Relación con múltiples herramientas? ¿Requiere Resiliencia ante entradas variables? Si la respuesta es sí en dos o más, probablemente necesitas un agente.</p>
+
+    <!-- Pain A -->
+    <div class="pain pain-a">
+      <div class="pain-header">
+        <div class="pain-letter">A</div>
+        <div class="pain-title-wrap">
+          <div class="pain-badge">Alta Frecuencia · Bajo impacto unitario · Alto impacto acumulado</div>
+          <h3>El "Laberinto" de Atención al Cliente</h3>
+        </div>
+      </div>
+      <div class="pain-body">
+        <p>El <strong>60% de los tickets</strong> son variantes de la misma pregunta: <em>"¿Dónde está mi pedido y por qué dice que está en reparto si no he recibido nada?"</em></p>
+        <div class="pain-row">
+          <div class="pain-detail">
+            <div class="pd-label">Proceso actual</div>
+            Agente abre el ticket → abre el portal del transportista → copia el código → lo pega → encuentra el error → entra en el ERP → verifica la dirección → redacta respuesta.
+          </div>
+          <div class="pain-detail">
+            <div class="pd-label">El coste real</div>
+            <strong>8 minutos por ticket.</strong> Con 400 tickets diarios en Black Friday, eso son 53 horas de trabajo humano <em>cada día</em> en una sola tipología de consulta.
+          </div>
+        </div>
+        <div class="pain-3r">
+          <strong>🔍 Test 3R — reflexión</strong>
+          ¿Requiere <strong>razonamiento</strong>? Sí — la respuesta cambia según el estado del transportista, el historial del cliente y la política de devoluciones. ¿Requiere <strong>tooling</strong>? Sí — Zendesk + portal logístico + SAP. ¿Requiere <strong>resiliencia</strong>? Sí — cada transportista responde en formatos distintos.
+        </div>
+      </div>
+    </div>
+
+    <!-- Pain B -->
+    <div class="pain pain-b">
+      <div class="pain-header">
+        <div class="pain-letter">B</div>
+        <div class="pain-title-wrap">
+          <div class="pain-badge">Media Frecuencia · Alto impacto · Pérdida directa de ingresos</div>
+          <h3>El "Caos" del Stock</h3>
+        </div>
+      </div>
+      <div class="pain-body">
+        <p>Cuando un producto se agota en la web pero el ERP registra 2 unidades disponibles (por desincronización), el sistema sigue vendiendo. El resultado: cancelaciones, devoluciones y <strong>penalizaciones en los marketplaces</strong> que dañan el ranking.</p>
+        <div class="pain-row">
+          <div class="pain-detail">
+            <div class="pd-label">Proceso actual</div>
+            Un becario descarga un CSV de SAP una vez al día y lo sube manualmente a Shopify. La ventana de error es de hasta 23 horas.
+          </div>
+          <div class="pain-detail">
+            <div class="pd-label">El coste real</div>
+            Cada overselling genera devolución + coste logístico de retorno + penalización marketplace + cliente insatisfecho. En Black Friday, este proceso es una máquina de perder dinero.
+          </div>
+        </div>
+        <div class="pain-3r">
+          <strong>🔍 Test 3R — reflexión</strong>
+          ¿Requiere <strong>razonamiento</strong>? No — la lógica es determinista: si stock SAP cambia, actualiza Shopify. ¿Requiere <strong>tooling</strong>? Sí — dos sistemas. ¿Requiere <strong>resiliencia</strong>? Poco — el formato es estable. <em>Señal de alerta: esto podría ser una automatización clásica, no un agente.</em>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pain C -->
+    <div class="pain pain-c">
+      <div class="pain-header">
+        <div class="pain-letter">C</div>
+        <div class="pain-title-wrap">
+          <div class="pain-badge">Baja Frecuencia · Impacto Crítico · Riesgo reputacional</div>
+          <h3>Los "Incendios" de IT</h3>
+        </div>
+      </div>
+      <div class="pain-body">
+        <p>Cada pico de tráfico satura la base de datos. El equipo de ingenieros abandona el desarrollo de producto para hacer <strong>"fontanería de emergencia"</strong>: limpiar logs, reiniciar servidores, ajustar el balanceador de carga.</p>
+        <div class="pain-row">
+          <div class="pain-detail">
+            <div class="pd-label">Proceso actual</div>
+            Un ingeniero on-call recibe una alerta a las 3 AM, se conecta, diagnostica manualmente y aplica el fix. El tiempo medio de resolución es 47 minutos.
+          </div>
+          <div class="pain-detail">
+            <div class="pd-label">El coste real</div>
+            Cada hora de caída en Black Friday equivale a ~€180.000 en ventas perdidas (estimación basada en el volumen diario de €85M/año en pico). El equipo quema a sus mejores ingenieros en trabajo operativo.
+          </div>
+        </div>
+        <div class="pain-3r">
+          <strong>🔍 Test 3R — reflexión</strong>
+          ¿Requiere <strong>razonamiento</strong>? Sí — el diagnóstico de causa raíz es ambiguo: ¿logs? ¿memoria? ¿query sin índice? ¿ataque? ¿Requiere <strong>tooling</strong>? Sí — monitorización + shell + base de datos + notificación. ¿Requiere <strong>resiliencia</strong>? Crítica — cada incidente es distinto.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ── LA TRINIDAD ── -->
+  <section class="section">
+    <div class="section-label">Marco de Referencia</div>
+    <h2 class="section-title">La Santísima Trinidad del Éxito Agéntico</h2>
+
+    <p>Para que la implementación funcione, no basta con el código correcto. Los tres tipos de agentes deben operar en equilibrio — y cada uno se corresponde con uno de los problemas de NovaRetail.</p>
+
+    <div class="trinity">
+      <div class="trinity-item">
+        <span class="trinity-icon">⚙️</span>
+        <div class="trinity-type">Tipo 1 · Problema A + C</div>
+        <div class="trinity-name">Agentes de Operaciones</div>
+        <p class="trinity-desc">Los que <strong>hacen</strong>. Ejecutan tareas repetitivas o de diagnóstico de forma autónoma. Reducen coste operativo.</p>
+        <span class="trinity-tag">OpenClaw · OpenCode</span>
+      </div>
+      <div class="trinity-item">
+        <span class="trinity-icon">📈</span>
+        <div class="trinity-type">Tipo 2 · Problema B</div>
+        <div class="trinity-name">Agentes de Inteligencia</div>
+        <p class="trinity-desc">Los que <strong>predicen</strong>. Anticipan la demanda, detectan anomalías de stock antes de que ocurran. Generan ingresos.</p>
+        <span class="trinity-tag">ML Predictivo · Forecasting</span>
+      </div>
+      <div class="trinity-item">
+        <span class="trinity-icon">🛡️</span>
+        <div class="trinity-type">Tipo 3 · Transversal</div>
+        <div class="trinity-name">Gobernanza</div>
+        <p class="trinity-desc">Los que <strong>protegen</strong>. Sin esto, los otros dos pueden convertirse en el mayor riesgo de la empresa.</p>
+        <span class="trinity-tag">RGPD · AI Act · Blast Radius</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      Quien construye solo eficiencia optimiza costes. Quien añade inteligencia genera valor. Quien gobierna ambas capas <strong>construye ventaja competitiva sostenible</strong>.
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ── TAREAS ── -->
+  <section class="section" id="tareas">
+    <div class="section-label">04 · Trabajo en Equipo</div>
+    <h2 class="section-title">Cuatro tareas para construir la solución</h2>
+
+    <p class="lead">Trabajad en grupos de 4–5 personas. Cada grupo debe completar las cuatro tareas y estar preparado para defender sus decisiones ante el resto del aula.</p>
+
+    <!-- TAREA 1 -->
+    <div class="task">
+      <div class="task-header">
+        <div class="task-num">01</div>
+        <div class="task-meta">
+          <div class="task-label">Tarea 1 · 20 minutos</div>
+          <h3>La Matriz de Priorización Agéntica</h3>
+          <div class="task-time">⏱ 20 min · Individual + puesta en común</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p>Utiliza la <strong>Matriz Impacto vs. Frecuencia</strong> para clasificar los tres problemas (A, B y C) y asignarles el tipo de solución adecuado.</p>
+
+        <div class="matrix-wrap">
+          <div class="matrix-title">Matriz de Decisión Agéntica — tu canvas de trabajo</div>
+          <div class="matrix-grid">
+            <div class="matrix-axis-y">← Frecuencia →</div>
+            <div class="matrix-cell mc-zone1" style="grid-column:2;grid-row:1;">
+              <div class="mc-tag">🤖 Automatización clásica</div>
+              Alta frecuencia, bajo impacto → Script / RPA. Rápido y barato.
+            </div>
+            <div class="matrix-cell mc-zone2" style="grid-column:3;grid-row:1;">
+              <div class="mc-tag">🧠 Zona dulce del agente</div>
+              Alta frecuencia, alto impacto → Agente autónomo. Máximo ROI.
+            </div>
+            <div class="matrix-cell mc-zone3" style="grid-column:2;grid-row:2;">
+              <div class="mc-tag">🤷 Ignorar / Manual</div>
+              Baja frecuencia, bajo impacto → No automatizar. Gasta el presupuesto en otra parte.
+            </div>
+            <div class="matrix-cell mc-zone4" style="grid-column:3;grid-row:2;">
+              <div class="mc-tag">👤 Copiloto / Human-in-loop</div>
+              Baja frecuencia, alto impacto → El agente propone, el humano aprueba.
+            </div>
+            <div class="matrix-axis-x">← Impacto →</div>
+          </div>
+        </div>
+
+        <ul class="task-questions">
+          <li>Sitúa los problemas A, B y C en la matriz. ¿Coincide tu clasificación con la del Test de las 3R?</li>
+          <li>¿Cuál de los tres problemas debería resolverse <em>primero</em> con €200.000 disponibles? Justifica con criterios de ROI, no solo de complejidad técnica.</li>
+          <li>¿Cuál es una trampa clásica de over-engineering? ¿Para cuál usarías Zapier o un simple webhook en lugar de un agente?</li>
+          <li>Si el CEO te pide un quick win antes del Black Friday (4 semanas), ¿cuál escoges y por qué?</li>
+        </ul>
+
+        <div class="task-hint">
+          <div class="th-label">💡 Pista para el facilitador</div>
+          El problema B (stock) es una trampa clásica: parece agéntico pero supera el Test de las 3R solo en Tooling — la lógica es determinista y la entrada estable. La respuesta correcta es una integración API directa SAP↔Shopify vía webhook, no un LLM. Los problemas A y C son los candidatos reales al agente.
+        </div>
+
+        <div class="task-deliverable">
+          <div class="td-icon">📋</div>
+          <div>
+            <div class="td-label">Entregable</div>
+            Matriz rellenada + tabla de priorización con ROI estimado para cada problema.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAREA 2 -->
+    <div class="task">
+      <div class="task-header">
+        <div class="task-num">02</div>
+        <div class="task-meta">
+          <div class="task-label">Tarea 2 · 25 minutos</div>
+          <h3>Diseño del Agente de Atención al Cliente</h3>
+          <div class="task-time">⏱ 25 min · Trabajo en equipo</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p>Diseña el flujo de trabajo del <strong>Agente de Atención al Cliente</strong>. No es un chatbot. Es un agente que razona, accede a múltiples sistemas y toma decisiones con criterio propio.</p>
+
+        <div class="flow">
+          <div class="flow-node">
+            <div class="flow-node-inner">
+              <div class="fn-label">Entrada</div>
+              ¿Por dónde llega la petición?
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">
+            <div class="flow-node-inner fn-active">
+              <div class="fn-label">Comprensión</div>
+              Classifica intent + extrae entidades (nº pedido, cliente)
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">
+            <div class="flow-node-inner">
+              <div class="fn-label">Tool use</div>
+              ¿Qué APIs lee y escribe?
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">
+            <div class="flow-node-inner">
+              <div class="fn-label">Razonamiento</div>
+              ¿Qué decide en cada escenario?
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node">
+            <div class="flow-node-inner">
+              <div class="fn-label">Acción</div>
+              Responde / escala / actúa
+            </div>
+          </div>
+        </div>
+
+        <ul class="task-questions">
+          <li><strong>Entrada:</strong> ¿WhatsApp, email, Zendesk, todos? ¿Importa el canal para el razonamiento del agente?</li>
+          <li><strong>Skills / Herramientas:</strong> Lista las APIs que el agente necesita leer (tracking, ERP, historial de cliente) y las que necesita escribir (responder ticket, actualizar Zendesk, notificar al equipo logístico).</li>
+          <li><strong>Árbol de decisión:</strong> ¿Qué hace el agente si el transportista responde "Dirección Incorrecta"? ¿Y si el cliente ya ha tenido tres incidencias este mes? ¿Y si el pedido supera €500?</li>
+          <li><strong>Límite de autonomía:</strong> ¿Para qué tipo de respuesta debe pedir aprobación humana antes de actuar?</li>
+        </ul>
+
+        <div class="task-deliverable">
+          <div class="td-icon">🗺️</div>
+          <div>
+            <div class="td-label">Entregable</div>
+            Diagrama de flujo del agente dibujado en papel o pizarra + listado de Skills (APIs) con dirección de lectura/escritura.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAREA 3 -->
+    <div class="task">
+      <div class="task-header">
+        <div class="task-num">03</div>
+        <div class="task-meta">
+          <div class="task-label">Tarea 3 · 20 minutos</div>
+          <h3>Gestión de Riesgos — El Blast Radius</h3>
+          <div class="task-time">⏱ 20 min · Debate estructurado</div>
+        </div>
+      </div>
+      <div class="task-body">
+        <p>En diciembre de 2025, Amazon sufrió una caída de 13 horas porque su agente interno <strong>Kiro</strong> decidió borrar y recrear el entorno de producción como solución a un problema. Los permisos eran demasiado amplios y no había guardrails. NovaRetail no puede permitirse ese error.</p>
+
+        <div class="callout">
+          <strong>El principio del Blast Radius:</strong> antes de darle permisos a un agente, pregunta qué pasa si se equivoca. El radio de explosión de un error define el techo de autonomía que puedes otorgar.
+        </div>
+
+        <ul class="task-questions">
+          <li><strong>Permisos mínimos:</strong> Si implementamos auto-remediación para los incendios de IT, ¿qué permisos específicos necesita el agente en el servidor? (Piensa en operaciones de lectura vs. escritura, en qué entornos puede actuar.)</li>
+          <li><strong>La línea roja:</strong> Lista tres acciones que el agente <em>jamás</em> debería ejecutar sin aprobación humana explícita. Justifica cada una.</li>
+          <li><strong>El escalado:</strong> ¿Cuándo y cómo debe el agente escalar a un humano? ¿Qué información debe incluir en la notificación para que el humano pueda decidir en 30 segundos?</li>
+          <li><strong>El rollback:</strong> Si el agente aplica un fix incorrecto, ¿cómo garantizamos que podemos volver al estado anterior? ¿Qué cambia en el diseño del sistema si el rollback es imposible?</li>
+        </ul>
+
+        <div class="task-hint">
+          <div class="th-label">💡 Marco de referencia: niveles de autonomía</div>
+          Nivel 1: Solo sugiere (el humano decide y ejecuta). Nivel 2: Ejecuta acciones reversibles sin pedir permiso. Nivel 3: Ejecuta acciones no reversibles con aprobación previa. Nivel 4: Autonomía total (solo para entornos de desarrollo o casos de uso muy acotados con blast radius mínimo).
+        </div>
+
+        <div class="task-deliverable">
+          <div class="td-icon">🔒</div>
+          <div>
+            <div class="td-label">Entregable</div>
+            Tabla de permisos (qué puede / qué no puede) + definición de las 3 líneas rojas + protocolo de escalado.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ═══════════════════════════ DPO SECTION ═══════════════════════════ -->
+<div class="dpo-section" id="dpo">
+  <div class="dpo-inner">
+
+    <div class="section-label">05 · El Giro Inesperado</div>
+    <h2 class="section-title">El DPO Para el Carro</h2>
+
+    <p>Justo antes del despliegue, la Delegada de Protección de Datos de NovaRetail frena el proyecto. No niega la tecnología. Plantea tres objeciones que <strong>todo directivo debe saber responder</strong> antes de poner un agente en producción en Europa.</p>
+
+    <div class="dpo-objections">
+      <div class="dpo-obj">
+        <div class="dpo-obj-num">Objeción 01 · Soberanía de Datos</div>
+        <h4>Cloud vs. On-Premise — ¿Dónde viven los datos de nuestros clientes?</h4>
+        <p>Los agentes llaman a LLMs cuyos servidores están en EE. UU. La DPO pregunta: <em>"¿Cómo garantizamos que los datos de nuestros clientes españoles no se usan para entrenar modelos de terceros en California? ¿Hemos hecho la DPIA?"</em> El RGPD exige base legal explícita para cualquier transferencia internacional de datos personales.</p>
+      </div>
+
+      <div class="dpo-obj">
+        <div class="dpo-obj-num">Objeción 02 · Decisiones Automatizadas · Art. 22 RGPD</div>
+        <h4>El agente puede denegar un reembolso. ¿Tiene derecho a hacerlo sin revisión humana?</h4>
+        <p>El agente de Atención al Cliente tiene autonomía para clasificar una devolución como "fraude potencial" mediante ML y bloquear el reembolso. El Art. 22 del RGPD establece que todo ciudadano europeo tiene derecho a <strong>no ser objeto de decisiones exclusivamente automatizadas</strong> que produzcan efectos jurídicos o le afecten significativamente. La DPO exige un botón de "Apelación Humana" visible en cada resolución automatizada.</p>
+      </div>
+
+      <div class="dpo-obj">
+        <div class="dpo-obj-num">Objeción 03 · Sesgo Algorítmico · AI Act Art. 6</div>
+        <h4>El modelo de predicción de demanda evita ciertos códigos postales. ¿Es discriminación?</h4>
+        <p>El modelo de analítica está sugiriendo excluir ciertos códigos postales de las campañas promocionales porque <em>"históricamente compran menos"</em>. La DPO advierte: <strong>los datos históricos codifican sesgos históricos</strong>. Desfavorecer sistemáticamente a clientes por su código postal puede ser discriminación algorítmica bajo el AI Act si el sistema influye en el acceso a servicios. Esto ya es un caso de uso de <em>alto riesgo</em> según el Artículo 6.</p>
+      </div>
+    </div>
+
+    <!-- TAREA 4 -->
+    <div class="dpo-task">
+      <div class="dpo-task-header task-header">
+        <div class="task-num">04</div>
+        <div class="task-meta">
+          <div class="task-label">Tarea 4 · 25 minutos</div>
+          <h3>Responde a la DPO como si fueras el CEO</h3>
+          <div class="task-time">⏱ 25 min · Role-play + debate plenario</div>
+        </div>
+      </div>
+      <div class="dpo-task-body">
+        <p style="color: rgba(245,240,232,0.75); margin-bottom: 16px;">El CEO te ha pedido que prepares las respuestas a las tres objeciones antes de la reunión del comité ejecutivo. No puedes bloquear el proyecto, pero tampoco puedes ignorar el riesgo regulatorio. Tienes que ser capaz de decir "sí, con estas condiciones".</p>
+
+        <ul class="task-questions">
+          <li>¿Qué solución técnica propones para la <strong>soberanía de datos</strong>? (Azure OpenAI con residencia EU, modelos on-premise, contract data processing con OpenAI, etc.) ¿Qué coste tiene cada opción y qué plazos implica?</li>
+          <li>Diseña el flujo de <strong>apelación humana</strong> para las decisiones de devolución automatizadas. ¿Quién recibe la apelación? ¿En qué plazo debe resolverse? ¿Cómo documenta el agente su razonamiento para que el humano pueda revisarlo?</li>
+          <li>¿Cómo detectas y corriges el <strong>sesgo del modelo de stock</strong>? ¿Qué métricas monitoreas? ¿Quién en la organización es responsable de auditarlo?</li>
+          <li>Si el proyecto se retrasa 3 meses por compliance, ¿cómo presentas ese retraso al CEO como inversión en lugar de coste?</li>
+        </ul>
+
+        <div class="task-deliverable" style="background: rgba(255,255,255,0.07); border-radius: 4px; margin-top:20px;">
+          <div class="td-icon">🎙️</div>
+          <div>
+            <div class="td-label" style="color: rgba(245,240,232,0.4);">Entregable + Plenario</div>
+            <span style="color: rgba(245,240,232,0.75); font-size: 14px;">Cada grupo presenta su posición (2 minutos). El facilitador actúa como DPO y puede objetar. El grupo que mejor combine viabilidad técnica, velocidad y gestión del riesgo regulatorio gana el debate.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <p>
+      Caso de estudio diseñado para <strong>PADDB+37 · The Valley Barcelona</strong> ·
+      IA Agéntica para Directivos · Alberto Robles · Logicalis España
+    </p>
+    <p style="margin-top: 8px;">
+      Framework: Test de las 3R (Razonamiento, Relación con Herramientas, Resiliencia) ·
+      Matriz Agéntica de Decisión · Referencia: EU AI Act COM(2021)206 · RGPD Art. 22
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
