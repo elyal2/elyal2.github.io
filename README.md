@@ -10,6 +10,8 @@ Puedes acceder a las demos directamente a través de GitHub Pages:
 
 - **[IPTC & FIBO Classifier/NER](https://elyal2.github.io/iptc-fibo-classifier_ner.html)**: Una herramienta para clasificación de textos bajo estándares IPTC y FIBO, incluyendo extracción de entidades (NER).
 
+- **[El Dado de la Innovación](https://elyal2.github.io/dice-innovation-test.html)**: Test de perfil de innovación basado en 15 preguntas distribuidas en 3 dimensiones. Inspirado en *The Dice Man* (Luke Rhinehart, 1971) y la tipología Tipo A/D de Friedman & Rosenman (1959), evalúa tu relación con el riesgo, la disrupción y la IA Generativa. Genera un perfil entre tres arquetipos: **Follower Puro** (Temperatura 0), **Innovador Social** (Temperatura 0.5) o **Disruptor Radical** (Temperatura 1.0), con recomendaciones de configuración de IA para cada perfil.
+
 ---
 
 ## 🛠️ Cómo crear tu propio repositorio de demos
