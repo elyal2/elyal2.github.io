@@ -475,6 +475,7 @@ tr:hover td{background:var(--card-hover)}
 .upload-btn:hover{opacity:.88}
 #file-input{display:none}
 .upload-hint{margin-top:16px;font-size:10px;color:var(--dim);font-family:var(--mono)}
+.upload-version{margin-top:6px;font-size:9px;color:var(--dim);font-family:var(--mono);opacity:.55}
 
 /* ── Loading ── */
 #loading-section{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 90px);gap:16px}
@@ -599,6 +600,7 @@ tr:hover td{background:var(--card-hover)}
     <label class="upload-btn" for="file-input">Seleccionar .xlsx</label>
     <input type="file" id="file-input" accept=".xlsx,.xls">
     <div class="upload-hint">Pestaña esperada: datos · Columnas: Nombre recurso, Tipo Imputacion, h, Mes, Area rec, Servicio…</div>
+    <div class="upload-version" id="upload-version"></div>
   </div>
 </div>
 
@@ -806,6 +808,13 @@ function classify(tipo) {
 
 function isMyBU_area(area) { return area && (/ana|analytics/i).test(area); }
 function isMyBU_org(org) { return org && (/ana/i).test(org); }
+
+// ═══════════════════════════════════════════════
+//  VERSION
+// ═══════════════════════════════════════════════
+// Súbela aquí cada vez que despliegues una nueva versión del dashboard
+const APP_VERSION = '1.1.1';
+document.getElementById('upload-version').textContent = 'v' + APP_VERSION;
 
 // ═══════════════════════════════════════════════
 //  THEME
@@ -1622,42 +1631,44 @@ function renderRepercusion() {
   // Chart
   const container = document.getElementById('chart-reperc');
   container.innerHTML = '';
-  if(areaData.length === 0) { container.innerHTML = '<p style="color:var(--muted);padding:20px">Sin repercusión externa detectada</p>'; return; }
-  
-  const margin = {top:10, right:20, bottom:30, left:140};
-  const width = container.clientWidth || 600;
-  const height = Math.min(190, Math.max(100, areaData.length * 26 + margin.top + margin.bottom));
-  
-  const svg = d3.select(container).append('svg')
-    .attr('width', width).attr('height', height);
-  const g = svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
-  
-  const iw = width - margin.left - margin.right;
-  const ih = height - margin.top - margin.bottom;
-  
-  const y = d3.scaleBand().domain(areaData.map(d=>d[0])).range([0,ih]).padding(0.2);
-  const x = d3.scaleLinear().domain([0, d3.max(areaData,d=>d[1])*1.1]).range([0,iw]);
-  
-  const tip = d3.select('.d3-tip').empty() ? d3.select('body').append('div').attr('class','d3-tip').style('display','none') : d3.select('.d3-tip');
-  
-  g.selectAll('rect')
-    .data(areaData)
-    .join('rect')
-    .attr('x',0).attr('y',d=>y(d[0]))
-    .attr('width',d=>x(d[1]))
-    .attr('height',y.bandwidth())
-    .attr('fill','var(--purple)')
-    .attr('opacity',0.7)
-    .attr('rx',3)
-    .on('mouseover',(e,d) => tip.style('display','block').html(`<b>${d[0]}</b><br>${fmt(d[1],0)}h en servicios Ana`))
-    .on('mousemove',e => tip.style('left',(e.pageX+10)+'px').style('top',(e.pageY-30)+'px'))
-    .on('mouseout',() => tip.style('display','none'));
-  
-  g.append('g').call(d3.axisLeft(y)).selectAll('text').attr('fill','var(--text)').style('font-size','10px');
-  g.append('g').attr('transform',`translate(0,${ih})`).call(d3.axisBottom(x).ticks(5).tickFormat(v=>fmtK(v)+'h')).selectAll('text').attr('fill','var(--muted)').style('font-size','9px');
-  g.selectAll('.domain').attr('stroke','var(--border)');
-  g.selectAll('.tick line').attr('stroke','var(--border)');
-  
+  if(areaData.length === 0) {
+    container.innerHTML = '<p style="color:var(--muted);padding:20px">Sin repercusión externa detectada</p>';
+  } else {
+    const margin = {top:10, right:20, bottom:30, left:140};
+    const width = container.clientWidth || 600;
+    const height = Math.min(190, Math.max(100, areaData.length * 26 + margin.top + margin.bottom));
+
+    const svg = d3.select(container).append('svg')
+      .attr('width', width).attr('height', height);
+    const g = svg.append('g').attr('transform',`translate(${margin.left},${margin.top})`);
+
+    const iw = width - margin.left - margin.right;
+    const ih = height - margin.top - margin.bottom;
+
+    const y = d3.scaleBand().domain(areaData.map(d=>d[0])).range([0,ih]).padding(0.2);
+    const x = d3.scaleLinear().domain([0, d3.max(areaData,d=>d[1])*1.1]).range([0,iw]);
+
+    const tip = d3.select('.d3-tip').empty() ? d3.select('body').append('div').attr('class','d3-tip').style('display','none') : d3.select('.d3-tip');
+
+    g.selectAll('rect')
+      .data(areaData)
+      .join('rect')
+      .attr('x',0).attr('y',d=>y(d[0]))
+      .attr('width',d=>x(d[1]))
+      .attr('height',y.bandwidth())
+      .attr('fill','var(--purple)')
+      .attr('opacity',0.7)
+      .attr('rx',3)
+      .on('mouseover',(e,d) => tip.style('display','block').html(`<b>${d[0]}</b><br>${fmt(d[1],0)}h en servicios Ana`))
+      .on('mousemove',e => tip.style('left',(e.pageX+10)+'px').style('top',(e.pageY-30)+'px'))
+      .on('mouseout',() => tip.style('display','none'));
+
+    g.append('g').call(d3.axisLeft(y)).selectAll('text').attr('fill','var(--text)').style('font-size','10px');
+    g.append('g').attr('transform',`translate(0,${ih})`).call(d3.axisBottom(x).ticks(5).tickFormat(v=>fmtK(v)+'h')).selectAll('text').attr('fill','var(--muted)').style('font-size','9px');
+    g.selectAll('.domain').attr('stroke','var(--border)');
+    g.selectAll('.tick line').attr('stroke','var(--border)');
+  }
+
   // Table
   const agg = {};
   rows.forEach(r => {
