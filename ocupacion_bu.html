@@ -578,6 +578,13 @@ tr:hover td{background:var(--card-hover)}
       <div id="f-service-drop" style="position:absolute;top:100%;left:0;width:260px;max-height:180px;overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);display:none;z-index:200;box-shadow:var(--shadow)"></div>
     </div>
   </div>
+  <div class="filter-group">
+    <span class="filter-label">CECO</span>
+    <div class="multicheck" id="mc-ceco">
+      <div class="multicheck-btn" id="mc-ceco-btn">Todos ▾</div>
+      <div class="multicheck-dropdown" id="mc-ceco-drop"></div>
+    </div>
+  </div>
   <div class="filter-group" style="margin-left:auto">
     <input class="filter-input" id="f-search" placeholder="🔍 Buscar persona…">
   </div>
@@ -741,6 +748,7 @@ let state = {
   onlyMyBU: false,
   search: '',
   serviceFilter: '',
+  ceco: null, // null = all (Set of selected CECOs otherwise)
   tab: 'resumen',
   // Sort states per table
   sorts: { bench:{key:'bench',asc:false}, personas:{key:'occ',asc:false}, reperc:{key:'h',asc:false}, clientes:{key:'h',asc:false} },
@@ -752,6 +760,15 @@ const PER_PAGE = 25;
 //  UTILS
 // ═══════════════════════════════════════════════
 const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
+function setCookie(name, value, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + days*24*60*60*1000);
+  document.cookie = `${name}=${encodeURIComponent(value)};expires=${d.toUTCString()};path=/;SameSite=Lax`;
+}
+function getCookie(name) {
+  const m = document.cookie.match(new RegExp('(^| )'+name+'=([^;]+)'));
+  return m ? decodeURIComponent(m[2]) : null;
+}
 const fmt = (n,d=0) => n.toLocaleString('es-ES',{minimumFractionDigits:d,maximumFractionDigits:d});
 const fmtPct = n => (isNaN(n)||n==null) ? '—' : n.toFixed(1)+'%';
 const fmtK = n => { if(Math.abs(n)>=1e6) return (n/1e6).toFixed(1)+'M'; if(Math.abs(n)>=1e4) return Math.round(n/1e3)+'K'; if(Math.abs(n)>=1e3) return (n/1e3).toFixed(1)+'K'; return fmt(n); };
@@ -903,6 +920,7 @@ function populateFilters() {
   const months = [...new Set(DATA.map(r=>r.mk))].sort();
   const areas = [...new Set(DATA.map(r=>r.area).filter(Boolean))].sort();
   const orgs = [...new Set(DATA.map(r=>r.orgServicio).filter(Boolean))].sort();
+  const cecos = [...new Set(DATA.map(r=>r.grp).filter(Boolean))].sort();
   
   // Month selectors
   const mFrom = document.getElementById('f-month-from');
@@ -929,6 +947,27 @@ function populateFilters() {
     if (!e.target.closest('#mc-area')) mcDrop.classList.remove('open');
   });
 
+  // CECO multi-check (Grp rec, col I) - global filter, preference persisted in a cookie
+  const cecoDrop = document.getElementById('mc-ceco-drop');
+  const savedCecoRaw = getCookie('ocupBU_ceco');
+  let savedCeco = null;
+  try { savedCeco = savedCecoRaw ? JSON.parse(savedCecoRaw) : null; } catch(e) { savedCeco = null; }
+  const savedValid = Array.isArray(savedCeco) && savedCeco.length && savedCeco.some(c => cecos.includes(c));
+  cecoDrop.innerHTML = `<div class="multicheck-actions"><span onclick="mcCecoAll(true)">✓ Todos</span><span onclick="mcCecoAll(false)">✗ Ninguno</span></div>`;
+  cecos.forEach(c => {
+    const checked = savedValid ? savedCeco.includes(c) : true;
+    cecoDrop.innerHTML += `<label class="multicheck-item"><input type="checkbox" value="${c}" ${checked?'checked':''} onchange="mcCecoChange()"/>${c}</label>`;
+  });
+  document.getElementById('mc-ceco-btn').addEventListener('click', () => {
+    cecoDrop.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#mc-ceco')) cecoDrop.classList.remove('open');
+  });
+  // Sync initial state/label from the (possibly restored) checkbox selection, without re-saving the cookie
+  const cecoChecked = [...cecoDrop.querySelectorAll('input:checked')].map(i=>i.value);
+  state.ceco = cecoChecked.length === cecos.length ? null : new Set(cecoChecked);
+  document.getElementById('mc-ceco-btn').textContent = cecoChecked.length === cecos.length ? 'Todos' : `${cecoChecked.length} sel.`;
   // Org Servicio filter for Clientes tab
   const orgSel = document.getElementById('f-org-servicio');
   orgSel.innerHTML = '<option value="ALL">Todos</option>';
@@ -1004,6 +1043,21 @@ window.mcAreaChange = function() {
   applyFilters();
 };
 
+window.mcCecoAll = function(check) {
+  document.querySelectorAll('#mc-ceco-drop input').forEach(i => i.checked = check);
+  mcCecoChange();
+};
+
+window.mcCecoChange = function() {
+  const checked = [...document.querySelectorAll('#mc-ceco-drop input:checked')].map(i=>i.value);
+  const total = document.querySelectorAll('#mc-ceco-drop input').length;
+  state.ceco = checked.length === total ? null : new Set(checked);
+  document.getElementById('mc-ceco-btn').textContent = checked.length === total ? 'Todos' : `${checked.length} sel.`;
+  // Remember preference: empty array means "all" so a future load with different CECOs defaults to all-checked
+  setCookie('ocupBU_ceco', JSON.stringify(checked.length === total ? [] : checked), 365);
+  applyFilters();
+};
+
 function applyFilters() {
   FILT = DATA.filter(r => {
     if (state.monthFrom && r.mk < state.monthFrom) return false;
@@ -1013,6 +1067,7 @@ function applyFilters() {
     if (state.onlyMyBU && !isMyBU_area(r.area)) return false;
     if (state.search && !r.name.toLowerCase().includes(state.search)) return false;
     if (state.serviceFilter && !(r.servicio||'').toLowerCase().includes(state.serviceFilter)) return false;
+    if (state.ceco && !state.ceco.has(r.grp)) return false;
     return true;
   });
   // Reset pages
