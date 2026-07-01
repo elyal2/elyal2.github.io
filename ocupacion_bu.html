@@ -571,6 +571,10 @@ tr:hover td{background:var(--card-hover)}
     <div class="toggle" id="toggle-bu"></div>
     <span class="toggle-lbl">Solo mi BU</span>
   </div>
+  <div class="filter-group toggle-wrap">
+    <div class="toggle" id="toggle-jornada"></div>
+    <span class="toggle-lbl" title="Corrige la capacidad de semanas de jornada intensiva (29 Jun–4 Sep): 35h reales vs 40h del sistema">Jornada real ⚡</span>
+  </div>
   <div class="filter-group">
     <span class="filter-label">Servicio</span>
     <div style="position:relative;display:inline-block">
@@ -751,6 +755,7 @@ let state = {
   search: '',
   serviceFilter: '',
   ceco: null, // null = all (Set of selected CECOs otherwise)
+  jornadaReal: false, // corrige capacidad por jornada intensiva (35h vs 40h sistema)
   tab: 'resumen',
   // Sort states per table
   sorts: { bench:{key:'bench',asc:false}, personas:{key:'occ',asc:false}, reperc:{key:'h',asc:false}, clientes:{key:'h',asc:false} },
@@ -813,8 +818,23 @@ function isMyBU_org(org) { return org && (/ana/i).test(org); }
 //  VERSION
 // ═══════════════════════════════════════════════
 // Súbela aquí cada vez que despliegues una nueva versión del dashboard
-const APP_VERSION = '1.1.1';
+const APP_VERSION = '1.2.0';
 document.getElementById('upload-version').textContent = 'v' + APP_VERSION;
+
+// ═══════════════════════════════════════════════
+//  JORNADA INTENSIVA
+// ═══════════════════════════════════════════════
+// Semanas ISO de jornada intensiva por año (29 Jun → 4 Sep)
+// Añadir aquí los rangos de futuros años cuando sean conocidos
+const INTENSIVA = { 2026: [27, 36] };
+function isIntensiva(week, year) {
+  const r = INTENSIVA[year];
+  return r ? week >= r[0] && week <= r[1] : false;
+}
+// Factor real vs sistema: 35h (7h×5d intensiva) / 40h (8h×5d sistema) = 0.875
+const INTENSIVA_FACTOR = 35 / 40;
+// Helper: h de capacidad → corregida si toggle activo, bruta si no
+const capH = r => (state.jornadaReal && r.cat === 'capacity') ? r.hAdj : r.h;
 
 // ═══════════════════════════════════════════════
 //  THEME
@@ -891,6 +911,9 @@ function processData(rows) {
     const tipo = (r['Tipo Imputacion']||'Otros').trim();
     const cat = classify(tipo);
     const mk = monthKey(r);
+    const semana = num(r['Semana']);
+    const year = num(r['Año']);
+    const intensiva = isIntensiva(semana, year);
     return {
       id: r['Id rec'] || '',
       name: (r['Nombre recurso']||'').trim(),
@@ -904,7 +927,8 @@ function processData(rows) {
       tipo, cat, h, hDisp, hImput, mk,
       tipoSem: (r['Tipo sem']||'').trim(),
       fy: String(r['FY']||'').trim(),
-      semana: num(r['Semana']),
+      semana, year, intensiva,
+      hAdj: (cat === 'capacity' && intensiva) ? h * INTENSIVA_FACTOR : h,
       repercBU: parseInt(r['Reperc BU']) === 1 ? 1 : 0,
     };
   }).filter(r => r.mk && r.name);
@@ -998,6 +1022,13 @@ function populateFilters() {
   tog.addEventListener('click', () => {
     state.onlyMyBU = !state.onlyMyBU;
     tog.classList.toggle('on', state.onlyMyBU);
+    applyFilters();
+  });
+
+  const togJ = document.getElementById('toggle-jornada');
+  togJ.addEventListener('click', () => {
+    state.jornadaReal = !state.jornadaReal;
+    togJ.classList.toggle('on', state.jornadaReal);
     applyFilters();
   });
 
@@ -1117,7 +1148,7 @@ function computeMetrics(rows) {
   let productive=0, capacity=0, absence=0, internal=0, vacaciones=0;
   rows.forEach(r => {
     if (r.cat === 'productive') productive += r.h;
-    else if (r.cat === 'capacity') capacity += r.h; // Disponibilidad h = remaining capacity
+    else if (r.cat === 'capacity') capacity += capH(r); // Disponibilidad h = remaining capacity
     else if (r.cat === 'absence') { absence += r.h; if(r.tipo==='Vacaciones') vacaciones += r.h; }
     else if (r.cat === 'internal') internal += r.h;
   });
@@ -1161,8 +1192,11 @@ function computeMetrics(rows) {
 
 function renderKPIs() {
   const m = computeMetrics(FILT);
+  const jornadaNota = state.jornadaReal
+    ? `<div style="grid-column:1/-1;font-size:9px;color:var(--cyan);opacity:.8;padding:2px 0 4px 2px">⚡ Capacidad corregida: jornada intensiva (29 Jun – 4 Sep) calculada a 35h/sem en lugar de las 40h del sistema</div>`
+    : '';
   const grid = document.getElementById('kpi-grid');
-  grid.innerHTML = `
+  grid.innerHTML = jornadaNota + `
     <div class="kpi" onclick="drillDown('occ')">
       <div class="kpi-value" style="color:var(${m.occ>=80?'--green':m.occ>=50?'--amber':'--red'})">${fmtPct(m.occ)}</div>
       <div class="kpi-label">Ocupación</div>
@@ -1205,7 +1239,7 @@ function renderIdleResumen() {
   FILT.forEach(r => {
     if(!agg[r.name]) agg[r.name] = {name:r.name, area:r.area, capacity:0, productive:0, allRows:[]};
     const p = agg[r.name];
-    if(r.cat==='capacity') p.capacity += r.h;
+    if(r.cat==='capacity') p.capacity += capH(r);
     else if(r.cat==='productive') p.productive += r.h;
     p.allRows.push(r);
   });
@@ -1346,7 +1380,7 @@ function benchByPerson(data) {
   const agg = {};
   data.forEach(r => {
     if(!agg[r.name]) agg[r.name] = {name:r.name, area:r.area, cap:0, prod:0};
-    if(r.cat==='capacity') agg[r.name].cap += r.h;
+    if(r.cat==='capacity') agg[r.name].cap += capH(r);
     if(r.cat==='productive') agg[r.name].prod += r.h;
   });
   return Object.values(agg)
@@ -1382,8 +1416,8 @@ function renderMonthlyChart() {
       productive: rows.filter(r=>r.cat==='productive').reduce((s,r)=>s+r.h,0),
       absence: rows.filter(r=>r.cat==='absence').reduce((s,r)=>s+r.h,0),
       internal: rows.filter(r=>r.cat==='internal').reduce((s,r)=>s+r.h,0),
-      capacity: rows.filter(r=>r.cat==='capacity').reduce((s,r)=>s+r.h,0),
-      realCapacity: rows.filter(r=>r.cat==='capacity').reduce((s,r)=>s+r.h,0),
+      capacity: rows.filter(r=>r.cat==='capacity').reduce((s,r)=>s+capH(r),0),
+      realCapacity: rows.filter(r=>r.cat==='capacity').reduce((s,r)=>s+capH(r),0),
     };
   });
   
@@ -1492,13 +1526,13 @@ function getBenchData() {
   FILT.forEach(r => {
     if(!agg[r.name]) agg[r.name] = {name:r.name, area:r.area, capacity:0, productive:0, absence:0, vac:0, internal:0, months:{}};
     const p = agg[r.name];
-    if(r.cat==='capacity') p.capacity += r.h;
+    if(r.cat==='capacity') p.capacity += capH(r);
     else if(r.cat==='productive') p.productive += r.h;
     else if(r.cat==='absence') { p.absence += r.h; if(r.tipo==='Vacaciones') p.vac += r.h; }
     else if(r.cat==='internal') p.internal += r.h;
     // Monthly bench
     if(!p.months[r.mk]) p.months[r.mk] = {cap:0, prod:0};
-    if(r.cat==='capacity') p.months[r.mk].cap += r.h;
+    if(r.cat==='capacity') p.months[r.mk].cap += capH(r);
     if(r.cat==='productive') p.months[r.mk].prod += r.h;
   });
   return Object.values(agg).map(p => ({
@@ -1767,7 +1801,7 @@ window.togglePersonExpand = function(tr) {
   // Monthly occupation mini-chart
   const monthlyOcc = months.map(m => {
     const mRows = FILT.filter(r => r.name === name && r.mk === m);
-    const cap = mRows.filter(r=>r.cat==='capacity').reduce((s,r)=>s+r.h,0);
+    const cap = mRows.filter(r=>r.cat==='capacity').reduce((s,r)=>s+capH(r),0);
     const prod = mRows.filter(r=>r.cat==='productive').reduce((s,r)=>s+r.h,0);
     return {month:m, occ: cap > 0 ? (prod/cap*100) : (prod > 0 ? 100 : 0)};
   });
