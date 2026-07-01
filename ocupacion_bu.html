@@ -818,7 +818,7 @@ function isMyBU_org(org) { return org && (/ana/i).test(org); }
 //  VERSION
 // ═══════════════════════════════════════════════
 // Súbela aquí cada vez que despliegues una nueva versión del dashboard
-const APP_VERSION = '1.2.0';
+const APP_VERSION = '1.2.1';
 document.getElementById('upload-version').textContent = 'v' + APP_VERSION;
 
 // ═══════════════════════════════════════════════
@@ -1848,6 +1848,13 @@ window.togglePersonExpand = function(tr) {
     const c = it.cat==='productive'?'var(--green)':it.cat==='capacity'?'var(--cyan)':it.cat==='absence'?'var(--amber)':'var(--blue)';
     html += '<tr><td style="color:'+c+';padding:2px 6px;white-space:nowrap">'+it.tipo+'</td><td style="padding:2px 6px;max-width:300px;overflow:hidden;text-overflow:ellipsis">'+it.servicio+'</td><td style="padding:2px 6px">'+it.cliente+'</td><td class="mono tr" style="padding:2px 6px">'+fmt(it.h,1)+'</td></tr>';
   });
+  // Sin asignar = capacity (h_disp) minus productive — the bench/unassigned time
+  const totalCap  = allPR.filter(r=>r.cat==='capacity').reduce((s,r)=>s+capH(r),0);
+  const totalProd = allPR.filter(r=>r.cat==='productive').reduce((s,r)=>s+r.h,0);
+  const sinAsignar = Math.max(0, totalCap - totalProd);
+  if (sinAsignar > 0) {
+    html += `<tr style="border-top:1px dashed var(--border);opacity:.75"><td style="color:var(--muted);padding:2px 6px;white-space:nowrap;font-style:italic">Sin asignar</td><td style="padding:2px 6px;color:var(--muted);font-style:italic">Capacidad disponible no imputada a proyectos</td><td style="padding:2px 6px"></td><td class="mono tr" style="padding:2px 6px;color:var(--muted)">${fmt(sinAsignar,1)}</td></tr>`;
+  }
   html += '</tbody></table></div>';
 
   contentDiv.innerHTML = html;
