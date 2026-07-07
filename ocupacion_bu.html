@@ -790,14 +790,17 @@ function parseExcelDate(serial) {
   return null;
 }
 
+let FILE_MODE = 'weekly'; // 'weekly' | 'monthly' — auto-detected on load
+
 function monthKey(row) {
-  const yr = parseInt(row['Año']);
-  if (!yr || yr < 2000 || yr > 2099) return '';
+  // Mes is a date serial in BOTH formats → extract year from it directly
+  // (avoids relying on 'Año' vs 'Anyo' column name difference)
   const mesRaw = row['Mes'];
-  let dt = parseExcelDate(mesRaw);
+  const dt = parseExcelDate(mesRaw);
   if (dt) {
-    const m = dt.getUTCMonth() + 1;
-    return `${yr}-${String(m).padStart(2,'0')}`;
+    const yr = dt.getUTCFullYear();
+    const m  = dt.getUTCMonth() + 1;
+    if (yr >= 2000 && yr <= 2099) return `${yr}-${String(m).padStart(2,'0')}`;
   }
   return '';
 }
@@ -818,7 +821,7 @@ function isMyBU_org(org) { return org && (/ana/i).test(org); }
 //  VERSION
 // ═══════════════════════════════════════════════
 // Súbela aquí cada vez que despliegues una nueva versión del dashboard
-const APP_VERSION = '1.2.1';
+const APP_VERSION = '1.3.1';
 document.getElementById('upload-version').textContent = 'v' + APP_VERSION;
 
 // ═══════════════════════════════════════════════
@@ -904,6 +907,9 @@ function loadFile(file) {
 //  PROCESS DATA
 // ═══════════════════════════════════════════════
 function processData(rows) {
+  // Auto-detect format: weekly has 'Semana', monthly doesn't
+  FILE_MODE = rows.length > 0 && rows[0]['Semana'] !== undefined ? 'weekly' : 'monthly';
+
   DATA = rows.map(r => {
     const h = num(r['h']);
     const hDisp = num(r['h disp']);
@@ -912,7 +918,8 @@ function processData(rows) {
     const cat = classify(tipo);
     const mk = monthKey(r);
     const semana = num(r['Semana']);
-    const year = num(r['Año']);
+    // 'Año' in weekly file, 'Anyo' in monthly file; fallback to year parsed from mk
+    const year = num(r['Año'] ?? r['Anyo']) || (mk ? parseInt(mk) : 0);
     const intensiva = isIntensiva(semana, year);
     return {
       id: r['Id rec'] || '',
@@ -935,15 +942,39 @@ function processData(rows) {
 
   // Populate filters
   populateFilters();
+  updateModeUI();
   
   // Set period badge
   const months = [...new Set(DATA.map(r=>r.mk))].sort();
   const persons = new Set(DATA.map(r=>r.name)).size;
+  const modeTag = FILE_MODE === 'monthly' ? ' · 📅 Mensual' : '';
   document.getElementById('period-badge').textContent = 
-    `${persons} personas · ${mLabel(months[0])} → ${mLabel(months[months.length-1])}`;
+    `${persons} personas · ${mLabel(months[0])} → ${mLabel(months[months.length-1])}${modeTag}`;
 
   applyFilters();
   showSection('dashboard');
+}
+
+// ═══════════════════════════════════════════════
+//  MODE UI — show/hide weekly-only controls
+// ═══════════════════════════════════════════════
+function updateModeUI() {
+  const isWeekly = FILE_MODE === 'weekly';
+  // "Tipo sem" pills (Real / Pred) only make sense in weekly format
+  document.querySelectorAll('[data-tsem]').forEach(el => {
+    const isAll = el.dataset.tsem === 'ALL';
+    el.style.display = (isWeekly || isAll) ? '' : 'none';
+  });
+  // "Jornada real" toggle only applies to weekly (35h vs 40h per week)
+  const togJWrap = document.getElementById('toggle-jornada').closest('.filter-group');
+  togJWrap.style.display = isWeekly ? '' : 'none';
+  // Reset weekly-only state when switching to monthly
+  if (!isWeekly) {
+    state.tipoSem = 'ALL';
+    document.querySelectorAll('[data-tsem]').forEach(el => el.classList.toggle('active', el.dataset.tsem === 'ALL'));
+    state.jornadaReal = false;
+    document.getElementById('toggle-jornada').classList.remove('on');
+  }
 }
 
 // ═══════════════════════════════════════════════
@@ -1183,7 +1214,7 @@ function computeMetrics(rows) {
   
   const totalCapacity = capacity; // Disponibilidad = capacidad real (jornada asignada)
   const occ = totalCapacity > 0 ? (productive / totalCapacity * 100) : 0;
-  const bench = Math.max(0, totalCapacity - productive); // Disponibilidad - Ejecución = idle hours
+  const bench = Math.max(0, totalCapacity - productive - vacaciones); // excluye vacaciones del bench
   const persons = new Set(rows.map(r=>r.name)).size;
   const clients = new Set(rows.filter(r=>r.cat==='productive'&&r.cliente).map(r=>r.cliente)).size;
   
@@ -1237,16 +1268,17 @@ function renderKPIs() {
 function renderIdleResumen() {
   const agg = {};
   FILT.forEach(r => {
-    if(!agg[r.name]) agg[r.name] = {name:r.name, area:r.area, capacity:0, productive:0, allRows:[]};
+    if(!agg[r.name]) agg[r.name] = {name:r.name, area:r.area, capacity:0, productive:0, vac:0, allRows:[]};
     const p = agg[r.name];
     if(r.cat==='capacity') p.capacity += capH(r);
     else if(r.cat==='productive') p.productive += r.h;
+    else if(r.tipo==='Vacaciones') p.vac += r.h;
     p.allRows.push(r);
   });
   let data = Object.values(agg).map(p => ({
     ...p,
     realCapacity: p.capacity,
-    bench: Math.max(0, p.capacity - p.productive),
+    bench: Math.max(0, p.capacity - p.productive - p.vac),
     occ: p.capacity > 0 ? (p.productive / p.capacity * 100) : (p.productive > 0 ? 100 : 0),
   })).filter(d => d.bench > 0).sort((a,b) => b.bench - a.bench).slice(0,30);
 
@@ -1531,13 +1563,14 @@ function getBenchData() {
     else if(r.cat==='absence') { p.absence += r.h; if(r.tipo==='Vacaciones') p.vac += r.h; }
     else if(r.cat==='internal') p.internal += r.h;
     // Monthly bench
-    if(!p.months[r.mk]) p.months[r.mk] = {cap:0, prod:0};
+    if(!p.months[r.mk]) p.months[r.mk] = {cap:0, prod:0, vac:0};
     if(r.cat==='capacity') p.months[r.mk].cap += capH(r);
     if(r.cat==='productive') p.months[r.mk].prod += r.h;
+    if(r.tipo==='Vacaciones') p.months[r.mk].vac += r.h;
   });
   return Object.values(agg).map(p => ({
     ...p,
-    bench: Math.max(0, p.capacity - p.productive),
+    bench: Math.max(0, p.capacity - p.productive - p.vac),
     occ: p.capacity > 0 ? (p.productive / p.capacity * 100) : (p.productive > 0 ? 100 : 0),
     total: p.productive + p.absence + p.internal,
     realCapacity: p.productive + p.capacity,
@@ -1560,7 +1593,7 @@ function renderBenchTable() {
   const tbody = document.getElementById('tbody-bench');
   tbody.innerHTML = slice.map(r => {
     const bc = r.occ >= 80 ? 'bg' : r.occ >= 50 ? 'ba' : 'br';
-    const alert80 = Object.values(r.months).some(m => (m.cap - m.prod) > 80);
+    const alert80 = Object.values(r.months).some(m => (m.cap - m.prod - m.vac) > 80);
     return `<tr${r.occ<30?' style="background:var(--red-dim)"':r.occ<60?' style="background:var(--amber-dim)"':''}>
       <td><strong>${r.name}</strong>${alert80?'<span class="badge br" style="margin-left:6px">⚠ >80h/mes</span>':''}</td>
       <td class="mono" style="color:var(--muted)">${r.area}</td>
@@ -1595,7 +1628,7 @@ function renderHeatmap() {
   const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
   
   // Color scale: 0 bench = green, high bench = red
-  const maxBench = d3.max(benchData, d => d3.max(Object.values(d.months), m => m.cap - m.prod)) || 40;
+  const maxBench = d3.max(benchData, d => d3.max(Object.values(d.months), m => m.cap - m.prod - m.vac)) || 40;
   const color = d3.scaleSequential(d3.interpolateRdYlGn).domain([maxBench, 0]);
   
   const tip = d3.select('body').selectAll('.d3-tip').empty() ? d3.select('body').append('div').attr('class','d3-tip').style('display','none') : d3.select('.d3-tip');
@@ -1604,7 +1637,7 @@ function renderHeatmap() {
   benchData.forEach((person, yi) => {
     months.forEach((m, xi) => {
       const mdata = person.months[m];
-      const bench = mdata ? Math.max(0, mdata.cap - mdata.prod) : 0;
+      const bench = mdata ? Math.max(0, mdata.cap - mdata.prod - mdata.vac) : 0;
       g.append('rect')
         .attr('x', xi * cellW).attr('y', yi * cellH)
         .attr('width', cellW - 2).attr('height', cellH - 2)
@@ -1848,12 +1881,13 @@ window.togglePersonExpand = function(tr) {
     const c = it.cat==='productive'?'var(--green)':it.cat==='capacity'?'var(--cyan)':it.cat==='absence'?'var(--amber)':'var(--blue)';
     html += '<tr><td style="color:'+c+';padding:2px 6px;white-space:nowrap">'+it.tipo+'</td><td style="padding:2px 6px;max-width:300px;overflow:hidden;text-overflow:ellipsis">'+it.servicio+'</td><td style="padding:2px 6px">'+it.cliente+'</td><td class="mono tr" style="padding:2px 6px">'+fmt(it.h,1)+'</td></tr>';
   });
-  // Sin asignar = capacity (h_disp) minus productive — the bench/unassigned time
+  // Sin asignar = capacity (h_disp) minus productive and vacation — true unassigned bench
   const totalCap  = allPR.filter(r=>r.cat==='capacity').reduce((s,r)=>s+capH(r),0);
   const totalProd = allPR.filter(r=>r.cat==='productive').reduce((s,r)=>s+r.h,0);
-  const sinAsignar = Math.max(0, totalCap - totalProd);
+  const totalVac  = allPR.filter(r=>r.tipo==='Vacaciones').reduce((s,r)=>s+r.h,0);
+  const sinAsignar = Math.max(0, totalCap - totalProd - totalVac);
   if (sinAsignar > 0) {
-    html += `<tr style="border-top:1px dashed var(--border);opacity:.75"><td style="color:var(--muted);padding:2px 6px;white-space:nowrap;font-style:italic">Sin asignar</td><td style="padding:2px 6px;color:var(--muted);font-style:italic">Capacidad disponible no imputada a proyectos</td><td style="padding:2px 6px"></td><td class="mono tr" style="padding:2px 6px;color:var(--muted)">${fmt(sinAsignar,1)}</td></tr>`;
+    html += `<tr style="border-top:1px dashed var(--border);opacity:.75"><td style="color:var(--muted);padding:2px 6px;white-space:nowrap;font-style:italic">Sin asignar</td><td style="padding:2px 6px;color:var(--muted);font-style:italic">Capacidad no imputada a proyectos ni vacaciones</td><td style="padding:2px 6px"></td><td class="mono tr" style="padding:2px 6px;color:var(--muted)">${fmt(sinAsignar,1)}</td></tr>`;
   }
   html += '</tbody></table></div>';
 
