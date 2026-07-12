@@ -294,7 +294,7 @@ table.data tr:hover td{background:var(--card2);}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
 'use strict';
-const VERSION='v1.4.0';
+const VERSION='v1.5.0';
 /* ─── CONFIG ─── */
 const MONTHS=['Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic','Ene','Feb'];
 const R={revenue:28,gpEjec:52,ebitda:204,pmEjec:70,utilisation:254,heads:216,contractors:222,subTotal:262};
@@ -397,16 +397,16 @@ function buildData(){
       utilisation:{actYTD:DEMO_RAW.utilisation.at,pyYTD:DEMO_RAW.utilisation.pt},
       subTotal:{actYTD:DEMO_RAW.subTotal.at,pyYTD:DEMO_RAW.subTotal.pt},
       revLines:[
-        {n:'Delivery',actYTD:sumN(DEMO_RAW.rev_del.am,3),pyYTD:sumN(DEMO_RAW.rev_del.pm,3),pyTot:DEMO_RAW.rev_del.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_del,3)},
-        {n:'Rec Delivery',actYTD:sumN(DEMO_RAW.rev_recdel.am,3),pyYTD:sumN(DEMO_RAW.rev_recdel.pm,3),pyTot:DEMO_RAW.rev_recdel.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_recdel,3)},
-        {n:'Managed Svcs',actYTD:sumN(DEMO_RAW.rev_ms.am,3),pyYTD:sumN(DEMO_RAW.rev_ms.pm,3),pyTot:DEMO_RAW.rev_ms.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_ms,3)},
-        {n:'Resourcing',actYTD:sumN(DEMO_RAW.rev_res.am,3),pyYTD:sumN(DEMO_RAW.rev_res.pm,3),pyTot:DEMO_RAW.rev_res.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_res,3)},
+        {n:'Delivery',am:DEMO_RAW.rev_del.am,pm:DEMO_RAW.rev_del.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.rev_del.am,3),pyYTD:sumN(DEMO_RAW.rev_del.pm,3),pyTot:DEMO_RAW.rev_del.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_del,3)},
+        {n:'Rec Delivery',am:DEMO_RAW.rev_recdel.am,pm:DEMO_RAW.rev_recdel.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.rev_recdel.am,3),pyYTD:sumN(DEMO_RAW.rev_recdel.pm,3),pyTot:DEMO_RAW.rev_recdel.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_recdel,3)},
+        {n:'Managed Svcs',am:DEMO_RAW.rev_ms.am,pm:DEMO_RAW.rev_ms.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.rev_ms.am,3),pyYTD:sumN(DEMO_RAW.rev_ms.pm,3),pyTot:DEMO_RAW.rev_ms.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_ms,3)},
+        {n:'Resourcing',am:DEMO_RAW.rev_res.am,pm:DEMO_RAW.rev_res.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.rev_res.am,3),pyYTD:sumN(DEMO_RAW.rev_res.pm,3),pyTot:DEMO_RAW.rev_res.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_res,3)},
       ],
       gpLines:[
-        {n:'Delivery',actYTD:sumN(DEMO_RAW.gp_del.am,3),pyYTD:sumN(DEMO_RAW.gp_del.pm,3),pyTot:DEMO_RAW.gp_del.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_del,3)},
-        {n:'Rec Delivery',actYTD:sumN(DEMO_RAW.gp_recdel.am,3),pyYTD:sumN(DEMO_RAW.gp_recdel.pm,3),pyTot:DEMO_RAW.gp_recdel.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_recdel,3)},
-        {n:'Managed Svcs',actYTD:sumN(DEMO_RAW.gp_ms.am,3),pyYTD:sumN(DEMO_RAW.gp_ms.pm,3),pyTot:DEMO_RAW.gp_ms.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_ms,3)},
-        {n:'Resourcing',actYTD:sumN(DEMO_RAW.gp_res.am,3),pyYTD:sumN(DEMO_RAW.gp_res.pm,3),pyTot:DEMO_RAW.gp_res.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_res,3)},
+        {n:'Delivery',am:DEMO_RAW.gp_del.am,pm:DEMO_RAW.gp_del.pm,tm:[65.9,68.8,74.4,81.4,0,0,0,0,0,0,0,0],actYTD:sumN(DEMO_RAW.gp_del.am,3),pyYTD:sumN(DEMO_RAW.gp_del.pm,3),pyTot:DEMO_RAW.gp_del.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_del,3)},
+        {n:'Rec Delivery',am:DEMO_RAW.gp_recdel.am,pm:DEMO_RAW.gp_recdel.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.gp_recdel.am,3),pyYTD:sumN(DEMO_RAW.gp_recdel.pm,3),pyTot:DEMO_RAW.gp_recdel.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_recdel,3)},
+        {n:'Managed Svcs',am:DEMO_RAW.gp_ms.am,pm:DEMO_RAW.gp_ms.pm,tm:[57.2,51.5,57.2,63.0,0,0,0,0,0,0,0,0],actYTD:sumN(DEMO_RAW.gp_ms.am,3),pyYTD:sumN(DEMO_RAW.gp_ms.pm,3),pyTot:DEMO_RAW.gp_ms.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_ms,3)},
+        {n:'Resourcing',am:DEMO_RAW.gp_res.am,pm:DEMO_RAW.gp_res.pm,tm:[128.1,125.4,130.9,136.3,0,0,0,0,0,0,0,0],actYTD:sumN(DEMO_RAW.gp_res.am,3),pyYTD:sumN(DEMO_RAW.gp_res.pm,3),pyTot:DEMO_RAW.gp_res.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_res,3)},
       ],
       headLines:[{n:'Delivery',actYTD:DEMO_RAW.head_del.at,pyYTD:DEMO_RAW.head_del.pt},{n:'Managed Svcs',actYTD:DEMO_RAW.head_ms.at,pyYTD:DEMO_RAW.head_ms.pt},{n:'Resourcing',actYTD:DEMO_RAW.head_res.at,pyYTD:DEMO_RAW.head_res.pt}],
       utilLines:[{n:'Delivery',actYTD:DEMO_RAW.util_del.at,pyYTD:DEMO_RAW.util_del.pt},{n:'Managed Svcs',actYTD:DEMO_RAW.util_ms.at,pyYTD:DEMO_RAW.util_ms.pt},{n:'Resourcing',actYTD:DEMO_RAW.util_res.at,pyYTD:DEMO_RAW.util_res.pt}],
@@ -528,6 +528,26 @@ function renderAlerts(){
     chips.push({t:'red',x:`${rMax.n}: util. ${pct(rMax.actYTD)} — sobrecarga: pipeline de contratación urgente o redistribución de carga`});
   else if(utilOk&&util>0.93)
     chips.push({t:'amber',x:`Utilización BU ${pct(util)} — margen de maniobra ajustado: vigilar picos y subcontratación`});
+
+  // ── 3b. ÚLTIMO MES — colapso de línea individual ──
+  if(D.gpLines&&D.gpLines.length){
+    const lastMisses=D.gpLines.filter(l=>{
+      const lGP=l.am&&l.am[n-1]||0;
+      const lTgt=l.tm&&l.tm[n-1]||0;
+      return lTgt>5&&lGP/lTgt<0.60;  // <60% del objetivo mensual
+    });
+    if(lastMisses.length){
+      const worst=lastMisses.reduce((a,b)=>(b.am[n-1]||0)/(b.tm[n-1]||1)<(a.am[n-1]||0)/(a.tm[n-1]||1)?b:a);
+      const lGP=worst.am[n-1]||0, lTgt=worst.tm[n-1]||1;
+      chips.push({t:'red',x:`${worst.n}: GP ${MONTHS[n-1]} de ${f0(lGP)} K€ vs objetivo ${f0(lTgt)} K€ (${Math.round(lGP/lTgt*100)}%) — colapso puntual que requiere análisis inmediato`});
+    }
+    // Margin trend: is the last month %GM much lower than YTD average?
+    const totRev=D.revenue.am[n-1]||0, totGP=D.gpEjec?D.gpEjec.am[n-1]||0:0;
+    const lastGM=totRev>0?totGP/totRev:0;
+    const avgGM=D.revenue.actYTD>0?D.gpEjec.actYTD/D.revenue.actYTD:0;
+    if(lastGM>0&&avgGM>0&&lastGM<avgGM*0.85&&n>=2)
+      chips.push({t:'amber',x:`Margen ${MONTHS[n-1]}: ${pct(lastGM)} vs media YTD ${pct(avgGM)} — tendencia a la baja en el último mes cerrado`});
+  }
 
   // ── 4. Subcontratación ──
   if(D.subTotal.pyYTD>0){
@@ -722,6 +742,45 @@ function renderLineas(){
   const dT=dTxt(tot.a,tot.py),voT=tot.t?dTxt(tot.f,tot.t):{cls:'neu',val:'n/d'};
   h+=`<tr class="total"><td>Total</td><td>${f0(tot.a)}</td><td>100%</td><td>${f0(tot.py)}</td><td class="${dT.cls}">${dT.val}</td><td>${f0(tot.f)}</td><td>${tot.t?f0(tot.t):'—'}</td><td class="${voT.cls}">${voT.val}</td></tr></tbody>`;
   document.getElementById('line-table').innerHTML=h;
+
+  // ── Último mes spotlight ──
+  const n=D.closed, lastMth=MONTHS[n-1];
+  const lsrc=lineMetric==='rev'?D.revLines:D.gpLines;
+  const lUnit=lineMetric==='rev'?'K€ ingresos':'K€ GP';
+
+  let spotHtml=`<div class="sec-title" style="margin-top:18px">Rendimiento <b>${lastMth}</b> por línea <span style="font-size:11px;font-weight:400;color:var(--dim)">${lUnit} · último mes cerrado vs objetivo mensual</span></div>`;
+  spotHtml+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:6px">`;
+
+  lsrc.forEach(l=>{
+    const lAct=l.am&&l.am[n-1]||0;
+    const lTgt=l.tm&&l.tm[n-1]||0;
+    const lPy =l.pm&&l.pm[n-1]||0;
+    const att =lTgt>0?lAct/lTgt*100:null;
+    const cls =att==null?'chip-n':att>=90?'g':att>=70?'a':'r';
+    const prevMonths=l.am?l.am.slice(0,n-1).filter(v=>v&&v!==0):[];
+    const avg=prevMonths.length?prevMonths.reduce((s,v)=>s+v,0)/prevMonths.length:0;
+    const trend=avg>0?(lAct/avg-1)*100:null;
+    const trendTxt=trend!=null?(trend>=0?`▲ +${trend.toFixed(0)}% vs media`:
+                                         `▼ ${trend.toFixed(0)}% vs media`):'';
+    const trendCls=trend==null?'dim':trend>=-10?'pos':'neg';
+
+    spotHtml+=`<div class="card" style="padding:11px 13px">
+      <div style="font-size:11px;font-weight:600;margin-bottom:6px">${l.n}</div>
+      <div style="font-size:18px;font-weight:700;font-family:var(--mono);margin-bottom:4px">${f0(lAct)}<span style="font-size:10px;color:var(--dim);margin-left:3px">K€</span></div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        ${att!=null?`<span class="chip ${cls}" style="font-size:9px">${att.toFixed(0)}% obj</span>`:''}
+        <span style="font-size:9px;color:var(--${trendCls})">${trendTxt}</span>
+      </div>
+      ${lTgt>0?`<div style="font-size:9px;color:var(--dim)">Obj ${f0(lTgt)} K€ · FY26 ${f0(lPy)} K€</div>`:''}
+      <div class="k-prog-track" style="margin-top:6px;height:4px;overflow:hidden;border-radius:999px;background:var(--card2)">
+        <div class="k-prog-fill" style="width:${Math.min(100,att||0).toFixed(0)}%;height:4px;border-radius:999px;background:${att==null?'var(--dim)':att>=90?'var(--green)':att>=70?'var(--amber)':'var(--red)'}"></div>
+      </div>
+    </div>`;
+  });
+  spotHtml+=`</div>`;
+  let spotEl=document.getElementById('lineas-spotlight');
+  if(!spotEl){spotEl=document.createElement('div');spotEl.id='lineas-spotlight';document.getElementById('v-lineas').appendChild(spotEl);}
+  spotEl.innerHTML=spotHtml;
 }
 
 function renderCapacidad(){
