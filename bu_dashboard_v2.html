@@ -294,7 +294,7 @@ table.data tr:hover td{background:var(--card2);}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
 'use strict';
-const VERSION='v1.5.0';
+const VERSION='v1.5.1';
 /* ─── CONFIG ─── */
 const MONTHS=['Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic','Ene','Feb'];
 const R={revenue:28,gpEjec:52,ebitda:204,pmEjec:70,utilisation:254,heads:216,contractors:222,subTotal:262};
@@ -534,12 +534,18 @@ function renderAlerts(){
     const lastMisses=D.gpLines.filter(l=>{
       const lGP=l.am&&l.am[n-1]||0;
       const lTgt=l.tm&&l.tm[n-1]||0;
-      return lTgt>5&&lGP/lTgt<0.60;  // <60% del objetivo mensual
+      return lTgt>20&&lGP/lTgt<0.60;  // <60% obj mensual Y linea material (>20K€ tgt)
     });
     if(lastMisses.length){
       const worst=lastMisses.reduce((a,b)=>(b.am[n-1]||0)/(b.tm[n-1]||1)<(a.am[n-1]||0)/(a.tm[n-1]||1)?b:a);
       const lGP=worst.am[n-1]||0, lTgt=worst.tm[n-1]||1;
-      chips.push({t:'red',x:`${worst.n}: GP ${MONTHS[n-1]} de ${f0(lGP)} K€ vs objetivo ${f0(lTgt)} K€ (${Math.round(lGP/lTgt*100)}%) — colapso puntual que requiere análisis inmediato`});
+      // Try to determine cause: revenue miss vs cost pressure
+      const lRev=D.revLines&&D.revLines.find(r=>r.n===worst.n);
+      const lRevAct=lRev&&lRev.am?lRev.am[n-1]||0:0;
+      const lRevPy =lRev&&lRev.pm?lRev.pm[n-1]||0:0;
+      const revMiss=lRevPy>10&&lRevAct<lRevPy*0.85;
+      const revNote=revMiss?`revenue ${MONTHS[n-1]} ${f0(lRevAct)} K€ vs FY26 ${f0(lRevPy)} K€ (−${Math.round((1-lRevAct/lRevPy)*100)}%) + costes propios elevados`:`costes propios elevados con revenue reducido`;
+      chips.push({t:'red',x:`${worst.n}: GP ${MONTHS[n-1]} ${f0(lGP)} K€ vs obj ${f0(lTgt)} K€ (${Math.round(lGP/lTgt*100)}%) — ${revNote}. Validar si está previsto en presupuesto`});
     }
     // Margin trend: is the last month %GM much lower than YTD average?
     const totRev=D.revenue.am[n-1]||0, totGP=D.gpEjec?D.gpEjec.am[n-1]||0:0;
@@ -564,14 +570,33 @@ function renderAlerts(){
     chips.push({t:'amber',x:`Compresión de margen: Ingresos +${pct(revG)} pero GP +${pct(gpG)} — revisar mix o eficiencia por línea`});
 
   // ── 6. Confianza del forecast ──
-  const confMsg=n<=3?`solo ${n}m de datos — banda muy amplia, confirmar en Q2`:
-                n<=6?`${n}m — incertidumbre moderada; cierre de Q${Math.ceil(n/3)} reducirá el intervalo`:
+  // Seasonal context: flag if upcoming months include historically slow periods
+  const slowMonths=[4,5,6]; // Jul, Ago, Sep (0-indexed from Mar) — summer slowdown Spain
+  const hasSlowAhead=n<=5&&slowMonths.some(m=>m>=n);
+  const seasonNote=hasSlowAhead?` · Nota: próximos meses incluyen Ago/Sep — estacionalidad FY26 ya incorporada`:'';
+
+  const confMsg=n<=3?`solo ${n}m de datos — banda muy amplia, confirmar en Q2${seasonNote}`:
+                n<=6?`${n}m — incertidumbre moderada; cierre de Q${Math.ceil(n/3)} reducirá el intervalo${seasonNote}`:
                      `${n}m (${(n/12*100).toFixed(0)}% del año) — modelo estacional con buena fiabilidad`;
   chips.push({t:'blue',x:`Forecast: ${confMsg}`});
 
   document.getElementById('alerts-card').style.display='block';
   document.getElementById('al-count').textContent=chips.length+' señales';
-  document.getElementById('alerts-body').innerHTML=chips.slice(0,6).map(c=>`<div class="alert-chip alert-${c.t}"><span class="a-dot"></span>${c.x}</div>`).join('');
+  const NOTES_KEY='bu-signal-notes';
+  const savedNotes=JSON.parse(localStorage.getItem(NOTES_KEY)||'{}');
+  document.getElementById('alerts-body').innerHTML=chips.slice(0,6).map((c,i)=>{
+    const key=`${n}_${i}_${c.t}`;
+    const note=savedNotes[key]||'';
+    const noteHtml=note?`<div style="font-size:9.5px;color:var(--dim);margin-top:3px;padding-left:13px;font-style:italic">📌 ${note} <button onclick="event.stopPropagation();delete window._BU_NOTES['${key}'];localStorage.setItem('${NOTES_KEY}',JSON.stringify(window._BU_NOTES));renderAlerts();" style="border:none;background:none;cursor:pointer;color:var(--red);font-size:10px;padding:0 3px">✕</button></div>`:'';
+    return `<div class="alert-chip alert-${c.t}" style="flex-direction:column;align-items:flex-start;gap:2px">
+      <div style="display:flex;align-items:center;gap:7px;width:100%">
+        <span class="a-dot"></span>
+        <span style="flex:1">${c.x}</span>
+        <button title="Añadir contexto" onclick="event.stopPropagation();const k='${key}';const cur=(JSON.parse(localStorage.getItem('${NOTES_KEY}')||'{}')||{})[k]||'';const n=prompt('Contexto para esta señal (ej. previsto en plan):',cur);if(n!==null){window._BU_NOTES=JSON.parse(localStorage.getItem('${NOTES_KEY}')||'{}');window._BU_NOTES[k]=n;localStorage.setItem('${NOTES_KEY}',JSON.stringify(window._BU_NOTES));renderAlerts();}" style="border:none;background:none;cursor:pointer;color:var(--dim);font-size:11px;padding:2px 4px;border-radius:4px;flex-shrink:0" onmouseover="this.style.background='var(--card2)'" onmouseout="this.style.background='none'">📌</button>
+      </div>
+      ${noteHtml}
+    </div>`;
+  }).join('');
 }
 
 function renderEvo(){
