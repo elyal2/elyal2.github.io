@@ -294,7 +294,7 @@ table.data tr:hover td{background:var(--card2);}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
 'use strict';
-const VERSION='v1.5.1';
+const VERSION='v1.5.2';
 /* ─── CONFIG ─── */
 const MONTHS=['Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic','Ene','Feb'];
 const R={revenue:28,gpEjec:52,ebitda:204,pmEjec:70,utilisation:254,heads:216,contractors:222,subTotal:262};
@@ -453,7 +453,7 @@ function kpiCard(o){
   const rows=(o.rows||[]).map(r=>`<div class="k-row"><span class="lbl">${r.lbl}</span><span class="val ${r.cls||'neu'}">${r.val}</span></div>`).join('');
   let prog='';
   if(o.prog){const f=Math.max(0,Math.min(100,o.prog.fillPct)),fcRaw=o.prog.fcPct,fc=Math.max(0,Math.min(100,fcRaw)),fcOver=fcRaw>100;
-    prog=`<div class="k-prog"><div class="k-prog-track"><div class="k-prog-fill" style="width:${f}%"></div><div class="k-prog-fc" style="left:calc(${fc}% - 1px);background:${fcOver?'var(--green)'  :'var(--cyan)'};box-shadow:0 0 5px ${fcOver?'var(--green)'  :'var(--cyan)'}" title="Forecast ${fcRaw.toFixed(0)}% del objetivo"></div></div><div class="k-prog-lbls"><span>${o.prog.left}</span><span>${fcOver?'▲ supera objetivo':'FC '+o.prog.right}</span></div></div>`;}
+    prog=`<div class="k-prog"><div class="k-prog-track"><div class="k-prog-fill" style="width:${f}%"></div><div class="k-prog-fc" style="left:calc(${fc}% - 1px);background:${fcOver?'var(--green)'  :'var(--cyan)'};box-shadow:0 0 5px ${fcOver?'var(--green)'  :'var(--cyan)'}" title="Forecast ${fcRaw.toFixed(0)}% del objetivo"></div></div><div class="k-prog-lbls"><span>${o.prog.left}</span><span>${fcOver?'▲ sobre ppto YTD':'FC ▶ '+o.prog.right}</span></div></div>`;}
   return `<div class="card kpi"><div class="k-lbl">${o.icon||''}${o.lbl}</div><div class="k-val">${o.val}</div><div class="k-rows">${rows}</div>${prog}</div>`;
 }
 const ICONS={eur:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9a5 5 0 1 0 0 6M5 12h6"/></svg>',gp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>',eb:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9.5h4.5a1.5 1.5 0 010 3H9"/></svg>',u:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>',pp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>',pct:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>'};
@@ -467,16 +467,28 @@ function cv(v){return getComputedStyle(document.documentElement).getPropertyValu
 /* ─── VIEW RENDERERS ─── */
 function renderKPIs(){
   const rev=D.revenue,gp=D.gpEjec,eb=D.ebitda,hd=D.heads,ut=D.utilisation;
+  const n=D.closed;
+  // YTD actual vs YTD budget — métrica operativa correcta
+  const revTgtYTD=rev.tm?sumN(rev.tm,n):0;
+  const gpTgtYTD =gp.tm?sumN(gp.tm,n):0;
+  const ebTgtYTD =eb.tm?sumN(eb.tm,n):0;
+  const revAttYTD=revTgtYTD>0?rev.actYTD/revTgtYTD:null;
+  const gpAttYTD =gpTgtYTD>0?gp.actYTD/gpTgtYTD:null;
+  const ebAttYTD =ebTgtYTD>0?eb.actYTD/ebTgtYTD:null;
+  // Forecast vs objetivo anual — indicador de dirección, secundario
+  const revAtt=rev.tgt>0?rev.forecast/rev.tgt:1;
+  const gpAtt =gp.tgt>0?gp.forecast/gp.tgt:1;
+  const ebAtt =eb.tgt>0?eb.forecast/eb.tgt:1;
   const cards=[
     kpiCard({lbl:'Ingresos',icon:ICONS.eur,val:`${fM(rev.actYTD)}<span class="u">M€</span>`,
-      rows:[{lbl:'vs Obj',val:pct(rev.forecast/rev.tgt),cls:rev.forecast>=rev.tgt?'pos':'neg'},{lbl:'vs FY26',...dTxt(rev.actYTD,rev.pyYTD)},{lbl:'Forecast FY',val:fM(rev.forecast)+'M',cls:'neu'}],
-      prog:{fillPct:rev.actYTD/rev.tgt*100,fcPct:rev.forecast/rev.tgt*100,left:'Real '+fM(rev.actYTD)+'M',right:'Obj '+fM(rev.tgt)+'M'}}),
+      rows:[{lbl:'YTD vs Ppto',val:revAttYTD!=null?pct(revAttYTD):'n/d',cls:revAttYTD!=null?(revAttYTD>=0.98?'pos':revAttYTD>=0.93?'a':'neg'):'neu'},{lbl:'vs FY26',...dTxt(rev.actYTD,rev.pyYTD)},{lbl:'FC cierre',val:pct(revAtt)+' obj',cls:revAtt>=1?'pos':'neu'}],
+      prog:{fillPct:revTgtYTD>0?rev.actYTD/revTgtYTD*100:0,fcPct:rev.forecast/rev.tgt*100,left:'Real '+fM(rev.actYTD)+'M',right:'Ppto '+fM(revTgtYTD)+'M YTD'}}),
     kpiCard({lbl:'GP Ejecución',icon:ICONS.gp,val:`${fM(gp.actYTD)}<span class="u">M€</span>`,
-      rows:[{lbl:'vs Obj',val:pct(gp.forecast/gp.tgt),cls:gp.forecast>=gp.tgt?'pos':'neg'},{lbl:'vs FY26',...dTxt(gp.actYTD,gp.pyYTD)},{lbl:'Forecast FY',val:fM(gp.forecast)+'M',cls:'neu'}],
-      prog:{fillPct:gp.actYTD/gp.tgt*100,fcPct:gp.forecast/gp.tgt*100,left:'Real '+fM(gp.actYTD)+'M',right:'Obj '+fM(gp.tgt)+'M'}}),
+      rows:[{lbl:'YTD vs Ppto',val:gpAttYTD!=null?pct(gpAttYTD):'n/d',cls:gpAttYTD!=null?(gpAttYTD>=0.98?'pos':gpAttYTD>=0.93?'a':'neg'):'neu'},{lbl:'vs FY26',...dTxt(gp.actYTD,gp.pyYTD)},{lbl:'FC cierre',val:pct(gpAtt)+' obj',cls:gpAtt>=1?'pos':'neu'}],
+      prog:{fillPct:gpTgtYTD>0?gp.actYTD/gpTgtYTD*100:0,fcPct:gp.forecast/gp.tgt*100,left:'Real '+fM(gp.actYTD)+'M',right:'Ppto '+fM(gpTgtYTD)+'M YTD'}}),
     kpiCard({lbl:'EBITDA Servicios',icon:ICONS.eb,val:`${fM(eb.actYTD)}<span class="u">M€</span>`,
-      rows:[{lbl:'vs Obj',val:pct(eb.forecast/eb.tgt),cls:eb.forecast>=eb.tgt?'pos':'neg'},{lbl:'vs FY26',...dTxt(eb.actYTD,eb.pyYTD)},{lbl:'Forecast FY',val:fM(eb.forecast)+'M',cls:'neu'}],
-      prog:{fillPct:eb.actYTD/eb.tgt*100,fcPct:eb.forecast/eb.tgt*100,left:'Real '+fM(eb.actYTD)+'M',right:'Obj '+fM(eb.tgt)+'M'}}),
+      rows:[{lbl:'YTD vs Ppto',val:ebAttYTD!=null?pct(ebAttYTD):'n/d',cls:ebAttYTD!=null?(ebAttYTD>=0.98?'pos':ebAttYTD>=0.93?'a':'neg'):'neu'},{lbl:'vs FY26',...dTxt(eb.actYTD,eb.pyYTD)},{lbl:'FC cierre',val:pct(ebAtt)+' obj',cls:ebAtt>=1?'pos':'neu'}],
+      prog:{fillPct:ebTgtYTD>0?eb.actYTD/ebTgtYTD*100:0,fcPct:eb.forecast/eb.tgt*100,left:'Real '+fM(eb.actYTD)+'M',right:'Ppto '+fM(ebTgtYTD)+'M YTD'}}),
     kpiCard({lbl:'Utilización',icon:ICONS.u,val:pct(ut.actYTD),rows:[{lbl:'vs FY26',...dTxt(ut.actYTD,ut.pyYTD)},{lbl:'FY26',val:pct(ut.pyYTD),cls:'neu'}]}),
     kpiCard({lbl:`Heads (${D.monthLabel})`,icon:ICONS.pp,val:`${f1(hd.actYTD)}<span class="u">FTE</span>`,rows:[{lbl:'vs FY26',...dTxt(hd.actYTD,hd.pyYTD)},{lbl:'FY26',val:f1(hd.pyYTD),cls:'neu'}]}),
   ];
@@ -495,6 +507,9 @@ function renderAlerts(){
   const T_LO  = n<=3?0.80:n<=6?0.85:0.90;
   const conf  = n<=3?'baja':n<=6?'moderada':n<=9?'buena':'alta';
   // Core metrics
+  // Core attainment metrics (computed in renderKPIs, repeated here for signals)
+  const revAttYTD2=D.revenue.tm?D.revenue.actYTD/sumN(D.revenue.tm,n):null;
+  const gpAttYTD2 =D.gpEjec.tm?D.gpEjec.actYTD/sumN(D.gpEjec.tm,n):null;
   const revAtt=D.revenue.tgt>0?D.revenue.forecast/D.revenue.tgt:1;
   const gpAtt =D.gpEjec.tgt>0?D.gpEjec.forecast/D.gpEjec.tgt:1;
   const ebAtt =D.ebitda.tgt>0?D.ebitda.forecast/D.ebitda.tgt:1;
