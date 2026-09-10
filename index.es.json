@@ -1,0 +1,295 @@
+{
+  "version": "b9a711efb_1789053583",
+  "lang": "es",
+  "facets": [
+    {
+      "key": "sector",
+      "label": "Sector",
+      "type": "single_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "Salud",
+          "label": "Salud"
+        },
+        {
+          "id": "Banca y Finanzas",
+          "label": "Banca y Finanzas"
+        },
+        {
+          "id": "Seguros",
+          "label": "Seguros"
+        },
+        {
+          "id": "Telecomunicaciones",
+          "label": "Telecomunicaciones"
+        },
+        {
+          "id": "Industria y Fabricación",
+          "label": "Industria y Fabricación"
+        },
+        {
+          "id": "Retail y Consumo",
+          "label": "Retail y Consumo"
+        },
+        {
+          "id": "Sector Público",
+          "label": "Sector Público"
+        },
+        {
+          "id": "Energía y Utilities",
+          "label": "Energía y Utilities"
+        },
+        {
+          "id": "Logística y Transporte",
+          "label": "Logística y Transporte"
+        }
+      ]
+    },
+    {
+      "key": "tecnologia",
+      "label": "Tecnología",
+      "type": "multi_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "Azure",
+          "label": "Azure"
+        },
+        {
+          "id": "AWS",
+          "label": "AWS"
+        },
+        {
+          "id": "Databricks",
+          "label": "Databricks"
+        },
+        {
+          "id": "Microsoft Fabric",
+          "label": "Microsoft Fabric"
+        },
+        {
+          "id": "Snowflake",
+          "label": "Snowflake"
+        },
+        {
+          "id": "Power BI",
+          "label": "Power BI"
+        },
+        {
+          "id": "OpenAI",
+          "label": "OpenAI"
+        },
+        {
+          "id": "Kubernetes",
+          "label": "Kubernetes"
+        },
+        {
+          "id": "Apache Spark",
+          "label": "Apache Spark"
+        },
+        {
+          "id": "Terraform",
+          "label": "Terraform"
+        },
+        {
+          "id": "Python",
+          "label": "Python"
+        }
+      ]
+    },
+    {
+      "key": "tipo_proyecto",
+      "label": "Tipo de Proyecto",
+      "type": "single_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "MVP/PoC",
+          "label": "MVP/PoC"
+        },
+        {
+          "id": "Vertical",
+          "label": "Vertical"
+        },
+        {
+          "id": "Transversal",
+          "label": "Transversal"
+        },
+        {
+          "id": "Plataforma",
+          "label": "Plataforma"
+        }
+      ]
+    },
+    {
+      "key": "partner",
+      "label": "Partner",
+      "type": "multi_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "Microsoft",
+          "label": "Microsoft"
+        },
+        {
+          "id": "AWS",
+          "label": "AWS"
+        },
+        {
+          "id": "Databricks",
+          "label": "Databricks"
+        },
+        {
+          "id": "Snowflake",
+          "label": "Snowflake"
+        },
+        {
+          "id": "Cisco",
+          "label": "Cisco"
+        },
+        {
+          "id": "IBM",
+          "label": "IBM"
+        },
+        {
+          "id": "Google Cloud",
+          "label": "Google Cloud"
+        }
+      ]
+    },
+    {
+      "key": "bu",
+      "label": "Unidad de Negocio",
+      "type": "single_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "Data & AI",
+          "label": "Data & AI"
+        },
+        {
+          "id": "Cloud & Managed Services",
+          "label": "Cloud & Managed Services"
+        },
+        {
+          "id": "Security",
+          "label": "Security"
+        },
+        {
+          "id": "Business Applications",
+          "label": "Business Applications"
+        }
+      ]
+    },
+    {
+      "key": "anio",
+      "label": "Año",
+      "type": "single_select",
+      "dynamic": true,
+      "options": [
+        {
+          "id": "2025",
+          "label": "2025"
+        },
+        {
+          "id": "2024",
+          "label": "2024"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "banco-fraude-ml",
+      "title": "Sistema de Detección de Fraude en Tiempo Real con Modelos de Machine Learning",
+      "cliente_display": "Entidad Bancaria IBEX",
+      "cliente_publico": false,
+      "sector": "Banca y Finanzas",
+      "tecnologia": [
+        "AWS",
+        "Python",
+        "Kubernetes"
+      ],
+      "tipo_proyecto": "Vertical",
+      "importe_label": "Vertical (<50K)",
+      "partner": [
+        "AWS"
+      ],
+      "anio": 2024,
+      "bu": "Data & AI",
+      "tags": [
+        "machine learning",
+        "fraude",
+        "streaming",
+        "tiempo real",
+        "AWS",
+        "Kubernetes",
+        "banca"
+      ],
+      "briefing": "Una de las principales entidades bancarias del IBEX 35 requería modernizar sus mecanismos de prevención de fraude transaccional en canales de pago digital y banca móvil. Los sistemas basados exclusivamente en motores de reglas estáticas generaban una tasa excesiva de falsos positivos, afectando negativamente la experiencia de usuario de clientes legítimos y dilatando el tiempo de respuesta ante nuevos patrones de ciberestafa. El objetivo fue desplegar una infraestructura de inferencia en tiempo real capaz de evaluar miles de transacciones por segundo con una latencia inferior a 50 milisegundos.",
+      "ficha_ref": "fichas/banco-fraude-ml.es.md"
+    },
+    {
+      "id": "retail-demand-fabric",
+      "title": "Previsión de Demanda y Optimización de Cadena de Suministro con Microsoft Fabric",
+      "cliente_display": "Supermercados Global Retail",
+      "cliente_publico": true,
+      "sector": "Retail y Consumo",
+      "tecnologia": [
+        "Microsoft Fabric",
+        "Power BI",
+        "Azure"
+      ],
+      "tipo_proyecto": "Transversal",
+      "importe_label": "Transversal (<150K)",
+      "partner": [
+        "Microsoft"
+      ],
+      "anio": 2025,
+      "bu": "Data & AI",
+      "tags": [
+        "demanda",
+        "fabric",
+        "retail",
+        "supply chain",
+        "Microsoft Fabric",
+        "Power BI",
+        "lakehouse"
+      ],
+      "briefing": "Supermercados Global Retail, una de las mayores cadenas de distribución de gran consumo, enfrentaba desajustes entre la planificación de aprovisionamiento de sus centros logísticos y la demanda diaria de sus puntos de venta físicos y canal e-commerce. Las roturas de stock en productos frescos y el sobrestock en bienes no perecederos generaban pérdidas operativas relevantes. El proyecto buscaba centralizar la información transaccional de ventas, inventarios y variables exógenas (meteorología y estacionalidad) para calcular predicciones diarias de demanda a nivel de SKU y tienda.",
+      "ficha_ref": "fichas/retail-demand-fabric.es.md"
+    },
+    {
+      "id": "teladoc-lakehouse",
+      "title": "Plataforma Lakehouse para Analítica Clínica e Interoperabilidad Hospitalaria",
+      "cliente_display": "Grupo Hospitalario Internacional",
+      "cliente_publico": false,
+      "sector": "Salud",
+      "tecnologia": [
+        "Azure",
+        "Databricks",
+        "Python"
+      ],
+      "tipo_proyecto": "Plataforma",
+      "importe_label": "Plataforma (<500K)",
+      "partner": [
+        "Microsoft",
+        "Databricks"
+      ],
+      "anio": 2025,
+      "bu": "Data & AI",
+      "tags": [
+        "lakehouse",
+        "salud",
+        "interoperabilidad",
+        "datos clínicos",
+        "Azure",
+        "Databricks",
+        "streaming"
+      ],
+      "briefing": "El cliente gestiona una red distribuida de centros hospitalarios y telemedicina con millones de registros de pacientes. Los datos asistenciales residían en silos heterogéneos (sistemas HIS legacy, bases relacionales y almacenes documentales), imposibilitando la generación de analítica en tiempo casi real y dificultando el cumplimiento de normativas de interoperabilidad sanitaria. El reto principal consistía en unificar la información bajo una arquitectura escalable, segura y gobernada que permitiese tanto la explotación analítica tradicional como el entrenamiento futuro de modelos predictivos clínicos, preservando estrictos protocolos de anonimización de datos de pacientes.",
+      "ficha_ref": "fichas/teladoc-lakehouse.es.md"
+    }
+  ]
+}

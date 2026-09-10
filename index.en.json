@@ -1,0 +1,232 @@
+{
+  "version": "b9a711efb_1789053583",
+  "lang": "en",
+  "facets": [
+    {
+      "key": "sector",
+      "label": "Industry",
+      "type": "single_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "Salud",
+          "label": "Healthcare"
+        },
+        {
+          "id": "Banca y Finanzas",
+          "label": "Banking & Finance"
+        },
+        {
+          "id": "Seguros",
+          "label": "Insurance"
+        },
+        {
+          "id": "Telecomunicaciones",
+          "label": "Telecommunications"
+        },
+        {
+          "id": "Industria y Fabricación",
+          "label": "Manufacturing"
+        },
+        {
+          "id": "Retail y Consumo",
+          "label": "Retail & Consumer"
+        },
+        {
+          "id": "Sector Público",
+          "label": "Public Sector"
+        },
+        {
+          "id": "Energía y Utilities",
+          "label": "Energy & Utilities"
+        },
+        {
+          "id": "Logística y Transporte",
+          "label": "Logistics & Transport"
+        }
+      ]
+    },
+    {
+      "key": "tecnologia",
+      "label": "Technology",
+      "type": "multi_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "Azure",
+          "label": "Azure"
+        },
+        {
+          "id": "AWS",
+          "label": "AWS"
+        },
+        {
+          "id": "Databricks",
+          "label": "Databricks"
+        },
+        {
+          "id": "Microsoft Fabric",
+          "label": "Microsoft Fabric"
+        },
+        {
+          "id": "Snowflake",
+          "label": "Snowflake"
+        },
+        {
+          "id": "Power BI",
+          "label": "Power BI"
+        },
+        {
+          "id": "OpenAI",
+          "label": "OpenAI"
+        },
+        {
+          "id": "Kubernetes",
+          "label": "Kubernetes"
+        },
+        {
+          "id": "Apache Spark",
+          "label": "Apache Spark"
+        },
+        {
+          "id": "Terraform",
+          "label": "Terraform"
+        },
+        {
+          "id": "Python",
+          "label": "Python"
+        }
+      ]
+    },
+    {
+      "key": "tipo_proyecto",
+      "label": "Project Type",
+      "type": "single_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "MVP/PoC",
+          "label": "MVP/PoC"
+        },
+        {
+          "id": "Vertical",
+          "label": "Vertical"
+        },
+        {
+          "id": "Transversal",
+          "label": "Transversal"
+        },
+        {
+          "id": "Plataforma",
+          "label": "Plataforma"
+        }
+      ]
+    },
+    {
+      "key": "partner",
+      "label": "Partner",
+      "type": "multi_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "Microsoft",
+          "label": "Microsoft"
+        },
+        {
+          "id": "AWS",
+          "label": "AWS"
+        },
+        {
+          "id": "Databricks",
+          "label": "Databricks"
+        },
+        {
+          "id": "Snowflake",
+          "label": "Snowflake"
+        },
+        {
+          "id": "Cisco",
+          "label": "Cisco"
+        },
+        {
+          "id": "IBM",
+          "label": "IBM"
+        },
+        {
+          "id": "Google Cloud",
+          "label": "Google Cloud"
+        }
+      ]
+    },
+    {
+      "key": "bu",
+      "label": "Business Unit",
+      "type": "single_select",
+      "dynamic": false,
+      "options": [
+        {
+          "id": "Data & AI",
+          "label": "Data & AI"
+        },
+        {
+          "id": "Cloud & Managed Services",
+          "label": "Cloud & Managed Services"
+        },
+        {
+          "id": "Security",
+          "label": "Security"
+        },
+        {
+          "id": "Business Applications",
+          "label": "Business Applications"
+        }
+      ]
+    },
+    {
+      "key": "anio",
+      "label": "Year",
+      "type": "single_select",
+      "dynamic": true,
+      "options": [
+        {
+          "id": "2025",
+          "label": "2025"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "teladoc-lakehouse",
+      "title": "Clinical Analytics and Hospital Interoperability Lakehouse Platform",
+      "cliente_display": "International Healthcare Provider",
+      "cliente_publico": false,
+      "sector": "Salud",
+      "tecnologia": [
+        "Azure",
+        "Databricks",
+        "Python"
+      ],
+      "tipo_proyecto": "Plataforma",
+      "importe_label": "Plataforma (<500K)",
+      "partner": [
+        "Microsoft",
+        "Databricks"
+      ],
+      "anio": 2025,
+      "bu": "Data & AI",
+      "tags": [
+        "lakehouse",
+        "healthcare",
+        "interoperability",
+        "clinical data",
+        "Azure",
+        "Databricks",
+        "Healthcare",
+        "machine learning"
+      ],
+      "briefing": "The client operates an international distributed network of hospitals and telemedicine centers serving millions of patients. Clinical data resided in isolated, heterogeneous systems (legacy Hospital Information Systems, relational databases, and unstructured document stores), preventing near real-time operational analytics and hindering healthcare interoperability compliance. The core challenge was to unify all data assets within an enterprise-grade, secure, and governed lakehouse architecture capable of both descriptive analytics and machine learning workloads, while enforcing patient privacy regulations.",
+      "ficha_ref": "fichas/teladoc-lakehouse.en.md"
+    }
+  ]
+}
