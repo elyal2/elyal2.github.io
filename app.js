@@ -88,7 +88,6 @@ function catalogApp() {
     // Internationalized UI labels
     i18n: {
       es: {
-        brandSubtitle: 'Architects of Change',
         heroEyebrow: 'Data & AI · Logicalis Spain',
         catalogTitle: 'Catálogo de Casos de Uso y Éxito',
         catalogSubtitle: 'Explora soluciones empresariales validadas en Cloud, Data, AI y Ciberseguridad.',
@@ -122,7 +121,6 @@ function catalogApp() {
         modelNotReadyTooltip: 'El modelo semántico aún no está listo'
       },
       en: {
-        brandSubtitle: 'Architects of Change',
         heroEyebrow: 'Data & AI · Logicalis Spain',
         catalogTitle: 'Use Cases & Success Stories Catalog',
         catalogSubtitle: 'Explore validated enterprise solutions across Cloud, Data, AI, and Cybersecurity.',
