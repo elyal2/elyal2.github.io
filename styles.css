@@ -153,14 +153,10 @@ body {
   color: var(--text-inverse);
 }
 
-.brand-logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.brand-logo-img {
+  height: 26px;
+  width: auto;
+  display: block;
 }
 
 .brand-badge {
@@ -566,9 +562,22 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
-  max-height: 220px;
-  overflow-y: auto;
-  padding-right: 0.25rem;
+}
+
+.facet-toggle-more {
+  background: transparent;
+  border: none;
+  color: var(--brand-blue);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.4rem 0 0 0;
+  text-align: left;
+}
+
+.facet-toggle-more:hover {
+  color: var(--brand-blue-deep);
+  text-decoration: underline;
 }
 
 .facet-option-label {
@@ -612,6 +621,20 @@ body {
   border-left: 2px solid #FFFFFF;
   border-bottom: 2px solid #FFFFFF;
   transform: rotate(-45deg) translate(1px, -1px);
+}
+
+/* single_select facets render as radio inputs — circular, dot indicator instead of checkmark */
+.facet-checkbox[type="radio"] {
+  border-radius: 50%;
+}
+
+.facet-checkbox[type="radio"]:checked::before {
+  width: 7px;
+  height: 7px;
+  border: none;
+  border-radius: 50%;
+  background: #FFFFFF;
+  transform: none;
 }
 
 .facet-option-text {
@@ -980,6 +1003,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 0.25rem;
+  padding-right: 2.5rem;
 }
 
 .modal-title {

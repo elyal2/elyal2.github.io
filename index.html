@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Catálogo de Casos de Uso y Éxito de la Unidad - Logicalis Spain. Soluciones en Cloud, Data, AI y Ciberseguridad.">
   <meta name="theme-color" content="#143CCD">
-  <meta name="build-id" content="b103148b4_1789054424">
+  <meta name="build-id" content="b26f747cc_1789057105">
   <meta
     http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://huggingface.co https://*.hf.co https://cdn.jsdelivr.net; img-src 'self' data:;">
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Logicalis Design System Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=b103148b4_1789054424">
+  <link rel="stylesheet" href="styles.css?v=b26f747cc_1789057105">
 
   <!-- Third-party CDN Dependencies with Subresource Integrity (SRI) -->
   <script 
@@ -44,12 +44,12 @@
     crossorigin="anonymous">
   <script 
     type="module" 
-    src="transformers-bridge.js?v=b103148b4_1789054424" 
+    src="transformers-bridge.js?v=b26f747cc_1789057105" 
     crossorigin="anonymous">
   </script>
 
   <!-- Application Logic -->
-  <script src="app.js?v=b103148b4_1789054424"></script>
+  <script src="app.js?v=b26f747cc_1789057105"></script>
 
   <!-- Alpine.js 3.x with defer -->
   <script 
@@ -68,10 +68,8 @@
   <header class="header-hero">
     <div class="header-top">
       <div class="brand-container">
-        <div class="brand-logo">
-          LOGICALIS
-          <span class="brand-badge" x-text="t.brandSubtitle">Architects of Change</span>
-        </div>
+        <img class="brand-logo-img" src="assets/logicalis-logo-white.webp" alt="Logicalis" width="140" height="26">
+        <span class="brand-badge" x-text="t.brandSubtitle">Architects of Change</span>
       </div>
 
       <div class="header-actions">
@@ -250,19 +248,27 @@
           <div class="facet-group">
             <h3 class="facet-heading" x-text="facet.label"></h3>
             <ul class="facet-options-list">
-              <template x-for="option in facet.options" :key="option.id">
+              <template x-for="option in visibleFacetOptions(facet)" :key="option.id">
                 <li>
                   <label class="facet-option-label">
-                    <input 
-                      type="checkbox" 
+                    <input
+                      :type="facet.type === 'single_select' ? 'radio' : 'checkbox'"
+                      :name="facet.type === 'single_select' ? 'facet-' + facet.key : null"
                       class="facet-checkbox"
                       :checked="isFilterActive(facet.key, option.id)"
-                      @change="toggleFilter(facet.key, option.id)">
+                      @change="toggleFilter(facet, option.id)">
                     <span class="facet-option-text" x-text="option.label"></span>
                   </label>
                 </li>
               </template>
             </ul>
+            <button
+              type="button"
+              class="facet-toggle-more"
+              x-show="facetHasMore(facet)"
+              @click="toggleFacetExpanded(facet.key)"
+              x-text="expandedFacets[facet.key] ? t.showLess : t.showMore + ' (' + facetHiddenCount(facet) + ')'">
+            </button>
           </div>
         </template>
       </div>

@@ -54,6 +54,7 @@ function catalogApp() {
 
     // Dynamic facet state: generic dictionary mapping facetKey -> Array<string>
     activeFilters: {},
+    expandedFacets: {},
 
     // Release build ID for non-circular cache-busting (ADR-0008, Issue #43).
     // Read from the <meta name="build-id"> tag rather than an inline <script> —
@@ -110,6 +111,8 @@ function catalogApp() {
         clientConfidential: 'Cliente Confidencial',
         clientPublic: 'Cliente Público',
         allYears: 'Todos los años',
+        showMore: 'Ver más',
+        showLess: 'Ver menos',
         searchModeHybrid: 'Híbrido (Recomendado)',
         searchModeSemantic: 'Semántica',
         searchModeLexical: 'Texto exacto',
@@ -142,6 +145,8 @@ function catalogApp() {
         clientConfidential: 'Confidential Client',
         clientPublic: 'Public Client',
         allYears: 'All years',
+        showMore: 'Show more',
+        showLess: 'Show less',
         searchModeHybrid: 'Hybrid (Recommended)',
         searchModeSemantic: 'Semantic',
         searchModeLexical: 'Exact Text',
@@ -447,18 +452,59 @@ function catalogApp() {
         filters[facet.key] = [];
       }
       this.activeFilters = filters;
+      this.expandedFacets = {};
+    },
+
+    // Number of options shown per facet before collapsing behind "Ver más" (Amazon-style
+    // progressive disclosure) — avoids nested scrollbars when a facet has many options.
+    FACET_VISIBLE_LIMIT: 6,
+
+    /**
+     * Options to render for a facet: all of them once expanded, otherwise capped at
+     * FACET_VISIBLE_LIMIT. Generic over any facet — no per-facet-key branching (AC-007).
+     */
+    visibleFacetOptions(facet) {
+      const options = facet.options || [];
+      if (this.expandedFacets[facet.key] || options.length <= this.FACET_VISIBLE_LIMIT) {
+        return options;
+      }
+      return options.slice(0, this.FACET_VISIBLE_LIMIT);
+    },
+
+    facetHasMore(facet) {
+      return (facet.options || []).length > this.FACET_VISIBLE_LIMIT;
+    },
+
+    facetHiddenCount(facet) {
+      return Math.max(0, (facet.options || []).length - this.FACET_VISIBLE_LIMIT);
+    },
+
+    toggleFacetExpanded(facetKey) {
+      this.expandedFacets[facetKey] = !this.expandedFacets[facetKey];
     },
 
     /**
      * Toggle option selection within activeFilters[facetKey].
+     * `single_select` facets (per taxonomy.yaml) behave like a radio group: picking a new
+     * option replaces the previous one; clicking the active option clears it. `multi_select`
+     * facets keep the existing checkbox add/remove behavior. Generic over facet.type — no
+     * per-facet-key branching (AC-007).
      */
-    toggleFilter(facetKey, optionId) {
+    toggleFilter(facet, optionId) {
+      const facetKey = typeof facet === 'string' ? facet : facet.key;
+      const facetType = typeof facet === 'string' ? 'multi_select' : facet.type;
+
       if (!this.activeFilters[facetKey]) {
         this.activeFilters[facetKey] = [];
       }
       const optionStr = String(optionId);
       const list = this.activeFilters[facetKey];
       const idx = list.indexOf(optionStr);
+
+      if (facetType === 'single_select') {
+        this.activeFilters[facetKey] = idx > -1 ? [] : [optionStr];
+        return;
+      }
 
       if (idx > -1) {
         list.splice(idx, 1);
