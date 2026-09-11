@@ -126,7 +126,6 @@ table.data tr:hover td{background:var(--card2);}
 .dz-card p{color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:18px;}
 .dz-browse{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;border:none;padding:10px 18px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;}
 .dz-hint{margin-top:12px;font-size:9.5px;color:var(--dim);font-family:var(--mono);}
-.demo-lnk{margin-top:8px;font-size:12px;color:var(--orange-text);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:var(--sans);}
 .d3tip{position:fixed;pointer-events:none;background:var(--surface);border:1px solid var(--border2);border-radius:7px;padding:6px 9px;font-family:var(--mono);font-size:11px;color:var(--text);z-index:200;display:none;box-shadow:0 4px 16px rgba(0,0,0,.4);}
 .svg-pill{font-size:8.5px;font-weight:600;font-family:var(--mono);padding:1px 6px;border-radius:4px;background:var(--blue-dim);color:var(--blue-text);white-space:nowrap;}
 ::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
@@ -143,7 +142,7 @@ table.data tr:hover td{background:var(--card2);}
     <span style="font-family:var(--mono);font-size:9px;color:var(--dim);padding:2px 6px;border-radius:4px;border:1px solid var(--border);background:var(--card2)" id="topbar-version"></span>
   <div class="h-right">
     <span class="h-pill" id="period-badge">Sin datos</span>
-    <span id="data-badge">Datos de ejemplo</span>
+    <span id="data-badge">Sin datos cargados</span>
     <label class="hbtn" for="file-input"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Cargar Excel</label>
     <input type="file" id="file-input" accept=".xlsx,.xls">
     <button class="hbtn ico" id="theme-btn" title="Tema"><svg id="theme-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button>
@@ -306,38 +305,6 @@ const UTIL_L=[{r:248,n:'Delivery'},{r:251,n:'Managed Services'},{r:252,n:'Resour
 const SUB_L= [{r:258,n:'Delivery'},{r:259,n:'Managed Services'},{r:260,n:'Resourcing'}];
 const COL={am:[1,2,3,4,5,6,7,8,9,10,11,12],at:13,pm:[29,30,31,32,33,34,35,36,37,38,39,40],pt:41,tm:[58,59,60,61,62,63,64,65,66,67,68,69],tt:70};
 
-/* ─── DEFAULT DATA (BU Analytics, FY27 Mar-May real) ─── */
-const DEMO_RAW = (()=>{
-  const mk=(am,pm,tt,tgt)=>({am,pm,at:am.reduce((s,v)=>s+v,0),pt:pm.reduce((s,v)=>s+v,0),tm:Array(12).fill(0),tt,tgt});
-  return {
-    revenue_total:  mk([873.88,792.56,816.94,0,0,0,0,0,0,0,0,0],[608.15,729.34,682.42,746.90,681.46,673.36,779.66,996.88,680.20,742.61,900.73,709.30],8931.0,10065.0),
-    gp_ejec:        mk([328.06,260.76,281.29,0,0,0,0,0,0,0,0,0],[150.99,234.84,201.10,211.38,215.53,288.70,241.67,335.35,190.56,241.75,328.68,183.31],2823.9,3256.3),
-    ebitda:         mk([196.24,134.39,112.43,0,0,0,0,0,0,0,0,0],[113.56,154.55,107.45,159.41,113.99,215.43,119.36,198.03,87.28,97.65,178.54,111.87],1657.1,1852.0),
-    rev_del:        mk([174.55,197.51,156.39,0,0,0,0,0,0,0,0,0],[113.60,117.93,133.20,130.56,153.57,176.27,157.14,241.26,98.11,89.81,271.88,141.20],1825.5,0),
-    rev_recdel:     mk([23.65,6.49,14.08,0,0,0,0,0,0,0,0,0],[8.59,5.76,21.22,19.71,24.59,26.28,16.02,8.25,10.17,23.14,4.64,16.07],184.4,0),
-    rev_ms:         mk([118.27,105.82,101.56,0,0,0,0,0,0,0,0,0],[82.97,120.73,92.71,131.99,109.06,96.81,98.92,122.15,83.41,112.02,105.22,100.88],1257.9,0),
-    rev_res:        mk([557.41,482.74,540.84,0,0,0,0,0,0,0,0,0],[397.45,427.81,429.68,459.36,417.99,373.99,490.60,532.80,474.59,480.55,491.19,465.04],5441.0,0),
-    gp_del:         mk([85.33,69.06,54.32,0,0,0,0,0,0,0,0,0],[30.22,58.45,48.71,51.29,52.18,69.43,52.76,87.15,38.05,56.44,82.72,35.22],662.6,0),
-    gp_recdel:      mk([8.87,2.14,5.28,0,0,0,0,0,0,0,0,0],[3.12,1.85,6.27,5.44,7.65,8.33,5.02,2.87,3.22,7.44,1.52,5.22],57.9,0),
-    gp_ms:          mk([37.42,33.54,29.86,0,0,0,0,0,0,0,0,0],[22.16,35.56,24.83,34.25,28.73,23.31,25.97,32.40,22.36,30.81,28.51,26.52],334.4,0),
-    gp_res:         mk([196.44,155.99,191.83,0,0,0,0,0,0,0,0,0],[95.49,139.02,121.29,120.40,126.95,187.59,157.93,212.91,126.96,147.05,216.38,116.47],1769.4,0),
-    heads:          {am:[112,117,117,0,0,0,0,0,0,0,0,0],pm:[92,92,99,99,102,100,102,108,106,104,106,108],at:117,pt:101.5},
-    contractors:    {am:[18,16,21,0,0,0,0,0,0,0,0,0],pm:[15,10,13,13,12,15,14,15,15,15,20,15],at:21,pt:14.3},
-    utilisation:    {am:[0.9029,0.8896,0.9072,0,0,0,0,0,0,0,0,0],pm:[0.8796,0.9115,0.9220,0.9220,0.9198,0.9098,0.8713,0.8977,0.8920,0.6643,0.8743,0.8979],at:0.9,pt:0.876},
-    subTotal:       {am:[0.18,0.17,0.20,0,0,0,0,0,0,0,0,0],pm:[0.15,0.16,0.18,0.17,0.16,0.17,0.16,0.15,0.16,0.17,0.17,0.16],at:0.185,pt:0.165},
-    head_del:       {am:[55,59,58,0,0,0,0,0,0,0,0,0],pm:[43,42,46,46,47,46,47,49,49,47,49,51],at:58,pt:46},
-    head_ms:        {am:[18,19,20,0,0,0,0,0,0,0,0,0],pm:[15,15,16,16,17,16,16,18,17,17,17,18],at:20,pt:16},
-    head_res:       {am:[39,39,39,0,0,0,0,0,0,0,0,0],pm:[34,35,37,37,38,38,39,41,40,40,40,39],at:39,pt:37},
-    util_del:       {am:[0.91,0.90,0.92,0,0,0,0,0,0,0,0,0],pm:[0.88,0.92,0.93,0.93,0.92,0.91,0.87,0.90,0.89,0.66,0.88,0.90],at:0.91,pt:0.878},
-    util_ms:        {am:[0.89,0.88,0.90,0,0,0,0,0,0,0,0,0],pm:[0.87,0.90,0.91,0.91,0.91,0.90,0.86,0.89,0.88,0.65,0.87,0.89],at:0.89,pt:0.871},
-    util_res:       {am:[0.90,0.89,0.91,0,0,0,0,0,0,0,0,0],pm:[0.88,0.91,0.93,0.93,0.92,0.91,0.87,0.90,0.89,0.67,0.87,0.90],at:0.9,pt:0.882},
-    rate_del:       {am:[1480,1560,1520,0,0,0,0,0,0,0,0,0],pm:[1320,1380,1450,0,0,0,0,0,0,0,0,0],at:1520,pt:1383},
-    rate_ms:        {am:[980,990,1005,0,0,0,0,0,0,0,0,0],pm:[880,920,940,0,0,0,0,0,0,0,0,0],at:1005,pt:913},
-    rate_res:       {am:[670,680,690,0,0,0,0,0,0,0,0,0],pm:[580,600,610,0,0,0,0,0,0,0,0,0],at:690,pt:597},
-    closed:3,
-  };
-})();
-
 /* ─── PARSER ─── */
 let RAW_GRID=null;
 function num(v){if(v==null||v==='')return 0;const n=typeof v==='number'?v:parseFloat(String(v).replace(',','.'));return isNaN(n)?0:n;}
@@ -346,22 +313,26 @@ function amArr(r){return COL.am.map(c=>g(r,c));}
 function pmArr(r){return COL.pm.map(c=>g(r,c));}
 function tmArr(r){return COL.tm.map(c=>g(r,c));}
 
-function buildSeries(rowIdx, type){
-  const am=RAW_GRID?amArr(rowIdx):[];
-  const pm=RAW_GRID?pmArr(rowIdx):[];
-  const at=RAW_GRID?g(rowIdx,COL.at):0;
-  const pt=RAW_GRID?g(rowIdx,COL.pt):0;
-  const tt=RAW_GRID?g(rowIdx,COL.tt):0;
-  let closed=0;for(const v of am){if(Math.abs(v)>1e-6)closed++;else break;}
-  const _slice=(a,n)=>a.slice(0,n).filter(v=>Math.abs(v)>1e-9);
-  const _sum=(a,n)=>_slice(a,n).reduce((s,v)=>s+v,0);
-  const _avg=(a,n)=>{const s=_slice(a,n);return s.length?s.reduce((r,v)=>r+v,0)/s.length:0;}
+function buildSeries(rowIdx, type, closed){
+  // 'closed' SIEMPRE viene del recuento global (fila Revenue Total) — nunca se
+  // re-detecta por fila: una fila con un mes real en 0 (línea que arranca a
+  // mitad de año, mes sin actividad) no debe truncar su propio YTD.
+  const am=amArr(rowIdx);
+  const pm=pmArr(rowIdx);
+  const at=g(rowIdx,COL.at);
+  const pt=g(rowIdx,COL.pt);
+  const tt=g(rowIdx,COL.tt);
+  const _sum=(a,n)=>a.slice(0,n).reduce((s,v)=>s+v,0);
+  // Media SIN filtrar ceros: un mes con ratio real 0% (p.ej. 0% subcontratación)
+  // debe contar como 0 en el promedio, no descartarse como "sin dato".
+  const _avg=(a,n)=>n>0?_sum(a,n)/n:0;
   const actYTD=type==='stock'?am[closed-1]||0:type==='ratio'?_avg(am,closed):_sum(am,closed);
   const pyYTD=type==='stock'?pm[closed-1]||0:type==='ratio'?_avg(pm,closed):_sum(pm,closed);
+  const avgYTD=_avg(am,closed), avgPyYTD=_avg(pm,closed); // media real (no snapshot) — usada en descomposición volumen/productividad
   const ratio=pyYTD!==0?actYTD/pyYTD:1;
   const forecast=type==='stock'||type==='ratio'?actYTD:actYTD+(pt-pyYTD)*ratio;
-  const tm=RAW_GRID?tmArr(rowIdx):[];
-  return {am,pm,tm,at,pt,tt,actYTD,pyYTD,pyTot:pt,tgt:tt,forecast,ratio,closed};
+  const tm=tmArr(rowIdx);
+  return {am,pm,tm,at,pt,tt,actYTD,pyYTD,avgYTD,avgPyYTD,pyTot:pt,tgt:tt,forecast,ratio,closed};
 }
 
 function parseExcel(file){
@@ -384,63 +355,30 @@ function parseExcel(file){
 let D=null;
 let alertsOpen=true;
 function buildData(){
-  if(!RAW_GRID){
-    // Use demo data
-    D={
-      closed:DEMO_RAW.closed,
-      monthLabel:MONTHS[DEMO_RAW.closed-1],
-      revenue:{am:DEMO_RAW.revenue_total.am,pm:DEMO_RAW.revenue_total.pm,actYTD:sumN(DEMO_RAW.revenue_total.am,DEMO_RAW.closed),pyYTD:sumN(DEMO_RAW.revenue_total.pm,DEMO_RAW.closed),pyTot:DEMO_RAW.revenue_total.pt,tgt:DEMO_RAW.revenue_total.tgt,forecast:forecastDemo(DEMO_RAW.revenue_total,DEMO_RAW.closed)},
-      gpEjec:{am:DEMO_RAW.gp_ejec.am,pm:DEMO_RAW.gp_ejec.pm,actYTD:sumN(DEMO_RAW.gp_ejec.am,DEMO_RAW.closed),pyYTD:sumN(DEMO_RAW.gp_ejec.pm,DEMO_RAW.closed),pyTot:DEMO_RAW.gp_ejec.pt,tgt:DEMO_RAW.gp_ejec.tgt,forecast:forecastDemo(DEMO_RAW.gp_ejec,DEMO_RAW.closed)},
-      ebitda:{am:DEMO_RAW.ebitda.am,pm:DEMO_RAW.ebitda.pm,actYTD:sumN(DEMO_RAW.ebitda.am,DEMO_RAW.closed),pyYTD:sumN(DEMO_RAW.ebitda.pm,DEMO_RAW.closed),pyTot:DEMO_RAW.ebitda.pt,tgt:DEMO_RAW.ebitda.tgt,forecast:forecastDemo(DEMO_RAW.ebitda,DEMO_RAW.closed)},
-      heads:{actYTD:DEMO_RAW.heads.at,pyYTD:DEMO_RAW.heads.pt},
-      contractors:{actYTD:DEMO_RAW.contractors.at,pyYTD:DEMO_RAW.contractors.pt},
-      utilisation:{actYTD:DEMO_RAW.utilisation.at,pyYTD:DEMO_RAW.utilisation.pt},
-      subTotal:{actYTD:DEMO_RAW.subTotal.at,pyYTD:DEMO_RAW.subTotal.pt},
-      revLines:[
-        {n:'Delivery',am:DEMO_RAW.rev_del.am,pm:DEMO_RAW.rev_del.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.rev_del.am,3),pyYTD:sumN(DEMO_RAW.rev_del.pm,3),pyTot:DEMO_RAW.rev_del.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_del,3)},
-        {n:'Rec Delivery',am:DEMO_RAW.rev_recdel.am,pm:DEMO_RAW.rev_recdel.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.rev_recdel.am,3),pyYTD:sumN(DEMO_RAW.rev_recdel.pm,3),pyTot:DEMO_RAW.rev_recdel.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_recdel,3)},
-        {n:'Managed Svcs',am:DEMO_RAW.rev_ms.am,pm:DEMO_RAW.rev_ms.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.rev_ms.am,3),pyYTD:sumN(DEMO_RAW.rev_ms.pm,3),pyTot:DEMO_RAW.rev_ms.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_ms,3)},
-        {n:'Resourcing',am:DEMO_RAW.rev_res.am,pm:DEMO_RAW.rev_res.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.rev_res.am,3),pyYTD:sumN(DEMO_RAW.rev_res.pm,3),pyTot:DEMO_RAW.rev_res.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.rev_res,3)},
-      ],
-      gpLines:[
-        {n:'Delivery',am:DEMO_RAW.gp_del.am,pm:DEMO_RAW.gp_del.pm,tm:[65.9,68.8,74.4,81.4,0,0,0,0,0,0,0,0],actYTD:sumN(DEMO_RAW.gp_del.am,3),pyYTD:sumN(DEMO_RAW.gp_del.pm,3),pyTot:DEMO_RAW.gp_del.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_del,3)},
-        {n:'Rec Delivery',am:DEMO_RAW.gp_recdel.am,pm:DEMO_RAW.gp_recdel.pm,tm:Array(12).fill(0),actYTD:sumN(DEMO_RAW.gp_recdel.am,3),pyYTD:sumN(DEMO_RAW.gp_recdel.pm,3),pyTot:DEMO_RAW.gp_recdel.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_recdel,3)},
-        {n:'Managed Svcs',am:DEMO_RAW.gp_ms.am,pm:DEMO_RAW.gp_ms.pm,tm:[57.2,51.5,57.2,63.0,0,0,0,0,0,0,0,0],actYTD:sumN(DEMO_RAW.gp_ms.am,3),pyYTD:sumN(DEMO_RAW.gp_ms.pm,3),pyTot:DEMO_RAW.gp_ms.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_ms,3)},
-        {n:'Resourcing',am:DEMO_RAW.gp_res.am,pm:DEMO_RAW.gp_res.pm,tm:[128.1,125.4,130.9,136.3,0,0,0,0,0,0,0,0],actYTD:sumN(DEMO_RAW.gp_res.am,3),pyYTD:sumN(DEMO_RAW.gp_res.pm,3),pyTot:DEMO_RAW.gp_res.pt,tgt:0,forecast:forecastDemo(DEMO_RAW.gp_res,3)},
-      ],
-      headLines:[{n:'Delivery',actYTD:DEMO_RAW.head_del.at,pyYTD:DEMO_RAW.head_del.pt},{n:'Managed Svcs',actYTD:DEMO_RAW.head_ms.at,pyYTD:DEMO_RAW.head_ms.pt},{n:'Resourcing',actYTD:DEMO_RAW.head_res.at,pyYTD:DEMO_RAW.head_res.pt}],
-      utilLines:[{n:'Delivery',actYTD:DEMO_RAW.util_del.at,pyYTD:DEMO_RAW.util_del.pt},{n:'Managed Svcs',actYTD:DEMO_RAW.util_ms.at,pyYTD:DEMO_RAW.util_ms.pt},{n:'Resourcing',actYTD:DEMO_RAW.util_res.at,pyYTD:DEMO_RAW.util_res.pt}],
-      rateLines:[{n:'Delivery',actYTD:DEMO_RAW.rate_del.at,pyYTD:DEMO_RAW.rate_del.pt},{n:'Managed Svcs',actYTD:DEMO_RAW.rate_ms.at,pyYTD:DEMO_RAW.rate_ms.pt},{n:'Resourcing',actYTD:DEMO_RAW.rate_res.at,pyYTD:DEMO_RAW.rate_res.pt}],
-      subLines:[{n:'Delivery',actYTD:0.19,pyYTD:0.17},{n:'Managed Svcs',actYTD:0.12,pyYTD:0.10},{n:'Resourcing',actYTD:0.21,pyYTD:0.18}],
-    };
-    // Monthly target arrays for SVG charts
-    D.revenue.tm=[817.04,794.98,849.67,924.94,743.31,689.63,871.21,993.15,871.74,774.89,873.75,860.69];
-    D.gpEjec.tm=[258.40,252.79,269.57,291.30,235.48,224.77,276.53,324.50,278.02,237.99,329.84,277.10];
-    D.ebitda.tm=[140.84,132.84,143.84,162.14,114.70,183.84,159.93,185.29,152.08,116.51,218.74,141.24];
-    return;
-  }
-  // Parse from Excel
-  const n=DEMO_RAW.closed; // will be overridden below
-  const bld=(r,t)=>buildSeries(r,t);
-  // detect closed months
+  if(!RAW_GRID)return; // nada cargado todavía — la vista se queda con el drop-zone
+  const bld=(r,t,cl)=>buildSeries(r,t,cl);
+  // Único punto de detección de "meses cerrados": fila Revenue Total.
+  // Todas las demás filas/líneas usan este mismo valor — nunca redetectan por su cuenta.
   const testAm=amArr(R.revenue);let cl=0;for(const v of testAm){if(Math.abs(v)>1e-6)cl++;else break;}if(cl===0)cl=1;
   const CLOSED=cl;
-  function bldLine(arr,type){return arr.map(l=>{const s=buildSeries(l.r,type);s.n=l.n;return s;});}
+  function bldLine(arr,type){return arr.map(l=>{const s=buildSeries(l.r,type,CLOSED);s.n=l.n;return s;});}
+  const headsS=bld(R.heads,'stock',CLOSED);
+  const contractorsS=bld(R.contractors,'stock',CLOSED);
+  const utilS=bld(R.utilisation,'ratio',CLOSED);
+  const subS=bld(R.subTotal,'ratio',CLOSED);
   D={
     closed:CLOSED,monthLabel:MONTHS[CLOSED-1],
-    revenue:bld(R.revenue,'flow'),gpEjec:bld(R.gpEjec,'flow'),ebitda:bld(R.ebitda,'flow'),
-    heads:{actYTD:g(R.heads,COL.am[CLOSED-1]),pyYTD:g(R.heads,COL.pm[CLOSED-1])},
-    contractors:{actYTD:g(R.contractors,COL.am[CLOSED-1]),pyYTD:g(R.contractors,COL.pm[CLOSED-1])},
-    utilisation:{actYTD:avgN(amArr(R.utilisation).slice(0,CLOSED)),pyYTD:avgN(pmArr(R.utilisation).slice(0,CLOSED))},
-    subTotal:{actYTD:g(R.subTotal,COL.am[CLOSED-1]),pyYTD:g(R.subTotal,COL.pm[CLOSED-1])},
+    revenue:bld(R.revenue,'flow',CLOSED),gpEjec:bld(R.gpEjec,'flow',CLOSED),ebitda:bld(R.ebitda,'flow',CLOSED),
+    heads:{actYTD:headsS.actYTD,pyYTD:headsS.pyYTD,avgYTD:headsS.avgYTD,avgPyYTD:headsS.avgPyYTD},
+    contractors:{actYTD:contractorsS.actYTD,pyYTD:contractorsS.pyYTD},
+    utilisation:{actYTD:utilS.actYTD,pyYTD:utilS.pyYTD},
+    subTotal:{actYTD:subS.actYTD,pyYTD:subS.pyYTD},
     revLines:bldLine(REV_L,'flow'),gpLines:bldLine(GP_L,'flow'),
     headLines:bldLine(HEAD_L,'stock'),utilLines:bldLine(UTIL_L,'ratio'),
     rateLines:bldLine(RATE_L,'stock'),subLines:bldLine(SUB_L,'ratio'),
   };
 }
-function forecastDemo(s,cl){const actYTD=sumN(s.am,cl),pyYTD=sumN(s.pm,cl),r=pyYTD?actYTD/pyYTD:1;return actYTD+(s.pt-pyYTD)*r;}
 const sumN=(a,n)=>a.slice(0,n).reduce((s,v)=>s+(v||0),0);
-const avgN=arr=>{const f=arr.filter(v=>v&&v!==0);return f.length?f.reduce((s,v)=>s+v,0)/f.length:0;}
 
 /* ─── FORMATTERS ─── */
 const f0=n=>Math.round(n).toLocaleString('es-ES');
@@ -689,7 +627,20 @@ function renderBridge(){
   const tot=srcMap[bridgeMetric],lines=linesMap[bridgeMetric];
   const el=document.getElementById('chart-bridge');el.innerHTML='';
   const steps=[];steps.push({label:'Objetivo',val:tot.tgt,type:'anchor'});
-  if(lines){const pyS=lines.reduce((a,l)=>a+(l.pyTot||0),0)||1;lines.forEach(l=>{const contrib=(l.forecast-tot.tgt*(l.pyTot/pyS));steps.push({label:l.n,val:contrib,type:'delta'});});}
+  if(lines){
+    // Cada línea extrapola su forecast con SU PROPIA ratio YoY, distinta de la ratio
+    // agregada que usa la fila Total — la suma de contribuciones por línea NO tiene
+    // por qué cuadrar exactamente con (Forecast total − Objetivo). En vez de ocultar
+    // ese residuo (las barras quedarían "flotando" sin llegar al ancla Forecast), se
+    // muestra explícito como barra "Otros/Ajuste" para que el puente sea aditivo de verdad.
+    const pyS=lines.reduce((a,l)=>a+(l.pyTot||0),0)||1;
+    let sumContrib=0;
+    lines.forEach(l=>{const contrib=(l.forecast-tot.tgt*(l.pyTot/pyS));sumContrib+=contrib;steps.push({label:l.n,val:contrib,type:'delta'});});
+    const residual=(tot.forecast-tot.tgt)-sumContrib;
+    if(Math.abs(residual)>Math.abs(tot.tgt)*0.005){
+      steps.push({label:'Otros/Ajuste',val:residual,type:'delta'});
+    }
+  }
   steps.push({label:'Forecast',val:tot.forecast,type:'anchor'});
   const W=el.clientWidth||580,H=220,m={t:20,r:14,b:40,l:52},iw=W-m.l-m.r,ih=H-m.t-m.b;
   const svg=d3.select(el).append('svg').attr('width',W).attr('height',H);const g=svg.append('g').attr('transform',`translate(${m.l},${m.t})`);
@@ -716,11 +667,16 @@ function renderBridge(){
 function renderGrowth(){
   const rev=D.revenue,hd=D.heads;
   const dRev=rev.actYTD-rev.pyYTD;
-  const rpfNow=hd.actYTD?rev.actYTD/hd.actYTD:0,rpfPy=hd.pyYTD?rev.pyYTD/hd.pyYTD:0;
-  const volEffect=(hd.actYTD-hd.pyYTD)*rpfPy,prodEffect=dRev-volEffect;
+  // Rev/FTE debe usar headcount MEDIO del periodo (avgYTD), no la foto de fin de mes
+  // (actYTD) — los ingresos son un flujo acumulado de varios meses y comparar esa suma
+  // contra el headcount de un único mes (el último) infla o desinfla el ratio si la
+  // plantilla creció de forma gradual durante el periodo.
+  const dHeadsAvg=hd.avgYTD-hd.avgPyYTD;
+  const rpfNow=hd.avgYTD?rev.actYTD/hd.avgYTD:0,rpfPy=hd.avgPyYTD?rev.pyYTD/hd.avgPyYTD:0;
+  const volEffect=dHeadsAvg*rpfPy,prodEffect=dRev-volEffect;
   document.getElementById('growth-kpis').innerHTML=[
     kpiCard({lbl:'Δ Ingresos YTD',icon:ICONS.eur,val:`${sign(dRev)}<span class="u">k€</span>`,rows:[{lbl:'Real',val:fM(rev.actYTD)+'M'},{lbl:'FY26',val:fM(rev.pyYTD)+'M'},{lbl:'crecim.',val:(dRev/rev.pyYTD*100).toFixed(0)+'%',cls:'pos'}]}),
-    kpiCard({lbl:'Efecto Volumen',icon:ICONS.pp,val:`${sign(volEffect)}<span class="u">k€</span>`,rows:[{lbl:'ΔHeads',val:sign(hd.actYTD-hd.pyYTD)+' FTE'},{lbl:'% del Δ',val:(volEffect/dRev*100).toFixed(0)+'%',cls:'neu'}]}),
+    kpiCard({lbl:'Efecto Volumen',icon:ICONS.pp,val:`${sign(volEffect)}<span class="u">k€</span>`,rows:[{lbl:'ΔHeads (medio)',val:sign(dHeadsAvg)+' FTE'},{lbl:'% del Δ',val:(volEffect/dRev*100).toFixed(0)+'%',cls:'neu'}]}),
     kpiCard({lbl:'Efecto Productividad',icon:ICONS.gp,val:`${sign(prodEffect)}<span class="u">k€</span>`,rows:[{lbl:'Rev/FTE',val:f0(rpfNow)},{lbl:'FY26',val:f0(rpfPy)},{lbl:'% del Δ',val:(prodEffect/dRev*100).toFixed(0)+'%',cls:prodEffect>=0?'pos':'neg'}]}),
     kpiCard({lbl:'Rev / FTE',icon:ICONS.pct,val:`${f0(rpfNow)}<span class="u">k€</span>`,rows:[{lbl:'vs FY26',...dTxt(rpfNow,rpfPy)},{lbl:'Util.',val:pct(D.utilisation.actYTD),cls:'neu'}]}),
   ].join('');
@@ -745,13 +701,13 @@ function renderGrowth(){
   const hmap={};D.headLines.forEach(h=>hmap[h.n]=h);
   const ldata=D.revLines.filter(l=>l.n!=='Rec Delivery').map(l=>{
     // Try exact match, then partial match for name variants
-    const h=hmap[l.n]||hmap[l.n.replace('Managed Svcs','Managed Services')]||hmap[l.n.replace('Managed Services','Managed Svcs')]||{actYTD:0,pyYTD:0};
+    const h=hmap[l.n]||hmap[l.n.replace('Managed Svcs','Managed Services')]||hmap[l.n.replace('Managed Services','Managed Svcs')]||{avgYTD:0,avgPyYTD:0};
     const dRev=l.actYTD-l.pyYTD;
     const label=l.n.replace('Managed Svcs','MS').replace('Managed Services','MS');
-    if(!h.pyYTD||h.pyYTD<0.5) return{n:label,vol:dRev,prod:0,noData:true};
-    const rpy=l.pyYTD/h.pyYTD; // FY26 revenue per FTE
-    const vol=(h.actYTD-h.pyYTD)*rpy;  // Δheads × FY26 rate = volume effect
-    const prod=dRev-vol;                 // residual = productivity/rate effect
+    if(!h.avgPyYTD||h.avgPyYTD<0.5) return{n:label,vol:dRev,prod:0,noData:true};
+    const rpy=l.pyYTD/h.avgPyYTD; // FY26 revenue por FTE medio
+    const vol=(h.avgYTD-h.avgPyYTD)*rpy;  // Δheads medio × tarifa FY26 = efecto volumen
+    const prod=dRev-vol;                 // residuo = efecto productividad/tarifa
     return{n:label,vol,prod};
   });
   const W2=el2.clientWidth||440,H2=220,m2={t:16,r:14,b:36,l:52},iw2=W2-m2.l-m2.r,ih2=H2-m2.t-m2.b;
