@@ -1,5 +1,5 @@
 {
-  "version": "b26f747cc_1789057317",
+  "version": "bdc383d48_1789404313",
   "lang": "es",
   "facets": [
     {
@@ -268,7 +268,7 @@
       "sector": "Salud",
       "tecnologia": [
         "Azure",
-        "Databricks",
+        "Snowflake",
         "Python"
       ],
       "tipo_proyecto": "Plataforma",

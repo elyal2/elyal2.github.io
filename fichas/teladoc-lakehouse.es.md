@@ -7,7 +7,7 @@ cliente_publico: false
 sector: Salud
 tecnologia:
 - Azure
-- Databricks
+- Snowflake
 - Python
 tipo_proyecto: Plataforma
 importe_label: Plataforma (<500K)
