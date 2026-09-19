@@ -1,5 +1,5 @@
 {
-  "version": "b047d115a_1789812921",
+  "version": "b23a17d6d_1789816819",
   "lang": "en",
   "facets": [
     {
@@ -43,6 +43,14 @@
         {
           "id": "Logística y Transporte",
           "label": "Logistics & Transport"
+        },
+        {
+          "id": "No determinado",
+          "label": "No determinado"
+        },
+        {
+          "id": "Tecnología y Servicios Digitales",
+          "label": "Technology and Digital Services"
         }
       ]
     },
@@ -107,6 +115,30 @@
         {
           "id": "Servicios AWS de datos y machine learning",
           "label": "Servicios AWS de datos y machine learning"
+        },
+        {
+          "id": "Google BigQuery",
+          "label": "Google BigQuery"
+        },
+        {
+          "id": "Google Cloud Logging",
+          "label": "Google Cloud Logging"
+        },
+        {
+          "id": "Vertex AI",
+          "label": "Vertex AI"
+        },
+        {
+          "id": "Grafana Cloud",
+          "label": "Grafana Cloud"
+        },
+        {
+          "id": "Cloud Run",
+          "label": "Cloud Run"
+        },
+        {
+          "id": "Retrieval-Augmented Generation (RAG)",
+          "label": "Retrieval-Augmented Generation (RAG)"
         }
       ]
     },
@@ -201,6 +233,10 @@
       "dynamic": true,
       "options": [
         {
+          "id": "2026",
+          "label": "2026"
+        },
+        {
           "id": "2025",
           "label": "2025"
         }
@@ -208,6 +244,40 @@
     }
   ],
   "cases": [
+    {
+      "id": "masorange-logora",
+      "title": "Advanced Data-Driven Observability Platform for a National Telecommunications Operator",
+      "cliente_display": "MasOrange",
+      "cliente_publico": true,
+      "sector": "Telecomunicaciones",
+      "tecnologia": [
+        "IA generativa",
+        "Modelado y analítica de grafos"
+      ],
+      "tipo_proyecto": "MVP/PoC",
+      "importe_label": "MVP/PoC",
+      "partner": [
+        "Google Cloud"
+      ],
+      "anio": 2026,
+      "bu": "Data & AI",
+      "tags": [
+        "observability",
+        "log analytics",
+        "AIOps",
+        "root cause analysis",
+        "RAG",
+        "machine learning",
+        "business observability",
+        "managed service",
+        "Cloud Run",
+        "Google Cloud Logging",
+        "Grafana Cloud",
+        "Vertex AI"
+      ],
+      "briefing": "The client operated a centralized logging model based on syslog, a log concentrator and Google Cloud Logging. This architecture supported efficient incident response and real-time troubleshooting, but was primarily oriented towards operational ingestion and short-term analysis. It limited large-scale correlation across technology domains, extended historical analysis, advanced anomaly detection and the conversion of telemetry into business-oriented insights.",
+      "ficha_ref": "fichas/masorange-logora.en.md"
+    },
     {
       "id": "masorange-rca",
       "title": "Intelligent Network Incident Diagnosis Using Graphs and Generative AI",

@@ -1,5 +1,5 @@
 {
-  "version": "b047d115a_1789812921",
+  "version": "b23a17d6d_1789816819",
   "lang": "es",
   "facets": [
     {
@@ -43,6 +43,14 @@
         {
           "id": "Logística y Transporte",
           "label": "Logística y Transporte"
+        },
+        {
+          "id": "No determinado",
+          "label": "No determinado"
+        },
+        {
+          "id": "Tecnología y Servicios Digitales",
+          "label": "Tecnología y Servicios Digitales"
         }
       ]
     },
@@ -107,6 +115,30 @@
         {
           "id": "Servicios AWS de datos y machine learning",
           "label": "Servicios AWS de datos y machine learning"
+        },
+        {
+          "id": "Google BigQuery",
+          "label": "Google BigQuery"
+        },
+        {
+          "id": "Google Cloud Logging",
+          "label": "Google Cloud Logging"
+        },
+        {
+          "id": "Vertex AI",
+          "label": "Vertex AI"
+        },
+        {
+          "id": "Grafana Cloud",
+          "label": "Grafana Cloud"
+        },
+        {
+          "id": "Cloud Run",
+          "label": "Cloud Run"
+        },
+        {
+          "id": "Retrieval-Augmented Generation (RAG)",
+          "label": "Retrieval-Augmented Generation (RAG)"
         }
       ]
     },
@@ -201,6 +233,10 @@
       "dynamic": true,
       "options": [
         {
+          "id": "2026",
+          "label": "2026"
+        },
+        {
           "id": "2025",
           "label": "2025"
         },
@@ -241,6 +277,41 @@
       ],
       "briefing": "Una de las principales entidades bancarias del IBEX 35 requería modernizar sus mecanismos de prevención de fraude transaccional en canales de pago digital y banca móvil. Los sistemas basados exclusivamente en motores de reglas estáticas generaban una tasa excesiva de falsos positivos, afectando negativamente la experiencia de usuario de clientes legítimos y dilatando el tiempo de respuesta ante nuevos patrones de ciberestafa. El objetivo fue desplegar una infraestructura de inferencia en tiempo real capaz de evaluar miles de transacciones por segundo con una latencia inferior a 50 milisegundos.",
       "ficha_ref": "fichas/banco-fraude-ml.es.md"
+    },
+    {
+      "id": "masorange-logora",
+      "title": "Plataforma avanzada de observabilidad basada en datos para un operador de telecomunicaciones",
+      "cliente_display": "MasOrange",
+      "cliente_publico": true,
+      "sector": "Telecomunicaciones",
+      "tecnologia": [
+        "IA generativa",
+        "Modelado y analítica de grafos"
+      ],
+      "tipo_proyecto": "MVP/PoC",
+      "importe_label": "MVP/PoC",
+      "partner": [
+        "Google Cloud"
+      ],
+      "anio": 2026,
+      "bu": "Data & AI",
+      "tags": [
+        "observabilidad",
+        "analítica de logs",
+        "AIOps",
+        "análisis de causa raíz",
+        "RAG",
+        "machine learning",
+        "observabilidad orientada al negocio",
+        "servicio gestionado",
+        "Cloud Run",
+        "Google Cloud Logging",
+        "Grafana Cloud",
+        "Retrieval-Augmented Generation (RAG)",
+        "Vertex AI"
+      ],
+      "briefing": "El cliente operaba con un modelo centralizado de gestión de logs basado en syslog, un concentrador de logs y Google Cloud Logging. Esta arquitectura permitía responder eficazmente a las incidencias y realizar troubleshooting en tiempo real, pero estaba orientada principalmente a la ingesta operativa y al análisis a corto plazo. Esto limitaba la correlación a gran escala entre distintos dominios tecnológicos, el análisis histórico ampliado, la detección avanzada de anomalías y la transformación de la telemetría en información de valor para el negocio.",
+      "ficha_ref": "fichas/masorange-logora.es.md"
     },
     {
       "id": "masorange-rca",
