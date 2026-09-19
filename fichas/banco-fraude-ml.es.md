@@ -10,7 +10,7 @@ tecnologia:
 - Python
 - Kubernetes
 tipo_proyecto: Vertical
-importe_label: Vertical (<50K)
+importe_label: Vertical
 anio: 2024
 partner:
 - AWS

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Catálogo de Casos de Uso y Éxito de la Unidad - Logicalis Spain. Soluciones en Cloud, Data, AI y Ciberseguridad.">
   <meta name="theme-color" content="#143CCD">
-  <meta name="build-id" content="b4bb7fa5a_1789661526">
+  <meta name="build-id" content="b047d115a_1789812921">
   <meta
     http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://huggingface.co https://*.hf.co https://cdn.jsdelivr.net; img-src 'self' data:;">
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Logicalis Design System Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=b4bb7fa5a_1789661526">
+  <link rel="stylesheet" href="styles.css?v=b047d115a_1789812921">
 
   <!-- Third-party CDN Dependencies with Subresource Integrity (SRI) -->
   <script 
@@ -44,12 +44,12 @@
     crossorigin="anonymous">
   <script 
     type="module" 
-    src="transformers-bridge.js?v=b4bb7fa5a_1789661526" 
+    src="transformers-bridge.js?v=b047d115a_1789812921" 
     crossorigin="anonymous">
   </script>
 
   <!-- Application Logic -->
-  <script src="app.js?v=b4bb7fa5a_1789661526"></script>
+  <script src="app.js?v=b047d115a_1789812921"></script>
 
   <!-- Alpine.js 3.x with defer -->
   <script 
@@ -373,10 +373,16 @@
               <template x-for="tech in item.tecnologia" :key="tech">
                 <span class="badge-tech" x-text="tech"></span>
               </template>
+              <template x-for="tag in (item.tags || []).filter(t => !(item.tecnologia || []).includes(t)).slice(0, 5)" :key="tag">
+                <span class="badge-tag" x-text="tag"></span>
+              </template>
+              <template x-if="(item.tags || []).filter(t => !(item.tecnologia || []).includes(t)).length > 5">
+                <span class="badge-tag-more" x-text="'+' + ((item.tags || []).filter(t => !(item.tecnologia || []).includes(t)).length - 5)"></span>
+              </template>
             </div>
 
             <div class="card-footer">
-              <span style="font-size: 0.75rem; color: var(--text-muted);" x-text="item.tipo_proyecto"></span>
+              <span style="font-size: 0.75rem; color: var(--text-muted);" x-text="item.partner && item.partner.length ? ('Partner: ' + item.partner.join(', ')) : ''"></span>
               <button 
                 type="button" 
                 class="card-btn-view" 
@@ -387,6 +393,7 @@
                 </svg>
               </button>
             </div>
+
           </article>
         </template>
       </div>
@@ -428,6 +435,15 @@
           <span class="badge-importe" x-text="selectedCase ? selectedCase.importe_label : ''"></span>
         </div>
         <h2 id="modal-case-title" class="modal-title" x-text="selectedCase ? selectedCase.title : ''"></h2>
+        <div class="modal-tags-row" x-show="selectedCase && ((selectedCase.tecnologia && selectedCase.tecnologia.length) || (selectedCase.tags && selectedCase.tags.length))">
+          <template x-for="tech in (selectedCase ? selectedCase.tecnologia : [])" :key="tech">
+            <span class="badge-tech" x-text="tech"></span>
+          </template>
+          <template x-for="tag in (selectedCase ? (selectedCase.tags || []).filter(t => !(selectedCase.tecnologia || []).includes(t)) : [])" :key="tag">
+            <span class="badge-tag" x-text="tag"></span>
+          </template>
+        </div>
+
         <button 
           type="button" 
           class="modal-close-btn"

@@ -10,7 +10,7 @@ tecnologia:
 - Databricks
 - Python
 tipo_proyecto: Plataforma
-importe_label: Plataforma (<500K)
+importe_label: Plataforma
 anio: 2025
 partner:
 - Microsoft

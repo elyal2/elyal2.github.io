@@ -1,5 +1,5 @@
 {
-  "version": "b4bb7fa5a_1789661526",
+  "version": "b047d115a_1789812921",
   "lang": "es",
   "facets": [
     {
@@ -95,6 +95,18 @@
         {
           "id": "Python",
           "label": "Python"
+        },
+        {
+          "id": "Modelado y analítica de grafos",
+          "label": "Modelado y analítica de grafos"
+        },
+        {
+          "id": "IA generativa",
+          "label": "IA generativa"
+        },
+        {
+          "id": "Servicios AWS de datos y machine learning",
+          "label": "Servicios AWS de datos y machine learning"
         }
       ]
     },
@@ -212,7 +224,7 @@
         "Kubernetes"
       ],
       "tipo_proyecto": "Vertical",
-      "importe_label": "Vertical (<50K)",
+      "importe_label": "Vertical",
       "partner": [
         "AWS"
       ],
@@ -231,6 +243,37 @@
       "ficha_ref": "fichas/banco-fraude-ml.es.md"
     },
     {
+      "id": "masorange-rca",
+      "title": "Diagnóstico inteligente de incidencias de red mediante grafos e IA generativa",
+      "cliente_display": "MasOrange",
+      "cliente_publico": true,
+      "sector": "Telecomunicaciones",
+      "tecnologia": [
+        "AWS"
+      ],
+      "tipo_proyecto": "Plataforma",
+      "importe_label": "Plataforma",
+      "partner": [
+        "AWS"
+      ],
+      "anio": 2025,
+      "bu": "Data & AI",
+      "tags": [
+        "RCA",
+        "AIOps",
+        "Digital Twin",
+        "Grafos",
+        "NOC",
+        "Correlación de alarmas",
+        "Análisis multivendor",
+        "IA generativa",
+        "Predicción de fallos",
+        "AWS"
+      ],
+      "briefing": "El operador afrontaba una elevada complejidad en la operación de sus redes RAN, core y transporte, con miles de alarmas, inventarios de topología estáticos y segmentados, y múltiples herramientas OSS difíciles de correlacionar. La identificación del origen de una incidencia podía prolongarse durante más de siete horas, especialmente en escenarios multivendor y de caída masiva de servicios. Los equipos de operación dedicaban un esfuerzo considerable a revisar alarmas, recopilar evidencias y relacionar manualmente eventos entre dominios, mientras que los enfoques tradicionales de análisis de causa raíz se apoyaban principalmente en reglas estáticas y umbrales.",
+      "ficha_ref": "fichas/masorange-rca.es.md"
+    },
+    {
       "id": "retail-demand-fabric",
       "title": "Previsión de Demanda y Optimización de Cadena de Suministro con Microsoft Fabric",
       "cliente_display": "Supermercados Global Retail",
@@ -242,7 +285,7 @@
         "Azure"
       ],
       "tipo_proyecto": "Transversal",
-      "importe_label": "Transversal (<150K)",
+      "importe_label": "Transversal",
       "partner": [
         "Microsoft"
       ],
@@ -272,7 +315,7 @@
         "Python"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma (<500K)",
+      "importe_label": "Plataforma",
       "partner": [
         "Microsoft",
         "Databricks"

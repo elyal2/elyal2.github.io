@@ -10,7 +10,7 @@ tecnologia:
 - Power BI
 - Azure
 tipo_proyecto: Transversal
-importe_label: Transversal (<150K)
+importe_label: Transversal
 anio: 2025
 partner:
 - Microsoft

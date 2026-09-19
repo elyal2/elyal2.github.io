@@ -1,5 +1,5 @@
 {
-  "version": "b4bb7fa5a_1789661526",
+  "version": "b047d115a_1789812921",
   "lang": "en",
   "facets": [
     {
@@ -95,6 +95,18 @@
         {
           "id": "Python",
           "label": "Python"
+        },
+        {
+          "id": "Modelado y analítica de grafos",
+          "label": "Modelado y analítica de grafos"
+        },
+        {
+          "id": "IA generativa",
+          "label": "IA generativa"
+        },
+        {
+          "id": "Servicios AWS de datos y machine learning",
+          "label": "Servicios AWS de datos y machine learning"
         }
       ]
     },
@@ -197,6 +209,38 @@
   ],
   "cases": [
     {
+      "id": "masorange-rca",
+      "title": "Intelligent Network Incident Diagnosis Using Graphs and Generative AI",
+      "cliente_display": "MasOrange",
+      "cliente_publico": true,
+      "sector": "Telecomunicaciones",
+      "tecnologia": [
+        "AWS"
+      ],
+      "tipo_proyecto": "Plataforma",
+      "importe_label": "Plataforma",
+      "partner": [
+        "AWS"
+      ],
+      "anio": 2025,
+      "bu": "Data & AI",
+      "tags": [
+        "RCA",
+        "AIOps",
+        "Digital Twin",
+        "Graphs",
+        "NOC",
+        "Alarm Correlation",
+        "Multivendor Analysis",
+        "Generative AI",
+        "Failure Prediction",
+        "AWS",
+        "machine learning"
+      ],
+      "briefing": "The operator faced significant operational complexity across its RAN, core and transport networks, with thousands of alarms, static and segmented topology inventories, and multiple OSS tools that were difficult to correlate. Identifying the origin of an incident could take more than seven hours, particularly in multivendor environments and widespread service outage scenarios. Operations teams invested considerable effort in reviewing alarms, gathering evidence and manually relating events across domains, while traditional root cause analysis approaches relied mainly on static rules and thresholds.",
+      "ficha_ref": "fichas/masorange-rca.en.md"
+    },
+    {
       "id": "teladoc-lakehouse",
       "title": "Clinical Analytics and Hospital Interoperability Lakehouse Platform",
       "cliente_display": "International Healthcare Provider",
@@ -208,7 +252,7 @@
         "Python"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma (<500K)",
+      "importe_label": "Plataforma",
       "partner": [
         "Microsoft",
         "Databricks"
