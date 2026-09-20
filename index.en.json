@@ -1,5 +1,5 @@
 {
-  "version": "bd78d0c86_1789890246",
+  "version": "ba57501d7_1789891218",
   "lang": "en",
   "facets": [
     {
@@ -470,38 +470,6 @@
       ],
       "briefing": "The operator faced significant operational complexity across its RAN, core and transport networks, with thousands of alarms, static and segmented topology inventories, and multiple OSS tools that were difficult to correlate. Identifying the origin of an incident could take more than seven hours, particularly in multivendor environments and widespread service outage scenarios. Operations teams invested considerable effort in reviewing alarms, gathering evidence and manually relating events across domains, while traditional root cause analysis approaches relied mainly on static rules and thresholds.",
       "ficha_ref": "fichas/masorange-rca.en.md"
-    },
-    {
-      "id": "teladoc-lakehouse",
-      "title": "Clinical Analytics and Hospital Interoperability Lakehouse Platform",
-      "cliente_display": "International Healthcare Provider",
-      "cliente_publico": false,
-      "sector": "Salud",
-      "tecnologia": [
-        "Azure",
-        "Databricks",
-        "Python"
-      ],
-      "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
-      "partner": [
-        "Microsoft",
-        "Databricks"
-      ],
-      "anio": 2025,
-      "bu": "Data & AI",
-      "tags": [
-        "lakehouse",
-        "healthcare",
-        "interoperability",
-        "clinical data",
-        "Azure",
-        "Databricks",
-        "Healthcare",
-        "machine learning"
-      ],
-      "briefing": "The client operates an international distributed network of hospitals and telemedicine centers serving millions of patients. Clinical data resided in isolated, heterogeneous systems (legacy Hospital Information Systems, relational databases, and unstructured document stores), preventing near real-time operational analytics and hindering healthcare interoperability compliance. The core challenge was to unify all data assets within an enterprise-grade, secure, and governed lakehouse architecture capable of both descriptive analytics and machine learning workloads, while enforcing patient privacy regulations.",
-      "ficha_ref": "fichas/teladoc-lakehouse.en.md"
     }
   ]
 }
