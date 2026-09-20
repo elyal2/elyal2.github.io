@@ -1,5 +1,5 @@
 {
-  "version": "b1c4717f3_1789895879",
+  "version": "bff71d634_1789896949",
   "lang": "en",
   "facets": [
     {
@@ -51,6 +51,26 @@
         {
           "id": "Tecnología y Servicios Digitales",
           "label": "Technology and Digital Services"
+        },
+        {
+          "id": "Inmobiliario",
+          "label": "Real Estate"
+        },
+        {
+          "id": "Formación y Servicios Profesionales",
+          "label": "Training and Professional Services"
+        },
+        {
+          "id": "Turismo y ocio",
+          "label": "Tourism and Leisure"
+        },
+        {
+          "id": "Medios y entretenimiento",
+          "label": "Media and Entertainment"
+        },
+        {
+          "id": "Construcción",
+          "label": "Construction"
         }
       ]
     },
@@ -195,6 +215,498 @@
         {
           "id": "Model Context Protocol (MCP)",
           "label": "Model Context Protocol (MCP)"
+        },
+        {
+          "id": "Power Apps",
+          "label": "Power Apps"
+        },
+        {
+          "id": "Power Automate",
+          "label": "Power Automate"
+        },
+        {
+          "id": "Direct Lake",
+          "label": "Direct Lake"
+        },
+        {
+          "id": "Amazon S3",
+          "label": "Amazon S3"
+        },
+        {
+          "id": "Amazon SQS",
+          "label": "Amazon SQS"
+        },
+        {
+          "id": "AWS Lambda",
+          "label": "AWS Lambda"
+        },
+        {
+          "id": "Amazon Bedrock",
+          "label": "Amazon Bedrock"
+        },
+        {
+          "id": "CloudWatch",
+          "label": "CloudWatch"
+        },
+        {
+          "id": "Grafana",
+          "label": "Grafana"
+        },
+        {
+          "id": "IAM",
+          "label": "IAM"
+        },
+        {
+          "id": "Cost Explorer",
+          "label": "Cost Explorer"
+        },
+        {
+          "id": "Watsonx.ai",
+          "label": "Watsonx.ai"
+        },
+        {
+          "id": "Watsonx Discovery",
+          "label": "Watsonx Discovery"
+        },
+        {
+          "id": "Code Engine",
+          "label": "Code Engine"
+        },
+        {
+          "id": "Excel",
+          "label": "Excel"
+        },
+        {
+          "id": "M3",
+          "label": "M3"
+        },
+        {
+          "id": "Oracle",
+          "label": "Oracle"
+        },
+        {
+          "id": "OpenCode",
+          "label": "OpenCode"
+        },
+        {
+          "id": "Qdrant",
+          "label": "Qdrant"
+        },
+        {
+          "id": "Apache Camel K",
+          "label": "Apache Camel K"
+        },
+        {
+          "id": "Apache Kafka",
+          "label": "Apache Kafka"
+        },
+        {
+          "id": "PostgreSQL",
+          "label": "PostgreSQL"
+        },
+        {
+          "id": "Java",
+          "label": "Java"
+        },
+        {
+          "id": "Quarkus",
+          "label": "Quarkus"
+        },
+        {
+          "id": "GitHub Copilot",
+          "label": "GitHub Copilot"
+        },
+        {
+          "id": "Cursor.ai",
+          "label": "Cursor.ai"
+        },
+        {
+          "id": "dbt",
+          "label": "dbt"
+        },
+        {
+          "id": "Jira",
+          "label": "Jira"
+        },
+        {
+          "id": "AWS Glue",
+          "label": "AWS Glue"
+        },
+        {
+          "id": "Amazon MSK",
+          "label": "Amazon MSK"
+        },
+        {
+          "id": "AWS Lake Formation",
+          "label": "AWS Lake Formation"
+        },
+        {
+          "id": "AWS KMS",
+          "label": "AWS KMS"
+        },
+        {
+          "id": "AWS CloudTrail",
+          "label": "AWS CloudTrail"
+        },
+        {
+          "id": "AWS Config",
+          "label": "AWS Config"
+        },
+        {
+          "id": "Amazon SNS",
+          "label": "Amazon SNS"
+        },
+        {
+          "id": "Amazon EC2",
+          "label": "Amazon EC2"
+        },
+        {
+          "id": "Amazon API Gateway",
+          "label": "Amazon API Gateway"
+        },
+        {
+          "id": "Amazon Athena",
+          "label": "Amazon Athena"
+        },
+        {
+          "id": "AWS CDK",
+          "label": "AWS CDK"
+        },
+        {
+          "id": "AWS Glue Data Quality",
+          "label": "AWS Glue Data Quality"
+        },
+        {
+          "id": "Deequ",
+          "label": "Deequ"
+        },
+        {
+          "id": "Copilot Studio",
+          "label": "Copilot Studio"
+        },
+        {
+          "id": "Azure AI Foundry Agent Service",
+          "label": "Azure AI Foundry Agent Service"
+        },
+        {
+          "id": "AWS Bedrock AgentCore",
+          "label": "AWS Bedrock AgentCore"
+        },
+        {
+          "id": "LangChain",
+          "label": "LangChain"
+        },
+        {
+          "id": "CrewAI",
+          "label": "CrewAI"
+        },
+        {
+          "id": "Amazon Q Business",
+          "label": "Amazon Q Business"
+        },
+        {
+          "id": "Microsoft Copilot",
+          "label": "Microsoft Copilot"
+        },
+        {
+          "id": "Azure OpenAI",
+          "label": "Azure OpenAI"
+        },
+        {
+          "id": "Neo4j",
+          "label": "Neo4j"
+        },
+        {
+          "id": "MongoDB",
+          "label": "MongoDB"
+        },
+        {
+          "id": "Elasticsearch",
+          "label": "Elasticsearch"
+        },
+        {
+          "id": "Amazon SageMaker",
+          "label": "Amazon SageMaker"
+        },
+        {
+          "id": "Ansible",
+          "label": "Ansible"
+        },
+        {
+          "id": "OpenText",
+          "label": "OpenText"
+        },
+        {
+          "id": "SAP Content Server",
+          "label": "SAP Content Server"
+        },
+        {
+          "id": "SAP RISE",
+          "label": "SAP RISE"
+        },
+        {
+          "id": "ArchiveLink",
+          "label": "ArchiveLink"
+        },
+        {
+          "id": "Amazon S3 File Gateway",
+          "label": "Amazon S3 File Gateway"
+        },
+        {
+          "id": "AWS Direct Connect",
+          "label": "AWS Direct Connect"
+        },
+        {
+          "id": "AWS Site-to-Site VPN",
+          "label": "AWS Site-to-Site VPN"
+        },
+        {
+          "id": "Amazon VPC",
+          "label": "Amazon VPC"
+        },
+        {
+          "id": "Amazon Route 53",
+          "label": "Amazon Route 53"
+        },
+        {
+          "id": "Elastic Load Balancing",
+          "label": "Elastic Load Balancing"
+        },
+        {
+          "id": "AWS Auto Scaling",
+          "label": "AWS Auto Scaling"
+        },
+        {
+          "id": "AWS CloudFormation",
+          "label": "AWS CloudFormation"
+        },
+        {
+          "id": "AWS Systems Manager",
+          "label": "AWS Systems Manager"
+        },
+        {
+          "id": "Amazon Textract",
+          "label": "Amazon Textract"
+        },
+        {
+          "id": "Tesseract",
+          "label": "Tesseract"
+        },
+        {
+          "id": "Snowpark Python",
+          "label": "Snowpark Python"
+        },
+        {
+          "id": "Snowflake ML",
+          "label": "Snowflake ML"
+        },
+        {
+          "id": "Snowflake Horizon",
+          "label": "Snowflake Horizon"
+        },
+        {
+          "id": "Business Central",
+          "label": "Business Central"
+        },
+        {
+          "id": "Ollama",
+          "label": "Ollama"
+        },
+        {
+          "id": "LibreChat",
+          "label": "LibreChat"
+        },
+        {
+          "id": "Alfresco",
+          "label": "Alfresco"
+        },
+        {
+          "id": "DB2",
+          "label": "DB2"
+        },
+        {
+          "id": "Debezium",
+          "label": "Debezium"
+        },
+        {
+          "id": "Amazon S3 Glacier",
+          "label": "Amazon S3 Glacier"
+        },
+        {
+          "id": "AWS Step Functions",
+          "label": "AWS Step Functions"
+        },
+        {
+          "id": "AWS Elemental MediaConvert",
+          "label": "AWS Elemental MediaConvert"
+        },
+        {
+          "id": "Amazon CloudFront",
+          "label": "Amazon CloudFront"
+        },
+        {
+          "id": "Amazon DynamoDB",
+          "label": "Amazon DynamoDB"
+        },
+        {
+          "id": "Amazon EventBridge",
+          "label": "Amazon EventBridge"
+        },
+        {
+          "id": "Jenkins",
+          "label": "Jenkins"
+        },
+        {
+          "id": "Claude",
+          "label": "Claude"
+        },
+        {
+          "id": "RDS PostgreSQL",
+          "label": "RDS PostgreSQL"
+        },
+        {
+          "id": "Prometheus",
+          "label": "Prometheus"
+        },
+        {
+          "id": "Grafana Alloy",
+          "label": "Grafana Alloy"
+        },
+        {
+          "id": "AWS CodeCommit",
+          "label": "AWS CodeCommit"
+        },
+        {
+          "id": "Azure Data Factory",
+          "label": "Azure Data Factory"
+        },
+        {
+          "id": "Azure Data Lake Storage Gen2",
+          "label": "Azure Data Lake Storage Gen2"
+        },
+        {
+          "id": "Azure DevOps",
+          "label": "Azure DevOps"
+        },
+        {
+          "id": "Azure Key Vault",
+          "label": "Azure Key Vault"
+        },
+        {
+          "id": "Microsoft Purview",
+          "label": "Microsoft Purview"
+        },
+        {
+          "id": "Confluent Cloud",
+          "label": "Confluent Cloud"
+        },
+        {
+          "id": "Qlik Sense",
+          "label": "Qlik Sense"
+        },
+        {
+          "id": "Opera Cloud",
+          "label": "Opera Cloud"
+        },
+        {
+          "id": "Simphony",
+          "label": "Simphony"
+        },
+        {
+          "id": "SAP S/4HANA Cloud",
+          "label": "SAP S/4HANA Cloud"
+        },
+        {
+          "id": "AWS Fargate",
+          "label": "AWS Fargate"
+        },
+        {
+          "id": "Amazon ECS",
+          "label": "Amazon ECS"
+        },
+        {
+          "id": "Amazon Aurora",
+          "label": "Amazon Aurora"
+        },
+        {
+          "id": "Amazon DocumentDB",
+          "label": "Amazon DocumentDB"
+        },
+        {
+          "id": "GitHub Actions",
+          "label": "GitHub Actions"
+        },
+        {
+          "id": "AWS Secrets Manager",
+          "label": "AWS Secrets Manager"
+        },
+        {
+          "id": "React",
+          "label": "React"
+        },
+        {
+          "id": "TypeScript",
+          "label": "TypeScript"
+        },
+        {
+          "id": "Amazon Cognito",
+          "label": "Amazon Cognito"
+        },
+        {
+          "id": "Keycloak",
+          "label": "Keycloak"
+        },
+        {
+          "id": "SharePoint",
+          "label": "SharePoint"
+        },
+        {
+          "id": "Microsoft Teams",
+          "label": "Microsoft Teams"
+        },
+        {
+          "id": "SAP",
+          "label": "SAP"
+        },
+        {
+          "id": "MySQL",
+          "label": "MySQL"
+        },
+        {
+          "id": "MySQL Workbench",
+          "label": "MySQL Workbench"
+        },
+        {
+          "id": "Metabase",
+          "label": "Metabase"
+        },
+        {
+          "id": "Delta Lake",
+          "label": "Delta Lake"
+        },
+        {
+          "id": "Sistema de Inteligencia Artificial",
+          "label": "Sistema de Inteligencia Artificial"
+        },
+        {
+          "id": "Apache Airflow",
+          "label": "Apache Airflow"
+        },
+        {
+          "id": "Scala",
+          "label": "Scala"
+        },
+        {
+          "id": "Amazon EMR",
+          "label": "Amazon EMR"
+        },
+        {
+          "id": "SQL Server",
+          "label": "SQL Server"
+        },
+        {
+          "id": "DataDog",
+          "label": "DataDog"
         }
       ]
     },
@@ -219,6 +731,10 @@
         {
           "id": "Plataforma",
           "label": "Plataforma"
+        },
+        {
+          "id": "Formación",
+          "label": "Training"
         }
       ]
     },
@@ -301,6 +817,47 @@
   ],
   "cases": [
     {
+      "id": "gestora-activos-inmobiliaria-automatizacion-plusvalias",
+      "title": "Automation of Municipal Capital Gains Tax Documentation",
+      "cliente_display": "Real Estate Asset Management Company",
+      "cliente_publico": false,
+      "sector": "Inmobiliario",
+      "tecnologia": [
+        "AWS",
+        "Amazon S3",
+        "Amazon SQS",
+        "AWS Lambda",
+        "Amazon Bedrock",
+        "CloudWatch",
+        "Grafana",
+        "IAM",
+        "Cost Explorer"
+      ],
+      "tipo_proyecto": "Vertical",
+      "importe_label": "Vertical",
+      "partner": [
+        "AWS"
+      ],
+      "anio": 2026,
+      "bu": "Cloud & Managed Services",
+      "tags": [
+        "Automatización documental",
+        "IIVTNU",
+        "IA generativa",
+        "OCR",
+        "Observabilidad",
+        "Trazabilidad",
+        "Validación fiscal",
+        "AWS",
+        "AWS Lambda",
+        "Amazon Bedrock",
+        "Amazon S3",
+        "Amazon SQS"
+      ],
+      "briefing": "A real estate asset management company needed to streamline the review, validation and generation of documentation related to municipal capital gains tax (IIVTNU). The process relied on heterogeneous documents, including deeds, land registry records, cadastral information and transaction histories, which had to be manually interpreted and transferred to operational systems. This created a significant administrative burden, a risk of transcription errors, inconsistencies in ownership or cadastral values, and difficulties in maintaining complete process traceability.",
+      "ficha_ref": "fichas/gestora-activos-inmobiliaria-automatizacion-plusvalias.en.md"
+    },
+    {
       "id": "masorange-aiops",
       "title": "Intelligent IT Operations Automation for a National Telecommunications Operator",
       "cliente_display": "National Telecommunications Operator",
@@ -327,9 +884,10 @@
         "Network Operations",
         "Intelligent Orchestration",
         "FortiManager",
+        "React",
+        "Scala",
         "ServiceNow",
-        "Zabbix",
-        "governance"
+        "Zabbix"
       ],
       "briefing": "The customer managed a global network and security infrastructure through a high-volume, predominantly reactive monitoring environment. Operations teams had to correlate alerts from different systems, prioritise incidents, consult technical documentation, and coordinate actions between the Service Desk and specialised support teams. This fragmentation made it difficult to establish the full context of each event, slowed resolution, and limited the consistent application of preventive or automated responses.",
       "ficha_ref": "fichas/masorange-aiops.en.md"
@@ -372,11 +930,11 @@
         "multimodal AI observability",
         "confusion matrix analysis",
         "GPU model training",
+        "Grafana",
         "OpenLLMetry",
         "OpenShift",
         "OpenTelemetry",
-        "Oracle Database",
-        "Telecommunications"
+        "Oracle"
       ],
       "briefing": "A national telecommunications operator was evaluating how to make its IRIS image-classification solution more explainable, auditable and operationally observable. The existing approach could produce predictions, but it provided limited visibility into the evidence supporting each decision, the reliability of the responses and the causes of classification errors. The proposal addressed the need to detect bias, inconsistencies, data drift, class confusion and model degradation over time, while also establishing a defensible approach for production and audit-oriented environments.",
       "ficha_ref": "fichas/masorange-iris.en.md"
@@ -432,9 +990,9 @@
         "Google Cloud Logging Agent",
         "four-layer architecture",
         "Cloud Run",
+        "Elasticsearch",
         "Google Cloud Logging",
-        "Grafana Cloud",
-        "Retrieval-Augmented Generation (RAG)"
+        "Grafana"
       ],
       "briefing": "The telecommunications operator had a log management model based on syslog, a shared collector and Google Cloud Logging. This approach was suitable for operational ingestion, immediate querying and incident resolution, but presented limitations for advanced analytics, large-scale correlation across technology domains, historical analysis and automated diagnosis. The challenge was to evolve from a reactive logging model towards an intelligent observability platform while maintaining operational continuity and minimising the impact on source systems.",
       "ficha_ref": "fichas/masorange-logora.en.md"
@@ -466,6 +1024,7 @@
         "Generative AI",
         "Failure Prediction",
         "AWS",
+        "Scala",
         "machine learning"
       ],
       "briefing": "The operator faced significant operational complexity across its RAN, core and transport networks, with thousands of alarms, static and segmented topology inventories, and multiple OSS tools that were difficult to correlate. Identifying the origin of an incident could take more than seven hours, particularly in multivendor environments and widespread service outage scenarios. Operations teams invested considerable effort in reviewing alarms, gathering evidence and manually relating events across domains, while traditional root cause analysis approaches relied mainly on static rules and thresholds.",
