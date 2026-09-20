@@ -21,12 +21,14 @@ tags:
 - Roadmap de implantación
 - Quick wins
 - Sistemas heterogéneos
-briefing: The organization operates in a process-intensive environment covering regulatory
-  compliance, quality management systems and training. Its broad customer base and
-  the repetitive, scalable nature of many activities create significant potential
-  for automation. At the same time, heterogeneous systems with limited integration
-  and a high volume of manual tasks hinder operational efficiency, scalability and
-  time-to-market improvements.
+briefing: The organization seeks to identify and prioritize opportunities for AI-enabled
+  process automation, technical task automation and RPA across compliance, quality
+  management and training operations. Logicalis will assess the current state, define
+  a target architecture and develop an implementation roadmap covering use cases such
+  as document processing, content generation, internal assistants, provisioning and
+  operational workflows. The outcome will be a prioritized use-case catalogue, quick
+  wins, recommended technology stack, operating model and implementation strategy
+  that supports scalable automation and regulatory compliance.
 ---
 
 ## 1. Context and Challenge

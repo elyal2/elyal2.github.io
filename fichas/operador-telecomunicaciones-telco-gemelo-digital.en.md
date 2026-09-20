@@ -28,13 +28,13 @@ tags:
 - Pipeline CI/CD
 - Correlación de cambios
 - Razonamiento en lenguaje natural
-briefing: A telecommunications operator needed to evolve from complex, resource-intensive
-  network emulation models towards a scalable semantic representation focused on dependencies
-  between elements. Identifying the impact of changes to configurations, routes, security
-  policies, and relationships across L2 and L3 layers required extensive expert knowledge
-  and could create operational risks. The challenge was to anticipate the scope of
-  a change before applying it in production, explain its consequences in an understandable
-  way, and subsequently compare the prediction with actual telemetry and logs.
+briefing: A telecommunications operator proposed a semantic digital twin to model
+  dependencies across network devices, interfaces, routes, security rules, services,
+  and telemetry. The PRE, REPORT, and POST workflow would predict change impact, explain
+  risks and conflicts, and compare forecasts with observed behaviour, helping reduce
+  outage risk and reliance on manual expert analysis. The pilot is expected to support
+  CI/CD pre-flight validation, blast-radius analysis, and automated correlation of
+  changes with alarms and telemetry.
 ---
 
 ## 1. Context and Challenge

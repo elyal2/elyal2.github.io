@@ -39,12 +39,13 @@ tags:
 - Scrum
 - CI/CD
 - Soporte 24x7
-briefing: An organization in the audiovisual media sector needed to strengthen the
-  operation and evolution of its Big Data and Analytics environment. The scope covered
-  cloud platform management, new developments, evolutionary and corrective maintenance,
-  and technical support for business teams. The challenge included ensuring data service
-  availability, responding to critical incidents outside business hours, and maintaining
-  the flexibility required to address new analytical and technology requirements.
+briefing: A managed service was proposed to operate and evolve an audiovisual media
+  organization’s AWS and Snowflake Big Data and Analytics environment. A specialised
+  remote team would provide platform administration, data engineering, deployments,
+  monitoring, incident management, scalability, and technical support, coordinated
+  with internal operations and development teams. Expected benefits included improved
+  24x7 service continuity, faster delivery of analytics capabilities, stronger cloud
+  operations, knowledge transfer, and greater platform autonomy.
 ---
 
 ## 1. Context and Challenge

@@ -20,13 +20,13 @@ tags:
 - Mantenimiento predictivo
 - Dashboards interactivos
 - Automatización de procesos
-briefing: Una organización industrial busca supervisar de forma integral el estado
-  de varias plantas de fabricación y avanzar hacia un modelo de operación más anticipativo.
-  El reto parte de la ausencia de monitorización continua en determinadas instalaciones
-  y de la existencia de detenciones no programadas, especialmente en plantas con alta
-  demanda. La propuesta plantea estandarizar los modelos de análisis y las soluciones
-  digitales entre distintos tipos de planta, comenzando por instalaciones ubicadas
-  en Chile.
+briefing: Smart Plant propone una plataforma de supervisión virtual basada en inteligencia
+  artificial para monitorizar en tiempo real varias plantas de fabricación, detectar
+  anomalías y activar alarmas, notificaciones y respuestas automatizadas. La solución
+  incorporará dashboards personalizados, chatbot, informes diarios e integración progresiva
+  con inventario, mantenimiento y compras, con una implantación inicial por fases
+  en plantas de Chile. Se espera mejorar la visibilidad operativa, anticipar incidencias,
+  reducir el impacto de paradas no programadas y estandarizar los análisis entre instalaciones.
 ---
 
 ## 1. Contexto y Desafío

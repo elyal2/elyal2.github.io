@@ -43,13 +43,13 @@ tags:
 - Observabilidad
 - Infraestructura como código
 - Arquitectura modular
-briefing: A hospital organization needed to consolidate and normalize clinical information
-  related to patient deaths from separate internal sources. Because the information
-  was not integrated, daily analysis by medical unit, location, and clinical cause
-  was difficult. The challenge was to create a reusable first domain that could serve
-  as a template for future care domains while ensuring automation, traceability, data
-  quality, security, and the ability to reconstruct datasets after errors or changes
-  to clinical rules.
+briefing: A modular AWS data lake architecture is proposed to consolidate, pseudonymize,
+  validate, and normalize historical and daily mortality data for clinical and operational
+  analysis. AWS Glue, Lambda, governed storage zones, and automated quality and traceability
+  controls would support Power BI reporting, dataset reconstruction, and future expansion
+  to additional clinical domains. As a pilot proposal, the expected benefits include
+  near-real-time updates, improved data reliability, scalable reuse of pipelines,
+  and stronger auditability.
 ---
 
 ## 1. Context and Challenge

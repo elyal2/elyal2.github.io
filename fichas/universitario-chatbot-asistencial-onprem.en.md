@@ -22,13 +22,12 @@ tags:
 - Integración documental
 - Búsqueda semántica
 - Autoservicio de información clínica
-briefing: The hospital needed to provide clinical staff with fast, contextual access
-  to clinical protocols, internal procedures and operational guidelines. The documentation
-  was distributed across a file directory and a corporate document management system,
-  without structured metadata or predefined taxonomies. The proposed pilot was designed
-  to work with more than two thousand PDF documents, avoiding manual tagging and advanced
-  pre-classification, while running entirely on-premises to preserve the confidentiality
-  of clinical information.
+briefing: The hospital proposed an on-premises conversational assistant to provide
+  clinical staff with fast, contextual access to protocols, procedures and operational
+  guidelines distributed across file repositories and Alfresco. Using local language
+  models, RAG and automated knowledge-base maintenance, the pilot aims to improve
+  information retrieval while preserving clinical data confidentiality and enabling
+  future scalability.
 ---
 
 ## 1. Context and Challenge

@@ -23,12 +23,12 @@ tags:
 - Scoring predictivo
 - AutoML
 - Analítica avanzada
-briefing: La aseguradora disponía de un modelo de churn aplicado principalmente a
-  seguros de decesos, con resultados satisfactorios para apoyar la retención de clientes.
-  Sin embargo, necesitaba ampliar sus capacidades comerciales para identificar oportunidades
-  de up-selling de nuevas garantías y ampliación de coberturas, así como de cross-selling
-  de seguros de hogar. La ausencia de histórico suficiente para algunos productos
-  dificultaba la selección de públicos objetivo mediante técnicas tradicionales.
+briefing: La aseguradora plantea una PoC de Machine Learning en AWS para identificar
+  clientes con mayor propensión al up-selling de nuevas garantías y al cross-selling
+  de seguros de hogar. El uso de capacidades de AutoML permitiría acelerar la experimentación,
+  mejorar la priorización comercial y facilitar el reentrenamiento de modelos mediante
+  notebooks reproducibles y outputs de scoring. La industrialización, monitorización
+  e integración con el ecosistema corporativo se contemplan como evoluciones posteriores.
 ---
 
 ## 1. Contexto y Desafío

@@ -29,14 +29,14 @@ tags:
 - Observabilidad
 - Trazabilidad
 - Validación fiscal
-briefing: Una organización gestora de activos inmobiliarios necesitaba agilizar la
-  revisión, validación y generación de documentación asociada a la plusvalía municipal
-  (IIVTNU). El proceso dependía de documentos heterogéneos, como escrituras, registros,
-  información catastral e históricos transaccionales, que debían interpretarse y trasladarse
-  manualmente a los sistemas operativos. Esta situación generaba una elevada carga
-  administrativa, riesgo de errores de transcripción, inconsistencias en la titularidad
-  o los valores catastrales y dificultades para mantener una trazabilidad completa
-  del proceso.
+briefing: Una organización gestora de activos inmobiliarios implantó una arquitectura
+  cloud-native en AWS para automatizar la revisión, validación y generación de documentación
+  relacionada con la plusvalía municipal (IIVTNU). La solución combina procesamiento
+  serverless y capacidades de IA generativa para extraer, clasificar y validar información
+  procedente de documentos heterogéneos, mejorando la trazabilidad y la detección
+  de riesgos. Se automatizó entre el 75% y el 90% de las tareas documentales y el
+  procesamiento se aceleró aproximadamente diez veces, sentando además una base escalable
+  para nuevos procesos legales, fiscales y operativos.
 ---
 
 ## 1. Contexto y Desafío

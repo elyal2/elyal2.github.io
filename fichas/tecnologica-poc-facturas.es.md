@@ -21,14 +21,14 @@ tags:
 - Anonimización de datos
 - RGPD
 - Gobernanza de IA
-briefing: Una organización fundacional dedicada a la investigación tecnológica y al
-  impacto social quería evaluar la viabilidad de automatizar un proceso existente
-  de análisis de documentación de proveedores. El reto se centraba en procesar facturas,
-  albaranes, contratos, acuerdos de tratamiento de datos y otros documentos relacionados
-  con la relación contractual, reduciendo la intervención manual sin sustituir las
-  funciones de los equipos financieros o contables. La iniciativa se planteó como
-  una prueba de concepto acotada, limitada a los casos de uso definidos por la organización
-  y sin incluir personalizaciones ni integraciones adicionales fuera del alcance acordado.
+briefing: Se plantea una prueba de concepto para evaluar la automatización del análisis
+  de facturas, albaranes, contratos y otros documentos de proveedores mediante inteligencia
+  artificial, manteniendo la supervisión humana y sin sustituir las funciones financieras
+  o contables. La solución utilizará documentación anonimizada en un entorno controlado,
+  con medidas de confidencialidad, minimización y eliminación de datos, trazabilidad
+  y validación de la calidad. El objetivo es determinar la viabilidad técnica, operativa,
+  de seguridad y normativa antes de considerar una posible ampliación a otros casos
+  de uso.
 ---
 
 ## 1. Contexto y Desafío

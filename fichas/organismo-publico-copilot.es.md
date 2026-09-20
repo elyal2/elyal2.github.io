@@ -22,14 +22,14 @@ tags:
 - Prompt engineering
 - IA responsable
 - Automatización de tareas
-briefing: El organismo público buscaba comprender cómo la inteligencia artificial
-  puede transformar el trabajo diario y mejorar la eficiencia, la creatividad y la
-  colaboración entre sus equipos. La propuesta respondía a la necesidad de ofrecer
-  una formación accesible para personas de distintas áreas y niveles técnicos, con
-  especial atención a finanzas, atención al cliente y gestión legal. El reto consistía
-  en trasladar el potencial de Microsoft Copilot a situaciones laborales concretas,
-  manteniendo una perspectiva responsable sobre privacidad, seguridad, errores y posibles
-  sesgos.
+briefing: Se propone un workshop práctico para mostrar cómo Microsoft Copilot puede
+  mejorar la productividad, la creatividad y la colaboración en un organismo público,
+  con ejemplos aplicados a finanzas, atención al cliente y gestión legal. La formación
+  combinará demostraciones y ejercicios sobre Microsoft 365, junto con buenas prácticas
+  de prompting, integración, privacidad, seguridad, revisión humana y uso responsable
+  de la IA. Se espera acelerar la adopción segura, reducir tareas repetitivas y ayudar
+  a los equipos a identificar oportunidades de automatización y mejora de sus flujos
+  de trabajo.
 ---
 
 ## 1. Contexto y Desafío

@@ -38,13 +38,12 @@ tags:
 - Data Governance
 - CI/CD
 - Information Marts
-briefing: Un grupo hotelero nacional se encontraba inmerso en una transformación estratégica
-  para avanzar hacia un modelo de negocio más orientado al dato. La información comercial,
-  de puntos de venta y financiera estaba distribuida entre diferentes sistemas y servicios
-  SaaS, dificultando la consolidación, la trazabilidad y el análisis homogéneo del
-  negocio. El reto consistía en definir y construir una arquitectura informacional
-  corporativa, escalable y flexible, capaz de integrar fuentes heterogéneas y establecer
-  una base común para la toma de decisiones.
+briefing: Un grupo hotelero nacional plantea una arquitectura lakehouse modular en
+  Azure para centralizar y homogeneizar la información comercial, de puntos de venta
+  y financiera. La solución combina ingesta batch y streaming, Azure Data Lake Storage
+  Gen2, Snowflake, Databricks y Data Factory, con modelado Data Vault 2.0, automatización
+  CI/CD y controles de seguridad. Se espera mejorar la trazabilidad, acelerar el análisis
+  y facilitar la incorporación de nuevas fuentes y productos de datos.
 ---
 
 ## 1. Contexto y Desafío

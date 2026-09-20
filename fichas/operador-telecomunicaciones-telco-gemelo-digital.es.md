@@ -28,14 +28,13 @@ tags:
 - Pipeline CI/CD
 - Correlación de cambios
 - Razonamiento en lenguaje natural
-briefing: Un operador de telecomunicaciones necesitaba evolucionar desde modelos de
-  emulación de red complejos e intensivos en recursos hacia una representación semántica,
-  escalable y orientada a las dependencias entre elementos. La identificación del
-  impacto de cambios de configuración, rutas, políticas de seguridad y relaciones
-  entre capas L2 y L3 requería un elevado conocimiento experto y podía generar riesgos
-  operativos. El reto consistía en anticipar el alcance de una modificación antes
-  de aplicarla en producción, explicar sus consecuencias de forma comprensible y contrastar
-  posteriormente la predicción con la telemetría y los registros reales.
+briefing: Un operador de telecomunicaciones plantea un piloto de gemelo digital semántico
+  para representar dependencias entre dispositivos, interfaces, rutas, políticas y
+  servicios de red. La solución contempla fases PRE, REPORT y POST para anticipar
+  el impacto de cambios, explicar riesgos en lenguaje natural y contrastar las predicciones
+  con logs y telemetría real. Se espera reducir interrupciones, automatizar el análisis
+  operativo y mejorar la autonomía de los equipos mediante mapas de dependencias,
+  análisis de blast radius e integración con CI/CD.
 ---
 
 ## 1. Contexto y Desafío

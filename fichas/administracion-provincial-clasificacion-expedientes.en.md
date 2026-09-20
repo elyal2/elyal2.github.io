@@ -26,15 +26,13 @@ tags:
 - prueba de concepto
 - trazabilidad
 - cumplimiento normativo
-briefing: A provincial government administration needed to assess how to improve the
-  organisation and management of documents associated with administrative case files,
-  initially focusing on competitive grant procedures. The diversity of document formats,
-  the potential presence of poor-quality scanned documents and the absence of fully
-  defined classification criteria made automation difficult and could require significant
-  manual review. The challenge was to determine the technical feasibility of an artificial
-  intelligence solution capable of extracting information, classifying documents and
-  providing traceable results while maintaining compliance with security and data
-  protection requirements.
+briefing: A provincial government administration proposed a feasibility pilot to automate
+  the extraction, classification and traceability of documents in administrative case
+  files, initially focusing on competitive grant procedures. The solution would combine
+  OCR with Amazon Bedrock to produce structured, explainable results while assessing
+  accuracy, efficiency, security and regulatory compliance. The study would establish
+  the basis for a scalable production architecture that preserves human oversight
+  and governance controls.
 ---
 
 ## 1. Context and Challenge

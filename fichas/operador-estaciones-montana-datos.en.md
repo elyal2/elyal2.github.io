@@ -28,14 +28,12 @@ tags:
 - Optimización operativa
 - IA explicable
 - Autoservicio de datos
-briefing: The operator managed a complex, seasonal data ecosystem distributed across
-  several legal entities and business areas. Although it had an on-premises SQL Server
-  Data Warehouse with multiple integrated sources and numerous Power BI reports, information
-  silos, reliance on Excel files, manual processes and the absence of unified KPI
-  definitions persisted. Finance, HR and Operations worked with misaligned data and
-  different refresh frequencies, making it difficult to understand the ski school’s
-  actual profitability, including the cost per instructor hour and margin by class
-  type.
+briefing: The proposed solution establishes Snowflake as a governed corporate analytics
+  platform, using dbt to integrate and standardise HR, Finance and Operations data
+  into Bronze, Silver and Gold layers. Power BI dashboards will provide a unified
+  view of ski school profitability, occupancy and operational performance, reducing
+  reliance on Excel and manual reporting. A later phase would add explainable instructor-allocation
+  optimisation, alerts and natural-language analytics to support more proactive decision-making.
 ---
 
 ## 1. Context and Challenge

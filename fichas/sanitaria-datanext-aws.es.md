@@ -36,12 +36,13 @@ tags:
 - Gobierno de datos
 - Operaciones CRUD
 - Assessment de migración
-briefing: La organización sanitaria había iniciado una estrategia de modernización
-  tecnológica mediante la adopción progresiva de AWS y el establecimiento de una Landing
-  Zone. En este contexto, la plataforma informacional DataNext, desplegada en un entorno
-  local, estaba experimentando un crecimiento sostenido de usuarios, requisitos funcionales
-  y volumen de datos. Su arquitectura dependía principalmente de un escalado vertical,
-  lo que limitaba la capacidad de ampliar almacenamiento y computación con agilidad.
+briefing: Se propone migrar la plataforma informacional DataNext desde un entorno
+  local hacia una arquitectura escalable en AWS, basada en servicios gestionados para
+  persistencia, integración, gobierno y consulta de datos. La solución contempla controles
+  de acceso detallados a nivel de tabla, fila y columna, auditoría completa mediante
+  CloudTrail y un piloto para validar requisitos, esfuerzo de migración y comportamiento
+  antes de definir el roadmap. Se esperan mejoras en escalabilidad, concurrencia,
+  flexibilidad operativa y cumplimiento.
 ---
 
 ## 1. Contexto y Desafío

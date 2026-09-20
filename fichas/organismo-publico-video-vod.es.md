@@ -30,14 +30,12 @@ tags:
 - Ciclo de vida audiovisual
 - DRM
 - Archivado automático
-briefing: Una organización pública cultural especializada en la conservación y difusión
-  del patrimonio visual disponía de un sistema de información orientado principalmente
-  a la gestión de imágenes. La creciente incorporación de contenidos audiovisuales
-  exigía adaptar el catálogo, los procesos de ingesta y los portales de consulta para
-  gestionar vídeos de forma estructurada. El reto consistía en definir una solución
-  robusta para vídeo bajo demanda y streaming en directo, integrada con el archivo
-  digital y los sistemas existentes, con capacidad de controlar el almacenamiento,
-  la seguridad, los derechos de acceso y la evolución futura de la plataforma.
+briefing: Se definió una arquitectura serverless en AWS para incorporar vídeo bajo
+  demanda y streaming en directo al sistema de gestión del patrimonio visual. La propuesta
+  utiliza orquestación, transcodificación adaptativa, distribución global, automatización
+  de eventos y almacenamiento de metadatos, con controles de seguridad, derechos de
+  acceso y archivado. La consultoría establecerá el diseño funcional y técnico, las
+  modificaciones necesarias, el plan de pruebas y el roadmap de implantación.
 ---
 
 ## 1. Contexto y Desafío

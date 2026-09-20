@@ -22,14 +22,13 @@ tags:
 - Gobernanza y DLP
 - Autoservicio
 - Análisis de sentimiento
-briefing: Una universidad privada buscaba desarrollar las capacidades de su equipo
-  para crear agentes inteligentes capaces de conversar con estudiantes y personal,
-  pero también de ejecutar acciones sobre los procesos internos. El reto consistía
-  en combinar comprensión del lenguaje natural, automatización de tareas y buenas
-  prácticas de seguridad para abordar casos reales de admisiones, secretaría académica
-  y calidad docente. La organización necesitaba reducir la dependencia de soporte
-  externo, acelerar la adopción de la automatización y disponer de una metodología
-  reutilizable para extender estos casos a otros departamentos.
+briefing: 'Una universidad privada diseñó un programa práctico de formación y co-creación
+  para capacitar a sus equipos en el desarrollo de agentes conversacionales y automatizaciones
+  aplicadas a admisiones, secretaría académica y calidad docente. La iniciativa contempla
+  dos pilotos, buenas prácticas de gobernanza y seguridad, y una metodología reutilizable
+  para que la organización pueda mantener y escalar estas capacidades con mayor autonomía.
+  Al no haberse ejecutado todavía, los beneficios descritos son esperados: menor carga
+  manual, mayor trazabilidad y tiempos de respuesta más ágiles.'
 ---
 
 ## 1. Contexto y Desafío

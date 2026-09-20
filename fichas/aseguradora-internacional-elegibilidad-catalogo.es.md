@@ -42,15 +42,14 @@ tags:
 - Migración por oleadas
 - Infraestructura como código
 - Observabilidad y trazabilidad
-briefing: La organización necesitaba consolidar la gestión de elegibilidad y del catálogo
-  de productos y servicios como una capacidad común, trazable y reutilizable para
-  distintas plataformas internas, aseguradoras y modelos operativos. La situación
-  de partida combinaba procesos locales, integraciones distribuidas, formatos legacy
-  y lógicas específicas por país o entidad, lo que dificultaba determinar de forma
-  homogénea qué servicios podía utilizar cada miembro. El reto consistía en evolucionar
-  la plataforma existente sin interrumpir la operación, habilitando una migración
-  progresiva, convivencia temporal con el modelo legacy, validación por oleadas y
-  capacidad de rollback por aseguradora.
+briefing: Se propone una plataforma reutilizable para centralizar la gestión de elegibilidad
+  y el catálogo de productos y servicios mediante APIs desacopladas, portales operativos
+  y un motor ETL parametrizado. La arquitectura permitirá una migración progresiva
+  desde sistemas legacy, con convivencia temporal, trazabilidad, rollback por aseguradora
+  y procesamiento de ficheros completos o delta. El enfoque basado en infraestructura
+  como código, controles de seguridad y opciones de persistencia relacional o documental
+  facilitará el escalado, el cumplimiento regulatorio y la incorporación de nuevas
+  entidades.
 ---
 
 ## 1. Contexto y Desafío

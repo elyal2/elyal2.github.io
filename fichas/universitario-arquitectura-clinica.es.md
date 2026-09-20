@@ -43,13 +43,14 @@ tags:
 - Observabilidad
 - Infraestructura como código
 - Arquitectura modular
-briefing: Una organización hospitalaria necesitaba consolidar y normalizar la información
-  clínica relacionada con los fallecimientos de pacientes a partir de fuentes internas
-  independientes. La información no estaba integrada, lo que dificultaba el análisis
-  diario por unidad médica, ubicación y motivo clínico. El reto consistía en crear
-  un primer dominio reutilizable que sirviera como plantilla para futuros dominios
-  asistenciales, garantizando automatización, trazabilidad, calidad del dato, seguridad
-  y capacidad de reconstrucción ante errores o cambios en las reglas clínicas.
+briefing: Se diseñó una arquitectura modular de data lake en AWS para integrar y normalizar
+  información clínica sobre fallecimientos, combinando históricos y actualizaciones
+  diarias mediante procesos automatizados y reglas de coincidencia. La solución incorpora
+  gobierno, calidad, seguridad, trazabilidad, versionado y capacidades de reconstrucción,
+  generando datasets optimizados para análisis en Power BI. El enfoque establece un
+  dominio reutilizable y escalable para futuros ámbitos asistenciales, reduciendo
+  el riesgo operativo y facilitando la evolución hacia una plataforma de datos clínicos
+  modular.
 ---
 
 ## 1. Contexto y Desafío

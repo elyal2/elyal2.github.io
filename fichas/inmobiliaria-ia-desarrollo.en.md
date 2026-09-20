@@ -36,14 +36,14 @@ tags:
 - Metadata as Code
 - Quality gates
 - Memoria persistente
-briefing: A real estate organization seeks to modernize its software development practices
-  through artificial intelligence, evolving from code assistants towards agentic collaboration
-  models and more autonomous systems. The challenge is to improve productivity without
-  losing control over quality, security, traceability, or the knowledge accumulated
-  across projects. The absence of executable specifications, shared rules, persistent
-  memory, and validation mechanisms can lead to inconsistent results, context debt,
-  and an expanded risk surface in environments where agents are connected to corporate
-  tools.
+briefing: A real estate organization proposes a Spec-Driven Development model that
+  combines specialized AI agents, versioned requirements, persistent semantic memory,
+  BDD, and structured validation to modernize software delivery. The approach is designed
+  to improve productivity and knowledge reuse while preserving quality, security,
+  traceability, and human oversight through least-privilege access, controlled tool
+  integration, and governance checkpoints. Benefits such as faster specification,
+  review, documentation, and test generation are expected and will require validation
+  through a pilot before broader adoption.
 ---
 
 ## 1. Context and Challenge

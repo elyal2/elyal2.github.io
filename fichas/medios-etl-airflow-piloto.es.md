@@ -37,13 +37,13 @@ tags:
 - Observabilidad
 - Reintentos automáticos
 - Logging estructurado
-briefing: La organización necesitaba validar un nuevo modelo de orquestación y ejecución
-  de procesos ETL que sustituyera una arquitectura fragmentada entre distintos servicios
-  de ejecución, eventos y funciones. El modelo existente presentaba una gestión heterogénea
-  de reintentos, generación de alertas y tickets fuera de contexto, baja trazabilidad
-  de los errores y una elevada carga para los equipos de guardia. Además, el despliegue
-  y las pruebas entre entornos se realizaban de forma manual, dificultando el mantenimiento,
-  la escalabilidad y la autonomía de los equipos de desarrollo.
+briefing: Se propone validar un modelo común de orquestación ETL basado en Apache
+  Airflow para sustituir una arquitectura fragmentada y mejorar la gestión de reintentos,
+  alertas, trazabilidad y despliegues entre entornos. El piloto cubrirá la ingesta
+  y transformación de ficheros CSV, con configuración dinámica, ejecución distribuida,
+  observabilidad y automatización mediante CI/CD. Se espera reducir la carga operativa,
+  acelerar la incorporación de nuevos flujos y facilitar el diagnóstico de errores,
+  sujeto a la validación funcional del piloto.
 ---
 
 ## 1. Contexto y Desafío

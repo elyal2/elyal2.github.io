@@ -23,13 +23,13 @@ tags:
 - Incident Management
 - Network Operations
 - Intelligent Orchestration
-briefing: The customer managed a global network and security infrastructure through
-  a high-volume, predominantly reactive monitoring environment. Operations teams had
-  to correlate alerts from different systems, prioritise incidents, consult technical
-  documentation, and coordinate actions between the Service Desk and specialised support
-  teams. This fragmentation made it difficult to establish the full context of each
-  event, slowed resolution, and limited the consistent application of preventive or
-  automated responses.
+briefing: Logicalis deployed LEIA, an agentic AIOps platform that unifies observability,
+  automation, technical knowledge, and incident management across global network and
+  security operations. By integrating Zabbix, FortiManager, and ServiceNow, the solution
+  correlates alerts, prioritises incidents, recommends or executes governed actions,
+  and escalates cases with greater context. It improves operational efficiency and
+  response times while providing a scalable foundation for preventive automation,
+  human oversight, and AI governance in critical environments.
 ---
 
 ## 1. Context and Challenge

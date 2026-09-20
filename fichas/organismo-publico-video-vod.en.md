@@ -30,13 +30,13 @@ tags:
 - Ciclo de vida audiovisual
 - DRM
 - Archivado automático
-briefing: A public cultural organisation specialising in the preservation and dissemination
-  of visual heritage operated an information system primarily designed to manage images.
-  The growing incorporation of audiovisual content required the catalogue, ingestion
-  processes and public portals to be adapted for the structured management of video.
-  The challenge was to define a robust solution for Video on Demand and live streaming,
-  integrated with the digital archive and existing systems, while providing control
-  over storage, security, access rights and the platform’s future evolution.
+briefing: A public cultural organisation is defining a serverless AWS architecture
+  to incorporate audiovisual content into its digital archive and public portals.
+  The proposed Video on Demand and live streaming solution uses managed workflows
+  for ingestion, orchestration, adaptive transcoding, secure distribution, metadata
+  integration and automated archiving. The consultancy deliverables will establish
+  the target architecture, data model, required system changes, testing approach and
+  implementation roadmap, supporting future scalability and operational autonomy.
 ---
 
 ## 1. Context and Challenge

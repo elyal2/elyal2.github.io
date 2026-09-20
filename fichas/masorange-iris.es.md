@@ -35,15 +35,14 @@ tags:
 - observabilidad multimodal de IA
 - análisis de matriz de confusión
 - entrenamiento de modelos con GPU
-briefing: Un operador nacional de telecomunicaciones estaba evaluando cómo hacer que
-  su solución IRIS de clasificación de imágenes fuera más explicable, auditable y
-  observable desde el punto de vista operativo. El enfoque existente podía generar
-  predicciones, pero ofrecía una visibilidad limitada sobre la evidencia que respaldaba
-  cada decisión, la fiabilidad de las respuestas y las causas de los errores de clasificación.
-  La propuesta abordaba la necesidad de detectar sesgos, incoherencias, deriva de
-  datos, confusión entre clases y degradación del modelo a lo largo del tiempo, así
-  como de establecer un enfoque defendible para entornos de producción y sujetos a
-  auditoría.
+briefing: La solución mejora la explicabilidad, auditabilidad y observabilidad de
+  la plataforma IRIS de clasificación de imágenes mediante evidencia visual, reglas
+  deterministas, modelos auditores y persistencia estructurada de resultados. La instrumentación
+  con OpenLLMetry y OpenTelemetry permite supervisar trazas, métricas, logs, latencia
+  y errores, mientras que dashboards operativos analizan el rendimiento por clase,
+  la confianza, los patrones de error y la deriva del modelo. También se contempla
+  evaluar modelos visuales de mayor capacidad con conjuntos de datos más amplios y
+  recursos GPU.
 ---
 
 ## 1. Contexto y Desafío

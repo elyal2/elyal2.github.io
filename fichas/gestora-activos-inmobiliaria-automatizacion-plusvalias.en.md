@@ -29,13 +29,13 @@ tags:
 - Observabilidad
 - Trazabilidad
 - Validación fiscal
-briefing: A real estate asset management company needed to streamline the review,
-  validation and generation of documentation related to municipal capital gains tax
-  (IIVTNU). The process relied on heterogeneous documents, including deeds, land registry
-  records, cadastral information and transaction histories, which had to be manually
-  interpreted and transferred to operational systems. This created a significant administrative
-  burden, a risk of transcription errors, inconsistencies in ownership or cadastral
-  values, and difficulties in maintaining complete process traceability.
+briefing: A real estate asset management company implemented an AWS-native solution
+  to automate the ingestion, classification, extraction and validation of documentation
+  for municipal capital gains tax processes. Amazon Bedrock and AWS Lambda reduced
+  manual effort, accelerated document processing by approximately ten times, improved
+  data quality and enabled end-to-end traceability through operational metrics and
+  alerts. The scalable architecture provides a foundation for extending AI-powered
+  document automation across legal, tax and operational workflows.
 ---
 
 ## 1. Context and Challenge

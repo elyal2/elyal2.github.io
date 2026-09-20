@@ -24,13 +24,13 @@ tags:
 - Autoservicio de información
 - Trazabilidad de fuentes
 - Feedback de usuario
-briefing: An educational organization held relevant knowledge in its corporate document
-  management system but needed to make that information available to employees more
-  quickly, naturally, and intuitively. The challenge was to enable natural-language
-  queries across existing documentation, initially in Spanish, while preventing responses
-  outside the authorized repository and preserving the security controls already applied
-  across corporate systems. The proposal also included using a familiar collaboration
-  channel to encourage service adoption.
+briefing: An educational organization plans to use generative AI and Retrieval-Augmented
+  Generation to make authorized corporate documentation searchable through natural-language
+  queries in Spanish. A Copilot Studio assistant integrated with SharePoint and Microsoft
+  Teams would provide source-linked answers, respect existing permissions, and collect
+  feedback for continuous improvement. Expected benefits include faster access to
+  knowledge, greater employee autonomy, improved traceability, and broader adoption
+  through a familiar collaboration channel.
 ---
 
 ## 1. Context and Challenge

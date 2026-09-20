@@ -23,14 +23,14 @@ tags:
 - Análisis multivendor
 - IA generativa
 - Predicción de fallos
-briefing: El operador afrontaba una elevada complejidad en la operación de sus redes
-  RAN, core y transporte, con miles de alarmas, inventarios de topología estáticos
-  y segmentados, y múltiples herramientas OSS difíciles de correlacionar. La identificación
-  del origen de una incidencia podía prolongarse durante más de siete horas, especialmente
-  en escenarios multivendor y de caída masiva de servicios. Los equipos de operación
-  dedicaban un esfuerzo considerable a revisar alarmas, recopilar evidencias y relacionar
-  manualmente eventos entre dominios, mientras que los enfoques tradicionales de análisis
-  de causa raíz se apoyaban principalmente en reglas estáticas y umbrales.
+briefing: Un operador de telecomunicaciones ha implantado una plataforma de diagnóstico
+  proactivo basada en un gemelo digital de la red y un modelo de grafos actualizado
+  continuamente. La solución correlaciona topología, alarmas y métricas para identificar
+  causas raíz, priorizar los nodos de mayor influencia y generar explicaciones y acciones
+  de recuperación mediante aprendizaje automático e IA generativa. El resultado es
+  un análisis más rápido, accionable, trazable y escalable para entornos multivendor
+  y distintos dominios de red, reduciendo el ruido y la dependencia de investigaciones
+  manuales del NOC.
 ---
 
 ## 1. Contexto y Desafío
