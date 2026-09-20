@@ -41,13 +41,14 @@ tags:
 - Network Load Balancer
 - log analytics
 - observabilidad no disruptiva
-briefing: El operador busca evolucionar de un modelo reactivo basado en syslog y Google
-  Cloud Logging hacia una plataforma de observabilidad inteligente, manteniendo la
-  continuidad operativa y minimizando el impacto en los sistemas origen. La solución
-  combina Google BigQuery y BigQuery ML para analítica histórica, correlación y detección
-  de anomalías; Grafana Cloud para visualización y alertado; y un servicio en Cloud
-  Run con capacidades de IA generativa y modelado de dependencias para automatizar
-  el análisis de causa raíz.
+briefing: El operador disponía de un modelo de gestión de logs basado en syslog, un
+  concentrador y Google Cloud Logging, adecuado para la ingesta operativa, la consulta
+  inmediata y la resolución de incidencias. Sin embargo, esta aproximación presentaba
+  limitaciones para la analítica avanzada, la correlación masiva entre dominios tecnológicos,
+  la explotación histórica y la automatización del diagnóstico. El reto consistía
+  en evolucionar desde un modelo reactivo de logging hacia una plataforma de observabilidad
+  inteligente, manteniendo la continuidad operativa y minimizando el impacto sobre
+  los sistemas origen.
 ---
 
 ## 1. Contexto y Desafío

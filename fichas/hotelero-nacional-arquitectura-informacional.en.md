@@ -38,13 +38,12 @@ tags:
 - Data Governance
 - CI/CD
 - Information Marts
-briefing: A national hotel group proposed a modular Azure lakehouse architecture to
-  consolidate commercial, point-of-sale and financial data from heterogeneous systems
-  and SaaS platforms. The design separates ingestion, storage, transformation and
-  consumption, combining batch and streaming pipelines with Data Vault 2.0 to provide
-  scalability, historisation, traceability and flexibility. Expected benefits include
-  faster, more consistent analytics, improved self-service reporting and greater operational
-  autonomy through automation and knowledge transfer.
+briefing: A national hotel group was undergoing a strategic transformation to move
+  towards a more data-driven business model. Commercial, point-of-sale and financial
+  information was distributed across different systems and SaaS services, making consolidation,
+  traceability and consistent business analysis difficult. The challenge was to define
+  and build a scalable and flexible enterprise information architecture capable of
+  integrating heterogeneous sources and establishing a common foundation for decision-making.
 ---
 
 ## 1. Context and Challenge

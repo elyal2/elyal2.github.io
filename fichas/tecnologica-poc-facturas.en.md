@@ -21,13 +21,14 @@ tags:
 - Anonimización de datos
 - RGPD
 - Gobernanza de IA
-briefing: A technology research and social-impact foundation is assessing a controlled
-  proof of concept to automate the analysis of supplier invoices, delivery notes,
-  contracts and related documentation using a general-purpose AI system. The initiative
-  prioritises data minimisation, anonymisation, human oversight, traceability, security
-  and regulatory validation, while preserving finance and accounting responsibilities.
-  If successful, it could reduce manual review effort and provide a scalable foundation
-  for additional authorised document-analysis use cases.
+briefing: A foundation focused on technological research and social impact wanted
+  to assess the feasibility of automating an existing supplier-document analysis process.
+  The challenge involved processing invoices, delivery notes, contracts, data processing
+  agreements and other documents related to contractual relationships, while reducing
+  manual intervention without replacing the responsibilities of finance or accounting
+  teams. The initiative was structured as a limited proof of concept, restricted to
+  the use cases defined by the organisation and excluding customisations or additional
+  integrations beyond the agreed scope.
 ---
 
 ## 1. Context and Challenge

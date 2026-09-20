@@ -41,14 +41,13 @@ tags:
 - ciclo de vida del dato
 - seguridad y cifrado
 - conectividad híbrida
-briefing: The proposed solution modernises the organisation’s unsupported on-premises
-  document archive through a hybrid AWS architecture integrated with SAP RISE and
-  external web applications. It combines cloud-based active document storage, local
-  caching, lifecycle-based archival, secure connectivity, encryption, monitoring and
-  audit controls, while preserving historical content on the existing platform. A
-  controlled migration process with metadata validation, integrity checks, high availability
-  and disaster-recovery considerations is expected to improve security, scalability
-  and operational autonomy.
+briefing: The organisation operated an on-premises OpenText platform, used primarily
+  as an archive server and approaching end of support. The environment needed to continue
+  providing document access from SAP RISE and from web applications used by authorised
+  third parties. The challenge was to modernise the architecture, improve the security,
+  availability and operational efficiency of long-term storage, and migrate active
+  documents to the new cloud environment while retaining historical information on
+  the existing platform, in line with the client’s strategic decision.
 ---
 
 ## 1. Context and Challenge

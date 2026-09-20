@@ -37,14 +37,13 @@ tags:
 - Citizen development
 - Hackathon de PoCs
 - Arquitectura multicloud
-briefing: A six-week AI capability programme is proposed to help technical and business
-  teams securely adopt generative AI, covering cloud architectures, prompt engineering,
-  RAG, agents, enterprise integrations and no-code automation. It combines responsible
-  AI governance with practical learning sprints and a joint hackathon to accelerate
-  functional prototypes, improve autonomy and establish foundations for scalable adoption.
-  Expected benefits include faster ideation, stronger compliance and cost control,
-  and reusable documentation, subject to participation, environment availability and
-  programme continuity.
+briefing: An industrial organisation with sensitive data seeks to accelerate the practical
+  adoption of artificial intelligence without creating technology overload or security
+  risks. The proposal addresses the need to transform a set of isolated courses into
+  a progressive capability journey, differentiating the needs of technical teams from
+  those of business profiles. The challenge includes preparing teams to develop generative
+  AI solutions, integrate agents with corporate systems, and establish criteria for
+  data sovereignty, prompt privacy, regulatory compliance, cost control and observability.
 ---
 
 ## 1. Context and Challenge

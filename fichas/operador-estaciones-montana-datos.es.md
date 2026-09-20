@@ -28,13 +28,14 @@ tags:
 - Optimización operativa
 - IA explicable
 - Autoservicio de datos
-briefing: La propuesta plantea una evolución progresiva hacia una plataforma analítica
-  corporativa sobre Snowflake y dbt, consolidando datos de RRHH, Finanzas y Operaciones
-  en una arquitectura Medallion con KPIs gobernados y cuadros de mando en Power BI.
-  El enfoque busca reducir la dependencia de Excel, mejorar la trazabilidad y adaptar
-  la capacidad analítica a la estacionalidad del negocio, preparando futuras capacidades
-  de optimización, alertas y consultas en lenguaje natural. Al tratarse de una propuesta
-  aún no ejecutada, los beneficios descritos son expectativas de negocio.
+briefing: El operador gestionaba un ecosistema de datos complejo, estacional y distribuido
+  entre varias sociedades y áreas de negocio. Aunque disponía de un Data Warehouse
+  SQL Server local con múltiples fuentes integradas y numerosos informes de Power
+  BI, persistían silos de información, dependencia de ficheros Excel, procesos manuales
+  y ausencia de definiciones unificadas para KPIs. Finanzas, RRHH y Operaciones trabajaban
+  con datos desalineados y con diferentes niveles de actualización, lo que dificultaba
+  conocer la rentabilidad real de la escuela de esquí, como el coste por hora de monitor
+  o el margen por tipo de clase.
 ---
 
 ## 1. Contexto y Desafío

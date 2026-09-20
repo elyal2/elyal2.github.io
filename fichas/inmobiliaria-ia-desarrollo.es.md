@@ -36,13 +36,14 @@ tags:
 - Metadata as Code
 - Quality gates
 - Memoria persistente
-briefing: Una organización inmobiliaria busca evolucionar desde asistentes de código
-  hacia un modelo de desarrollo agéntico basado en especificaciones ejecutables, agentes
-  especializados y validación estructurada. La propuesta combina memoria semántica
-  persistente mediante RAG, acceso controlado a herramientas, pruebas BDD, pipelines
-  de calidad y gobernanza con permisos mínimos, trazabilidad y revisión humana. Se
-  espera mejorar la productividad, la reutilización del conocimiento y la consistencia
-  entre equipos mediante un piloto escalable y automatización supervisada.
+briefing: Una organización inmobiliaria busca modernizar sus prácticas de desarrollo
+  de software mediante inteligencia artificial, evolucionando desde asistentes de
+  código hacia modelos de colaboración agéntica y sistemas con mayor autonomía. El
+  reto consiste en mejorar la productividad sin perder control sobre la calidad, la
+  seguridad, la trazabilidad ni el conocimiento acumulado de los proyectos. La ausencia
+  de especificaciones ejecutables, reglas comunes, memoria persistente y mecanismos
+  de validación puede provocar resultados inconsistentes, deuda de contexto y una
+  mayor superficie de riesgo en entornos con agentes conectados a herramientas corporativas.
 ---
 
 ## 1. Contexto y Desafío

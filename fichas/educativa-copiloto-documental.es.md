@@ -24,12 +24,14 @@ tags:
 - Autoservicio de información
 - Trazabilidad de fuentes
 - Feedback de usuario
-briefing: Se propone un asistente de IA generativa basado en RAG para consultar en
-  lenguaje natural la documentación corporativa autorizada, inicialmente en español,
-  mediante Copilot Studio y SharePoint. La integración con Microsoft Teams, la inclusión
-  de enlaces a las fuentes y el respeto de los permisos existentes mejorarían la rapidez,
-  trazabilidad y confianza en el acceso al conocimiento interno. Al tratarse de una
-  propuesta no ejecutada, los beneficios descritos son esperados.
+briefing: Una organización educativa disponía de conocimiento relevante en su gestor
+  documental corporativo, pero necesitaba facilitar el acceso a esa información de
+  forma más rápida, natural y usable para sus empleados. El reto consistía en habilitar
+  consultas en lenguaje natural sobre la documentación existente, inicialmente en
+  español, evitando respuestas ajenas al repositorio autorizado y manteniendo los
+  controles de seguridad ya aplicados en los sistemas corporativos. La propuesta también
+  contemplaba el uso de un canal de colaboración habitual para ampliar la adopción
+  del servicio.
 ---
 
 ## 1. Contexto y Desafío

@@ -24,13 +24,14 @@ tags:
 - Gestión de incidencias
 - Operaciones de red
 - Orquestación inteligente
-briefing: El cliente transformó una operación global de red y seguridad, inicialmente
-  reactiva y fragmentada, mediante una plataforma AIOps agéntica con IA transversal,
-  orquestación central y agentes especializados. La solución correlaciona alertas,
-  conocimiento técnico, observabilidad y gestión de incidencias para priorizar eventos,
-  recomendar acciones, ejecutar automatizaciones o escalar casos con supervisión humana.
-  El resultado es una operación más eficiente y orientada a datos, con mayor rapidez
-  de respuesta, trazabilidad y una base escalable para la auto-remediación gobernada.
+briefing: El cliente gestionaba una infraestructura global de red y seguridad con
+  un entorno de monitorización de alto volumen y carácter predominantemente reactivo.
+  La operación requería correlacionar alertas procedentes de diferentes sistemas,
+  priorizar incidencias, consultar documentación técnica y coordinar actuaciones entre
+  los equipos de Service Desk y soporte especializado. Esta fragmentación dificultaba
+  la identificación del contexto completo de cada evento, ralentizaba la resolución
+  y limitaba la capacidad de aplicar respuestas preventivas o automatizadas de forma
+  consistente.
 ---
 
 ## 1. Contexto y Desafío

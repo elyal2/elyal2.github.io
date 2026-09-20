@@ -37,13 +37,12 @@ tags:
 - fine-tuning
 - observabilidad
 - revisión humana
-briefing: A production-ready AWS architecture was designed to automate the classification
-  of large volumes of heterogeneous judicial documents using OCR, generative AI, and
-  a decoupled processing workflow. Amazon Bedrock would classify documents across
-  a 33-type taxonomy, provide confidence levels and support multiple classifications,
-  while a review interface would enable business teams to validate ambiguous cases.
-  The proposed solution was expected to reduce manual effort, improve consistency
-  and traceability, support scalable processing, and strengthen operational monitoring.
+briefing: A real estate organisation was introducing generative AI capabilities to
+  optimise the processing of judicial documentation. The challenge involved analysing
+  large volumes of heterogeneous documents, including judgments, claims, rulings and
+  communications, received from different sources and in multiple formats. Manual
+  classification was not sufficiently scalable and made it difficult to ensure traceability,
+  review inconclusive documents and identify operational issues at an early stage.
 ---
 
 ## 1. Context and Challenge

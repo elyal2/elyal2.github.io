@@ -37,12 +37,13 @@ tags:
 - Observabilidad
 - Reintentos automáticos
 - Logging estructurado
-briefing: The proposed pilot evaluates Apache Airflow as a common orchestration layer
-  for standardizing ETL workflows, including file validation, normalization, distributed
-  transformation, loading, retries, contextual logging, and operational monitoring.
-  It is expected to improve traceability, reduce recurring operational incidents,
-  increase team autonomy, and provide reusable workflow templates. CI/CD-based deployment
-  and sandbox validation will support safer promotion across environments.
+briefing: The organization needed to validate a new model for orchestrating and executing
+  ETL processes to replace a fragmented architecture spanning different execution
+  services, events, and functions. The existing model featured inconsistent retry
+  management, out-of-context alerts and ticket creation, limited error traceability,
+  and a significant operational burden for on-call teams. In addition, deployment
+  and testing across environments were performed manually, making maintenance and
+  scalability more difficult and limiting development team autonomy.
 ---
 
 ## 1. Context and Challenge

@@ -20,14 +20,12 @@ tags:
 - Mantenimiento predictivo
 - Dashboards interactivos
 - Automatización de procesos
-briefing: Smart Plant is an AI-based virtual supervision platform designed to provide
-  real-time visibility into manufacturing plant conditions, detect anomalies, and
-  trigger intelligent alarms and automated operational responses. The phased deployment
-  across plants in Chile is intended to reduce unplanned downtime, standardize analysis,
-  accelerate daily reporting, and improve coordination with maintenance, inventory,
-  and procurement processes. The platform would combine interactive dashboards, a
-  chatbot, and autonomous agents to increase operational team autonomy and support
-  future scalability.
+briefing: An industrial organization seeks to comprehensively monitor the condition
+  of multiple manufacturing plants and move towards a more proactive operating model.
+  The challenge stems from the lack of continuous monitoring at certain facilities
+  and the occurrence of unplanned downtime, particularly at high-demand plants. The
+  proposal aims to standardize analytical models and digital solutions across different
+  plant types, starting with facilities located in Chile.
 ---
 
 ## 1. Context and Challenge

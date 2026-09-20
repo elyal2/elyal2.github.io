@@ -37,13 +37,14 @@ tags:
 - Citizen development
 - Hackathon de PoCs
 - Arquitectura multicloud
-briefing: Se propone un programa de formación de seis semanas para acelerar la adopción
-  segura y práctica de la IA generativa, diferenciando las necesidades de los equipos
-  técnicos y de negocio. El itinerario abarca modelos de IA, prompting, RAG sobre
-  datos corporativos, agentes, APIs, automatización y criterios de gobierno, privacidad,
-  cumplimiento, soberanía del dato, observabilidad y control de costes. Un hackathon
-  conjunto permitirá validar micro-PoCs y establecer una base documentada y replicable
-  para escalar las capacidades de IA en la organización.
+briefing: Una organización industrial con datos sensibles busca acelerar la adopción
+  práctica de la inteligencia artificial sin generar saturación tecnológica ni riesgos
+  de seguridad. La propuesta parte de la necesidad de transformar una oferta de cursos
+  aislados en un itinerario progresivo de capacidades, diferenciando las necesidades
+  del equipo técnico y de los perfiles de negocio. El reto incluye preparar a los
+  equipos para desarrollar soluciones con IA generativa, integrar agentes con sistemas
+  corporativos y establecer criterios de soberanía del dato, privacidad de los prompts,
+  cumplimiento normativo, control de costes y observabilidad.
 ---
 
 ## 1. Contexto y Desafío

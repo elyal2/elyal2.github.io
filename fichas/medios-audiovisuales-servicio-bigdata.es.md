@@ -39,14 +39,15 @@ tags:
 - Scrum
 - CI/CD
 - Soporte 24x7
-briefing: Servicio gestionado remoto para reforzar la operación, evolución y soporte
-  24x7x365 de una plataforma de Big Data y Analytics en AWS y Snowflake para una organización
-  audiovisual. Un equipo especializado cubriría la administración cloud, desarrollo
-  y mantenimiento de datos, seguridad, monitorización, despliegues, continuidad operativa
-  y soporte a las áreas de negocio, con procesos estructurados de transición, operación
-  y transferencia de conocimiento. La propuesta esperaba mejorar la disponibilidad,
-  escalabilidad, capacidad de respuesta y velocidad de entrega de nuevos servicios
-  analíticos.
+briefing: Una organización del sector audiovisual necesitaba reforzar la operación
+  y evolución de su entorno de Big Data y Analytics, cubriendo tanto la gestión de
+  la plataforma cloud como los nuevos desarrollos, el mantenimiento evolutivo y correctivo
+  y el soporte técnico a las áreas de negocio. El reto incluía garantizar la disponibilidad
+  de los servicios de datos, responder ante incidencias críticas fuera del horario
+  laboral y mantener la capacidad de adaptación ante nuevos requisitos analíticos
+  y tecnológicos. La propuesta planteaba la integración de un equipo especializado
+  dentro del modelo operativo del cliente, con coordinación con sus equipos internos
+  de operaciones, desarrollo y monitorización.
 ---
 
 ## 1. Contexto y Desafío

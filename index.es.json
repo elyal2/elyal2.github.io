@@ -1,5 +1,5 @@
 {
-  "version": "b7af2a191_1789898338",
+  "version": "b922342cc_1789898447",
   "lang": "es",
   "facets": [
     {
@@ -850,9 +850,12 @@
         "trazabilidad",
         "cumplimiento normativo",
         "AWS",
-        "Amazon Bedrock"
+        "Amazon Textract",
+        "Excel",
+        "IA generativa",
+        "IAM"
       ],
-      "briefing": "Se plantea un piloto en AWS para evaluar la extracción, estructuración y clasificación automática de documentos administrativos mediante OCR e inteligencia artificial generativa. La iniciativa permitirá medir precisión, eficiencia, trazabilidad, seguridad y cumplimiento normativo, generando resultados explicables y una arquitectura de referencia para una futura implantación productiva con supervisión humana.",
+      "briefing": "Una administración provincial necesitaba evaluar cómo mejorar la ordenación y gestión de los documentos asociados a expedientes administrativos, inicialmente en el ámbito de las subvenciones de concurrencia. La diversidad de formatos, la posible presencia de documentos escaneados de baja calidad y la ausencia de criterios de clasificación completamente definidos dificultaban la automatización y podían exigir una revisión manual significativa. El reto consistía en determinar la viabilidad técnica de una solución basada en inteligencia artificial capaz de extraer información, clasificar documentos y proporcionar resultados trazables, manteniendo el cumplimiento de los requisitos de seguridad y protección de datos.",
       "ficha_ref": "fichas/administracion-provincial-clasificacion-expedientes.es.md"
     },
     {
@@ -900,13 +903,11 @@
         "Migración por oleadas",
         "Infraestructura como código",
         "Observabilidad y trazabilidad",
-        "Amazon API Gateway",
-        "AWS Glue",
-        "Amazon Aurora",
-        "Amazon DocumentDB",
-        "AWS Lambda"
+        "Apache Spark",
+        "Scala",
+        "Terraform"
       ],
-      "briefing": "Se propone una plataforma reutilizable para centralizar la gestión de elegibilidad y el catálogo de productos y servicios mediante APIs desacopladas, portales operativos y un motor ETL parametrizado. La arquitectura permitirá una migración progresiva desde sistemas legacy, con convivencia temporal, trazabilidad, rollback por aseguradora y procesamiento de ficheros completos o delta. El enfoque basado en infraestructura como código, controles de seguridad y opciones de persistencia relacional o documental facilitará el escalado, el cumplimiento regulatorio y la incorporación de nuevas entidades.",
+      "briefing": "La organización necesitaba consolidar la gestión de elegibilidad y del catálogo de productos y servicios como una capacidad común, trazable y reutilizable para distintas plataformas internas, aseguradoras y modelos operativos. La situación de partida combinaba procesos locales, integraciones distribuidas, formatos legacy y lógicas específicas por país o entidad, lo que dificultaba determinar de forma homogénea qué servicios podía utilizar cada miembro. El reto consistía en evolucionar la plataforma existente sin interrumpir la operación, habilitando una migración progresiva, convivencia temporal con el modelo legacy, validación por oleadas y capacidad de rollback por aseguradora.",
       "ficha_ref": "fichas/aseguradora-internacional-elegibilidad-catalogo.es.md"
     },
     {
@@ -935,9 +936,13 @@
         "Scoring predictivo",
         "AutoML",
         "Analítica avanzada",
-        "AWS"
+        "AWS",
+        "Amazon S3",
+        "Amazon SageMaker",
+        "Seguros",
+        "industria"
       ],
-      "briefing": "La aseguradora plantea una PoC de Machine Learning en AWS para identificar clientes con mayor propensión al up-selling de nuevas garantías y al cross-selling de seguros de hogar. El uso de capacidades de AutoML permitiría acelerar la experimentación, mejorar la priorización comercial y facilitar el reentrenamiento de modelos mediante notebooks reproducibles y outputs de scoring. La industrialización, monitorización e integración con el ecosistema corporativo se contemplan como evoluciones posteriores.",
+      "briefing": "La aseguradora disponía de un modelo de churn aplicado principalmente a seguros de decesos, con resultados satisfactorios para apoyar la retención de clientes. Sin embargo, necesitaba ampliar sus capacidades comerciales para identificar oportunidades de up-selling de nuevas garantías y ampliación de coberturas, así como de cross-selling de seguros de hogar. La ausencia de histórico suficiente para algunos productos dificultaba la selección de públicos objetivo mediante técnicas tradicionales.",
       "ficha_ref": "fichas/aseguradora-nacional-modelos-venta-cruzada.es.md"
     },
     {
@@ -967,11 +972,12 @@
         "enriquecimiento de datos",
         "validación dimensional",
         "gestión de colas",
-        "Amazon Bedrock",
-        "AWS Lambda",
-        "AWS Auto Scaling"
+        "Code Engine",
+        "Excel",
+        "Scala",
+        "Watsonx Discovery"
       ],
-      "briefing": "Una empresa constructora diseñó un MVP basado en IA generativa, búsqueda léxica y similitud para automatizar la descomposición de ficheros BC3 o Excel y el mapeo de materiales con una base de datos de impacto ambiental. La solución incorpora preprocesamiento, colas, validación de dimensiones y escalado de la ejecución, con el objetivo de reducir el análisis de unas dos semanas a aproximadamente 16 horas y facilitar el procesamiento masivo de partidas. Al estar pendiente de ejecución, estos beneficios son estimaciones esperadas.",
+      "briefing": "Una empresa constructora necesitaba agilizar el análisis de diseños y presupuestos constructivos en formato BC3 para identificar materiales valorables y relacionarlos con una base de datos de impacto ambiental. El proceso requería descomponer manualmente las partidas, interpretar descripciones heterogéneas y localizar materiales comparables, lo que limitaba la productividad, dificultaba la escalabilidad y aumentaba el esfuerzo de validación. El proyecto se definió como un MVP mediante sesiones de co-creación, descubrimiento funcional y profundización técnica.",
       "ficha_ref": "fichas/constructora-nacional-materiales.es.md"
     },
     {
@@ -1000,9 +1006,13 @@
         "Búsqueda asistida",
         "Autoservicio de información",
         "Trazabilidad de fuentes",
-        "Feedback de usuario"
+        "Feedback de usuario",
+        "Azure",
+        "Copilot Studio",
+        "Microsoft Teams",
+        "Retrieval-Augmented Generation (RAG)"
       ],
-      "briefing": "Se propone un asistente de IA generativa basado en RAG para consultar en lenguaje natural la documentación corporativa autorizada, inicialmente en español, mediante Copilot Studio y SharePoint. La integración con Microsoft Teams, la inclusión de enlaces a las fuentes y el respeto de los permisos existentes mejorarían la rapidez, trazabilidad y confianza en el acceso al conocimiento interno. Al tratarse de una propuesta no ejecutada, los beneficios descritos son esperados.",
+      "briefing": "Una organización educativa disponía de conocimiento relevante en su gestor documental corporativo, pero necesitaba facilitar el acceso a esa información de forma más rápida, natural y usable para sus empleados. El reto consistía en habilitar consultas en lenguaje natural sobre la documentación existente, inicialmente en español, evitando respuestas ajenas al repositorio autorizado y manteniendo los controles de seguridad ya aplicados en los sistemas corporativos. La propuesta también contemplaba el uso de un canal de colaboración habitual para ampliar la adopción del servicio.",
       "ficha_ref": "fichas/educativa-copiloto-documental.es.md"
     },
     {
@@ -1031,9 +1041,13 @@
         "Direct Lake",
         "Integración con Power Apps",
         "Arquitectura objetivo",
-        "Racionalización de licencias"
+        "Racionalización de licencias",
+        "IAM",
+        "Microsoft Fabric",
+        "Power Apps",
+        "Power Automate"
       ],
-      "briefing": "Assessment técnico para evaluar la evolución de un entorno Power BI hacia Microsoft Fabric, revisando datasets, orígenes, volúmenes, patrones de consumo, usuarios y licenciamiento. Se analizará la viabilidad de arquitecturas basadas en Lakehouse, Direct Lake y otras alternativas de almacenamiento y modelado, así como el impacto en Power Apps y Power Automate, incluyendo las opciones de acceso mediante API y XMLA. El resultado será una recomendación de arquitectura, dimensionamiento de capacidades para desarrollo y producción, racionalización de licencias y hoja de ruta inicial de migración.",
+      "briefing": "La organización necesita evaluar de forma rápida y estructurada la evolución de su entorno Power BI hacia Microsoft Fabric. El reto consiste en comprender el estado actual de los datasets, orígenes de datos, volúmenes, usuarios, patrones de consumo y licenciamiento, así como identificar las implicaciones técnicas de una posible migración. El análisis presta especial atención al consumo de información desde Power Apps y Power Automate, incluyendo las limitaciones de las interfaces de acceso y de los mecanismos de exposición de datos.",
       "ficha_ref": "fichas/entorno-power-powerbi-assessment-fabric.es.md"
     },
     {
@@ -1058,9 +1072,12 @@
         "Cutover controlado",
         "Replicación de datos",
         "Plan de fallback",
-        "Tuning de bases de datos"
+        "Tuning de bases de datos",
+        "DB2",
+        "PostgreSQL",
+        "industria"
       ],
-      "briefing": "Un fabricante industrial plantea evaluar y preparar la migración de su base de datos operativa desde DB2 hacia PostgreSQL, minimizando la interrupción de las aplicaciones y los riesgos de incompatibilidad. La metodología, basada en sprints, contempla inventario y clasificación de objetos, preparación del entorno PostgreSQL, replicación continua mediante Change Data Capture, validaciones de integridad, cutover controlado y un procedimiento de fallback. Como resultado esperado, se obtendrían una valoración objetiva de la complejidad, un plan de transición priorizado y una ruta de migración documentada y validada.",
+      "briefing": "Un fabricante industrial necesitaba evaluar y preparar la migración de su base de datos operativa desde DB2 hacia PostgreSQL, minimizando la interrupción de sus aplicaciones y reduciendo los riesgos asociados a la conversión de objetos, procedimientos almacenados y consultas. La complejidad del entorno incluía dependencias entre aplicaciones, conexiones JDBC, lógica implementada en SQL y PL/SQL, así como distintos tipos de datos y objetos con posibles incompatibilidades entre motores. La propuesta planteaba una metodología iterativa para conocer el entorno, clasificar los riesgos y validar progresivamente la viabilidad técnica de la migración.",
       "ficha_ref": "fichas/fabricante-industrial-migracion-bbdd.es.md"
     },
     {
@@ -1086,12 +1103,12 @@
         "Mantenimiento predictivo",
         "Dashboards interactivos",
         "Automatización de procesos",
-        "Amazon Bedrock",
-        "AWS Lambda",
-        "AWS Step Functions",
-        "Amazon API Gateway"
+        "M3",
+        "Oracle",
+        "Scala",
+        "industria"
       ],
-      "briefing": "Smart Plant propone una plataforma de supervisión virtual basada en inteligencia artificial para monitorizar en tiempo real varias plantas de fabricación, detectar anomalías y activar alarmas, notificaciones y respuestas automatizadas. La solución incorporará dashboards personalizados, chatbot, informes diarios e integración progresiva con inventario, mantenimiento y compras, con una implantación inicial por fases en plantas de Chile. Se espera mejorar la visibilidad operativa, anticipar incidencias, reducir el impacto de paradas no programadas y estandarizar los análisis entre instalaciones.",
+      "briefing": "Una organización industrial busca supervisar de forma integral el estado de varias plantas de fabricación y avanzar hacia un modelo de operación más anticipativo. El reto parte de la ausencia de monitorización continua en determinadas instalaciones y de la existencia de detenciones no programadas, especialmente en plantas con alta demanda. La propuesta plantea estandarizar los modelos de análisis y las soluciones digitales entre distintos tipos de planta, comenzando por instalaciones ubicadas en Chile.",
       "ficha_ref": "fichas/fabricante-industrial-smart-plant.es.md"
     },
     {
@@ -1134,13 +1151,13 @@
         "Citizen development",
         "Hackathon de PoCs",
         "Arquitectura multicloud",
-        "Amazon Bedrock",
-        "Amazon API Gateway",
-        "AWS KMS",
-        "AWS CloudTrail",
-        "AWS"
+        "AWS",
+        "Azure",
+        "Copilot Studio",
+        "IA generativa",
+        "Power Automate"
       ],
-      "briefing": "Se propone un programa de formación de seis semanas para acelerar la adopción segura y práctica de la IA generativa, diferenciando las necesidades de los equipos técnicos y de negocio. El itinerario abarca modelos de IA, prompting, RAG sobre datos corporativos, agentes, APIs, automatización y criterios de gobierno, privacidad, cumplimiento, soberanía del dato, observabilidad y control de costes. Un hackathon conjunto permitirá validar micro-PoCs y establecer una base documentada y replicable para escalar las capacidades de IA en la organización.",
+      "briefing": "Una organización industrial con datos sensibles busca acelerar la adopción práctica de la inteligencia artificial sin generar saturación tecnológica ni riesgos de seguridad. La propuesta parte de la necesidad de transformar una oferta de cursos aislados en un itinerario progresivo de capacidades, diferenciando las necesidades del equipo técnico y de los perfiles de negocio. El reto incluye preparar a los equipos para desarrollar soluciones con IA generativa, integrar agentes con sistemas corporativos y establecer criterios de soberanía del dato, privacidad de los prompts, cumplimiento normativo, control de costes y observabilidad.",
       "ficha_ref": "fichas/fabricante-papel-formacion-ia.es.md"
     },
     {
@@ -1177,9 +1194,11 @@
         "Validación fiscal",
         "AWS",
         "AWS Lambda",
-        "Amazon Bedrock"
+        "Amazon Bedrock",
+        "Amazon S3",
+        "Amazon SQS"
       ],
-      "briefing": "Una organización gestora de activos inmobiliarios implantó una arquitectura cloud-native en AWS para automatizar la revisión, validación y generación de documentación relacionada con la plusvalía municipal (IIVTNU). La solución combina procesamiento serverless y capacidades de IA generativa para extraer, clasificar y validar información procedente de documentos heterogéneos, mejorando la trazabilidad y la detección de riesgos. Se automatizó entre el 75% y el 90% de las tareas documentales y el procesamiento se aceleró aproximadamente diez veces, sentando además una base escalable para nuevos procesos legales, fiscales y operativos.",
+      "briefing": "Una organización gestora de activos inmobiliarios necesitaba agilizar la revisión, validación y generación de documentación asociada a la plusvalía municipal (IIVTNU). El proceso dependía de documentos heterogéneos, como escrituras, registros, información catastral e históricos transaccionales, que debían interpretarse y trasladarse manualmente a los sistemas operativos. Esta situación generaba una elevada carga administrativa, riesgo de errores de transcripción, inconsistencias en la titularidad o los valores catastrales y dificultades para mantener una trazabilidad completa del proceso.",
       "ficha_ref": "fichas/gestora-activos-inmobiliaria-automatizacion-plusvalias.es.md"
     },
     {
@@ -1222,9 +1241,14 @@
         "Streaming",
         "Data Governance",
         "CI/CD",
-        "Information Marts"
+        "Information Marts",
+        "Apache Kafka",
+        "Apache Spark",
+        "Azure",
+        "Azure Data Factory",
+        "Azure Data Lake Storage Gen2"
       ],
-      "briefing": "Un grupo hotelero nacional plantea una arquitectura lakehouse modular en Azure para centralizar y homogeneizar la información comercial, de puntos de venta y financiera. La solución combina ingesta batch y streaming, Azure Data Lake Storage Gen2, Snowflake, Databricks y Data Factory, con modelado Data Vault 2.0, automatización CI/CD y controles de seguridad. Se espera mejorar la trazabilidad, acelerar el análisis y facilitar la incorporación de nuevas fuentes y productos de datos.",
+      "briefing": "Un grupo hotelero nacional se encontraba inmerso en una transformación estratégica para avanzar hacia un modelo de negocio más orientado al dato. La información comercial, de puntos de venta y financiera estaba distribuida entre diferentes sistemas y servicios SaaS, dificultando la consolidación, la trazabilidad y el análisis homogéneo del negocio. El reto consistía en definir y construir una arquitectura informacional corporativa, escalable y flexible, capaz de integrar fuentes heterogéneas y establecer una base común para la toma de decisiones.",
       "ficha_ref": "fichas/hotelero-nacional-arquitectura-informacional.es.md"
     },
     {
@@ -1266,13 +1290,9 @@
         "Metadata as Code",
         "Quality gates",
         "Memoria persistente",
-        "Amazon Bedrock",
-        "AWS Bedrock AgentCore",
-        "AWS Lambda",
-        "AWS KMS",
-        "AWS CloudTrail"
+        "Scala"
       ],
-      "briefing": "Una organización inmobiliaria busca evolucionar desde asistentes de código hacia un modelo de desarrollo agéntico basado en especificaciones ejecutables, agentes especializados y validación estructurada. La propuesta combina memoria semántica persistente mediante RAG, acceso controlado a herramientas, pruebas BDD, pipelines de calidad y gobernanza con permisos mínimos, trazabilidad y revisión humana. Se espera mejorar la productividad, la reutilización del conocimiento y la consistencia entre equipos mediante un piloto escalable y automatización supervisada.",
+      "briefing": "Una organización inmobiliaria busca modernizar sus prácticas de desarrollo de software mediante inteligencia artificial, evolucionando desde asistentes de código hacia modelos de colaboración agéntica y sistemas con mayor autonomía. El reto consiste en mejorar la productividad sin perder control sobre la calidad, la seguridad, la trazabilidad ni el conocimiento acumulado de los proyectos. La ausencia de especificaciones ejecutables, reglas comunes, memoria persistente y mecanismos de validación puede provocar resultados inconsistentes, deuda de contexto y una mayor superficie de riesgo en entornos con agentes conectados a herramientas corporativas.",
       "ficha_ref": "fichas/inmobiliaria-ia-desarrollo.es.md"
     },
     {
@@ -1315,12 +1335,13 @@
         "fine-tuning",
         "observabilidad",
         "revisión humana",
-        "Amazon Bedrock",
-        "AWS Lambda",
+        "AWS",
         "AWS CloudFormation",
-        "AWS CodeCommit"
+        "AWS CodeCommit",
+        "AWS Lambda",
+        "Amazon Bedrock"
       ],
-      "briefing": "Se propone una arquitectura desacoplada sobre AWS para automatizar la extracción, clasificación y revisión de grandes volúmenes de documentación judicial heterogénea mediante OCR e IA generativa. Amazon Bedrock permitiría clasificar los documentos según una taxonomía de 33 tipos, incluyendo niveles de certeza y posibles clasificaciones múltiples, mientras que AWS Lambda, la persistencia estructurada y los mecanismos de observabilidad facilitarían el procesamiento escalable y trazable. Al tratarse de una propuesta aún no ejecutada, se esperan mejoras en la velocidad, homogeneidad y control de la revisión documental, así como mayor autonomía para gestionar casos ambiguos.",
+      "briefing": "Una organización del sector inmobiliario se encontraba incorporando capacidades de IA generativa para optimizar el procesamiento de documentación judicial. El reto consistía en analizar grandes volúmenes de documentos heterogéneos, como sentencias, demandas, resoluciones y comunicaciones, procedentes de distintas fuentes y formatos. La clasificación manual resultaba poco escalable y dificultaba la trazabilidad, la revisión de documentos no concluyentes y la identificación temprana de incidencias operativas.",
       "ficha_ref": "fichas/inmobiliaria-nacional-clasificador-documentos.es.md"
     },
     {
@@ -1349,10 +1370,10 @@
         "Gestión de incidencias",
         "Operaciones de red",
         "Orquestación inteligente",
-        "IA generativa",
-        "Active Directory"
+        "React",
+        "Scala"
       ],
-      "briefing": "El cliente transformó una operación global de red y seguridad, inicialmente reactiva y fragmentada, mediante una plataforma AIOps agéntica con IA transversal, orquestación central y agentes especializados. La solución correlaciona alertas, conocimiento técnico, observabilidad y gestión de incidencias para priorizar eventos, recomendar acciones, ejecutar automatizaciones o escalar casos con supervisión humana. El resultado es una operación más eficiente y orientada a datos, con mayor rapidez de respuesta, trazabilidad y una base escalable para la auto-remediación gobernada.",
+      "briefing": "El cliente gestionaba una infraestructura global de red y seguridad con un entorno de monitorización de alto volumen y carácter predominantemente reactivo. La operación requería correlacionar alertas procedentes de diferentes sistemas, priorizar incidencias, consultar documentación técnica y coordinar actuaciones entre los equipos de Service Desk y soporte especializado. Esta fragmentación dificultaba la identificación del contexto completo de cada evento, ralentizaba la resolución y limitaba la capacidad de aplicar respuestas preventivas o automatizadas de forma consistente.",
       "ficha_ref": "fichas/masorange-aiops.es.md"
     },
     {
@@ -1393,13 +1414,13 @@
         "observabilidad multimodal de IA",
         "análisis de matriz de confusión",
         "entrenamiento de modelos con GPU",
-        "Explainable AI (XAI)",
+        "Grafana",
         "OpenLLMetry",
-        "IA generativa",
-        "Grafana Cloud",
-        "No determinado"
+        "OpenShift",
+        "OpenTelemetry",
+        "Oracle"
       ],
-      "briefing": "La solución mejora la explicabilidad, auditabilidad y observabilidad de la plataforma IRIS de clasificación de imágenes mediante evidencia visual, reglas deterministas, modelos auditores y persistencia estructurada de resultados. La instrumentación con OpenLLMetry y OpenTelemetry permite supervisar trazas, métricas, logs, latencia y errores, mientras que dashboards operativos analizan el rendimiento por clase, la confianza, los patrones de error y la deriva del modelo. También se contempla evaluar modelos visuales de mayor capacidad con conjuntos de datos más amplios y recursos GPU.",
+      "briefing": "Un operador nacional de telecomunicaciones estaba evaluando cómo hacer que su solución IRIS de clasificación de imágenes fuera más explicable, auditable y observable desde el punto de vista operativo. El enfoque existente podía generar predicciones, pero ofrecía una visibilidad limitada sobre la evidencia que respaldaba cada decisión, la fiabilidad de las respuestas y las causas de los errores de clasificación. La propuesta abordaba la necesidad de detectar sesgos, incoherencias, deriva de datos, confusión entre clases y degradación del modelo a lo largo del tiempo, así como de establecer un enfoque defendible para entornos de producción y sujetos a auditoría.",
       "ficha_ref": "fichas/masorange-iris.es.md"
     },
     {
@@ -1446,12 +1467,12 @@
         "Network Load Balancer",
         "log analytics",
         "observabilidad no disruptiva",
-        "Google Cloud Logging",
-        "Google BigQuery",
         "Cloud Run",
-        "Modelado y analítica de grafos"
+        "Elasticsearch",
+        "Google BigQuery",
+        "Google Cloud Logging"
       ],
-      "briefing": "El operador busca evolucionar de un modelo reactivo basado en syslog y Google Cloud Logging hacia una plataforma de observabilidad inteligente, manteniendo la continuidad operativa y minimizando el impacto en los sistemas origen. La solución combina Google BigQuery y BigQuery ML para analítica histórica, correlación y detección de anomalías; Grafana Cloud para visualización y alertado; y un servicio en Cloud Run con capacidades de IA generativa y modelado de dependencias para automatizar el análisis de causa raíz.",
+      "briefing": "El operador disponía de un modelo de gestión de logs basado en syslog, un concentrador y Google Cloud Logging, adecuado para la ingesta operativa, la consulta inmediata y la resolución de incidencias. Sin embargo, esta aproximación presentaba limitaciones para la analítica avanzada, la correlación masiva entre dominios tecnológicos, la explotación histórica y la automatización del diagnóstico. El reto consistía en evolucionar desde un modelo reactivo de logging hacia una plataforma de observabilidad inteligente, manteniendo la continuidad operativa y minimizando el impacto sobre los sistemas origen.",
       "ficha_ref": "fichas/masorange-logora.es.md"
     },
     {
@@ -1480,12 +1501,10 @@
         "Análisis multivendor",
         "IA generativa",
         "Predicción de fallos",
-        "Telecommunications",
-        "Modelado y analítica de grafos",
         "AWS",
-        "Servicios AWS de datos y machine learning"
+        "Scala"
       ],
-      "briefing": "Un operador de telecomunicaciones ha implantado una plataforma de diagnóstico proactivo basada en un gemelo digital de la red y un modelo de grafos actualizado continuamente. La solución correlaciona topología, alarmas y métricas para identificar causas raíz, priorizar los nodos de mayor influencia y generar explicaciones y acciones de recuperación mediante aprendizaje automático e IA generativa. El resultado es un análisis más rápido, accionable, trazable y escalable para entornos multivendor y distintos dominios de red, reduciendo el ruido y la dependencia de investigaciones manuales del NOC.",
+      "briefing": "El operador afrontaba una elevada complejidad en la operación de sus redes RAN, core y transporte, con miles de alarmas, inventarios de topología estáticos y segmentados, y múltiples herramientas OSS difíciles de correlacionar. La identificación del origen de una incidencia podía prolongarse durante más de siete horas, especialmente en escenarios multivendor y de caída masiva de servicios. Los equipos de operación dedicaban un esfuerzo considerable a revisar alarmas, recopilar evidencias y relacionar manualmente eventos entre dominios, mientras que los enfoques tradicionales de análisis de causa raíz se apoyaban principalmente en reglas estáticas y umbrales.",
       "ficha_ref": "fichas/masorange-rca.es.md"
     },
     {
@@ -1531,12 +1550,12 @@
         "CI/CD",
         "Soporte 24x7",
         "AWS",
-        "Amazon Athena",
+        "AWS CloudFormation",
         "AWS Glue",
         "AWS Lambda",
         "AWS Step Functions"
       ],
-      "briefing": "Servicio gestionado remoto para reforzar la operación, evolución y soporte 24x7x365 de una plataforma de Big Data y Analytics en AWS y Snowflake para una organización audiovisual. Un equipo especializado cubriría la administración cloud, desarrollo y mantenimiento de datos, seguridad, monitorización, despliegues, continuidad operativa y soporte a las áreas de negocio, con procesos estructurados de transición, operación y transferencia de conocimiento. La propuesta esperaba mejorar la disponibilidad, escalabilidad, capacidad de respuesta y velocidad de entrega de nuevos servicios analíticos.",
+      "briefing": "Una organización del sector audiovisual necesitaba reforzar la operación y evolución de su entorno de Big Data y Analytics, cubriendo tanto la gestión de la plataforma cloud como los nuevos desarrollos, el mantenimiento evolutivo y correctivo y el soporte técnico a las áreas de negocio. El reto incluía garantizar la disponibilidad de los servicios de datos, responder ante incidencias críticas fuera del horario laboral y mantener la capacidad de adaptación ante nuevos requisitos analíticos y tecnológicos. La propuesta planteaba la integración de un equipo especializado dentro del modelo operativo del cliente, con coordinación con sus equipos internos de operaciones, desarrollo y monitorización.",
       "ficha_ref": "fichas/medios-audiovisuales-servicio-bigdata.es.md"
     },
     {
@@ -1579,13 +1598,13 @@
         "Observabilidad",
         "Reintentos automáticos",
         "Logging estructurado",
+        "AWS",
         "AWS Lambda",
         "Amazon DynamoDB",
-        "AWS Glue",
-        "AWS Fargate",
-        "AWS"
+        "Amazon ECS",
+        "Amazon EMR"
       ],
-      "briefing": "Se propone validar un modelo común de orquestación ETL basado en Apache Airflow para sustituir una arquitectura fragmentada y mejorar la gestión de reintentos, alertas, trazabilidad y despliegues entre entornos. El piloto cubrirá la ingesta y transformación de ficheros CSV, con configuración dinámica, ejecución distribuida, observabilidad y automatización mediante CI/CD. Se espera reducir la carga operativa, acelerar la incorporación de nuevos flujos y facilitar el diagnóstico de errores, sujeto a la validación funcional del piloto.",
+      "briefing": "La organización necesitaba validar un nuevo modelo de orquestación y ejecución de procesos ETL que sustituyera una arquitectura fragmentada entre distintos servicios de ejecución, eventos y funciones. El modelo existente presentaba una gestión heterogénea de reintentos, generación de alertas y tickets fuera de contexto, baja trazabilidad de los errores y una elevada carga para los equipos de guardia. Además, el despliegue y las pruebas entre entornos se realizaban de forma manual, dificultando el mantenimiento, la escalabilidad y la autonomía de los equipos de desarrollo.",
       "ficha_ref": "fichas/medios-etl-airflow-piloto.es.md"
     },
     {
@@ -1618,9 +1637,14 @@
         "Micro-batch",
         "Optimización operativa",
         "IA explicable",
-        "Autoservicio de datos"
+        "Autoservicio de datos",
+        "Business Central",
+        "Excel",
+        "Power BI",
+        "Python",
+        "SQL Server"
       ],
-      "briefing": "La propuesta plantea una evolución progresiva hacia una plataforma analítica corporativa sobre Snowflake y dbt, consolidando datos de RRHH, Finanzas y Operaciones en una arquitectura Medallion con KPIs gobernados y cuadros de mando en Power BI. El enfoque busca reducir la dependencia de Excel, mejorar la trazabilidad y adaptar la capacidad analítica a la estacionalidad del negocio, preparando futuras capacidades de optimización, alertas y consultas en lenguaje natural. Al tratarse de una propuesta aún no ejecutada, los beneficios descritos son expectativas de negocio.",
+      "briefing": "El operador gestionaba un ecosistema de datos complejo, estacional y distribuido entre varias sociedades y áreas de negocio. Aunque disponía de un Data Warehouse SQL Server local con múltiples fuentes integradas y numerosos informes de Power BI, persistían silos de información, dependencia de ficheros Excel, procesos manuales y ausencia de definiciones unificadas para KPIs. Finanzas, RRHH y Operaciones trabajaban con datos desalineados y con diferentes niveles de actualización, lo que dificultaba conocer la rentabilidad real de la escuela de esquí, como el coste por hora de monitor o el margen por tipo de clase.",
       "ficha_ref": "fichas/operador-estaciones-montana-datos.es.md"
     },
     {
@@ -1648,9 +1672,13 @@
         "Seguridad y ciberseguridad",
         "Agentes de IA",
         "Automatización de procesos",
-        "Gobernanza de IA"
+        "Gobernanza de IA",
+        "Construcción",
+        "Copilot Studio",
+        "Excel",
+        "Microsoft Copilot"
       ],
-      "briefing": "Se diseñó una formación presencial y práctica para capacitar al equipo directivo en el uso seguro, responsable y eficaz de la IA generativa aplicada a tareas ejecutivas. La propuesta contempla itinerarios sobre Microsoft 365 y Copilot Studio, así como Copilot Chat, incorporando prompting, validación de resultados, protección de la información y ejercicios orientados a informes, reuniones, presentaciones y análisis. Al no haberse ejecutado todavía, se esperan mejoras en autonomía, productividad, adopción homogénea y preparación de futuras automatizaciones mediante un agente MVP y métricas de operación.",
+      "briefing": "La organización buscaba capacitar a su equipo directivo en el uso práctico, seguro y responsable de la inteligencia artificial generativa aplicada al entorno de trabajo. El reto consistía en trasladar las capacidades de Microsoft Copilot a tareas habituales como la preparación de informes, comités, presentaciones, reuniones, correos y análisis de datos, manteniendo criterios de verificación, protección de la información y alineamiento con la ciberseguridad corporativa. La propuesta contemplaba dos itinerarios formativos: uno basado en la integración con las aplicaciones de Microsoft 365 y Copilot Studio, y otro centrado exclusivamente en Copilot Chat.",
       "ficha_ref": "fichas/operador-mercado-energia-formacion-ia.es.md"
     },
     {
@@ -1683,9 +1711,14 @@
         "Análisis de impacto",
         "Pipeline CI/CD",
         "Correlación de cambios",
-        "Razonamiento en lenguaje natural"
+        "Razonamiento en lenguaje natural",
+        "Azure",
+        "Elasticsearch",
+        "IA generativa",
+        "IAM",
+        "MongoDB"
       ],
-      "briefing": "Un operador de telecomunicaciones plantea un piloto de gemelo digital semántico para representar dependencias entre dispositivos, interfaces, rutas, políticas y servicios de red. La solución contempla fases PRE, REPORT y POST para anticipar el impacto de cambios, explicar riesgos en lenguaje natural y contrastar las predicciones con logs y telemetría real. Se espera reducir interrupciones, automatizar el análisis operativo y mejorar la autonomía de los equipos mediante mapas de dependencias, análisis de blast radius e integración con CI/CD.",
+      "briefing": "Un operador de telecomunicaciones necesitaba evolucionar desde modelos de emulación de red complejos e intensivos en recursos hacia una representación semántica, escalable y orientada a las dependencias entre elementos. La identificación del impacto de cambios de configuración, rutas, políticas de seguridad y relaciones entre capas L2 y L3 requería un elevado conocimiento experto y podía generar riesgos operativos. El reto consistía en anticipar el alcance de una modificación antes de aplicarla en producción, explicar sus consecuencias de forma comprensible y contrastar posteriormente la predicción con la telemetría y los registros reales.",
       "ficha_ref": "fichas/operador-telecomunicaciones-telco-gemelo-digital.es.md"
     },
     {
@@ -1712,9 +1745,12 @@
         "Adopción de Copilot",
         "Prompt engineering",
         "IA responsable",
-        "Automatización de tareas"
+        "Automatización de tareas",
+        "Azure",
+        "Excel",
+        "Microsoft Copilot"
       ],
-      "briefing": "Se propone un workshop práctico para mostrar cómo Microsoft Copilot puede mejorar la productividad, la creatividad y la colaboración en un organismo público, con ejemplos aplicados a finanzas, atención al cliente y gestión legal. La formación combinará demostraciones y ejercicios sobre Microsoft 365, junto con buenas prácticas de prompting, integración, privacidad, seguridad, revisión humana y uso responsable de la IA. Se espera acelerar la adopción segura, reducir tareas repetitivas y ayudar a los equipos a identificar oportunidades de automatización y mejora de sus flujos de trabajo.",
+      "briefing": "El organismo público buscaba comprender cómo la inteligencia artificial puede transformar el trabajo diario y mejorar la eficiencia, la creatividad y la colaboración entre sus equipos. La propuesta respondía a la necesidad de ofrecer una formación accesible para personas de distintas áreas y niveles técnicos, con especial atención a finanzas, atención al cliente y gestión legal. El reto consistía en trasladar el potencial de Microsoft Copilot a situaciones laborales concretas, manteniendo una perspectiva responsable sobre privacidad, seguridad, errores y posibles sesgos.",
       "ficha_ref": "fichas/organismo-publico-copilot.es.md"
     },
     {
@@ -1750,13 +1786,13 @@
         "Ciclo de vida audiovisual",
         "DRM",
         "Archivado automático",
+        "AWS",
         "AWS Elemental MediaConvert",
-        "AWS Step Functions",
-        "Amazon CloudFront",
         "AWS Lambda",
-        "Amazon DynamoDB"
+        "AWS Step Functions",
+        "Amazon CloudFront"
       ],
-      "briefing": "Se definió una arquitectura serverless en AWS para incorporar vídeo bajo demanda y streaming en directo al sistema de gestión del patrimonio visual. La propuesta utiliza orquestación, transcodificación adaptativa, distribución global, automatización de eventos y almacenamiento de metadatos, con controles de seguridad, derechos de acceso y archivado. La consultoría establecerá el diseño funcional y técnico, las modificaciones necesarias, el plan de pruebas y el roadmap de implantación.",
+      "briefing": "Una organización pública cultural especializada en la conservación y difusión del patrimonio visual disponía de un sistema de información orientado principalmente a la gestión de imágenes. La creciente incorporación de contenidos audiovisuales exigía adaptar el catálogo, los procesos de ingesta y los portales de consulta para gestionar vídeos de forma estructurada. El reto consistía en definir una solución robusta para vídeo bajo demanda y streaming en directo, integrada con el archivo digital y los sistemas existentes, con capacidad de controlar el almacenamiento, la seguridad, los derechos de acceso y la evolución futura de la plataforma.",
       "ficha_ref": "fichas/organismo-publico-video-vod.es.md"
     },
     {
@@ -1798,13 +1834,13 @@
         "Gobierno de datos",
         "Operaciones CRUD",
         "Assessment de migración",
+        "AWS",
+        "AWS CloudTrail",
         "AWS Glue",
         "AWS Lake Formation",
-        "Amazon Athena",
-        "AWS CloudTrail",
-        "AWS"
+        "Amazon Athena"
       ],
-      "briefing": "Se propone migrar la plataforma informacional DataNext desde un entorno local hacia una arquitectura escalable en AWS, basada en servicios gestionados para persistencia, integración, gobierno y consulta de datos. La solución contempla controles de acceso detallados a nivel de tabla, fila y columna, auditoría completa mediante CloudTrail y un piloto para validar requisitos, esfuerzo de migración y comportamiento antes de definir el roadmap. Se esperan mejoras en escalabilidad, concurrencia, flexibilidad operativa y cumplimiento.",
+      "briefing": "La organización sanitaria había iniciado una estrategia de modernización tecnológica mediante la adopción progresiva de AWS y el establecimiento de una Landing Zone. En este contexto, la plataforma informacional DataNext, desplegada en un entorno local, estaba experimentando un crecimiento sostenido de usuarios, requisitos funcionales y volumen de datos. Su arquitectura dependía principalmente de un escalado vertical, lo que limitaba la capacidad de ampliar almacenamiento y computación con agilidad.",
       "ficha_ref": "fichas/sanitaria-datanext-aws.es.md"
     },
     {
@@ -1852,12 +1888,12 @@
         "seguridad y cifrado",
         "conectividad híbrida",
         "AWS",
+        "AWS CloudTrail",
         "AWS Direct Connect",
-        "AWS Site-to-Site VPN",
         "AWS KMS",
-        "AWS CloudTrail"
+        "Amazon EC2"
       ],
-      "briefing": "Se propone modernizar la plataforma documental mediante una arquitectura híbrida en AWS, desplegando SAP Content Server e integrándolo con SAP RISE y aplicaciones web autorizadas. Amazon S3 proporcionará el almacenamiento principal de los documentos vivos, con caché local, políticas de ciclo de vida, conectividad segura, cifrado y auditoría. La migración desde OpenText incluirá controles de integridad, trazabilidad, validación end-to-end y mecanismos de alta disponibilidad, con el objetivo de mejorar la seguridad, escalabilidad y eficiencia operativa.",
+      "briefing": "La organización disponía de una plataforma OpenText on-premise utilizada principalmente como servidor de archivo y próxima a quedar fuera de soporte. El entorno debía seguir ofreciendo acceso documental desde SAP RISE y desde aplicaciones web utilizadas por terceros autorizados. El reto consistía en modernizar la arquitectura, mejorar la seguridad, disponibilidad y eficiencia operativa del almacenamiento a largo plazo, y migrar los documentos vivos al nuevo entorno cloud, manteniendo la información histórica en la plataforma existente según la decisión estratégica del cliente.",
       "ficha_ref": "fichas/servicios-inmobiliarios-content-server.es.md"
     },
     {
@@ -1884,13 +1920,12 @@
         "Roadmap de implantación",
         "Quick wins",
         "Sistemas heterogéneos",
-        "Amazon Bedrock",
-        "AWS Bedrock AgentCore",
-        "AWS Lambda",
-        "AWS Step Functions",
-        "AWS Systems Manager"
+        "Ansible",
+        "IA generativa",
+        "Scala",
+        "Terraform"
       ],
-      "briefing": "Assessment para identificar, validar y priorizar oportunidades de automatización e inteligencia artificial en procesos normativos, de calidad, formación y operaciones. El trabajo definirá la situación actual y objetivo, una arquitectura de referencia, el stack tecnológico, los quick wins y un roadmap de implantación considerando protección de datos y cumplimiento. Se espera mejorar la eficiencia operativa, la escalabilidad y la capacidad del equipo interno para impulsar futuras iniciativas.",
+      "briefing": "La organización parte de un entorno intensivo en procesos relacionados con normativa, sistemas de calidad y formación, con una amplia base de clientes y un elevado potencial de automatización. La coexistencia de sistemas heterogéneos con bajo nivel de integración, junto con una alta carga de tareas manuales y repetitivas, dificulta la eficiencia operativa, la escalabilidad y la mejora del time-to-market. El reto consiste en identificar oportunidades reales de automatización e inteligencia artificial, validar su viabilidad y establecer una hoja de ruta priorizada para avanzar hacia un modelo operativo más eficiente.",
       "ficha_ref": "fichas/servicios-profesionales-assessment-automatizacion.es.md"
     },
     {
@@ -1917,11 +1952,11 @@
         "Anonimización de datos",
         "RGPD",
         "Gobernanza de IA",
-        "Amazon Bedrock",
-        "AWS",
-        "AWS KMS"
+        "IAM",
+        "Scala",
+        "Sistema de Inteligencia Artificial"
       ],
-      "briefing": "Se plantea una prueba de concepto para evaluar la automatización del análisis de facturas, albaranes, contratos y otros documentos de proveedores mediante inteligencia artificial, manteniendo la supervisión humana y sin sustituir las funciones financieras o contables. La solución utilizará documentación anonimizada en un entorno controlado, con medidas de confidencialidad, minimización y eliminación de datos, trazabilidad y validación de la calidad. El objetivo es determinar la viabilidad técnica, operativa, de seguridad y normativa antes de considerar una posible ampliación a otros casos de uso.",
+      "briefing": "Una organización fundacional dedicada a la investigación tecnológica y al impacto social quería evaluar la viabilidad de automatizar un proceso existente de análisis de documentación de proveedores. El reto se centraba en procesar facturas, albaranes, contratos, acuerdos de tratamiento de datos y otros documentos relacionados con la relación contractual, reduciendo la intervención manual sin sustituir las funciones de los equipos financieros o contables. La iniciativa se planteó como una prueba de concepto acotada, limitada a los casos de uso definidos por la organización y sin incluir personalizaciones ni integraciones adicionales fuera del alcance acordado.",
       "ficha_ref": "fichas/tecnologica-poc-facturas.es.md"
     },
     {
@@ -1948,9 +1983,13 @@
         "Aprender haciendo",
         "Gobernanza y DLP",
         "Autoservicio",
-        "Análisis de sentimiento"
+        "Análisis de sentimiento",
+        "Construcción",
+        "Copilot Studio",
+        "Power Automate",
+        "Scala"
       ],
-      "briefing": "Una universidad privada diseñó un programa práctico de formación y co-creación para capacitar a sus equipos en el desarrollo de agentes conversacionales y automatizaciones aplicadas a admisiones, secretaría académica y calidad docente. La iniciativa contempla dos pilotos, buenas prácticas de gobernanza y seguridad, y una metodología reutilizable para que la organización pueda mantener y escalar estas capacidades con mayor autonomía. Al no haberse ejecutado todavía, los beneficios descritos son esperados: menor carga manual, mayor trazabilidad y tiempos de respuesta más ágiles.",
+      "briefing": "Una universidad privada buscaba desarrollar las capacidades de su equipo para crear agentes inteligentes capaces de conversar con estudiantes y personal, pero también de ejecutar acciones sobre los procesos internos. El reto consistía en combinar comprensión del lenguaje natural, automatización de tareas y buenas prácticas de seguridad para abordar casos reales de admisiones, secretaría académica y calidad docente. La organización necesitaba reducir la dependencia de soporte externo, acelerar la adopción de la automatización y disponer de una metodología reutilizable para extender estos casos a otros departamentos.",
       "ficha_ref": "fichas/universidad-privada-formacion-agentes.es.md"
     },
     {
@@ -1999,13 +2038,13 @@
         "Observabilidad",
         "Infraestructura como código",
         "Arquitectura modular",
+        "AWS",
+        "AWS CDK",
         "AWS Glue",
         "AWS Lambda",
-        "AWS Lake Formation",
-        "AWS Glue Data Quality",
-        "AWS CDK"
+        "Amazon MSK"
       ],
-      "briefing": "Se diseñó una arquitectura modular de data lake en AWS para integrar y normalizar información clínica sobre fallecimientos, combinando históricos y actualizaciones diarias mediante procesos automatizados y reglas de coincidencia. La solución incorpora gobierno, calidad, seguridad, trazabilidad, versionado y capacidades de reconstrucción, generando datasets optimizados para análisis en Power BI. El enfoque establece un dominio reutilizable y escalable para futuros ámbitos asistenciales, reduciendo el riesgo operativo y facilitando la evolución hacia una plataforma de datos clínicos modular.",
+      "briefing": "Una organización hospitalaria necesitaba consolidar y normalizar la información clínica relacionada con los fallecimientos de pacientes a partir de fuentes internas independientes. La información no estaba integrada, lo que dificultaba el análisis diario por unidad médica, ubicación y motivo clínico. El reto consistía en crear un primer dominio reutilizable que sirviera como plantilla para futuros dominios asistenciales, garantizando automatización, trazabilidad, calidad del dato, seguridad y capacidad de reconstrucción ante errores o cambios en las reglas clínicas.",
       "ficha_ref": "fichas/universitario-arquitectura-clinica.es.md"
     },
     {
@@ -2033,9 +2072,13 @@
         "Integración documental",
         "Búsqueda semántica",
         "Autoservicio de información clínica",
-        "Alfresco"
+        "Alfresco",
+        "MongoDB",
+        "Ollama",
+        "Retrieval-Augmented Generation (RAG)",
+        "Scala"
       ],
-      "briefing": "Se propone un piloto de asistente conversacional ejecutado íntegramente on-premise para facilitar al personal asistencial el acceso contextualizado a protocolos, procedimientos y guías clínicas distribuidos entre un directorio de archivos y un gestor documental. La arquitectura combinará autenticación corporativa, trazabilidad, modelos de lenguaje locales y un flujo RAG con actualización automática de índices, preservando la confidencialidad de la información. Se espera reducir el tiempo de búsqueda, mejorar la precisión de las respuestas y establecer una base escalable con menor carga de mantenimiento.",
+      "briefing": "El hospital necesitaba facilitar al personal asistencial el acceso rápido y contextualizado a protocolos clínicos, procedimientos internos y guías de actuación. La documentación estaba distribuida entre un directorio de archivos y un gestor documental corporativo, sin metadatos estructurados ni taxonomías predefinidas. La propuesta planteaba un piloto capaz de trabajar sobre más de dos mil documentos PDF, evitando el etiquetado manual y la preclasificación avanzada, y con una ejecución íntegramente local para preservar la confidencialidad de la información clínica.",
       "ficha_ref": "fichas/universitario-chatbot-asistencial-onprem.es.md"
     }
   ]

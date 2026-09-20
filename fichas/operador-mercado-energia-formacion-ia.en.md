@@ -23,12 +23,14 @@ tags:
 - Agentes de IA
 - Automatización de procesos
 - Gobernanza de IA
-briefing: The organisation designed an in-person executive training programme to promote
-  practical, secure and responsible use of Microsoft Copilot and generative AI. The
-  programme covers Microsoft 365 applications, Copilot Studio or Copilot Chat, professional
-  prompting, information protection, validation practices and executive use cases.
-  Expected outcomes include greater user autonomy, faster preparation of business
-  materials, consistent adoption and a foundation for future AI automation initiatives.
+briefing: 'The organisation sought to equip its executive team with the practical,
+  secure and responsible use of generative artificial intelligence in the workplace.
+  The challenge was to apply Microsoft Copilot capabilities to everyday activities
+  such as preparing reports, committee materials, presentations, meetings, emails
+  and data analyses, while maintaining verification practices, information protection
+  and alignment with corporate cybersecurity policies. The proposal covered two training
+  pathways: one focused on integration with Microsoft 365 applications and Copilot
+  Studio, and another focused exclusively on Copilot Chat.'
 ---
 
 ## 1. Context and Challenge

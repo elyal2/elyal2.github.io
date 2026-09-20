@@ -24,14 +24,13 @@ tags:
 - Integración con Power Apps
 - Arquitectura objetivo
 - Racionalización de licencias
-briefing: Assessment técnico para evaluar la evolución de un entorno Power BI hacia
-  Microsoft Fabric, revisando datasets, orígenes, volúmenes, patrones de consumo,
-  usuarios y licenciamiento. Se analizará la viabilidad de arquitecturas basadas en
-  Lakehouse, Direct Lake y otras alternativas de almacenamiento y modelado, así como
-  el impacto en Power Apps y Power Automate, incluyendo las opciones de acceso mediante
-  API y XMLA. El resultado será una recomendación de arquitectura, dimensionamiento
-  de capacidades para desarrollo y producción, racionalización de licencias y hoja
-  de ruta inicial de migración.
+briefing: La organización necesita evaluar de forma rápida y estructurada la evolución
+  de su entorno Power BI hacia Microsoft Fabric. El reto consiste en comprender el
+  estado actual de los datasets, orígenes de datos, volúmenes, usuarios, patrones
+  de consumo y licenciamiento, así como identificar las implicaciones técnicas de
+  una posible migración. El análisis presta especial atención al consumo de información
+  desde Power Apps y Power Automate, incluyendo las limitaciones de las interfaces
+  de acceso y de los mecanismos de exposición de datos.
 ---
 
 ## 1. Contexto y Desafío

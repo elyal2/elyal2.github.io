@@ -24,13 +24,13 @@ tags:
 - Integración con Power Apps
 - Arquitectura objetivo
 - Racionalización de licencias
-briefing: The proposed engagement will assess the current Power BI environment and
-  determine the technical and licensing implications of evolving toward Microsoft
-  Fabric. It will review representative datasets, data sources, usage patterns, capacity
-  needs, architecture alternatives, Direct Lake compatibility, and impacts on Power
-  Apps and Power Automate. The outcome will be an executive report with target architecture
-  recommendations, indicative development and production capacity sizing, licensing
-  rationalization, and an initial migration roadmap.
+briefing: Context and Challenge The organization needs to rapidly and systematically
+  assess the evolution of its Power BI environment towards Microsoft Fabric. The challenge
+  is to understand the current state of datasets, data sources, volumes, users, consumption
+  patterns and licensing, while also identifying the technical implications of a potential
+  migration. The assessment places particular focus on information consumed through
+  Power Apps and Power Automate, including the limitations of access interfaces and
+  data exposure mechanisms.
 ---
 
 ## 1. Context and Challenge

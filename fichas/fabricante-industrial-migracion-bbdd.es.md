@@ -20,14 +20,14 @@ tags:
 - Replicación de datos
 - Plan de fallback
 - Tuning de bases de datos
-briefing: Un fabricante industrial plantea evaluar y preparar la migración de su base
-  de datos operativa desde DB2 hacia PostgreSQL, minimizando la interrupción de las
-  aplicaciones y los riesgos de incompatibilidad. La metodología, basada en sprints,
-  contempla inventario y clasificación de objetos, preparación del entorno PostgreSQL,
-  replicación continua mediante Change Data Capture, validaciones de integridad, cutover
-  controlado y un procedimiento de fallback. Como resultado esperado, se obtendrían
-  una valoración objetiva de la complejidad, un plan de transición priorizado y una
-  ruta de migración documentada y validada.
+briefing: Un fabricante industrial necesitaba evaluar y preparar la migración de su
+  base de datos operativa desde DB2 hacia PostgreSQL, minimizando la interrupción
+  de sus aplicaciones y reduciendo los riesgos asociados a la conversión de objetos,
+  procedimientos almacenados y consultas. La complejidad del entorno incluía dependencias
+  entre aplicaciones, conexiones JDBC, lógica implementada en SQL y PL/SQL, así como
+  distintos tipos de datos y objetos con posibles incompatibilidades entre motores.
+  La propuesta planteaba una metodología iterativa para conocer el entorno, clasificar
+  los riesgos y validar progresivamente la viabilidad técnica de la migración.
 ---
 
 ## 1. Contexto y Desafío

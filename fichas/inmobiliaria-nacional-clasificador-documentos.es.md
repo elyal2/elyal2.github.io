@@ -37,15 +37,13 @@ tags:
 - fine-tuning
 - observabilidad
 - revisión humana
-briefing: Se propone una arquitectura desacoplada sobre AWS para automatizar la extracción,
-  clasificación y revisión de grandes volúmenes de documentación judicial heterogénea
-  mediante OCR e IA generativa. Amazon Bedrock permitiría clasificar los documentos
-  según una taxonomía de 33 tipos, incluyendo niveles de certeza y posibles clasificaciones
-  múltiples, mientras que AWS Lambda, la persistencia estructurada y los mecanismos
-  de observabilidad facilitarían el procesamiento escalable y trazable. Al tratarse
-  de una propuesta aún no ejecutada, se esperan mejoras en la velocidad, homogeneidad
-  y control de la revisión documental, así como mayor autonomía para gestionar casos
-  ambiguos.
+briefing: Una organización del sector inmobiliario se encontraba incorporando capacidades
+  de IA generativa para optimizar el procesamiento de documentación judicial. El reto
+  consistía en analizar grandes volúmenes de documentos heterogéneos, como sentencias,
+  demandas, resoluciones y comunicaciones, procedentes de distintas fuentes y formatos.
+  La clasificación manual resultaba poco escalable y dificultaba la trazabilidad,
+  la revisión de documentos no concluyentes y la identificación temprana de incidencias
+  operativas.
 ---
 
 ## 1. Contexto y Desafío

@@ -41,13 +41,14 @@ tags:
 - ciclo de vida del dato
 - seguridad y cifrado
 - conectividad híbrida
-briefing: Se propone modernizar la plataforma documental mediante una arquitectura
-  híbrida en AWS, desplegando SAP Content Server e integrándolo con SAP RISE y aplicaciones
-  web autorizadas. Amazon S3 proporcionará el almacenamiento principal de los documentos
-  vivos, con caché local, políticas de ciclo de vida, conectividad segura, cifrado
-  y auditoría. La migración desde OpenText incluirá controles de integridad, trazabilidad,
-  validación end-to-end y mecanismos de alta disponibilidad, con el objetivo de mejorar
-  la seguridad, escalabilidad y eficiencia operativa.
+briefing: La organización disponía de una plataforma OpenText on-premise utilizada
+  principalmente como servidor de archivo y próxima a quedar fuera de soporte. El
+  entorno debía seguir ofreciendo acceso documental desde SAP RISE y desde aplicaciones
+  web utilizadas por terceros autorizados. El reto consistía en modernizar la arquitectura,
+  mejorar la seguridad, disponibilidad y eficiencia operativa del almacenamiento a
+  largo plazo, y migrar los documentos vivos al nuevo entorno cloud, manteniendo la
+  información histórica en la plataforma existente según la decisión estratégica del
+  cliente.
 ---
 
 ## 1. Contexto y Desafío

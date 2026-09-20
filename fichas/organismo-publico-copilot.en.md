@@ -22,12 +22,14 @@ tags:
 - Prompt engineering
 - IA responsable
 - Automatización de tareas
-briefing: A practical workshop was proposed to help public-sector teams understand
-  and safely adopt Microsoft Copilot across Microsoft 365 and Azure. Through demonstrations
-  and exercises for finance, customer service and legal operations, participants would
-  learn to automate repetitive tasks, improve collaboration and create better reports
-  and presentations. The training would also address prompt design, privacy, security,
-  human oversight and responsible AI practices.
+briefing: The public authority wanted to understand how artificial intelligence can
+  transform day-to-day work and improve efficiency, creativity and collaboration across
+  its teams. The proposal addressed the need to provide accessible training for people
+  from different departments and with varying levels of technical expertise, with
+  particular attention to finance, customer service and legal operations. The challenge
+  was to translate the potential of Microsoft Copilot into concrete workplace scenarios
+  while maintaining a responsible perspective on privacy, security, errors and potential
+  bias.
 ---
 
 ## 1. Context and Challenge

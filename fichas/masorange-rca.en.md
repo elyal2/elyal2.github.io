@@ -23,14 +23,14 @@ tags:
 - Multivendor Analysis
 - Generative AI
 - Failure Prediction
-briefing: A telecommunications operator implemented a proactive diagnosis platform
-  based on a network digital twin and continuously updated graph model to correlate
-  alarms, topology, metrics and service impact across multivendor RAN, core and transport
-  networks. Using graph analytics, machine learning and generative AI on managed AWS
-  services, the solution prioritizes probable root causes, explains propagation chains
-  and recommends recovery actions with full traceability. The platform analyzes incidents
-  within seconds, reduces noise and false correlations, and improves NOC efficiency
-  by automating clustering, enrichment and reporting.
+briefing: The operator faced significant operational complexity across its RAN, core
+  and transport networks, with thousands of alarms, static and segmented topology
+  inventories, and multiple OSS tools that were difficult to correlate. Identifying
+  the origin of an incident could take more than seven hours, particularly in multivendor
+  environments and widespread service outage scenarios. Operations teams invested
+  considerable effort in reviewing alarms, gathering evidence and manually relating
+  events across domains, while traditional root cause analysis approaches relied mainly
+  on static rules and thresholds.
 ---
 
 ## 1. Context and Challenge

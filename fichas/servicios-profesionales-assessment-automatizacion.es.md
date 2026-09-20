@@ -21,12 +21,14 @@ tags:
 - Roadmap de implantación
 - Quick wins
 - Sistemas heterogéneos
-briefing: Assessment para identificar, validar y priorizar oportunidades de automatización
-  e inteligencia artificial en procesos normativos, de calidad, formación y operaciones.
-  El trabajo definirá la situación actual y objetivo, una arquitectura de referencia,
-  el stack tecnológico, los quick wins y un roadmap de implantación considerando protección
-  de datos y cumplimiento. Se espera mejorar la eficiencia operativa, la escalabilidad
-  y la capacidad del equipo interno para impulsar futuras iniciativas.
+briefing: La organización parte de un entorno intensivo en procesos relacionados con
+  normativa, sistemas de calidad y formación, con una amplia base de clientes y un
+  elevado potencial de automatización. La coexistencia de sistemas heterogéneos con
+  bajo nivel de integración, junto con una alta carga de tareas manuales y repetitivas,
+  dificulta la eficiencia operativa, la escalabilidad y la mejora del time-to-market.
+  El reto consiste en identificar oportunidades reales de automatización e inteligencia
+  artificial, validar su viabilidad y establecer una hoja de ruta priorizada para
+  avanzar hacia un modelo operativo más eficiente.
 ---
 
 ## 1. Contexto y Desafío

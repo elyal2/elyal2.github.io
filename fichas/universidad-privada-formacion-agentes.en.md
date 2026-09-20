@@ -22,13 +22,13 @@ tags:
 - Gobernanza y DLP
 - Autoservicio
 - Análisis de sentimiento
-briefing: A private university is planning a practical training and co-creation programme
-  to help internal teams build conversational agents and automate processes using
-  Copilot Studio and Power Automate. Two pilots will address academic request management
-  and the analysis and classification of teaching-quality feedback, supported by governance,
-  security, traceability and documentation practices. The expected outcome is greater
-  internal autonomy, reduced manual effort, faster responses and a reusable foundation
-  for expanding automation across departments.
+briefing: A private university sought to develop its team’s capabilities to create
+  intelligent agents that could converse with students and staff while also executing
+  actions across internal processes. The challenge was to combine natural language
+  understanding, task automation and sound security practices to address real use
+  cases in admissions, academic administration and teaching quality. The organisation
+  needed to reduce its dependence on external support, accelerate automation adoption
+  and establish a reusable methodology for extending these use cases to other departments.
 ---
 
 ## 1. Context and Challenge

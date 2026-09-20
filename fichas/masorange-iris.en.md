@@ -35,13 +35,13 @@ tags:
 - multimodal AI observability
 - confusion matrix analysis
 - GPU model training
-briefing: A national telecommunications operator is enhancing its IRIS image-classification
-  solution with explainability, auditing and end-to-end observability. The proposed
-  architecture combines structured explanations, visual XAI evidence, deterministic
-  validation, an independent auditor model and monitoring of drift, confidence, errors
-  and model degradation. Predictions and telemetry are persisted and analyzed through
-  Oracle Database, OpenTelemetry/OpenLLMetry and an OpenShift-based observability
-  pipeline, with optional GPU-based training for a larger model.
+briefing: A national telecommunications operator was evaluating how to make its IRIS
+  image-classification solution more explainable, auditable and operationally observable.
+  The existing approach could produce predictions, but it provided limited visibility
+  into the evidence supporting each decision, the reliability of the responses and
+  the causes of classification errors. The proposal addressed the need to detect bias,
+  inconsistencies, data drift, class confusion and model degradation over time, while
+  also establishing a defensible approach for production and audit-oriented environments.
 ---
 
 ## 1. Context and Challenge

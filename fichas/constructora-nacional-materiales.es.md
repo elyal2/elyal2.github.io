@@ -24,13 +24,13 @@ tags:
 - enriquecimiento de datos
 - validación dimensional
 - gestión de colas
-briefing: Una empresa constructora diseñó un MVP basado en IA generativa, búsqueda
-  léxica y similitud para automatizar la descomposición de ficheros BC3 o Excel y
-  el mapeo de materiales con una base de datos de impacto ambiental. La solución incorpora
-  preprocesamiento, colas, validación de dimensiones y escalado de la ejecución, con
-  el objetivo de reducir el análisis de unas dos semanas a aproximadamente 16 horas
-  y facilitar el procesamiento masivo de partidas. Al estar pendiente de ejecución,
-  estos beneficios son estimaciones esperadas.
+briefing: Una empresa constructora necesitaba agilizar el análisis de diseños y presupuestos
+  constructivos en formato BC3 para identificar materiales valorables y relacionarlos
+  con una base de datos de impacto ambiental. El proceso requería descomponer manualmente
+  las partidas, interpretar descripciones heterogéneas y localizar materiales comparables,
+  lo que limitaba la productividad, dificultaba la escalabilidad y aumentaba el esfuerzo
+  de validación. El proyecto se definió como un MVP mediante sesiones de co-creación,
+  descubrimiento funcional y profundización técnica.
 ---
 
 ## 1. Contexto y Desafío

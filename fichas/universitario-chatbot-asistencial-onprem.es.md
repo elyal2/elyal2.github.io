@@ -22,14 +22,13 @@ tags:
 - Integración documental
 - Búsqueda semántica
 - Autoservicio de información clínica
-briefing: Se propone un piloto de asistente conversacional ejecutado íntegramente
-  on-premise para facilitar al personal asistencial el acceso contextualizado a protocolos,
-  procedimientos y guías clínicas distribuidos entre un directorio de archivos y un
-  gestor documental. La arquitectura combinará autenticación corporativa, trazabilidad,
-  modelos de lenguaje locales y un flujo RAG con actualización automática de índices,
-  preservando la confidencialidad de la información. Se espera reducir el tiempo de
-  búsqueda, mejorar la precisión de las respuestas y establecer una base escalable
-  con menor carga de mantenimiento.
+briefing: El hospital necesitaba facilitar al personal asistencial el acceso rápido
+  y contextualizado a protocolos clínicos, procedimientos internos y guías de actuación.
+  La documentación estaba distribuida entre un directorio de archivos y un gestor
+  documental corporativo, sin metadatos estructurados ni taxonomías predefinidas.
+  La propuesta planteaba un piloto capaz de trabajar sobre más de dos mil documentos
+  PDF, evitando el etiquetado manual y la preclasificación avanzada, y con una ejecución
+  íntegramente local para preservar la confidencialidad de la información clínica.
 ---
 
 ## 1. Contexto y Desafío

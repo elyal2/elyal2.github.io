@@ -47,14 +47,13 @@ tags:
 - log routing
 - Google Cloud Logging Agent
 - four-layer architecture
-briefing: The telecommunications operator is evolving from a reactive syslog and Google
-  Cloud Logging model into an intelligent observability platform while preserving
-  operational continuity. The target architecture combines Google Cloud Logging for
-  operational ingestion, BigQuery and BigQuery ML for historical cross-domain analytics
-  and anomaly detection, Grafana Cloud for dashboards and alerting, and a Cloud Run-based
-  Root Cause Analysis service enriched with graph dependencies and RAG capabilities.
-  A phased MVP and benchmarking approach will validate automated diagnosis and scalable
-  observability use cases.
+briefing: The telecommunications operator had a log management model based on syslog,
+  a shared collector and Google Cloud Logging. This approach was suitable for operational
+  ingestion, immediate querying and incident resolution, but presented limitations
+  for advanced analytics, large-scale correlation across technology domains, historical
+  analysis and automated diagnosis. The challenge was to evolve from a reactive logging
+  model towards an intelligent observability platform while maintaining operational
+  continuity and minimising the impact on source systems.
 ---
 
 ## 1. Context and Challenge

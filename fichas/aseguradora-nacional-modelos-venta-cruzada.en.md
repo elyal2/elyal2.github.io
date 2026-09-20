@@ -23,13 +23,12 @@ tags:
 - Scoring predictivo
 - AutoML
 - Analítica avanzada
-briefing: The insurer proposed an AWS-based proof of concept using Amazon SageMaker
-  and AutoML to develop propensity models for up-selling funeral insurance benefits
-  and cross-selling home insurance. The initiative aims to improve commercial prioritisation,
-  accelerate experimentation and model refinement, and support next-best-action strategies
-  despite limited historical data for some products. Reproducible notebooks, data
-  quality controls and deployment documentation would also strengthen internal autonomy
-  and prepare the solution for future industrialisation and integration.
+briefing: The insurer had a churn model, primarily applied to funeral insurance products,
+  which had delivered satisfactory results in supporting customer retention. However,
+  it needed to expand its commercial capabilities to identify opportunities for up-selling
+  new benefits and extending existing coverage, as well as for cross-selling home
+  insurance. The lack of sufficient historical data for certain products made it difficult
+  to select target audiences using traditional techniques.
 ---
 
 ## 1. Context and Challenge

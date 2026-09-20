@@ -20,13 +20,14 @@ tags:
 - Replicación de datos
 - Plan de fallback
 - Tuning de bases de datos
-briefing: An industrial manufacturer planned an iterative assessment to migrate its
-  operational database from DB2 to PostgreSQL while minimising application disruption
-  and conversion risks. The approach included dependency and compatibility analysis,
-  PostgreSQL preparation, CDC-based parallel replication, data validation, controlled
-  cutover and a documented fallback procedure. Expected outcomes included a prioritised
-  migration roadmap, reduced downtime, stronger data integrity controls and improved
-  operational readiness.
+briefing: An industrial manufacturer needed to assess and prepare the migration of
+  its operational database from DB2 to PostgreSQL, minimising application disruption
+  and reducing the risks associated with converting objects, stored procedures and
+  queries. The complexity of the environment included dependencies between applications,
+  JDBC connections, logic implemented in SQL and PL/SQL, and different data types
+  and objects with potential incompatibilities between database engines. The proposed
+  approach followed an iterative methodology to understand the environment, classify
+  risks and progressively validate the technical feasibility of the migration.
 ---
 
 ## 1. Context and Challenge

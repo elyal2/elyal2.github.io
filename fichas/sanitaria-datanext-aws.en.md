@@ -36,13 +36,12 @@ tags:
 - Gobierno de datos
 - Operaciones CRUD
 - Assessment de migración
-briefing: The healthcare organisation assessed the migration of its growing on-premises
-  DataNext platform to AWS to overcome scalability, concurrency, governance and auditability
-  limitations. The proposed architecture uses Amazon S3, AWS Glue, AWS Lake Formation
-  and Amazon Athena, with AWS CloudTrail supporting comprehensive access traceability
-  and alternatives such as Delta Lake or Snowflake considered for data management.
-  A pilot would validate technical requirements, migration effort and platform behaviour
-  before defining the long-term roadmap.
+briefing: The healthcare organisation had begun a technology modernisation strategy
+  based on the progressive adoption of AWS and the establishment of a Landing Zone.
+  In this context, the DataNext information platform, deployed on premises, was experiencing
+  sustained growth in users, functional requirements and data volumes. Its architecture
+  relied mainly on vertical scaling, limiting the ability to expand storage and computing
+  resources with agility.
 ---
 
 ## 1. Context and Challenge

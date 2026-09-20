@@ -26,11 +26,15 @@ tags:
 - prueba de concepto
 - trazabilidad
 - cumplimiento normativo
-briefing: Se plantea un piloto en AWS para evaluar la extracción, estructuración y
-  clasificación automática de documentos administrativos mediante OCR e inteligencia
-  artificial generativa. La iniciativa permitirá medir precisión, eficiencia, trazabilidad,
-  seguridad y cumplimiento normativo, generando resultados explicables y una arquitectura
-  de referencia para una futura implantación productiva con supervisión humana.
+briefing: Una administración provincial necesitaba evaluar cómo mejorar la ordenación
+  y gestión de los documentos asociados a expedientes administrativos, inicialmente
+  en el ámbito de las subvenciones de concurrencia. La diversidad de formatos, la
+  posible presencia de documentos escaneados de baja calidad y la ausencia de criterios
+  de clasificación completamente definidos dificultaban la automatización y podían
+  exigir una revisión manual significativa. El reto consistía en determinar la viabilidad
+  técnica de una solución basada en inteligencia artificial capaz de extraer información,
+  clasificar documentos y proporcionar resultados trazables, manteniendo el cumplimiento
+  de los requisitos de seguridad y protección de datos.
 ---
 
 ## 1. Contexto y Desafío

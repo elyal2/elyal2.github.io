@@ -23,14 +23,14 @@ tags:
 - Agentes de IA
 - Automatización de procesos
 - Gobernanza de IA
-briefing: Se diseñó una formación presencial y práctica para capacitar al equipo directivo
-  en el uso seguro, responsable y eficaz de la IA generativa aplicada a tareas ejecutivas.
-  La propuesta contempla itinerarios sobre Microsoft 365 y Copilot Studio, así como
-  Copilot Chat, incorporando prompting, validación de resultados, protección de la
-  información y ejercicios orientados a informes, reuniones, presentaciones y análisis.
-  Al no haberse ejecutado todavía, se esperan mejoras en autonomía, productividad,
-  adopción homogénea y preparación de futuras automatizaciones mediante un agente
-  MVP y métricas de operación.
+briefing: 'La organización buscaba capacitar a su equipo directivo en el uso práctico,
+  seguro y responsable de la inteligencia artificial generativa aplicada al entorno
+  de trabajo. El reto consistía en trasladar las capacidades de Microsoft Copilot
+  a tareas habituales como la preparación de informes, comités, presentaciones, reuniones,
+  correos y análisis de datos, manteniendo criterios de verificación, protección de
+  la información y alineamiento con la ciberseguridad corporativa. La propuesta contemplaba
+  dos itinerarios formativos: uno basado en la integración con las aplicaciones de
+  Microsoft 365 y Copilot Studio, y otro centrado exclusivamente en Copilot Chat.'
 ---
 
 ## 1. Contexto y Desafío

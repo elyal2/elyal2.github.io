@@ -24,13 +24,12 @@ tags:
 - enriquecimiento de datos
 - validación dimensional
 - gestión de colas
-briefing: A national construction company defined an MVP to automate the analysis
-  of BC3 and Excel construction estimates, decomposing line items and matching materials
-  with an environmental impact database. The proposed solution combines generative
-  AI, lexical and similarity search, queue-based processing, dimensional validation,
-  and automated scaling to reduce processing time, improve productivity, and identify
-  lower-impact alternatives. Implementation is still pending, so the benefits described
-  are expected outcomes.
+briefing: A national construction company needed to streamline the analysis of construction
+  designs and estimates in BC3 format in order to identify valuable materials and
+  match them with an environmental impact database. The process required manually
+  breaking down line items, interpreting heterogeneous descriptions and locating comparable
+  materials. This limited productivity, hindered scalability and increased validation
+  efforts.
 ---
 
 ## 1. Context and Challenge

@@ -42,13 +42,14 @@ tags:
 - Migración por oleadas
 - Infraestructura como código
 - Observabilidad y trazabilidad
-briefing: A reusable platform was proposed to centralize eligibility management and
-  product and service catalogs through standardized APIs, supporting multiple insurers,
-  operating models and regulatory requirements. The architecture enables progressive
-  migration from legacy processes, parameterized file-based ETL, full and delta processing,
-  traceability, and scalable handling of large data volumes. Expected benefits include
-  faster insurer onboarding, greater operational autonomy, repeatable deployments
-  and improved governance, although implementation results are not yet available.
+briefing: The organization needed to consolidate eligibility management and the products
+  and services catalog into a common, traceable and reusable capability for different
+  internal platforms, insurers and operating models. The starting point combined local
+  processes, distributed integrations, legacy formats and country- or entity-specific
+  logic, making it difficult to determine consistently which services each member
+  was entitled to use. The challenge was to evolve the existing platform without disrupting
+  operations by enabling progressive migration, temporary coexistence with the legacy
+  model, wave-based validation and insurer-level rollback.
 ---
 
 ## 1. Context and Challenge
