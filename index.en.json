@@ -1,5 +1,5 @@
 {
-  "version": "b23a17d6d_1789816819",
+  "version": "bd78d0c86_1789890246",
   "lang": "en",
   "facets": [
     {
@@ -139,6 +139,62 @@
         {
           "id": "Retrieval-Augmented Generation (RAG)",
           "label": "Retrieval-Augmented Generation (RAG)"
+        },
+        {
+          "id": "OpenTelemetry",
+          "label": "OpenTelemetry"
+        },
+        {
+          "id": "OpenLLMetry",
+          "label": "OpenLLMetry"
+        },
+        {
+          "id": "OpenShift",
+          "label": "OpenShift"
+        },
+        {
+          "id": "Oracle Database",
+          "label": "Oracle Database"
+        },
+        {
+          "id": "YOLO",
+          "label": "YOLO"
+        },
+        {
+          "id": "Explainable AI (XAI)",
+          "label": "Explainable AI (XAI)"
+        },
+        {
+          "id": "Spanner Graph",
+          "label": "Spanner Graph"
+        },
+        {
+          "id": "BigQuery ML",
+          "label": "BigQuery ML"
+        },
+        {
+          "id": "Zabbix",
+          "label": "Zabbix"
+        },
+        {
+          "id": "FortiManager",
+          "label": "FortiManager"
+        },
+        {
+          "id": "ServiceNow",
+          "label": "ServiceNow"
+        },
+        {
+          "id": "VMware",
+          "label": "VMware"
+        },
+        {
+          "id": "Active Directory",
+          "label": "Active Directory"
+        },
+        {
+          "id": "Model Context Protocol (MCP)",
+          "label": "Model Context Protocol (MCP)"
         }
       ]
     },
@@ -245,14 +301,102 @@
   ],
   "cases": [
     {
-      "id": "masorange-logora",
-      "title": "Advanced Data-Driven Observability Platform for a National Telecommunications Operator",
-      "cliente_display": "MasOrange",
-      "cliente_publico": true,
+      "id": "masorange-aiops",
+      "title": "Intelligent IT Operations Automation for a National Telecommunications Operator",
+      "cliente_display": "National Telecommunications Operator",
+      "cliente_publico": false,
       "sector": "Telecomunicaciones",
       "tecnologia": [
         "IA generativa",
-        "Modelado y analítica de grafos"
+        "OpenAI"
+      ],
+      "tipo_proyecto": "Plataforma",
+      "importe_label": "Plataforma",
+      "partner": [
+        "Cisco"
+      ],
+      "anio": 2025,
+      "bu": "Cloud & Managed Services",
+      "tags": [
+        "AIOps",
+        "Agentic AI",
+        "Observability",
+        "Automation",
+        "Auto-remediation",
+        "Incident Management",
+        "Network Operations",
+        "Intelligent Orchestration",
+        "FortiManager",
+        "ServiceNow",
+        "Zabbix",
+        "governance"
+      ],
+      "briefing": "The customer managed a global network and security infrastructure through a high-volume, predominantly reactive monitoring environment. Operations teams had to correlate alerts from different systems, prioritise incidents, consult technical documentation, and coordinate actions between the Service Desk and specialised support teams. This fragmentation made it difficult to establish the full context of each event, slowed resolution, and limited the consistent application of preventive or automated responses.",
+      "ficha_ref": "fichas/masorange-aiops.en.md"
+    },
+    {
+      "id": "masorange-iris",
+      "title": "Explainable AI and Observability for Image Classification",
+      "cliente_display": "National Telecommunications Operator",
+      "cliente_publico": false,
+      "sector": "Telecomunicaciones",
+      "tecnologia": [
+        "OpenLLMetry",
+        "OpenTelemetry",
+        "OpenShift",
+        "Oracle Database",
+        "YOLO",
+        "Explainable AI (XAI)",
+        "IA generativa"
+      ],
+      "tipo_proyecto": "Plataforma",
+      "importe_label": "MVP/PoC",
+      "partner": [],
+      "anio": 2025,
+      "bu": "Data & AI",
+      "tags": [
+        "AI observability",
+        "LLM monitoring",
+        "image classification",
+        "model explainability",
+        "model auditing",
+        "data drift",
+        "Grafana dashboards",
+        "visual evidence",
+        "structured explanations",
+        "contrastive explanations",
+        "deterministic validation",
+        "statistical monitoring",
+        "visual XAI",
+        "heatmaps",
+        "multimodal AI observability",
+        "confusion matrix analysis",
+        "GPU model training",
+        "OpenLLMetry",
+        "OpenShift",
+        "OpenTelemetry",
+        "Oracle Database",
+        "Telecommunications"
+      ],
+      "briefing": "A national telecommunications operator was evaluating how to make its IRIS image-classification solution more explainable, auditable and operationally observable. The existing approach could produce predictions, but it provided limited visibility into the evidence supporting each decision, the reliability of the responses and the causes of classification errors. The proposal addressed the need to detect bias, inconsistencies, data drift, class confusion and model degradation over time, while also establishing a defensible approach for production and audit-oriented environments.",
+      "ficha_ref": "fichas/masorange-iris.en.md"
+    },
+    {
+      "id": "masorange-logora",
+      "title": "Evolving towards an Advanced Data-Driven Observability Platform",
+      "cliente_display": "National Telecommunications Operator",
+      "cliente_publico": false,
+      "sector": "Telecomunicaciones",
+      "tecnologia": [
+        "Google Cloud Logging",
+        "Google BigQuery",
+        "Grafana Cloud",
+        "Vertex AI",
+        "Cloud Run",
+        "Retrieval-Augmented Generation (RAG)",
+        "IA generativa",
+        "Modelado y analítica de grafos",
+        "Spanner Graph"
       ],
       "tipo_proyecto": "MVP/PoC",
       "importe_label": "MVP/PoC",
@@ -262,20 +406,37 @@
       "anio": 2026,
       "bu": "Data & AI",
       "tags": [
-        "observability",
+        "advanced observability",
         "log analytics",
         "AIOps",
         "root cause analysis",
-        "RAG",
-        "machine learning",
-        "business observability",
-        "managed service",
+        "RCA",
+        "anomaly detection",
+        "conversational AI",
+        "Business Observability",
+        "telemetry",
+        "MVP",
+        "BigQuery ML",
+        "Spanner Graph",
+        "syslog",
+        "rsyslog",
+        "Linked Datasets",
+        "Compute Engine",
+        "Network Load Balancer",
+        "non-disruptive observability",
+        "historical log analysis",
+        "multi-domain log correlation",
+        "AI-ready architecture",
+        "intelligent operations",
+        "log routing",
+        "Google Cloud Logging Agent",
+        "four-layer architecture",
         "Cloud Run",
         "Google Cloud Logging",
         "Grafana Cloud",
-        "Vertex AI"
+        "Retrieval-Augmented Generation (RAG)"
       ],
-      "briefing": "The client operated a centralized logging model based on syslog, a log concentrator and Google Cloud Logging. This architecture supported efficient incident response and real-time troubleshooting, but was primarily oriented towards operational ingestion and short-term analysis. It limited large-scale correlation across technology domains, extended historical analysis, advanced anomaly detection and the conversion of telemetry into business-oriented insights.",
+      "briefing": "The telecommunications operator had a log management model based on syslog, a shared collector and Google Cloud Logging. This approach was suitable for operational ingestion, immediate querying and incident resolution, but presented limitations for advanced analytics, large-scale correlation across technology domains, historical analysis and automated diagnosis. The challenge was to evolve from a reactive logging model towards an intelligent observability platform while maintaining operational continuity and minimising the impact on source systems.",
       "ficha_ref": "fichas/masorange-logora.en.md"
     },
     {
