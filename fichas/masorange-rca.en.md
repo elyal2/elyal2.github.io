@@ -8,7 +8,7 @@ sector: Telecomunicaciones
 tecnologia:
 - AWS
 tipo_proyecto: Plataforma
-importe_label: Plataforma
+importe_label: Platform
 anio: 2025
 partner:
 - AWS

@@ -14,13 +14,13 @@ importe_label: MVP/PoC
 anio: 2026
 bu: Data & AI
 tags:
-- Automatización de procesos
+- Process automation
 - RPA
-- Agentes de IA
-- AS-IS y TO-BE
-- Roadmap de implantación
+- AI agents
+- AS-IS and TO-BE
+- Implementation roadmap
 - Quick wins
-- Sistemas heterogéneos
+- Heterogeneous systems
 briefing: The organization operates in a process-intensive environment covering regulatory
   compliance, quality management systems and training. Its broad customer base and
   the repetitive, scalable nature of many activities create significant potential

@@ -19,13 +19,13 @@ partner:
 - AWS
 bu: Data & AI
 tags:
-- clasificación documental
-- extracción de información
+- Document classification
+- Information extraction
 - OCR
-- expedientes de subvenciones
-- prueba de concepto
-- trazabilidad
-- cumplimiento normativo
+- Grant case files
+- Proof of concept
+- Traceability
+- Regulatory compliance
 briefing: A provincial government administration needed to assess how to improve the
   organisation and management of documents associated with administrative case files,
   initially focusing on competitive grant procedures. The diversity of document formats,

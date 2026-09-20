@@ -18,12 +18,12 @@ partner:
 - Microsoft
 bu: Data & AI
 tags:
-- Migración a Fabric
-- Dimensionamiento de capacidades
+- Migration to Fabric
+- Capacity sizing
 - Direct Lake
-- Integración con Power Apps
-- Arquitectura objetivo
-- Racionalización de licencias
+- Power Apps integration
+- Target architecture
+- License rationalization
 briefing: Context and Challenge The organization needs to rapidly and systematically
   assess the evolution of its Power BI environment towards Microsoft Fabric. The challenge
   is to understand the current state of datasets, data sources, volumes, users, consumption

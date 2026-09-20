@@ -14,13 +14,13 @@ partner:
 - IBM
 bu: Data & AI
 tags:
-- Prueba de concepto
-- Automatización documental
-- Análisis de facturas
-- Análisis de albaranes
-- Anonimización de datos
-- RGPD
-- Gobernanza de IA
+- Proof of concept
+- Document automation
+- Invoice analysis
+- Delivery note analysis
+- Data anonymization
+- GDPR
+- AI governance
 briefing: A foundation focused on technological research and social impact wanted
   to assess the feasibility of automating an existing supplier-document analysis process.
   The challenge involved processing invoices, delivery notes, contracts, data processing

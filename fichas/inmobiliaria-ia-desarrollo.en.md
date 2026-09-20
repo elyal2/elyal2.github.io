@@ -25,17 +25,17 @@ tecnologia:
 - dbt
 - Jira
 tipo_proyecto: Formación
-importe_label: Formación
+importe_label: Training
 anio: 2025
 bu: Data & AI
 tags:
-- Desarrollo agéntico
+- Agentic development
 - Spec-Driven Development
 - BDD
-- Gobierno del contexto
+- Context governance
 - Metadata as Code
 - Quality gates
-- Memoria persistente
+- Persistent memory
 briefing: A real estate organization seeks to modernize its software development practices
   through artificial intelligence, evolving from code assistants towards agentic collaboration
   models and more autonomous systems. The challenge is to improve productivity without

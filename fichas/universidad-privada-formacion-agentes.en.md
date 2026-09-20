@@ -10,18 +10,18 @@ tecnologia:
 - Power Automate
 - IA generativa
 tipo_proyecto: Formación
-importe_label: Formación
+importe_label: Training
 anio: 2026
 partner:
 - Microsoft
 bu: Business Applications
 tags:
-- Agentes inteligentes
-- Automatización de procesos
-- Aprender haciendo
-- Gobernanza y DLP
-- Autoservicio
-- Análisis de sentimiento
+- Intelligent agents
+- Process automation
+- Learning by doing
+- Governance and DLP
+- Self-service
+- Sentiment analysis
 briefing: A private university sought to develop its team’s capabilities to create
   intelligent agents that could converse with students and staff while also executing
   actions across internal processes. The challenge was to combine natural language

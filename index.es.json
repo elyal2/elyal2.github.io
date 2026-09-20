@@ -1,5 +1,5 @@
 {
-  "version": "b922342cc_1789898447",
+  "version": "ba1ac13ba_1789899198",
   "lang": "es",
   "facets": [
     {
@@ -826,6 +826,7 @@
       "cliente_display": "Administración provincial",
       "cliente_publico": false,
       "sector": "Sector Público",
+      "sector_label": "Sector Público",
       "tecnologia": [
         "AWS",
         "Amazon Textract",
@@ -864,6 +865,7 @@
       "cliente_display": "Aseguradora internacional",
       "cliente_publico": false,
       "sector": "Seguros",
+      "sector_label": "Seguros",
       "tecnologia": [
         "AWS Lambda",
         "AWS Fargate",
@@ -916,6 +918,7 @@
       "cliente_display": "Aseguradora Nacional",
       "cliente_publico": false,
       "sector": "Seguros",
+      "sector_label": "Seguros",
       "tecnologia": [
         "AWS",
         "Amazon SageMaker",
@@ -951,6 +954,7 @@
       "cliente_display": "Empresa constructora nacional",
       "cliente_publico": false,
       "sector": "Construcción",
+      "sector_label": "Construcción",
       "tecnologia": [
         "Watsonx.ai",
         "Watsonx Discovery",
@@ -986,6 +990,7 @@
       "cliente_display": "Organización educativa",
       "cliente_publico": false,
       "sector": "Formación y Servicios Profesionales",
+      "sector_label": "Formación y Servicios Profesionales",
       "tecnologia": [
         "Azure",
         "Copilot Studio",
@@ -1021,6 +1026,7 @@
       "cliente_display": "Organización con entorno Power BI",
       "cliente_publico": false,
       "sector": "No determinado",
+      "sector_label": "No determinado",
       "tecnologia": [
         "Power BI",
         "Microsoft Fabric",
@@ -1056,6 +1062,7 @@
       "cliente_display": "Fabricante industrial de papel",
       "cliente_publico": false,
       "sector": "Industria y Fabricación",
+      "sector_label": "Industria y Fabricación",
       "tecnologia": [
         "PostgreSQL",
         "DB2",
@@ -1086,6 +1093,7 @@
       "cliente_display": "Fabricante industrial",
       "cliente_publico": false,
       "sector": "Industria y Fabricación",
+      "sector_label": "Industria y Fabricación",
       "tecnologia": [
         "IA generativa",
         "M3",
@@ -1117,6 +1125,7 @@
       "cliente_display": "Fabricante de Papel Nacional",
       "cliente_publico": false,
       "sector": "Industria y Fabricación",
+      "sector_label": "Industria y Fabricación",
       "tecnologia": [
         "Azure",
         "AWS",
@@ -1166,6 +1175,7 @@
       "cliente_display": "Gestora de activos inmobiliarios",
       "cliente_publico": false,
       "sector": "Inmobiliario",
+      "sector_label": "Inmobiliario",
       "tecnologia": [
         "AWS",
         "Amazon S3",
@@ -1207,6 +1217,7 @@
       "cliente_display": "Grupo hotelero nacional",
       "cliente_publico": false,
       "sector": "Turismo y ocio",
+      "sector_label": "Turismo y ocio",
       "tecnologia": [
         "Azure",
         "Snowflake",
@@ -1257,6 +1268,7 @@
       "cliente_display": "Organización inmobiliaria",
       "cliente_publico": false,
       "sector": "Inmobiliario",
+      "sector_label": "Inmobiliario",
       "tecnologia": [
         "OpenAI",
         "Python",
@@ -1301,6 +1313,7 @@
       "cliente_display": "Organización Inmobiliaria Nacional",
       "cliente_publico": false,
       "sector": "Inmobiliario",
+      "sector_label": "Inmobiliario",
       "tecnologia": [
         "Amazon S3",
         "Amazon EventBridge",
@@ -1350,6 +1363,7 @@
       "cliente_display": "Operador de Telecomunicaciones Nacional",
       "cliente_publico": false,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecomunicaciones",
       "tecnologia": [
         "IA generativa",
         "OpenAI"
@@ -1382,6 +1396,7 @@
       "cliente_display": "Operador nacional de telecomunicaciones",
       "cliente_publico": false,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecomunicaciones",
       "tecnologia": [
         "OpenLLMetry",
         "OpenTelemetry",
@@ -1429,6 +1444,7 @@
       "cliente_display": "Operador de Telecomunicaciones Nacional",
       "cliente_publico": false,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecomunicaciones",
       "tecnologia": [
         "Google Cloud Logging",
         "Google BigQuery",
@@ -1481,6 +1497,7 @@
       "cliente_display": "MasOrange",
       "cliente_publico": true,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecomunicaciones",
       "tecnologia": [
         "AWS"
       ],
@@ -1513,6 +1530,7 @@
       "cliente_display": "Grupo de Medios Audiovisuales",
       "cliente_publico": false,
       "sector": "Medios y entretenimiento",
+      "sector_label": "Medios y entretenimiento",
       "tecnologia": [
         "AWS",
         "Snowflake",
@@ -1564,6 +1582,7 @@
       "cliente_display": "Organización de medios",
       "cliente_publico": false,
       "sector": "Medios y entretenimiento",
+      "sector_label": "Medios y entretenimiento",
       "tecnologia": [
         "Apache Airflow",
         "Apache Spark",
@@ -1613,6 +1632,7 @@
       "cliente_display": "Operador de estaciones de montaña",
       "cliente_publico": false,
       "sector": "Turismo y ocio",
+      "sector_label": "Turismo y ocio",
       "tecnologia": [
         "Snowflake",
         "Power BI",
@@ -1653,6 +1673,7 @@
       "cliente_display": "Operador del mercado eléctrico",
       "cliente_publico": false,
       "sector": "Energía y Utilities",
+      "sector_label": "Energía y Utilities",
       "tecnologia": [
         "Microsoft Copilot",
         "Copilot Studio",
@@ -1687,6 +1708,7 @@
       "cliente_display": "Operador de Telecomunicaciones Nacional",
       "cliente_publico": false,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecomunicaciones",
       "tecnologia": [
         "Azure",
         "OpenAI",
@@ -1727,6 +1749,7 @@
       "cliente_display": "Organismo público territorial",
       "cliente_publico": false,
       "sector": "Sector Público",
+      "sector_label": "Sector Público",
       "tecnologia": [
         "Microsoft Copilot",
         "Azure",
@@ -1759,6 +1782,7 @@
       "cliente_display": "Organismo Público Cultural",
       "cliente_publico": false,
       "sector": "Sector Público",
+      "sector_label": "Sector Público",
       "tecnologia": [
         "AWS",
         "Amazon S3",
@@ -1801,6 +1825,7 @@
       "cliente_display": "Hospital de referencia sanitaria",
       "cliente_publico": false,
       "sector": "Salud",
+      "sector_label": "Salud",
       "tecnologia": [
         "AWS",
         "Amazon S3",
@@ -1849,6 +1874,7 @@
       "cliente_display": "Empresa de servicios inmobiliarios",
       "cliente_publico": false,
       "sector": "Inmobiliario",
+      "sector_label": "Inmobiliario",
       "tecnologia": [
         "Amazon S3",
         "Amazon EC2",
@@ -1902,6 +1928,7 @@
       "cliente_display": "Organización de servicios profesionales",
       "cliente_publico": false,
       "sector": "Formación y Servicios Profesionales",
+      "sector_label": "Formación y Servicios Profesionales",
       "tecnologia": [
         "IA generativa",
         "Ansible",
@@ -1934,6 +1961,7 @@
       "cliente_display": "Fundación tecnológica social",
       "cliente_publico": false,
       "sector": "Tecnología y Servicios Digitales",
+      "sector_label": "Tecnología y Servicios Digitales",
       "tecnologia": [
         "Sistema de Inteligencia Artificial"
       ],
@@ -1965,6 +1993,7 @@
       "cliente_display": "Universidad privada",
       "cliente_publico": false,
       "sector": "Formación y Servicios Profesionales",
+      "sector_label": "Formación y Servicios Profesionales",
       "tecnologia": [
         "Copilot Studio",
         "Power Automate",
@@ -1998,6 +2027,7 @@
       "cliente_display": "Hospital Universitario Nacional",
       "cliente_publico": false,
       "sector": "Salud",
+      "sector_label": "Salud",
       "tecnologia": [
         "Amazon S3",
         "Amazon SQS",
@@ -2053,6 +2083,7 @@
       "cliente_display": "Hospital Universitario",
       "cliente_publico": false,
       "sector": "Salud",
+      "sector_label": "Salud",
       "tecnologia": [
         "MongoDB",
         "Ollama",

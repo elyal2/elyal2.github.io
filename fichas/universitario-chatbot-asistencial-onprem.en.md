@@ -16,12 +16,12 @@ importe_label: MVP/PoC
 anio: 2025
 bu: Data & AI
 tags:
-- Chatbot asistencial
-- RAG autónomo
-- LLM on-premise
-- Integración documental
-- Búsqueda semántica
-- Autoservicio de información clínica
+- Clinical support chatbot
+- Autonomous RAG
+- On-premises LLM
+- Document integration
+- Semantic search
+- Clinical information self-service
 briefing: The hospital needed to provide clinical staff with fast, contextual access
   to clinical protocols, internal procedures and operational guidelines. The documentation
   was distributed across a file directory and a corporate document management system,

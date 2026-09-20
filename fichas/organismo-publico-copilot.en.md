@@ -10,18 +10,18 @@ tecnologia:
 - Azure
 - Excel
 tipo_proyecto: Formación
-importe_label: Formación
+importe_label: Training
 anio: 2025
 partner:
 - Microsoft
 bu: Business Applications
 tags:
-- IA generativa
-- Formación práctica
-- Adopción de Copilot
+- Generative AI
+- Hands-on training
+- Copilot adoption
 - Prompt engineering
-- IA responsable
-- Automatización de tareas
+- Responsible AI
+- Task automation
 briefing: The public authority wanted to understand how artificial intelligence can
   transform day-to-day work and improve efficiency, creativity and collaboration across
   its teams. The proposal addressed the need to provide accessible training for people

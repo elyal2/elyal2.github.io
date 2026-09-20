@@ -22,20 +22,20 @@ tecnologia:
 - Metabase
 - Delta Lake
 tipo_proyecto: Plataforma
-importe_label: Plataforma
+importe_label: Platform
 anio: 2024
 partner:
 - AWS
 bu: Cloud & Managed Services
 tags:
-- Migración cloud
-- Escalado horizontal
+- Cloud migration
+- Horizontal scaling
 - Lakehouse
-- Seguridad granular
-- Trazabilidad y auditoría
-- Gobierno de datos
-- Operaciones CRUD
-- Assessment de migración
+- Granular security
+- Traceability and auditing
+- Data governance
+- CRUD operations
+- Migration assessment
 briefing: The healthcare organisation had begun a technology modernisation strategy
   based on the progressive adoption of AWS and the establishment of a Landing Zone.
   In this context, the DataNext information platform, deployed on premises, was experiencing

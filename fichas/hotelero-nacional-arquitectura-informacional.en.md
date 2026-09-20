@@ -24,14 +24,14 @@ tecnologia:
 - Simphony
 - SAP S/4HANA Cloud
 tipo_proyecto: Plataforma
-importe_label: Plataforma
+importe_label: Platform
 anio: 2024
 partner:
 - Microsoft
 - Snowflake
 bu: Data & AI
 tags:
-- Arquitectura informacional
+- Information architecture
 - Lakehouse
 - Data Vault 2.0
 - Streaming

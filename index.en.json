@@ -1,5 +1,5 @@
 {
-  "version": "b922342cc_1789898447",
+  "version": "ba1ac13ba_1789899198",
   "lang": "en",
   "facets": [
     {
@@ -126,11 +126,11 @@
         },
         {
           "id": "Modelado y analítica de grafos",
-          "label": "Modelado y analítica de grafos"
+          "label": "Graph modeling and analytics"
         },
         {
           "id": "IA generativa",
-          "label": "IA generativa"
+          "label": "Generative AI"
         },
         {
           "id": "Servicios AWS de datos y machine learning",
@@ -686,7 +686,7 @@
         },
         {
           "id": "Sistema de Inteligencia Artificial",
-          "label": "Sistema de Inteligencia Artificial"
+          "label": "Artificial Intelligence system"
         },
         {
           "id": "Apache Airflow",
@@ -726,11 +726,11 @@
         },
         {
           "id": "Transversal",
-          "label": "Transversal"
+          "label": "Cross-cutting"
         },
         {
           "id": "Plataforma",
-          "label": "Plataforma"
+          "label": "Platform"
         },
         {
           "id": "Formación",
@@ -826,6 +826,7 @@
       "cliente_display": "Provincial Government Administration",
       "cliente_publico": false,
       "sector": "Sector Público",
+      "sector_label": "Public Sector",
       "tecnologia": [
         "AWS",
         "Amazon Textract",
@@ -842,13 +843,13 @@
       "anio": 2025,
       "bu": "Data & AI",
       "tags": [
-        "clasificación documental",
-        "extracción de información",
+        "Document classification",
+        "Information extraction",
         "OCR",
-        "expedientes de subvenciones",
-        "prueba de concepto",
-        "trazabilidad",
-        "cumplimiento normativo",
+        "Grant case files",
+        "Proof of concept",
+        "Traceability",
+        "Regulatory compliance",
         "AWS",
         "Amazon Textract",
         "Excel",
@@ -864,6 +865,7 @@
       "cliente_display": "International Insurer",
       "cliente_publico": false,
       "sector": "Seguros",
+      "sector_label": "Insurance",
       "tecnologia": [
         "AWS Lambda",
         "AWS Fargate",
@@ -887,7 +889,7 @@
         "Keycloak"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
+      "importe_label": "Platform",
       "partner": [
         "AWS",
         "Microsoft"
@@ -896,13 +898,13 @@
       "bu": "Cloud & Managed Services",
       "tags": [
         "Domain-Driven Design",
-        "Elegibilidad de miembros",
-        "Catálogo de productos y servicios",
-        "ETL parametrizado",
+        "Member eligibility",
+        "Products and services catalog",
+        "Parameterized ETL",
         "Change Data Capture",
-        "Migración por oleadas",
-        "Infraestructura como código",
-        "Observabilidad y trazabilidad",
+        "Wave-based migration",
+        "Infrastructure as code",
+        "Observability and traceability",
         "Apache Spark",
         "Scala",
         "Terraform"
@@ -916,6 +918,7 @@
       "cliente_display": "National Insurance Company",
       "cliente_publico": false,
       "sector": "Seguros",
+      "sector_label": "Insurance",
       "tecnologia": [
         "AWS",
         "Amazon SageMaker",
@@ -930,12 +933,12 @@
       "anio": 2024,
       "bu": "Data & AI",
       "tags": [
-        "Venta cruzada",
-        "Venta incremental",
+        "Cross-selling",
+        "Up-selling",
         "Next-best-action",
-        "Scoring predictivo",
+        "Predictive scoring",
         "AutoML",
-        "Analítica avanzada",
+        "Advanced analytics",
         "AWS",
         "Amazon S3",
         "Amazon SageMaker",
@@ -951,6 +954,7 @@
       "cliente_display": "National Construction Company",
       "cliente_publico": false,
       "sector": "Construcción",
+      "sector_label": "Construction",
       "tecnologia": [
         "Watsonx.ai",
         "Watsonx Discovery",
@@ -965,13 +969,13 @@
       "anio": 2025,
       "bu": "Data & AI",
       "tags": [
-        "IA generativa",
-        "búsqueda por similitud",
+        "Generative AI",
+        "Similarity search",
         "cross-encoder",
         "BC3",
-        "enriquecimiento de datos",
-        "validación dimensional",
-        "gestión de colas",
+        "Data enrichment",
+        "Dimensional validation",
+        "Queue management",
         "Code Engine",
         "Construction",
         "Excel",
@@ -987,6 +991,7 @@
       "cliente_display": "Educational Organization",
       "cliente_publico": false,
       "sector": "Formación y Servicios Profesionales",
+      "sector_label": "Training and Professional Services",
       "tecnologia": [
         "Azure",
         "Copilot Studio",
@@ -1002,12 +1007,12 @@
       "anio": 2024,
       "bu": "Data & AI",
       "tags": [
-        "IA generativa",
-        "Chatbot documental",
-        "Búsqueda asistida",
-        "Autoservicio de información",
-        "Trazabilidad de fuentes",
-        "Feedback de usuario",
+        "Generative AI",
+        "Document chatbot",
+        "Assisted search",
+        "Information self-service",
+        "Source traceability",
+        "User feedback",
         "Azure",
         "Copilot Studio",
         "Microsoft Teams",
@@ -1023,6 +1028,7 @@
       "cliente_display": "Organization with a Power BI Environment",
       "cliente_publico": false,
       "sector": "No determinado",
+      "sector_label": "No determinado",
       "tecnologia": [
         "Power BI",
         "Microsoft Fabric",
@@ -1038,12 +1044,12 @@
       "anio": 2025,
       "bu": "Data & AI",
       "tags": [
-        "Migración a Fabric",
-        "Dimensionamiento de capacidades",
+        "Migration to Fabric",
+        "Capacity sizing",
         "Direct Lake",
-        "Integración con Power Apps",
-        "Arquitectura objetivo",
-        "Racionalización de licencias",
+        "Power Apps integration",
+        "Target architecture",
+        "License rationalization",
         "Microsoft Fabric",
         "Power Apps",
         "Power Automate",
@@ -1058,6 +1064,7 @@
       "cliente_display": "Industrial Paper Manufacturer",
       "cliente_publico": false,
       "sector": "Industria y Fabricación",
+      "sector_label": "Manufacturing",
       "tecnologia": [
         "PostgreSQL",
         "DB2",
@@ -1069,12 +1076,12 @@
       "anio": 2025,
       "bu": "Cloud & Managed Services",
       "tags": [
-        "Migración de bases de datos",
+        "Database migration",
         "Change Data Capture",
-        "Cutover controlado",
-        "Replicación de datos",
-        "Plan de fallback",
-        "Tuning de bases de datos",
+        "Controlled cutover",
+        "Data replication",
+        "Fallback plan",
+        "Database tuning",
         "DB2",
         "PostgreSQL",
         "industria",
@@ -1089,23 +1096,24 @@
       "cliente_display": "Industrial Manufacturer",
       "cliente_publico": false,
       "sector": "Industria y Fabricación",
+      "sector_label": "Manufacturing",
       "tecnologia": [
         "IA generativa",
         "M3",
         "Oracle"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
+      "importe_label": "Platform",
       "partner": [],
       "anio": 2026,
       "bu": "Data & AI",
       "tags": [
-        "Agentes autónomos",
-        "Monitorización en tiempo real",
-        "Alarmas inteligentes",
-        "Mantenimiento predictivo",
-        "Dashboards interactivos",
-        "Automatización de procesos",
+        "Autonomous agents",
+        "Real-time monitoring",
+        "Smart alerts",
+        "Predictive maintenance",
+        "Interactive dashboards",
+        "Process automation",
         "M3",
         "Manufacturing",
         "Oracle",
@@ -1121,6 +1129,7 @@
       "cliente_display": "National Paper Manufacturer",
       "cliente_publico": false,
       "sector": "Industria y Fabricación",
+      "sector_label": "Manufacturing",
       "tecnologia": [
         "Azure",
         "AWS",
@@ -1140,7 +1149,7 @@
         "Microsoft Copilot"
       ],
       "tipo_proyecto": "Formación",
-      "importe_label": "Formación",
+      "importe_label": "Training",
       "partner": [
         "Microsoft",
         "AWS"
@@ -1148,13 +1157,13 @@
       "anio": 2026,
       "bu": "Data & AI",
       "tags": [
-        "Adopción progresiva de IA",
+        "Progressive AI adoption",
         "AI Secure Ops",
-        "Gobierno y uso responsable de la IA",
-        "Agentes autónomos",
+        "AI governance and responsible use",
+        "Autonomous agents",
         "Citizen development",
-        "Hackathon de PoCs",
-        "Arquitectura multicloud",
+        "PoC hackathon",
+        "Multicloud architecture",
         "AWS",
         "Azure",
         "Copilot Studio",
@@ -1170,6 +1179,7 @@
       "cliente_display": "Real Estate Asset Management Company",
       "cliente_publico": false,
       "sector": "Inmobiliario",
+      "sector_label": "Real Estate",
       "tecnologia": [
         "AWS",
         "Amazon S3",
@@ -1189,13 +1199,13 @@
       "anio": 2026,
       "bu": "Cloud & Managed Services",
       "tags": [
-        "Automatización documental",
+        "Document automation",
         "IIVTNU",
-        "IA generativa",
+        "Generative AI",
         "OCR",
-        "Observabilidad",
-        "Trazabilidad",
-        "Validación fiscal",
+        "Observability",
+        "Traceability",
+        "Tax validation",
         "AWS",
         "AWS Lambda",
         "Amazon Bedrock",
@@ -1211,6 +1221,7 @@
       "cliente_display": "National Hotel Group",
       "cliente_publico": false,
       "sector": "Turismo y ocio",
+      "sector_label": "Tourism and Leisure",
       "tecnologia": [
         "Azure",
         "Snowflake",
@@ -1231,7 +1242,7 @@
         "SAP S/4HANA Cloud"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
+      "importe_label": "Platform",
       "partner": [
         "Microsoft",
         "Snowflake"
@@ -1239,7 +1250,7 @@
       "anio": 2024,
       "bu": "Data & AI",
       "tags": [
-        "Arquitectura informacional",
+        "Information architecture",
         "Lakehouse",
         "Data Vault 2.0",
         "Streaming",
@@ -1261,6 +1272,7 @@
       "cliente_display": "Real Estate Organization",
       "cliente_publico": false,
       "sector": "Inmobiliario",
+      "sector_label": "Real Estate",
       "tecnologia": [
         "OpenAI",
         "Python",
@@ -1282,18 +1294,18 @@
         "Jira"
       ],
       "tipo_proyecto": "Formación",
-      "importe_label": "Formación",
+      "importe_label": "Training",
       "partner": [],
       "anio": 2025,
       "bu": "Data & AI",
       "tags": [
-        "Desarrollo agéntico",
+        "Agentic development",
         "Spec-Driven Development",
         "BDD",
-        "Gobierno del contexto",
+        "Context governance",
         "Metadata as Code",
         "Quality gates",
-        "Memoria persistente",
+        "Persistent memory",
         "Real Estate",
         "governance"
       ],
@@ -1306,6 +1318,7 @@
       "cliente_display": "National Real Estate Organisation",
       "cliente_publico": false,
       "sector": "Inmobiliario",
+      "sector_label": "Real Estate",
       "tecnologia": [
         "Amazon S3",
         "Amazon EventBridge",
@@ -1333,13 +1346,13 @@
       "anio": 2024,
       "bu": "Data & AI",
       "tags": [
-        "clasificación documental",
+        "Document classification",
         "OCR",
-        "IA generativa",
+        "Generative AI",
         "few-shot learning",
         "fine-tuning",
-        "observabilidad",
-        "revisión humana",
+        "Observability",
+        "Human review",
         "AWS",
         "AWS CloudFormation",
         "AWS CodeCommit",
@@ -1355,12 +1368,13 @@
       "cliente_display": "National Telecommunications Operator",
       "cliente_publico": false,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecommunications",
       "tecnologia": [
         "IA generativa",
         "OpenAI"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
+      "importe_label": "Platform",
       "partner": [
         "Cisco"
       ],
@@ -1390,6 +1404,7 @@
       "cliente_display": "National Telecommunications Operator",
       "cliente_publico": false,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecommunications",
       "tecnologia": [
         "OpenLLMetry",
         "OpenTelemetry",
@@ -1437,6 +1452,7 @@
       "cliente_display": "National Telecommunications Operator",
       "cliente_publico": false,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecommunications",
       "tecnologia": [
         "Google Cloud Logging",
         "Google BigQuery",
@@ -1495,11 +1511,12 @@
       "cliente_display": "MasOrange",
       "cliente_publico": true,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecommunications",
       "tecnologia": [
         "AWS"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
+      "importe_label": "Platform",
       "partner": [
         "AWS"
       ],
@@ -1528,6 +1545,7 @@
       "cliente_display": "Audiovisual Media Group",
       "cliente_publico": false,
       "sector": "Medios y entretenimiento",
+      "sector_label": "Media and Entertainment",
       "tecnologia": [
         "AWS",
         "Snowflake",
@@ -1548,7 +1566,7 @@
         "Jenkins"
       ],
       "tipo_proyecto": "Transversal",
-      "importe_label": "Transversal",
+      "importe_label": "Cross-cutting",
       "partner": [
         "AWS",
         "Microsoft",
@@ -1558,12 +1576,12 @@
       "bu": "Data & AI",
       "tags": [
         "Big Data",
-        "Servicios gestionados",
-        "Ingeniería de datos",
+        "Managed services",
+        "Data engineering",
         "DevOps",
         "Scrum",
         "CI/CD",
-        "Soporte 24x7",
+        "24x7 support",
         "AWS",
         "AWS CloudFormation",
         "AWS Glue",
@@ -1579,6 +1597,7 @@
       "cliente_display": "Media Organization",
       "cliente_publico": false,
       "sector": "Medios y entretenimiento",
+      "sector_label": "Media and Entertainment",
       "tecnologia": [
         "Apache Airflow",
         "Apache Spark",
@@ -1607,12 +1626,12 @@
       "bu": "Data & AI",
       "tags": [
         "ETL",
-        "Orquestación de procesos",
+        "Process orchestration",
         "CI/CD",
-        "DAG reutilizables",
-        "Observabilidad",
-        "Reintentos automáticos",
-        "Logging estructurado",
+        "Reusable DAGs",
+        "Observability",
+        "Automatic retries",
+        "Structured logging",
         "AWS",
         "AWS Lambda",
         "Amazon DynamoDB",
@@ -1628,6 +1647,7 @@
       "cliente_display": "Mountain Resort Operator",
       "cliente_publico": false,
       "sector": "Turismo y ocio",
+      "sector_label": "Tourism and Leisure",
       "tecnologia": [
         "Snowflake",
         "Power BI",
@@ -1640,19 +1660,19 @@
         "Business Central"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
+      "importe_label": "Platform",
       "partner": [],
       "anio": 2026,
       "bu": "Data & AI",
       "tags": [
-        "Arquitectura Medallion",
-        "Gobierno del dato",
+        "Medallion architecture",
+        "Data governance",
         "DataOps",
-        "Analítica de rentabilidad",
+        "Profitability analytics",
         "Micro-batch",
-        "Optimización operativa",
-        "IA explicable",
-        "Autoservicio de datos",
+        "Operational optimization",
+        "Explainable AI",
+        "Data self-service",
         "Business Central",
         "Excel",
         "Power BI",
@@ -1668,26 +1688,27 @@
       "cliente_display": "Electricity Market Operator",
       "cliente_publico": false,
       "sector": "Energía y Utilities",
+      "sector_label": "Energy & Utilities",
       "tecnologia": [
         "Microsoft Copilot",
         "Copilot Studio",
         "Excel"
       ],
       "tipo_proyecto": "Formación",
-      "importe_label": "Formación",
+      "importe_label": "Training",
       "partner": [
         "Microsoft"
       ],
       "anio": 2026,
       "bu": "Business Applications",
       "tags": [
-        "IA generativa",
-        "Adopción de IA",
-        "Prompting profesional",
-        "Seguridad y ciberseguridad",
-        "Agentes de IA",
-        "Automatización de procesos",
-        "Gobernanza de IA",
+        "Generative AI",
+        "AI adoption",
+        "Professional prompting",
+        "Security and cybersecurity",
+        "AI agents",
+        "Process automation",
+        "AI governance",
         "Copilot Studio",
         "Excel",
         "Microsoft Copilot"
@@ -1701,6 +1722,7 @@
       "cliente_display": "National Telecommunications Operator",
       "cliente_publico": false,
       "sector": "Telecomunicaciones",
+      "sector_label": "Telecommunications",
       "tecnologia": [
         "Azure",
         "OpenAI",
@@ -1719,13 +1741,13 @@
       "anio": 2026,
       "bu": "Data & AI",
       "tags": [
-        "Gemelo digital semántico",
-        "Gobernanza de red",
+        "Semantic digital twin",
+        "Network governance",
         "Blast radius",
-        "Análisis de impacto",
-        "Pipeline CI/CD",
-        "Correlación de cambios",
-        "Razonamiento en lenguaje natural",
+        "Impact analysis",
+        "CI/CD pipeline",
+        "Change correlation",
+        "Natural-language reasoning",
         "Azure",
         "Elasticsearch",
         "MongoDB",
@@ -1741,25 +1763,26 @@
       "cliente_display": "Territorial Public Authority",
       "cliente_publico": false,
       "sector": "Sector Público",
+      "sector_label": "Public Sector",
       "tecnologia": [
         "Microsoft Copilot",
         "Azure",
         "Excel"
       ],
       "tipo_proyecto": "Formación",
-      "importe_label": "Formación",
+      "importe_label": "Training",
       "partner": [
         "Microsoft"
       ],
       "anio": 2025,
       "bu": "Business Applications",
       "tags": [
-        "IA generativa",
-        "Formación práctica",
-        "Adopción de Copilot",
+        "Generative AI",
+        "Hands-on training",
+        "Copilot adoption",
         "Prompt engineering",
-        "IA responsable",
-        "Automatización de tareas",
+        "Responsible AI",
+        "Task automation",
         "Azure",
         "Excel",
         "Microsoft Copilot"
@@ -1773,6 +1796,7 @@
       "cliente_display": "Public Cultural Organisation",
       "cliente_publico": false,
       "sector": "Sector Público",
+      "sector_label": "Public Sector",
       "tecnologia": [
         "AWS",
         "Amazon S3",
@@ -1793,13 +1817,13 @@
       "anio": 2025,
       "bu": "Cloud & Managed Services",
       "tags": [
-        "Vídeo bajo demanda",
-        "Streaming en directo",
-        "Arquitectura serverless",
-        "Integración mediante APIs",
-        "Ciclo de vida audiovisual",
+        "Video on demand",
+        "Live streaming",
+        "Serverless architecture",
+        "API-based integration",
+        "Audiovisual lifecycle",
         "DRM",
-        "Archivado automático",
+        "Automatic archiving",
         "AWS",
         "AWS Elemental MediaConvert",
         "AWS Lambda",
@@ -1815,6 +1839,7 @@
       "cliente_display": "Healthcare Reference Hospital",
       "cliente_publico": false,
       "sector": "Salud",
+      "sector_label": "Healthcare",
       "tecnologia": [
         "AWS",
         "Amazon S3",
@@ -1833,21 +1858,21 @@
         "Delta Lake"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
+      "importe_label": "Platform",
       "partner": [
         "AWS"
       ],
       "anio": 2024,
       "bu": "Cloud & Managed Services",
       "tags": [
-        "Migración cloud",
-        "Escalado horizontal",
+        "Cloud migration",
+        "Horizontal scaling",
         "Lakehouse",
-        "Seguridad granular",
-        "Trazabilidad y auditoría",
-        "Gobierno de datos",
-        "Operaciones CRUD",
-        "Assessment de migración",
+        "Granular security",
+        "Traceability and auditing",
+        "Data governance",
+        "CRUD operations",
+        "Migration assessment",
         "AWS",
         "AWS CloudTrail",
         "AWS Glue",
@@ -1863,6 +1888,7 @@
       "cliente_display": "Real Estate Services Company",
       "cliente_publico": false,
       "sector": "Inmobiliario",
+      "sector_label": "Real Estate",
       "tecnologia": [
         "Amazon S3",
         "Amazon EC2",
@@ -1887,20 +1913,20 @@
         "AWS Systems Manager"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
+      "importe_label": "Platform",
       "partner": [
         "AWS"
       ],
       "anio": 2024,
       "bu": "Cloud & Managed Services",
       "tags": [
-        "migración documental",
-        "gestión de contenidos empresariales",
-        "alta disponibilidad",
+        "Document migration",
+        "Enterprise content management",
+        "High availability",
         "ArchiveLink",
-        "ciclo de vida del dato",
-        "seguridad y cifrado",
-        "conectividad híbrida",
+        "Data lifecycle",
+        "Security and encryption",
+        "Hybrid connectivity",
         "AWS",
         "AWS CloudTrail",
         "AWS Direct Connect",
@@ -1916,6 +1942,7 @@
       "cliente_display": "Professional Services Organization",
       "cliente_publico": false,
       "sector": "Formación y Servicios Profesionales",
+      "sector_label": "Training and Professional Services",
       "tecnologia": [
         "IA generativa",
         "Ansible",
@@ -1927,13 +1954,13 @@
       "anio": 2026,
       "bu": "Data & AI",
       "tags": [
-        "Automatización de procesos",
+        "Process automation",
         "RPA",
-        "Agentes de IA",
-        "AS-IS y TO-BE",
-        "Roadmap de implantación",
+        "AI agents",
+        "AS-IS and TO-BE",
+        "Implementation roadmap",
         "Quick wins",
-        "Sistemas heterogéneos",
+        "Heterogeneous systems",
         "Ansible",
         "Scala",
         "Terraform"
@@ -1947,6 +1974,7 @@
       "cliente_display": "Social Technology Foundation",
       "cliente_publico": false,
       "sector": "Tecnología y Servicios Digitales",
+      "sector_label": "Technology and Digital Services",
       "tecnologia": [
         "Sistema de Inteligencia Artificial"
       ],
@@ -1958,13 +1986,13 @@
       "anio": 2025,
       "bu": "Data & AI",
       "tags": [
-        "Prueba de concepto",
-        "Automatización documental",
-        "Análisis de facturas",
-        "Análisis de albaranes",
-        "Anonimización de datos",
-        "RGPD",
-        "Gobernanza de IA"
+        "Proof of concept",
+        "Document automation",
+        "Invoice analysis",
+        "Delivery note analysis",
+        "Data anonymization",
+        "GDPR",
+        "AI governance"
       ],
       "briefing": "A foundation focused on technological research and social impact wanted to assess the feasibility of automating an existing supplier-document analysis process. The challenge involved processing invoices, delivery notes, contracts, data processing agreements and other documents related to contractual relationships, while reducing manual intervention without replacing the responsibilities of finance or accounting teams. The initiative was structured as a limited proof of concept, restricted to the use cases defined by the organisation and excluding customisations or additional integrations beyond the agreed scope.",
       "ficha_ref": "fichas/tecnologica-poc-facturas.en.md"
@@ -1975,25 +2003,26 @@
       "cliente_display": "Private University",
       "cliente_publico": false,
       "sector": "Formación y Servicios Profesionales",
+      "sector_label": "Training and Professional Services",
       "tecnologia": [
         "Copilot Studio",
         "Power Automate",
         "IA generativa"
       ],
       "tipo_proyecto": "Formación",
-      "importe_label": "Formación",
+      "importe_label": "Training",
       "partner": [
         "Microsoft"
       ],
       "anio": 2026,
       "bu": "Business Applications",
       "tags": [
-        "Agentes inteligentes",
-        "Automatización de procesos",
-        "Aprender haciendo",
-        "Gobernanza y DLP",
-        "Autoservicio",
-        "Análisis de sentimiento",
+        "Intelligent agents",
+        "Process automation",
+        "Learning by doing",
+        "Governance and DLP",
+        "Self-service",
+        "Sentiment analysis",
         "Copilot Studio",
         "Power Automate",
         "governance"
@@ -2007,6 +2036,7 @@
       "cliente_display": "National University Hospital",
       "cliente_publico": false,
       "sector": "Salud",
+      "sector_label": "Healthcare",
       "tecnologia": [
         "Amazon S3",
         "Amazon SQS",
@@ -2032,21 +2062,21 @@
         "Deequ"
       ],
       "tipo_proyecto": "Plataforma",
-      "importe_label": "Plataforma",
+      "importe_label": "Platform",
       "partner": [
         "AWS"
       ],
       "anio": 2025,
       "bu": "Data & AI",
       "tags": [
-        "Data lake clínico",
-        "Ingesta incremental",
-        "Gobernanza del dato",
-        "Reconstrucción determinista",
-        "Pseudoanonimización",
-        "Observabilidad",
-        "Infraestructura como código",
-        "Arquitectura modular",
+        "Clinical data lake",
+        "Incremental ingestion",
+        "Data governance",
+        "Deterministic reconstruction",
+        "Pseudonymization",
+        "Observability",
+        "Infrastructure as code",
+        "Modular architecture",
         "AWS",
         "AWS CDK",
         "AWS Glue",
@@ -2062,6 +2092,7 @@
       "cliente_display": "University Hospital",
       "cliente_publico": false,
       "sector": "Salud",
+      "sector_label": "Healthcare",
       "tecnologia": [
         "MongoDB",
         "Ollama",
@@ -2075,12 +2106,12 @@
       "anio": 2025,
       "bu": "Data & AI",
       "tags": [
-        "Chatbot asistencial",
-        "RAG autónomo",
-        "LLM on-premise",
-        "Integración documental",
-        "Búsqueda semántica",
-        "Autoservicio de información clínica",
+        "Clinical support chatbot",
+        "Autonomous RAG",
+        "On-premises LLM",
+        "Document integration",
+        "Semantic search",
+        "Clinical information self-service",
         "Alfresco",
         "MongoDB",
         "Ollama",

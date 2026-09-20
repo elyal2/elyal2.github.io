@@ -14,12 +14,12 @@ importe_label: MVP/PoC
 anio: 2025
 bu: Cloud & Managed Services
 tags:
-- Migración de bases de datos
+- Database migration
 - Change Data Capture
-- Cutover controlado
-- Replicación de datos
-- Plan de fallback
-- Tuning de bases de datos
+- Controlled cutover
+- Data replication
+- Fallback plan
+- Database tuning
 briefing: An industrial manufacturer needed to assess and prepare the migration of
   its operational database from DB2 to PostgreSQL, minimising application disruption
   and reducing the risks associated with converting objects, stored procedures and

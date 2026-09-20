@@ -10,16 +10,16 @@ tecnologia:
 - M3
 - Oracle
 tipo_proyecto: Plataforma
-importe_label: Plataforma
+importe_label: Platform
 anio: 2026
 bu: Data & AI
 tags:
-- Agentes autónomos
-- Monitorización en tiempo real
-- Alarmas inteligentes
-- Mantenimiento predictivo
-- Dashboards interactivos
-- Automatización de procesos
+- Autonomous agents
+- Real-time monitoring
+- Smart alerts
+- Predictive maintenance
+- Interactive dashboards
+- Process automation
 briefing: An industrial organization seeks to comprehensively monitor the condition
   of multiple manufacturing plants and move towards a more proactive operating model.
   The challenge stems from the lack of continuous monitoring at certain facilities

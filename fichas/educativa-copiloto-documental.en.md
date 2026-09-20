@@ -18,12 +18,12 @@ partner:
 - Microsoft
 bu: Data & AI
 tags:
-- IA generativa
-- Chatbot documental
-- Búsqueda asistida
-- Autoservicio de información
-- Trazabilidad de fuentes
-- Feedback de usuario
+- Generative AI
+- Document chatbot
+- Assisted search
+- Information self-service
+- Source traceability
+- User feedback
 briefing: An educational organization held relevant knowledge in its corporate document
   management system but needed to make that information available to employees more
   quickly, naturally, and intuitively. The challenge was to enable natural-language

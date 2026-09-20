@@ -31,12 +31,12 @@ partner:
 bu: Data & AI
 tags:
 - ETL
-- Orquestación de procesos
+- Process orchestration
 - CI/CD
-- DAG reutilizables
-- Observabilidad
-- Reintentos automáticos
-- Logging estructurado
+- Reusable DAGs
+- Observability
+- Automatic retries
+- Structured logging
 briefing: The organization needed to validate a new model for orchestrating and executing
   ETL processes to replace a fragmented architecture spanning different execution
   services, events, and functions. The existing model featured inconsistent retry

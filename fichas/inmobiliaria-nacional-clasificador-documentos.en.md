@@ -30,13 +30,13 @@ partner:
 - AWS
 bu: Data & AI
 tags:
-- clasificación documental
+- Document classification
 - OCR
-- IA generativa
+- Generative AI
 - few-shot learning
 - fine-tuning
-- observabilidad
-- revisión humana
+- Observability
+- Human review
 briefing: A real estate organisation was introducing generative AI capabilities to
   optimise the processing of judicial documentation. The challenge involved analysing
   large volumes of heterogeneous documents, including judgments, claims, rulings and

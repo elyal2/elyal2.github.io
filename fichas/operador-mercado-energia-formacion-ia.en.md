@@ -10,19 +10,19 @@ tecnologia:
 - Copilot Studio
 - Excel
 tipo_proyecto: Formación
-importe_label: Formación
+importe_label: Training
 anio: 2026
 partner:
 - Microsoft
 bu: Business Applications
 tags:
-- IA generativa
-- Adopción de IA
-- Prompting profesional
-- Seguridad y ciberseguridad
-- Agentes de IA
-- Automatización de procesos
-- Gobernanza de IA
+- Generative AI
+- AI adoption
+- Professional prompting
+- Security and cybersecurity
+- AI agents
+- Process automation
+- AI governance
 briefing: 'The organisation sought to equip its executive team with the practical,
   secure and responsible use of generative artificial intelligence in the workplace.
   The challenge was to apply Microsoft Copilot capabilities to everyday activities

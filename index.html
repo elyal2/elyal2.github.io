@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Catálogo de Casos de Uso y Éxito de la Unidad - Logicalis Spain. Soluciones en Cloud, Data, AI y Ciberseguridad.">
   <meta name="theme-color" content="#143CCD">
-  <meta name="build-id" content="b922342cc_1789898447">
+  <meta name="build-id" content="ba1ac13ba_1789899198">
   <meta
     http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://huggingface.co https://*.hf.co https://cdn.jsdelivr.net; img-src 'self' data:;">
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Logicalis Design System Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=b922342cc_1789898447">
+  <link rel="stylesheet" href="styles.css?v=ba1ac13ba_1789899198">
 
   <!-- Third-party CDN Dependencies with Subresource Integrity (SRI) -->
   <script 
@@ -44,12 +44,12 @@
     crossorigin="anonymous">
   <script 
     type="module" 
-    src="transformers-bridge.js?v=b922342cc_1789898447" 
+    src="transformers-bridge.js?v=ba1ac13ba_1789899198" 
     crossorigin="anonymous">
   </script>
 
   <!-- Application Logic -->
-  <script src="app.js?v=b922342cc_1789898447"></script>
+  <script src="app.js?v=ba1ac13ba_1789899198"></script>
 
   <!-- Alpine.js 3.x with defer -->
   <script 
@@ -246,6 +246,13 @@
         <template x-for="facet in catalogData.facets" :key="facet.key">
           <div class="facet-group">
             <h3 class="facet-heading" x-text="facet.label"></h3>
+            <input
+              type="search"
+              class="facet-search-input"
+              x-show="facetSearchable(facet)"
+              x-model="facetSearch[facet.key]"
+              :placeholder="t.facetSearch"
+              :aria-label="t.facetSearch + ' ' + facet.label">
             <ul class="facet-options-list">
               <template x-for="option in visibleFacetOptions(facet)" :key="option.id">
                 <li>
@@ -257,6 +264,7 @@
                       :checked="isFilterActive(facet.key, option.id)"
                       @change="toggleFilter(facet, option.id)">
                     <span class="facet-option-text" x-text="option.label"></span>
+                    <span class="facet-option-count" x-text="facetCount(facet, option)"></span>
                   </label>
                 </li>
               </template>
@@ -347,7 +355,7 @@
         <template x-for="item in filteredCases" :key="item.id">
           <article class="case-card">
             <div class="card-top-row">
-              <span class="badge-sector" x-text="item.sector"></span>
+              <span class="badge-sector" x-text="item.sector_label || item.sector"></span>
               <span class="badge-year" x-text="item.anio"></span>
               <span class="badge-importe" x-text="item.importe_label"></span>
               <span 
@@ -430,7 +438,7 @@
       
       <header class="modal-header">
         <div class="modal-header-meta" x-show="selectedCase">
-          <span class="badge-sector" x-text="selectedCase ? selectedCase.sector : ''"></span>
+          <span class="badge-sector" x-text="selectedCase ? (selectedCase.sector_label || selectedCase.sector) : ''"></span>
           <span class="badge-year" x-text="selectedCase ? selectedCase.anio : ''"></span>
           <span class="badge-importe" x-text="selectedCase ? selectedCase.importe_label : ''"></span>
         </div>

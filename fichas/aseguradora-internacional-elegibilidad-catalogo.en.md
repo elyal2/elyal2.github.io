@@ -27,7 +27,7 @@ tecnologia:
 - Amazon Cognito
 - Keycloak
 tipo_proyecto: Plataforma
-importe_label: Plataforma
+importe_label: Platform
 anio: 2026
 partner:
 - AWS
@@ -35,13 +35,13 @@ partner:
 bu: Cloud & Managed Services
 tags:
 - Domain-Driven Design
-- Elegibilidad de miembros
-- Catálogo de productos y servicios
-- ETL parametrizado
+- Member eligibility
+- Products and services catalog
+- Parameterized ETL
 - Change Data Capture
-- Migración por oleadas
-- Infraestructura como código
-- Observabilidad y trazabilidad
+- Wave-based migration
+- Infrastructure as code
+- Observability and traceability
 briefing: The organization needed to consolidate eligibility management and the products
   and services catalog into a common, traceable and reusable capability for different
   internal platforms, insurers and operating models. The starting point combined local

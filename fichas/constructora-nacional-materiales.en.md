@@ -17,13 +17,13 @@ partner:
 - IBM
 bu: Data & AI
 tags:
-- IA generativa
-- búsqueda por similitud
+- Generative AI
+- Similarity search
 - cross-encoder
 - BC3
-- enriquecimiento de datos
-- validación dimensional
-- gestión de colas
+- Data enrichment
+- Dimensional validation
+- Queue management
 briefing: A national construction company needed to streamline the analysis of construction
   designs and estimates in BC3 format in order to identify valuable materials and
   match them with an environmental impact database. The process required manually

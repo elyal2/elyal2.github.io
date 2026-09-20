@@ -16,18 +16,18 @@ tecnologia:
 - Snowflake Horizon
 - Business Central
 tipo_proyecto: Plataforma
-importe_label: Plataforma
+importe_label: Platform
 anio: 2026
 bu: Data & AI
 tags:
-- Arquitectura Medallion
-- Gobierno del dato
+- Medallion architecture
+- Data governance
 - DataOps
-- Analítica de rentabilidad
+- Profitability analytics
 - Micro-batch
-- Optimización operativa
-- IA explicable
-- Autoservicio de datos
+- Operational optimization
+- Explainable AI
+- Data self-service
 briefing: The operator managed a complex, seasonal data ecosystem distributed across
   several legal entities and business areas. Although it had an on-premises SQL Server
   Data Warehouse with multiple integrated sources and numerous Power BI reports, information

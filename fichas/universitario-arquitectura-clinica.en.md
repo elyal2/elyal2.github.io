@@ -29,20 +29,20 @@ tecnologia:
 - AWS Glue Data Quality
 - Deequ
 tipo_proyecto: Plataforma
-importe_label: Plataforma
+importe_label: Platform
 anio: 2025
 partner:
 - AWS
 bu: Data & AI
 tags:
-- Data lake clínico
-- Ingesta incremental
-- Gobernanza del dato
-- Reconstrucción determinista
-- Pseudoanonimización
-- Observabilidad
-- Infraestructura como código
-- Arquitectura modular
+- Clinical data lake
+- Incremental ingestion
+- Data governance
+- Deterministic reconstruction
+- Pseudonymization
+- Observability
+- Infrastructure as code
+- Modular architecture
 briefing: A hospital organization needed to consolidate and normalize clinical information
   related to patient deaths from separate internal sources. Because the information
   was not integrated, daily analysis by medical unit, location, and clinical cause

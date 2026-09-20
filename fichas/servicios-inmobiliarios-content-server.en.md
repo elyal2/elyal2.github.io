@@ -28,19 +28,19 @@ tecnologia:
 - AWS CloudFormation
 - AWS Systems Manager
 tipo_proyecto: Plataforma
-importe_label: Plataforma
+importe_label: Platform
 anio: 2024
 partner:
 - AWS
 bu: Cloud & Managed Services
 tags:
-- migración documental
-- gestión de contenidos empresariales
-- alta disponibilidad
+- Document migration
+- Enterprise content management
+- High availability
 - ArchiveLink
-- ciclo de vida del dato
-- seguridad y cifrado
-- conectividad híbrida
+- Data lifecycle
+- Security and encryption
+- Hybrid connectivity
 briefing: The organisation operated an on-premises OpenText platform, used primarily
   as an archive server and approaching end of support. The environment needed to continue
   providing document access from SAP RISE and from web applications used by authorised

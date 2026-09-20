@@ -17,12 +17,12 @@ partner:
 - AWS
 bu: Data & AI
 tags:
-- Venta cruzada
-- Venta incremental
+- Cross-selling
+- Up-selling
 - Next-best-action
-- Scoring predictivo
+- Predictive scoring
 - AutoML
-- Analítica avanzada
+- Advanced analytics
 briefing: The insurer had a churn model, primarily applied to funeral insurance products,
   which had delivered satisfactory results in supporting customer retention. However,
   it needed to expand its commercial capabilities to identify opportunities for up-selling

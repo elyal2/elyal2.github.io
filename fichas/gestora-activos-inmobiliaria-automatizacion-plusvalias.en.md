@@ -22,13 +22,13 @@ partner:
 - AWS
 bu: Cloud & Managed Services
 tags:
-- Automatización documental
+- Document automation
 - IIVTNU
-- IA generativa
+- Generative AI
 - OCR
-- Observabilidad
-- Trazabilidad
-- Validación fiscal
+- Observability
+- Traceability
+- Tax validation
 briefing: A real estate asset management company needed to streamline the review,
   validation and generation of documentation related to municipal capital gains tax
   (IIVTNU). The process relied on heterogeneous documents, including deeds, land registry

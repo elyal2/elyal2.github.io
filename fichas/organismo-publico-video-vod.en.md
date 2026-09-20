@@ -23,13 +23,13 @@ partner:
 - AWS
 bu: Cloud & Managed Services
 tags:
-- Vídeo bajo demanda
-- Streaming en directo
-- Arquitectura serverless
-- Integración mediante APIs
-- Ciclo de vida audiovisual
+- Video on demand
+- Live streaming
+- Serverless architecture
+- API-based integration
+- Audiovisual lifecycle
 - DRM
-- Archivado automático
+- Automatic archiving
 briefing: A public cultural organisation specialising in the preservation and dissemination
   of visual heritage operated an information system primarily designed to manage images.
   The growing incorporation of audiovisual content required the catalogue, ingestion

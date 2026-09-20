@@ -24,7 +24,7 @@ tecnologia:
 - CloudWatch
 - Jenkins
 tipo_proyecto: Transversal
-importe_label: Transversal
+importe_label: Cross-cutting
 anio: 2024
 partner:
 - AWS
@@ -33,12 +33,12 @@ partner:
 bu: Data & AI
 tags:
 - Big Data
-- Servicios gestionados
-- Ingeniería de datos
+- Managed services
+- Data engineering
 - DevOps
 - Scrum
 - CI/CD
-- Soporte 24x7
+- 24x7 support
 briefing: An organization in the audiovisual media sector needed to strengthen the
   operation and evolution of its Big Data and Analytics environment. The scope covered
   cloud platform management, new developments, evolutionary and corrective maintenance,

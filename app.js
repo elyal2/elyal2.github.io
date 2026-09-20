@@ -55,6 +55,9 @@ function catalogApp() {
     // Dynamic facet state: generic dictionary mapping facetKey -> Array<string>
     activeFilters: {},
     expandedFacets: {},
+    facetSearch: {},
+    facetCounts: {},
+    facetSorted: {},
 
     // Release build ID for non-circular cache-busting (ADR-0008, Issue #43).
     // Read from the <meta name="build-id"> tag rather than an inline <script> —
@@ -110,6 +113,7 @@ function catalogApp() {
         clientConfidential: 'Cliente Confidencial',
         clientPublic: 'Cliente Público',
         allYears: 'Todos los años',
+        facetSearch: 'Buscar…',
         showMore: 'Ver más',
         showLess: 'Ver menos',
         searchModeHybrid: 'Híbrido (Recomendado)',
@@ -143,6 +147,7 @@ function catalogApp() {
         clientConfidential: 'Confidential Client',
         clientPublic: 'Public Client',
         allYears: 'All years',
+        facetSearch: 'Search…',
         showMore: 'Show more',
         showLess: 'Show less',
         searchModeHybrid: 'Hybrid (Recommended)',
@@ -227,6 +232,7 @@ function catalogApp() {
 
         this.catalogData = data;
         this.initFilters(data.facets || []);
+        this.buildFacetIndex(data);
         this.initMiniSearch(data.cases || []);
         this.loading = false;
       } catch (err) {
@@ -249,7 +255,7 @@ function catalogApp() {
 
     /**
      * Initializes MiniSearch client-side lexical engine (ADR-0004, Issue #29).
-     * Indexed fields: ['title', 'briefing', 'tags', 'cliente_display', 'sector', 'tecnologia']
+     * Indexed fields: ['title', 'briefing', 'tags', 'cliente_display', 'sector', 'sector_label', 'tecnologia']
      * Boosts: title=2.0, tags=1.5
      */
     initMiniSearch(cases) {
@@ -260,7 +266,7 @@ function catalogApp() {
       }
 
       this.miniSearch = new MiniSearch({
-        fields: ['title', 'briefing', 'tags', 'cliente_display', 'sector', 'tecnologia'],
+        fields: ['title', 'briefing', 'tags', 'cliente_display', 'sector', 'sector_label', 'tecnologia'],
         storeFields: ['id'],
         searchOptions: {
           boost: {
@@ -446,11 +452,14 @@ function catalogApp() {
      */
     initFilters(facets) {
       const filters = {};
+      const search = {};
       for (const facet of facets) {
         filters[facet.key] = [];
+        search[facet.key] = '';
       }
       this.activeFilters = filters;
       this.expandedFacets = {};
+      this.facetSearch = search;
     },
 
     // Number of options shown per facet before collapsing behind "Ver más" (Amazon-style
@@ -462,19 +471,87 @@ function catalogApp() {
      * FACET_VISIBLE_LIMIT. Generic over any facet — no per-facet-key branching (AC-007).
      */
     visibleFacetOptions(facet) {
-      const options = facet.options || [];
+      const options = this.sortedFacetOptions(facet);
+      const query = this.facetSearchQuery(facet);
+      if (query) {
+        return options.filter((o) => this.normalizeText(o.label).includes(query));
+      }
       if (this.expandedFacets[facet.key] || options.length <= this.FACET_VISIBLE_LIMIT) {
         return options;
       }
-      return options.slice(0, this.FACET_VISIBLE_LIMIT);
+      // Collapsed: top options by usage, plus any active selection so it never disappears.
+      const rest = options.slice(this.FACET_VISIBLE_LIMIT);
+      return options
+        .slice(0, this.FACET_VISIBLE_LIMIT)
+        .concat(rest.filter((o) => this.isFilterActive(facet.key, o.id)));
     },
 
     facetHasMore(facet) {
-      return (facet.options || []).length > this.FACET_VISIBLE_LIMIT;
+      return this.facetHiddenCount(facet) > 0 && !this.facetSearchQuery(facet);
     },
 
     facetHiddenCount(facet) {
-      return Math.max(0, (facet.options || []).length - this.FACET_VISIBLE_LIMIT);
+      const total = this.sortedFacetOptions(facet).length;
+      const collapsedShown = this.expandedFacets[facet.key]
+        ? total
+        : this.visibleFacetOptions(facet).length;
+      return this.expandedFacets[facet.key] ? total : Math.max(0, total - collapsedShown);
+    },
+
+    normalizeText(value) {
+      return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    },
+
+    facetSearchQuery(facet) {
+      return this.normalizeText(this.facetSearch[facet.key]);
+    },
+
+    // Search box only pays off on long facets (e.g. 150+ technologies).
+    FACET_SEARCH_MIN: 10,
+
+    facetSearchable(facet) {
+      return this.sortedFacetOptions(facet).length > this.FACET_SEARCH_MIN;
+    },
+
+    /**
+     * Precomputes, for every declarative facet, how many cases use each option, drops options
+     * no case uses, and orders long facets by usage (ties: alphabetical, accent-insensitive).
+     * Generic over any facet — no per-facet-key branching (AC-007).
+     */
+    buildFacetIndex(data) {
+      const cases = data.cases || [];
+      const counts = {};
+      const sorted = {};
+      for (const facet of data.facets || []) {
+        const perOption = {};
+        for (const c of cases) {
+          const raw = c[facet.key];
+          const values = Array.isArray(raw) ? raw : raw === undefined || raw === null ? [] : [raw];
+          for (const v of new Set(values.map(String))) {
+            perOption[v] = (perOption[v] || 0) + 1;
+          }
+        }
+        counts[facet.key] = perOption;
+        const options = (facet.options || []).filter((o) => perOption[o.id] > 0);
+        if (options.length > this.FACET_VISIBLE_LIMIT) {
+          options.sort(
+            (a, b) =>
+              (perOption[b.id] || 0) - (perOption[a.id] || 0) ||
+              a.label.localeCompare(b.label, this.currentLang, { sensitivity: 'base' })
+          );
+        }
+        sorted[facet.key] = options;
+      }
+      this.facetCounts = counts;
+      this.facetSorted = sorted;
+    },
+
+    sortedFacetOptions(facet) {
+      return this.facetSorted[facet.key] || facet.options || [];
+    },
+
+    facetCount(facet, option) {
+      return (this.facetCounts[facet.key] || {})[option.id] || 0;
     },
 
     toggleFacetExpanded(facetKey) {

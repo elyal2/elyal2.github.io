@@ -21,13 +21,13 @@ partner:
 - Microsoft
 bu: Data & AI
 tags:
-- Gemelo digital semántico
-- Gobernanza de red
+- Semantic digital twin
+- Network governance
 - Blast radius
-- Análisis de impacto
-- Pipeline CI/CD
-- Correlación de cambios
-- Razonamiento en lenguaje natural
+- Impact analysis
+- CI/CD pipeline
+- Change correlation
+- Natural-language reasoning
 briefing: A telecommunications operator needed to evolve from complex, resource-intensive
   network emulation models towards a scalable semantic representation focused on dependencies
   between elements. Identifying the impact of changes to configurations, routes, security

@@ -23,20 +23,20 @@ tecnologia:
 - Amazon Q Business
 - Microsoft Copilot
 tipo_proyecto: Formación
-importe_label: Formación
+importe_label: Training
 anio: 2026
 partner:
 - Microsoft
 - AWS
 bu: Data & AI
 tags:
-- Adopción progresiva de IA
+- Progressive AI adoption
 - AI Secure Ops
-- Gobierno y uso responsable de la IA
-- Agentes autónomos
+- AI governance and responsible use
+- Autonomous agents
 - Citizen development
-- Hackathon de PoCs
-- Arquitectura multicloud
+- PoC hackathon
+- Multicloud architecture
 briefing: An industrial organisation with sensitive data seeks to accelerate the practical
   adoption of artificial intelligence without creating technology overload or security
   risks. The proposal addresses the need to transform a set of isolated courses into
