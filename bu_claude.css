@@ -1,7 +1,8 @@
 /*
  * bu_claude.css — BU Analytics Dashboard · Tema Claude
  * Verde primario · DM Sans + JetBrains Mono · Dark por defecto
- * Requiere: bu_dashboard_v2.html
+ * Requiere: bu_dashboard_v3.html
+ * v3: contraste AA en --dim y series FY26; tokens --accent-solid / --on-accent.
  */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -43,11 +44,14 @@
   --r: 10px;  --r-sm: 6px;  --r-lg: 14px;
   --shadow-sm: 0 1px 4px rgba(0,0,0,.32), 0 0 1px rgba(0,0,0,.24);
 
+  /* Controles rellenos (chips, botón primario) */
+  --accent-solid: #71d6b7;  --on-accent: #0c121b;
+
   /* Charts */
   --chart-fy27:      #71d6b7;
   --chart-fy27-fill: rgba(113,214,183,.10);
   --chart-tgt:       #86bcff;
-  --chart-fy26:      #4a6278;
+  --chart-fy26:      #6f879f;
   --chart-grid:      #243449;
   --chart-axis:      #7f96b0;
 }
@@ -62,7 +66,7 @@ html[data-theme="light"] {
   --border2: rgba(0,0,0,.11);
   --text:    #112033;
   --muted:   #3f5169;
-  --dim:     #6d7d93;
+  --dim:     #5d6d84;
 
   --orange:      #1d9e75;
   --orange-dim:  rgba(29,158,117,.10);
@@ -76,11 +80,12 @@ html[data-theme="light"] {
   --purple:      #3c3489;  --purple-dim: rgba(60,52,137,.10);   --purple-text: #2a2464;
 
   --shadow-sm: 0 1px 4px rgba(0,0,0,.06), 0 0 1px rgba(0,0,0,.04);
+  --accent-solid: #0f6f54;  --on-accent: #ffffff;
 
   --chart-fy27:      #1d9e75;
   --chart-fy27-fill: rgba(29,158,117,.08);
   --chart-tgt:       #185fa5;
-  --chart-fy26:      #b0c0d0;
+  --chart-fy26:      #7c8da3;
   --chart-grid:      #e3e8ef;
   --chart-axis:      #b0c0d0;
 }

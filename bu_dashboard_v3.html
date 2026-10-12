@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Cuadro de Mando · BU Analytics FY27</title>
+<!-- Dos hojas de tema; solo una activa (media). Cambio instantáneo y sin parpadeo. -->
+<link id="theme-aampe" rel="stylesheet" href="bu_aampe.css">
+<link id="theme-claude" rel="stylesheet" href="bu_claude.css" media="not all">
+<script>
+/* Antes del primer pintado: tema claro/oscuro (OS o elección manual) y estilo de marca */
+(function () {
+  var d = document.documentElement, t = null, s = 'aampe';
+  try { t = localStorage.getItem('bu-theme'); s = localStorage.getItem('bu-analytics-style') || 'aampe'; } catch (e) {}
+  if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  d.setAttribute('data-theme', t);
+  var a = document.getElementById('theme-aampe'), c = document.getElementById('theme-claude');
+  if (a && c) { a.media = s === 'claude' ? 'not all' : 'all'; c.media = s === 'claude' ? 'all' : 'not all'; }
+})();
+</script>
+<script src="bu_style_switcher.js"></script>
+<style>
+/* CSS estructural. Los tokens (colores, fuentes, radios) viven en bu_aampe.css / bu_claude.css */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:var(--orange);--accent-dim:var(--orange-dim);--accent-text:var(--orange-text);--hdr:56px;--side:232px}
+html{height:100%;-webkit-text-size-adjust:100%}
+body{height:100%;font-family:var(--sans);font-size:13px;line-height:1.45;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
+select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ── Header ── */
+.header{height:var(--hdr);flex-shrink:0;display:flex;align-items:center;gap:12px;padding:0 18px;background:var(--surface);border-bottom:1px solid var(--border);z-index:30}
+.logo{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.08em;color:var(--accent-text)}
+.h-sep{width:1px;height:20px;background:var(--border2)}
+.h-title{font-size:13px;color:var(--muted);font-weight:500;white-space:nowrap}
+.tag{font-family:var(--mono);font-size:10px;color:var(--dim);padding:2px 7px;border-radius:5px;border:1px solid var(--border);background:var(--card2)}
+.h-right{margin-left:auto;display:flex;align-items:center;gap:8px;min-width:0}
+.h-pill{font-family:var(--mono);font-size:11px;color:var(--text);background:var(--accent-dim);border:1px solid transparent;padding:4px 10px;border-radius:var(--r-sm);font-weight:600;white-space:nowrap}
+#file-badge{font-family:var(--mono);font-size:10.5px;color:var(--dim);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbtn{height:32px;border:1px solid var(--border2);background:var(--card2);color:var(--muted);border-radius:var(--r-sm);display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:0 11px;transition:color .15s,border-color .15s,background .15s;white-space:nowrap}
+.hbtn.ico{width:32px;padding:0;justify-content:center}
+.hbtn:hover{color:var(--text);border-color:var(--dim)}
+.hbtn svg{flex-shrink:0}
+#file-input{display:none}
+
+/* ── Shell ── */
+.shell{flex:1;display:flex;min-height:0}
+.sidebar{width:var(--side);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:10px 0;overflow-y:auto}
+.nav-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);padding:12px 18px 4px}
+.nav-item{display:flex;align-items:flex-start;gap:10px;width:calc(100% - 16px);margin:1px 8px;padding:8px 10px;border-radius:8px;color:var(--muted);font-size:13px;font-weight:500;text-align:left;transition:background .12s,color .12s}
+.nav-item:hover{background:var(--card2);color:var(--text)}
+.nav-item[aria-selected="true"]{background:var(--accent-dim);color:var(--accent-text)}
+.nav-item svg{width:15px;height:15px;flex-shrink:0;margin-top:2px}
+.nav-sub{font-size:10.5px;color:var(--dim);margin-top:1px;line-height:1.25;font-weight:400}
+.nav-foot{margin-top:auto;padding:12px 16px 4px;border-top:1px solid var(--border);font-size:10.5px;color:var(--dim);line-height:1.5}
+.nav-foot summary{cursor:pointer;font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin-bottom:6px}
+.gl{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.gl b{font-family:var(--mono);color:var(--text);font-weight:600;white-space:nowrap}
+.gl span{text-align:right}
+.content{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 22px 48px;scroll-behavior:smooth}
+.content::-webkit-scrollbar{width:8px}.content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+
+/* ── Barra de cierre ── */
+.toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 0;margin:0 -22px;padding-left:22px;padding-right:22px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.tb-lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}
+.months{display:flex;gap:3px;flex-wrap:wrap}
+.m-chip{min-width:38px;height:28px;padding:0 8px;border-radius:7px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-size:12px;font-weight:600;transition:all .12s}
+.m-chip:hover:not(:disabled){border-color:var(--accent);color:var(--text)}
+.m-chip[aria-pressed="true"]{background:var(--accent-solid,var(--accent));border-color:var(--accent-solid,var(--accent));color:var(--on-accent,var(--bg))}
+.m-chip:disabled{opacity:.35;cursor:not-allowed}
+.tb-note{font-size:11.5px;color:var(--dim);margin-left:auto}
+
+/* ── Vistas ── */
+.view{display:none;padding-top:18px}.view.active{display:block}
+.page-hd{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.page-hd h1{font-size:20px;font-weight:700;letter-spacing:-.015em}
+.page-hd .sub{color:var(--muted);font-size:12.5px;margin-top:2px;max-width:70ch}
+.ctrls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--border2);border-radius:9px;padding:3px}
+.seg button{color:var(--muted);font-size:12px;font-weight:500;padding:5px 12px;border-radius:6px;transition:background .12s,color .12s;white-space:nowrap}
+.seg button:hover{color:var(--text)}
+.seg button.active{background:var(--accent-dim);color:var(--accent-text);font-weight:600}
+.g{display:grid;gap:14px;margin-top:16px}
+.g-kpi{grid-template-columns:repeat(auto-fit,minmax(min(100%,168px),1fr))}
+.g-2{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.g-21{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+.g-1{grid-template-columns:minmax(0,1fr)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:15px 17px;box-shadow:var(--shadow-sm);min-width:0}
+.card-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.card-hd h3{font-size:13.5px;font-weight:600}
+.card-hd .meta{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+.chart{min-width:0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:8px}
+.legend .li{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;flex-shrink:0}
+.sw.bar{width:10px;height:10px;border-radius:2px;background:var(--c)}
+.sw.line{width:16px;border-top:2.5px solid var(--c)}
+.sw.dash{width:16px;border-top:2px dashed var(--c)}
+.sw.band{width:14px;height:10px;border-radius:2px;background:var(--c);opacity:.28}
+.insight{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:12px;padding:9px 12px;background:var(--card2);border-left:3px solid var(--accent);border-radius:0 7px 7px 0}
+.insight b{color:var(--text)}
+.note{font-size:11.5px;color:var(--dim);margin-top:8px;line-height:1.5}
+.pos{color:var(--green-text)}.neg{color:var(--red-text)}.neu{color:var(--muted)}.amb{color:var(--amber-text)}
+
+/* ── Hero ── */
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px;align-items:center;padding:20px 22px;border-radius:var(--r-lg);border:1px solid var(--border);background:linear-gradient(115deg,var(--accent-dim),transparent 65%),var(--card);box-shadow:var(--shadow-sm)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--accent-text);margin-bottom:6px}
+.hero h2{font-size:21px;line-height:1.3;font-weight:650;letter-spacing:-.015em}
+.hero h2 b{color:var(--accent-text)}
+.chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.chipk{display:flex;flex-direction:column;gap:2px;padding:9px 12px;border-radius:10px;background:var(--card2);border:1px solid var(--border);min-width:0}
+.chipk .cl{font-size:10.5px;color:var(--dim);font-weight:500}
+.chipk .cv{font-family:var(--mono);font-size:19px;font-weight:700;letter-spacing:-.02em}
+.chipk .cs{font-size:10.5px;color:var(--muted)}
+.chipk.pos{box-shadow:inset 3px 0 0 var(--green)}.chipk.amb{box-shadow:inset 3px 0 0 var(--amber)}.chipk.neg{box-shadow:inset 3px 0 0 var(--red)}
+.chipk .cv{color:var(--text)}
+
+/* ── KPI ── */
+.kpi .k-lbl{font-size:12px;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:7px}
+.kpi .k-lbl svg{width:14px;height:14px;color:var(--accent)}
+.kpi .k-val{font-family:var(--mono);font-size:26px;font-weight:700;letter-spacing:-.025em;margin:6px 0 0;line-height:1.15}
+.kpi .k-val .u{font-size:12px;color:var(--dim);margin-left:3px;font-weight:500}
+.spark{display:block;width:100%;height:30px;margin:8px 0 2px}
+.k-rows{margin-top:8px;display:flex;flex-direction:column;gap:3px}
+.k-row{display:flex;justify-content:space-between;font-size:12px;gap:8px}
+.k-row .lbl{color:var(--dim)}.k-row .val{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.k-bar{margin-top:10px}
+.k-track{height:6px;border-radius:99px;background:var(--card2);position:relative;overflow:visible}
+.k-fill{height:100%;width:0;border-radius:99px;transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.k-fill.ok{background:var(--green)}.k-fill.warn{background:var(--amber)}.k-fill.bad{background:var(--red)}
+.k-tick{position:absolute;top:-3px;width:2px;height:12px;background:var(--text);opacity:.55;border-radius:1px}
+.k-bl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-top:5px}
+
+/* ── Señales ── */
+.sig-list{display:flex;flex-direction:column;gap:7px}
+.sig{display:flex;flex-direction:column;gap:3px;padding:8px 10px;border-radius:8px;font-size:12.5px;line-height:1.5;border:1px solid transparent;border-left-width:3px}
+.sig.red{background:var(--red-dim);color:var(--red-text);border-color:var(--red);}
+.sig.amber{background:var(--amber-dim);color:var(--amber-text);border-color:var(--amber)}
+.sig.green{background:var(--green-dim);color:var(--green-text);border-color:var(--green)}
+.sig.blue{background:var(--blue-dim);color:var(--blue-text);border-color:var(--blue)}
+.sig{border-top-color:transparent;border-right-color:transparent;border-bottom-color:transparent}
+.sig-row{display:flex;gap:8px;align-items:flex-start}
+.sig-row span{flex:1}
+.sig-btn{font-size:12px;padding:1px 6px;border-radius:5px;color:inherit;opacity:.65}
+.sig-btn:hover{opacity:1;background:var(--card2)}
+.sig-note{font-size:11.5px;font-style:italic;opacity:.85;padding-left:2px}
+.sig-edit{display:flex;gap:6px}
+.sig-edit input{flex:1;min-width:0;background:var(--card);border:1px solid var(--border2);border-radius:6px;padding:4px 8px;font-size:12px}
+.linkbtn{font-size:12px;color:var(--accent-text);font-weight:600;padding:4px 0;text-align:left}
+.linkbtn:hover{text-decoration:underline}
+
+/* ── Tablas ── */
+.tbl-wrap{overflow-x:auto;margin:0 -4px;padding:0 4px}
+table.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th,.tbl td{padding:8px 9px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap;font-family:var(--mono)}
+.tbl th{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--dim);font-weight:600;font-family:var(--sans);background:var(--card);position:sticky;top:0}
+.tbl th button{font:inherit;text-transform:inherit;letter-spacing:inherit;color:inherit;font-weight:inherit;display:inline-flex;gap:4px;align-items:center}
+.tbl th button:hover{color:var(--text)}
+.tbl th[aria-sort="ascending"] button::after{content:"▲";font-size:8px}
+.tbl th[aria-sort="descending"] button::after{content:"▼";font-size:8px}
+.tbl td:first-child,.tbl th:first-child{text-align:left;font-family:var(--sans);font-weight:500;color:var(--text);position:sticky;left:0;background:var(--card)}
+.tbl tbody tr:hover td{background:var(--card2)}
+.tbl tr.total td{font-weight:700;border-top:1.5px solid var(--border2);background:var(--card2)}
+.tbl tr.sub td{color:var(--muted)}
+.tbl tr.sel td{background:var(--accent-dim)}
+.tbl tr.click{cursor:pointer}
+.mixbar{display:inline-block;height:5px;border-radius:3px;background:var(--accent);vertical-align:middle;margin-left:6px;opacity:.8}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;padding:1px 7px;border-radius:99px}
+.pill.pos{background:var(--green-dim)}.pill.amb{background:var(--amber-dim)}.pill.neg{background:var(--red-dim)}.pill.neu{background:var(--card2)}
+
+/* ── Heatmap ── */
+.heat td,.heat th{padding:6px 4px;text-align:center;font-size:11.5px}
+.heat td:first-child,.heat th:first-child{text-align:left;padding-left:9px;min-width:118px}
+.heat td.h{border-radius:5px;font-weight:600;border:2px solid var(--card);cursor:default}
+.heat td.h.bad{background:color-mix(in srgb,var(--red) 38%,transparent)}
+.heat td.h.warn{background:color-mix(in srgb,var(--amber) 32%,transparent)}
+.heat td.h.ok{background:color-mix(in srgb,var(--green) 22%,transparent)}
+.heat td.h.top{background:color-mix(in srgb,var(--green) 42%,transparent)}
+.heat td.h.na{color:var(--dim);font-weight:400}
+
+/* ── Línea chips, tiles ── */
+.chiprow{display:flex;gap:6px;flex-wrap:wrap}
+.lchip{padding:6px 12px;border-radius:99px;border:1px solid var(--border2);background:var(--card);color:var(--muted);font-size:12px;font-weight:500;transition:all .12s}
+.lchip:hover{border-color:var(--accent);color:var(--text)}
+.lchip[aria-pressed="true"]{background:var(--accent-solid,var(--accent));border-color:var(--accent-solid,var(--accent));color:var(--on-accent,var(--bg));font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px}
+.tile{padding:10px 12px;border-radius:9px;background:var(--card2);border:1px solid var(--border)}
+.tile .tl{font-size:10.5px;color:var(--dim);font-weight:500}
+.tile .tv{font-family:var(--mono);font-size:17px;font-weight:700;margin-top:2px;letter-spacing:-.02em}
+.tile .ts{font-size:11px;color:var(--muted);margin-top:1px}
+.spot{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px}
+
+/* ── Escenarios ── */
+.sim{display:grid;gap:14px;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+.ctl{margin-bottom:16px}
+.ctl label{display:flex;justify-content:space-between;font-size:12.5px;font-weight:500;margin-bottom:6px}
+.ctl label b{font-family:var(--mono);color:var(--accent-text)}
+.ctl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctl .hint{font-size:11.5px;color:var(--dim);margin-top:3px;display:flex;justify-content:space-between;gap:8px}
+.btn{height:32px;padding:0 13px;border-radius:7px;border:1px solid var(--border2);background:var(--card2);color:var(--text);font-size:12px;font-weight:500}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent-solid,var(--accent));border-color:var(--accent-solid,var(--accent));color:var(--on-accent,var(--bg));font-weight:600}
+.res{display:grid;gap:10px}
+.res-row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;padding:10px 12px;background:var(--card2);border-radius:9px;border:1px solid var(--border)}
+.res-row .rn{font-size:12px;color:var(--muted);font-weight:500}
+.res-row .rv{font-family:var(--mono);font-size:20px;font-weight:700;letter-spacing:-.02em}
+.res-row .rs{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+
+/* ── Checks ── */
+.chk{display:flex;gap:9px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+.chk .ic{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.chk.ok .ic{background:var(--green-dim);color:var(--green-text)}
+.chk.warn .ic{background:var(--amber-dim);color:var(--amber-text)}
+.chk.err .ic{background:var(--red-dim);color:var(--red-text)}
+details.fold{margin-top:12px}
+details.fold summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--muted);padding:4px 0}
+
+/* ── Overlays ── */
+.empty{display:grid;place-items:center;min-height:calc(100vh - var(--hdr) - 80px);padding-top:24px}
+.dz{background:var(--card);border:2px dashed var(--border2);border-radius:var(--r-lg);padding:46px 56px;text-align:center;max-width:520px;width:100%;transition:border-color .2s,background .2s}
+.dz.over,.dz:hover{border-color:var(--accent);background:var(--accent-dim)}
+.dz svg{width:44px;height:44px;color:var(--accent);margin-bottom:12px}
+.dz h2{font-size:19px;font-weight:700;margin-bottom:8px}
+.dz p{color:var(--muted);font-size:13px;line-height:1.55;margin-bottom:18px}
+.dz .hint{margin-top:14px;font-size:11px;color:var(--dim);font-family:var(--mono)}
+#drag-ov{display:none;position:fixed;inset:10px;z-index:90;background:var(--accent-dim);border:2.5px dashed var(--accent);border-radius:16px;align-items:center;justify-content:center;flex-direction:column;gap:6px;pointer-events:none}
+#drag-ov.on{display:flex}
+#drag-ov b{font-size:22px;color:var(--accent-text)}
+#tip{position:fixed;z-index:200;display:none;pointer-events:none;background:var(--surface);border:1px solid var(--border2);border-radius:9px;padding:8px 11px;font-size:12px;color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,.35);min-width:140px;max-width:280px}
+.tt-h{font-weight:700;margin-bottom:4px}
+.tt-r{display:flex;justify-content:space-between;gap:14px;color:var(--muted);line-height:1.6}
+.tt-r b{font-family:var(--mono);color:var(--text)}.tt-r b.pos{color:var(--green-text)}.tt-r b.neg{color:var(--red-text)}.tt-r b.amb{color:var(--amber-text)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:300;background:var(--surface);border:1px solid var(--border2);border-left:4px solid var(--accent);border-radius:9px;padding:10px 16px;font-size:13px;box-shadow:0 8px 28px rgba(0,0,0,.4);max-width:min(560px,92vw)}
+#toast.err{border-left-color:var(--red)}
+
+/* ── Animación ── */
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.rise{animation:rise .45s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 45ms)}
+.grow{animation:growY .55s cubic-bezier(.2,.7,.2,1) both}
+@media (prefers-reduced-motion:reduce){.rise,.grow{animation:none!important}.k-fill{transition:none}.content{scroll-behavior:auto}}
+
+/* ── Responsive ── */
+@media (max-width:1100px){.g-21,.sim,.hero{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:860px){
+  :root{--side:100%}
+  body{overflow:auto;height:auto;min-height:100%}
+  .shell{flex-direction:column}
+  .sidebar{width:100%;flex-direction:row;overflow-x:auto;padding:6px 8px;border-right:none;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:25}
+  .nav-lbl,.nav-foot,.nav-sub{display:none}
+  .nav-item{width:auto;flex-shrink:0;margin:0 2px;white-space:nowrap}
+  .content{padding:0 14px 40px;overflow:visible}
+  .toolbar{margin:0 -14px;padding-left:14px;padding-right:14px;top:49px}
+  .h-title,#file-badge,.hbtn .lbl{display:none}
+  .header{padding:0 12px;gap:8px}
+}
+
+/* ── Impresión ── */
+@media (max-width:600px){#ver,.h-sep,#period{display:none}.chipk{padding:8px 9px}.chipk .cv{font-size:16px}.chipk .cs{font-size:10px}.hero{padding:16px}.hero h2{font-size:18px}}
+@media print{
+  body{overflow:visible;height:auto;background:#fff}
+  .header .h-right>*:not(.h-pill),.sidebar,.toolbar,.seg,.chiprow.noprint,.sig-btn,.linkbtn{display:none!important}
+  .shell{display:block}.content{overflow:visible;padding:0}
+  .view{display:block!important;break-inside:avoid-page;padding-top:10px;page-break-after:auto}
+  .card,.hero{box-shadow:none;break-inside:avoid}
+  .rise,.grow{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div id="drag-ov" aria-hidden="true"><b>Suelta el Excel</b><span>Pestaña ANALYTICS · FY27</span></div>
+
+<header class="header">
+  <div class="logo">LOGICALIS</div><div class="h-sep"></div>
+  <div class="h-title">Cuadro de Mando · BU Data &amp; Analytics AI</div>
+  <span class="tag" id="ver"></span>
+  <div class="h-right">
+    <span class="h-pill" id="period" hidden></span>
+    <span id="file-badge"></span>
+    <button class="hbtn" id="btn-copy" type="button" hidden title="Copia un resumen ejecutivo en texto"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><span class="lbl">Copiar resumen</span></button>
+    <button class="hbtn" id="btn-print" type="button" hidden title="Imprimir o guardar como PDF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span class="lbl">PDF</span></button>
+    <label class="hbtn" for="file-input" tabindex="0" id="btn-load"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span class="lbl">Cargar Excel</span></label>
+    <input type="file" id="file-input" accept=".xlsx,.xls">
+    <button class="hbtn ico" id="theme-btn" type="button" aria-label="Cambiar tema claro u oscuro" title="Cambiar tema (Alt+clic: volver al del sistema)"><svg id="theme-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="sidebar" aria-label="Secciones" id="nav" role="tablist" aria-orientation="vertical">
+    <div class="nav-lbl">Resultados</div>
+    <button class="nav-item" role="tab" data-v="resumen" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg><div>Resumen ejecutivo<div class="nav-sub">KPIs, evolución y señales</div></div></button>
+    <button class="nav-item" role="tab" data-v="puente" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 20h18M6 20V10M12 20V4M18 20v-7"/></svg><div>Puente vs objetivo<div class="nav-sub">Qué explica la desviación</div></div></button>
+    <button class="nav-item" role="tab" data-v="pyl" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h10M4 18h6"/></svg><div>P&amp;L y cascada<div class="nav-sub">De GP a EBITDA</div></div></button>
+    <button class="nav-item" role="tab" data-v="lineas" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><div>Líneas de negocio<div class="nav-sub">Drill-down y mapa de calor</div></div></button>
+    <div class="nav-lbl">Análisis</div>
+    <button class="nav-item" role="tab" data-v="calidad" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg><div>Calidad del crecimiento<div class="nav-sub">Volumen, calendario, productividad</div></div></button>
+    <button class="nav-item" role="tab" data-v="capacidad" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><div>Capacidad y personas<div class="nav-sub">Heads, utilización, horas</div></div></button>
+    <button class="nav-item" role="tab" data-v="escenarios" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg><div>Escenarios<div class="nav-sub">Simulador de cierre de año</div></div></button>
+    <div class="nav-lbl">Datos</div>
+    <button class="nav-item" role="tab" data-v="datos" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><div>Datos y calidad<div class="nav-sub">Cuadres, mapeo, tablas</div></div></button>
+    <details class="nav-foot"><summary>Glosario</summary>
+      <div class="gl"><b>GP Ejec.</b><span>Margen bruto de proyectos</span></div>
+      <div class="gl"><b>%GM</b><span>GP ÷ Ingresos</span></div>
+      <div class="gl"><b>Desocup.</b><span>Coste de capacidad sin asignar</span></div>
+      <div class="gl"><b>Util.</b><span>Horas facturadas ÷ disponibles</span></div>
+      <div class="gl"><b>Forecast</b><span>YTD + resto de año con estacionalidad FY26</span></div>
+      <div class="gl"><b>Ppto</b><span>Objetivo mensual FY27</span></div>
+      <div style="margin-top:8px">BU Data &amp; Analytics AI · Logicalis España</div>
+    </details>
+  </nav>
+
+  <main class="content" id="content" tabindex="-1">
+    <div class="toolbar" id="toolbar" hidden>
+      <span class="tb-lbl">Cierre a</span><div class="months" id="months" role="group" aria-label="Mes de cierre"></div>
+      <span class="tb-note" id="tb-note"></span>
+    </div>
+    <section id="empty" class="empty">
+      <div class="dz" id="dz">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+        <h2>Arrastra aquí el Excel de resultados</h2>
+        <p>Suelta el fichero <b>Rtdos_Servicios_BC_*.xlsx</b> o selecciónalo.<br>Todo el análisis ocurre <b>en tu navegador</b>: ningún dato sale de tu equipo.</p>
+        <button class="btn pri" id="browse" type="button">Seleccionar archivo</button>
+        <div class="hint">Pestaña ANALYTICS · columnas FY27, FY26 y Targets</div>
+      </div>
+    </section>
+    <div id="views" hidden>
+      <section class="view active" id="v-resumen" role="tabpanel"></section>
+      <section class="view" id="v-puente" role="tabpanel"></section>
+      <section class="view" id="v-pyl" role="tabpanel"></section>
+      <section class="view" id="v-lineas" role="tabpanel"></section>
+      <section class="view" id="v-calidad" role="tabpanel"></section>
+      <section class="view" id="v-capacidad" role="tabpanel"></section>
+      <section class="view" id="v-escenarios" role="tabpanel"></section>
+      <section class="view" id="v-datos" role="tabpanel"></section>
+    </div>
+  </main>
+</div>
+<div id="tip" role="tooltip"></div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- Librerías: copia local (carpeta vendor/) y, si no existe, CDN -->
+<script src="vendor/d3.min.js"></script>
+<script>window.d3||document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"><\/script>')</script>
+<script src="vendor/xlsx.full.min.js"></script>
+<script>window.XLSX||document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"><\/script>')</script>
+<script>
+'use strict';
+/* ═══════════════════════════════════════════════════════════════
+   CORE · configuración, parser, modelo de datos, formato
+   Sin acceso al DOM (se puede probar en Node).
+   ═══════════════════════════════════════════════════════════════ */
+const VERSION = 'v3.0.0';
+const FY = 'FY27', PY = 'FY26';
+const MONTHS = ['Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic','Ene','Feb'];
+const TH = { ok: 0.98, warn: 0.93 };            // cumplimiento: verde >= 98%, ámbar >= 93%
+
+/* Columnas de la pestaña ANALYTICS (índice base 0) */
+const COL = {
+  am: [1,2,3,4,5,6,7,8,9,10,11,12], at: 13, xlAcum: 24,
+  pm: [29,30,31,32,33,34,35,36,37,38,39,40], pt: 41,
+  tm: [58,59,60,61,62,63,64,65,66,67,68,69], tt: 70,
+};
+/* Filas (base 1). Verificadas contra Rtdos_Servicios_BC_2609 */
+const ROW = {
+  rev: 28, revOwn: 10, revBU: 16, revROS: 22,
+  gp: 52, gpDes: 161, gpCom: 193, pre: 188, opex: 202, ebitda: 204, gmTot: 70,
+  heads: 216, contr: 222, availH: 234, chgH: 244, blH: 272, util: 254, sub: 262, wd: 224, nwd: 266,
+};
+const LINES = [
+  { k:'del', n:'Delivery',         s:'Delivery', rev:24, gp:48, head:210, util:248, sub:258, rate:275, availH:228, blH:268 },
+  { k:'rec', n:'Rec Delivery',     s:'Rec Del.', rev:25, gp:49 },
+  { k:'ms',  n:'Managed Services', s:'MS',       rev:26, gp:50, head:213, util:251, sub:259, rate:277, availH:231, blH:269 },
+  { k:'res', n:'Resourcing',       s:'Resourcing', rev:27, gp:51, head:214, util:252, sub:260, rate:279, availH:232, blH:270 },
+];
+/* Umbral de sobrecarga de utilización por línea (Resourcing trabaja a ~100% por diseño) */
+const UTIL_MAX = { del: 0.88, ms: 0.92, res: 1.02 };
+
+/* ─── Parser ─── */
+let GRID = null;
+const num = v => { if (v == null || v === '') return 0; const n = typeof v === 'number' ? v : parseFloat(String(v).replace(',', '.')); return isNaN(n) ? 0 : n; };
+const gv = (r, c) => GRID ? num((GRID[r - 1] || [])[c]) : 0;
+const arr = (r, cols) => cols.map(c => gv(r, c));
+const rowLabel = r => { const v = GRID && (GRID[r - 1] || [])[0]; return v == null ? '' : String(v).trim(); };
+const setGrid = g => { GRID = g; };
+
+const sumTo = (a, n) => a.slice(0, n).reduce((s, v) => s + (v || 0), 0);
+const sumFrom = (a, n) => a.slice(n).reduce((s, v) => s + (v || 0), 0);
+const stdev = a => { if (a.length < 2) return 0; const m = a.reduce((s, v) => s + v, 0) / a.length; return Math.sqrt(a.reduce((s, v) => s + (v - m) ** 2, 0) / (a.length - 1)); };
+
+function rawRow(r) {
+  return { am: arr(r, COL.am), pm: arr(r, COL.pm), tm: arr(r, COL.tm), at: gv(r, COL.at), pt: gv(r, COL.pt), tt: gv(r, COL.tt), r };
+}
+function combine(a, b, sign) { // a + sign*b, mes a mes (series derivadas)
+  const f = (x, y) => x.map((v, i) => v + sign * y[i]);
+  return { am: f(a.am, b.am), pm: f(a.pm, b.pm), tm: f(a.tm, b.tm), at: a.at + sign * b.at, pt: a.pt + sign * b.pt, tt: a.tt + sign * b.tt, r: null };
+}
+
+/* Serie → acumulados, forecast estacional, cumplimiento.
+   type: flow (suma) · stock (foto de fin de mes) · ratio (media; ponderada si se pasa w) */
+function mkSeries(a, type, closed, w) {
+  const s = Object.assign({}, a, { type, closed });
+  const avg = (x, n) => n > 0 ? sumTo(x, n) / n : 0;
+  const wavg = (x, ww, n) => { let t = 0, d = 0; for (let i = 0; i < n; i++) { t += (x[i] || 0) * (ww[i] || 0); d += ww[i] || 0; } return d ? t / d : avg(x, n); };
+  if (type === 'stock') { s.actYTD = a.am[closed - 1] || 0; s.pyYTD = a.pm[closed - 1] || 0; }
+  else if (type === 'ratio') { s.actYTD = w ? wavg(a.am, w.am, closed) : avg(a.am, closed); s.pyYTD = w ? wavg(a.pm, w.pm, closed) : avg(a.pm, closed); }
+  else { s.actYTD = sumTo(a.am, closed); s.pyYTD = sumTo(a.pm, closed); }
+  s.avgYTD = avg(a.am, closed); s.avgPyYTD = avg(a.pm, closed);
+  s.last = a.am[closed - 1] || 0; s.lastPy = a.pm[closed - 1] || 0; s.lastTm = a.tm[closed - 1] || 0;
+  s.hasTm = a.tm.some(v => v !== 0);
+  s.tgt = a.tt || (s.hasTm ? sumTo(a.tm, 12) : 0);
+  s.tmYTD = sumTo(a.tm, closed);
+  s.tmRest = sumFrom(a.tm, closed);
+  s.att = type === 'flow' && s.tmYTD ? s.actYTD / s.tmYTD : null;
+  if (type === 'flow') {
+    let ratio = s.pyYTD !== 0 ? s.actYTD / s.pyYTD : 1;
+    if (!(ratio > 0)) ratio = 1; if (ratio > 3) ratio = 3;
+    s.ratio = ratio;
+    s.forecast = s.actYTD + (a.pt - s.pyYTD) * ratio;       // run-rate estacional
+    s.fcBud = s.hasTm ? s.actYTD + s.tmRest : null;          // YTD real + presupuesto restante
+  } else { s.ratio = 1; s.forecast = s.actYTD; s.fcBud = null; }
+  s.pyTot = a.pt;
+  return s;
+}
+
+function detectClosed() {
+  let n = 0; for (const v of arr(ROW.rev, COL.am)) { if (Math.abs(v) > 1e-6) n++; else break; }
+  return Math.max(1, n);
+}
+
+/* Construye todo el modelo a un mes de cierre dado (cut) */
+let D = null, CLOSED_MAX = 0;
+function buildData(cut) {
+  if (!GRID) return null;
+  CLOSED_MAX = detectClosed();
+  const closed = Math.max(1, Math.min(cut || CLOSED_MAX, CLOSED_MAX));
+  const F = r => mkSeries(rawRow(r), 'flow', closed);
+  const hrs = r => arr(r, COL.am), hrsP = r => arr(r, COL.pm);
+  const rat = (r, wr) => mkSeries(rawRow(r), 'ratio', closed, wr ? { am: hrs(wr), pm: hrsP(wr) } : null);
+  const rev = F(ROW.rev), gp = F(ROW.gp);
+  const gpDesRaw = rawRow(ROW.gpDes);
+  const des = mkSeries(combine(gpDesRaw, rawRow(ROW.gp), -1), 'flow', closed);   // efecto desocupación = GP Desocupación - GP Ejecución
+  D = {
+    closed, closedMax: CLOSED_MAX, monthLabel: MONTHS[closed - 1],
+    periodCode: GRID[3] && GRID[3][closed] != null ? String(GRID[3][closed]) : '',
+    rev, gp, des, pre: F(ROW.pre), gpCom: F(ROW.gpCom), opex: F(ROW.opex), ebitda: F(ROW.ebitda),
+    revOwn: F(ROW.revOwn), revBU: F(ROW.revBU), revROS: F(ROW.revROS),
+    heads: mkSeries(rawRow(ROW.heads), 'stock', closed), contr: mkSeries(rawRow(ROW.contr), 'stock', closed),
+    util: rat(ROW.util, ROW.availH), sub: rat(ROW.sub, ROW.blH),
+    availH: F(ROW.availH), chgH: F(ROW.chgH), blH: F(ROW.blH), nwd: F(ROW.nwd),
+    lines: LINES.map(L => {
+      const o = { k: L.k, n: L.n, s: L.s, rev: F(L.rev), gp: F(L.gp) };
+      if (L.head) { o.head = mkSeries(rawRow(L.head), 'stock', closed); o.util = rat(L.util, L.availH); o.sub = rat(L.sub, L.blH); o.rate = rat(L.rate, L.blH); }
+      return o;
+    }),
+  };
+  D.gm = {                                                   // %GM ejecución mensual
+    am: rev.am.map((r, i) => r ? gp.am[i] / r : 0), pm: rev.pm.map((r, i) => r ? gp.pm[i] / r : 0),
+    tm: arr(ROW.gmTot, COL.tm),
+  };
+  D.gm.ytd = rev.actYTD ? gp.actYTD / rev.actYTD : 0; D.gm.pyYtd = rev.pyYTD ? gp.pyYTD / rev.pyYTD : 0;
+  D.gm.tgtYtd = rev.tmYTD ? gp.tmYTD / rev.tmYTD : 0; D.gm.fc = rev.forecast ? gp.forecast / rev.forecast : 0; D.gm.tgt = rev.tgt ? gp.tgt / rev.tgt : 0;
+  return D;
+}
+
+/* Cuadres y comprobaciones del Excel (pestaña Datos y calidad) */
+function runChecks(d) {
+  const out = [], add = (lvl, msg) => out.push({ lvl, msg });
+  const pc = v => (v * 100).toFixed(2) + '%';
+  add('ok', `Meses con ingresos reales: ${d.closedMax} (${MONTHS[0]} a ${MONTHS[d.closedMax - 1]}).`);
+  const am = arr(ROW.rev, COL.am); let gap = false; for (let i = d.closedMax; i < 12; i++) if (Math.abs(am[i]) > 1e-6) gap = true;
+  if (gap) add('warn', 'Hay ingresos reales en meses posteriores al primer mes vacío: el cierre detectado puede ser incorrecto.');
+  const near = (a, b, tol) => Math.abs(a - b) <= Math.max(tol * Math.abs(b), 0.5);
+  const sLines = k => d.lines.reduce((s, l) => s + l[k].actYTD, 0);
+  near(sLines('rev'), d.rev.actYTD, 0.001) ? add('ok', 'Suma de líneas de ingresos = Total Revenue (YTD).') : add('warn', `Suma de líneas de ingresos (${f0(sLines('rev'))}) distinta de Total Revenue (${f0(d.rev.actYTD)}).`);
+  (() => { const s = d.lines.reduce((x, l) => x + l.gp.actYTD, 0); near(s, d.gp.actYTD, 0.001) ? add('ok', 'Suma de líneas de GP = GP Ejecución (YTD).') : add('warn', `Suma de líneas de GP (${f0(s)}) distinta de GP Ejecución (${f0(d.gp.actYTD)}).`); })();
+  const casc = d.gp.tgt + d.des.tgt + d.pre.tgt + d.opex.tgt;
+  near(casc, d.ebitda.tgt, 0.002) ? add('ok', 'Cascada de objetivos (GP + Desocupación + Preventa + OPEX) = EBITDA objetivo.') : add('warn', `La cascada de objetivos suma ${f0(casc)} y el EBITDA objetivo es ${f0(d.ebitda.tgt)}.`);
+  const cascY = d.gp.actYTD + d.des.actYTD + d.pre.actYTD + d.opex.actYTD;
+  near(cascY, d.ebitda.actYTD, 0.005) ? add('ok', 'Cascada real YTD (GP + Desocupación + Preventa + OPEX) = EBITDA real.') : add('warn', `Cascada real YTD suma ${f0(cascY)} y EBITDA real es ${f0(d.ebitda.actYTD)}.`);
+  [['Ingresos', ROW.rev], ['GP Ejecución', ROW.gp], ['EBITDA', ROW.ebitda]].forEach(([nm, r]) => {
+    const x = gv(r, COL.xlAcum), mine = sumTo(arr(r, COL.am), d.closedMax);
+    if (x) near(mine, x, 0.001) ? add('ok', `${nm}: YTD calculado = columna "Acumulado" del Excel (${f0(x)}).`) : add('warn', `${nm}: YTD calculado ${f0(mine)} vs columna "Acumulado" del Excel ${f0(x)}.`);
+    const py = sumTo(arr(r, COL.pm), 12); if (gv(r, COL.pt)) near(py, gv(r, COL.pt), 0.001) || add('warn', `${nm}: suma de meses FY26 (${f0(py)}) distinta del Total FY26 (${f0(gv(r, COL.pt))}).`);
+  });
+  [d.rev, d.gp, d.ebitda].forEach(s => { if (!s.tgt) add('warn', 'Falta el objetivo anual (columna Total FY27 TARGETS) en alguna métrica principal.'); });
+  const u = d.util.actYTD; if (u > 1.5 || u < 0.2) add('warn', `Utilización fuera de rango (${u.toFixed(2)}): ¿está en % en lugar de fracción?`);
+  if (d.gp.actYTD > d.rev.actYTD) add('warn', 'El GP supera a los ingresos: revisa las filas mapeadas.');
+  return out;
+}
+
+/* ─── Formato (es-ES, importes en k€) ─── */
+const f0 = n => Math.round(n).toLocaleString('es-ES', { useGrouping: 'always' });
+const f1 = n => n.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const fM = n => (n / 1000).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const pct = n => (n * 100).toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
+const pct0 = n => Math.round(n * 100) + '%';
+const sign = n => (n >= 0 ? '+' : '') + f0(n);
+const dRel = (cur, ref, o = {}) => {
+  if (!ref) return { cls: 'neu', val: 'n/d' };
+  const d = (cur - ref) / Math.abs(ref), good = o.inv ? d <= 0 : d >= 0;
+  return { cls: o.neutral ? 'neu' : good ? 'pos' : 'neg', val: (d >= 0 ? '+' : '') + (d * 100).toFixed(1) + '%' };
+};
+const dPP = (cur, ref, o = {}) => {
+  const d = cur - ref, good = o.inv ? d <= 0 : d >= 0, v = Math.round(d * 1000) / 10;
+  return { cls: Math.abs(d) < 0.0005 ? 'neu' : good ? 'pos' : 'neg', val: (v >= 0 ? '+' : '') + v.toFixed(1) + ' pp' };
+};
+const attCls = a => a == null ? 'neu' : a >= TH.ok ? 'pos' : a >= TH.warn ? 'amb' : 'neg';
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+
+if (typeof module !== 'undefined') module.exports = { setGrid, buildData, runChecks, COL, ROW, LINES, MONTHS, get D() { return D; } };
+/* ═══════════════════════════════════════════════════════════════
+   UI · helpers y toolkit de gráficos (D3 para escalas, SVG propio)
+   Todos los colores salen de variables CSS: cambian solos con el tema.
+   ═══════════════════════════════════════════════════════════════ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const C = {
+  real: 'var(--chart-fy27, var(--accent))', tgt: 'var(--chart-tgt, var(--blue))', py: 'var(--chart-fy26, var(--dim))',
+  grid: 'var(--chart-grid, var(--border))', axis: 'var(--chart-axis, var(--dim))',
+  pos: 'var(--green)', neg: 'var(--red)', amb: 'var(--amber)', blue: 'var(--blue)', purple: 'var(--purple)',
+  txt: 'var(--text)', mut: 'var(--muted)', dim: 'var(--dim)', card: 'var(--card)', card2: 'var(--card2)',
+};
+let ANIM = true;
+const reduceMotion = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ─── Tooltip (dentro del viewport) ─── */
+let tipEl = null;
+function tipShow(html, e) {
+  if (!tipEl) tipEl = $('#tip');
+  tipEl.innerHTML = html; tipEl.style.display = 'block';
+  const w = tipEl.offsetWidth, h = tipEl.offsetHeight;
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + w > innerWidth - 8) x = e.clientX - w - 14;
+  if (y + h > innerHeight - 8) y = e.clientY - h - 14;
+  tipEl.style.left = Math.max(8, x) + 'px'; tipEl.style.top = Math.max(8, y) + 'px';
+}
+const tipHide = () => { if (tipEl) tipEl.style.display = 'none'; };
+const tipRows = (title, rows) => `<div class="tt-h">${esc(title)}</div>` + rows.filter(Boolean).map(r =>
+  `<div class="tt-r"><span>${r.c ? `<i class="dot" style="background:${r.c}"></i>` : ''}${esc(r.l)}</span><b class="${r.cls || ''}">${r.v}</b></div>`).join('');
+
+/* ─── Piezas HTML ─── */
+function legend(items) {
+  return `<div class="legend">${items.map(i => `<span class="li"><i class="sw ${i.t}" style="--c:${i.c}"></i>${esc(i.l)}</span>`).join('')}</div>`;
+}
+function segHtml(grp, cur, opts) {
+  return `<div class="seg" role="group" aria-label="${esc(grp)}">${opts.map(o =>
+    `<button type="button" data-act="seg" data-grp="${grp}" data-val="${o[0]}" aria-pressed="${cur === o[0]}" class="${cur === o[0] ? 'active' : ''}">${esc(o[1])}</button>`).join('')}</div>`;
+}
+function sparkline(a, n, kind, tgt) {
+  const v = a.slice(0, n), W = 100, H = 30;
+  if (!v.length) return '';
+  const all = v.concat(tgt ? tgt.filter(x => x) : []);
+  let lo = Math.min(...all), hi = Math.max(...all);
+  if (kind === 'bar') lo = Math.min(0, lo); else { const p = (hi - lo) * .2 || 1; lo -= p; hi += p; }
+  const y = x => H - 2 - ((x - lo) / ((hi - lo) || 1)) * (H - 4);
+  if (kind === 'bar') {
+    const bw = W / 12, y0 = y(0);
+    const bars = v.map((x, i) => { const yy = y(x); return `<rect x="${(i * bw + 1).toFixed(1)}" y="${Math.min(yy, y0).toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${Math.max(1, Math.abs(yy - y0)).toFixed(1)}" rx="1.5" style="fill:${i === n - 1 ? C.real : 'var(--chart-fy27-fill, var(--accent-dim))'}"/>`; }).join('');
+    const tl = tgt && tgt.some(x => x) ? `<polyline fill="none" vector-effect="non-scaling-stroke" stroke-width="1.5" style="stroke:${C.tgt}" points="${tgt.map((x, i) => x ? `${(i * bw + bw / 2).toFixed(1)},${y(x).toFixed(1)}` : '').filter(Boolean).join(' ')}"/>` : '';
+    return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">${bars}${tl}</svg>`;
+  }
+  const bw = W / 12;
+  const pts = v.map((x, i) => `${(i * bw + bw / 2).toFixed(1)},${y(x).toFixed(1)}`).join(' ');
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" vector-effect="non-scaling-stroke" stroke-width="2" stroke-linejoin="round" style="stroke:${C.real}" points="${pts}"/></svg>`;
+}
+function kpiCard(o, i = 0) {
+  const rows = (o.rows || []).map(r => `<div class="k-row"><span class="lbl">${esc(r.lbl)}</span><span class="val ${r.cls || 'neu'}">${r.val}</span></div>`).join('');
+  let bar = '';
+  if (o.bar && o.bar.p != null) {
+    const p = o.bar.p, cls = p >= TH.ok ? 'ok' : p >= TH.warn ? 'warn' : 'bad', w = Math.min(p, 1.3) / 1.3 * 100;
+    bar = `<div class="k-bar" role="img" aria-label="${esc(o.lbl)}: ${pct0(p)} del presupuesto"><div class="k-track"><div class="k-fill ${cls}" data-w="${w.toFixed(1)}"></div><div class="k-tick" style="left:${(100 / 1.3).toFixed(1)}%"></div></div><div class="k-bl"><span>${o.bar.l}</span><span>${o.bar.r}</span></div></div>`;
+  }
+  return `<article class="card kpi rise" style="--i:${i}"><div class="k-lbl">${o.icon || ''}${esc(o.lbl)}</div><div class="k-val">${o.val}</div>${o.spark || ''}<div class="k-rows">${rows}</div>${bar}</article>`;
+}
+function fillBars(root) {
+  const set = () => $$('.k-fill[data-w]', root).forEach(b => { b.style.width = b.dataset.w + '%'; });
+  if (reduceMotion() || !ANIM) set(); else requestAnimationFrame(() => requestAnimationFrame(set));
+}
+const ICON = {
+  eur: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 9a5 5 0 1 0 0 6M5 11h7M5 14h7"/></svg>',
+  gp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>',
+  eb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9.5h4.5a1.5 1.5 0 010 3H9"/></svg>',
+  u: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>',
+  pp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>',
+  pc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>',
+  cal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+  clk: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+};
+
+/* ─── Toolkit SVG ─── */
+function mount(el, H, m) {
+  el.textContent = '';
+  const W = Math.max(280, Math.round(el.clientWidth) || 520);
+  const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
+    .style('width', '100%').style('height', 'auto').style('display', 'block').style('overflow', 'visible');
+  const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+  return { svg, g, W, H, iw: W - m.l - m.r, ih: H - m.t - m.b, m };
+}
+function txt(p, x, y, s, o = {}) {
+  return p.append('text').attr('x', x).attr('y', y).attr('text-anchor', o.a || 'start')
+    .style('font-size', (o.s || 11) + 'px').style('fill', o.f || C.dim).style('font-family', o.sans ? 'var(--sans)' : 'var(--mono)').style('font-weight', o.w || 400).style('paint-order', 'stroke').style('stroke', 'var(--card)').style('stroke-width', '3px').style('stroke-linejoin', 'round').text(s);
+}
+function yGrid(c, y, fmt, n = 4) {
+  y.ticks(n).forEach(t => {
+    c.g.append('line').attr('x1', 0).attr('x2', c.iw).attr('y1', y(t)).attr('y2', y(t))
+      .style('stroke', t === 0 ? C.axis : C.grid).attr('stroke-width', t === 0 ? 1 : 0.75).attr('stroke-dasharray', t === 0 ? null : '2 3');
+    txt(c.g, -8, y(t) + 4, fmt(t), { a: 'end' });
+  });
+}
+function xMonths(c, x, n) {
+  x.domain().forEach(i => txt(c.g, x(i) + x.bandwidth() / 2, c.ih + 17, MONTHS[i], { a: 'middle', f: i < n ? C.mut : C.dim, w: i === n - 1 ? 700 : 400, sans: true }));
+}
+const axM = v => (v / 1000).toLocaleString('es-ES', { maximumFractionDigits: 2 }) + 'M';
+const axK = v => Math.abs(v) >= 1000 ? axM(v) : Math.round(v) + 'k';
+const axP = v => Math.round(v * 100) + '%';
+function growIn(sel, i) {
+  if (!ANIM || reduceMotion()) return sel;
+  return sel.classed('grow', true).style('animation-delay', (i || 0) * 28 + 'ms');
+}
+function wrapLabel(s, max) {
+  const w = s.split(' '), out = []; let cur = '';
+  w.forEach(t => { if ((cur + ' ' + t).trim().length > max && cur) { out.push(cur); cur = t; } else cur = (cur + ' ' + t).trim(); });
+  if (cur) out.push(cur); return out.slice(0, 3);
+}
+
+/* Barras mensuales (flujos) o líneas (ratios) + líneas Ppto y FY26 */
+function monthlyChart(el, o) {
+  const n = o.closed, isLine = o.kind === 'line';
+  const c = mount(el, o.h || 200, { t: 16, r: 8, b: 26, l: isLine ? 42 : 50 });
+  const nz = a => a && a.some(v => v) ? a.map(v => v ? v : null) : null;
+  const tgt = nz(o.tgt), py = nz(o.py), real = o.real.slice(0, n);
+  const vals = [...real, ...(tgt || []), ...(py || [])].filter(v => v != null && isFinite(v));
+  let lo, hi;
+  if (isLine) { lo = d3.min(vals); hi = d3.max(vals); const p = (hi - lo) * .25 || Math.abs(hi) * .1 || .01; lo -= p; hi += p; }
+  else { lo = Math.min(0, d3.min(vals)); hi = Math.max(0, d3.max(vals)); hi += (hi - lo) * .14; }
+  const y = d3.scaleLinear().domain([lo, hi]).nice(4).range([c.ih, 0]);
+  const x = d3.scaleBand().domain(d3.range(12)).range([0, c.iw]).padding(.28);
+  yGrid(c, y, o.ax); xMonths(c, x, n);
+  const cx = i => x(i) + x.bandwidth() / 2, step = x.step();
+  const hl = c.g.append('rect').attr('y', 0).attr('height', c.ih).attr('width', step).attr('rx', 4).style('fill', C.card2).style('opacity', 0).style('pointer-events', 'none');
+  const path = (a, color, w, dash) => {
+    const ln = d3.line().defined(d => d.v != null).x(d => cx(d.i)).y(d => y(d.v)).curve(d3.curveMonotoneX);
+    c.g.append('path').datum(a.map((v, i) => ({ v, i }))).attr('d', ln).attr('fill', 'none').style('stroke', color).attr('stroke-width', w).attr('stroke-dasharray', dash || null).attr('stroke-linecap', 'round');
+  };
+  if (!isLine) {
+    const bw = Math.min(x.bandwidth(), 30), y0 = y(0);
+    real.forEach((v, i) => {
+      const yy = y(v), r = growIn(c.g.append('rect').attr('x', cx(i) - bw / 2).attr('y', Math.min(yy, y0)).attr('width', bw).attr('height', Math.max(1.5, Math.abs(yy - y0))).attr('rx', 3)
+        .style('fill', C.real).style('opacity', i === n - 1 ? 1 : 0.82).style('transform-box', 'fill-box').style('transform-origin', v >= 0 ? '50% 100%' : '50% 0%'), i);
+    });
+  }
+  if (py) path(py, C.py, 1.6, '4 3');
+  if (tgt) { path(tgt, C.tgt, 1.9); tgt.forEach((v, i) => v != null && c.g.append('circle').attr('cx', cx(i)).attr('cy', y(v)).attr('r', 2.6).style('fill', C.tgt).style('stroke', C.card).attr('stroke-width', 1)); }
+  if (isLine) {
+    path(real.map(v => v || null), C.real, 2.4);
+    real.forEach((v, i) => v && c.g.append('circle').attr('cx', cx(i)).attr('cy', y(v)).attr('r', i === n - 1 ? 4.2 : 3).style('fill', C.real).style('stroke', C.card).attr('stroke-width', 1.5));
+  }
+  const lv = real[n - 1];
+  if (lv != null) txt(c.g, cx(n - 1), y(lv) + (lv >= 0 ? -8 : 15), o.fmt(lv), { a: 'middle', f: C.txt, w: 700 });
+  c.svg.attr('aria-label', `${o.name}: último mes ${MONTHS[n - 1]} ${o.fmt(lv || 0)}`);
+  d3.range(12).forEach(i => {
+    c.g.append('rect').attr('x', x(i) - (step - x.bandwidth()) / 2).attr('y', 0).attr('width', step).attr('height', c.ih).style('fill', 'transparent')
+      .on('mousemove', e => {
+        hl.attr('x', x(i) - (step - x.bandwidth()) / 2).style('opacity', .9);
+        const rv = i < n ? real[i] : null, t = tgt && tgt[i], p = py && py[i];
+        let vs = null;
+        if (rv != null && t) { const d = isLine ? dPP(rv, t) : dRel(rv, t); vs = { l: 'vs Ppto', v: d.val, cls: d.cls }; }
+        let vp = null;
+        if (rv != null && p) { const d = isLine ? dPP(rv, p) : dRel(rv, p); vp = { l: 'vs FY26', v: d.val, cls: d.cls }; }
+        tipShow(tipRows(MONTHS[i] + (i < n ? '' : ' (sin cierre)'), [rv != null && { c: C.real, l: 'Real', v: o.fmt(rv) }, t != null && { c: C.tgt, l: 'Ppto', v: o.fmt(t) }, p != null && { c: C.py, l: 'FY26', v: o.fmt(p) }, vs, vp]), e);
+      }).on('mouseleave', () => { hl.style('opacity', 0); tipHide(); });
+  });
+}
+
+/* Series acumuladas con forecast estacional y banda ±1σ */
+function evoSeries(s) {
+  const n = s.closed, am = s.am, pm = s.pm, tm = s.tm, ratio = s.ratio;
+  const rr = []; for (let i = 0; i < n; i++) if (pm[i] > 0 && am[i] > 0) rr.push(am[i] / pm[i]);
+  const sd = Math.max(rr.length > 1 ? stdev(rr) : 0.08, 0.03), sdm = sd / Math.sqrt(Math.max(1, rr.length));
+  const o = { real: [], fc: [], py: [], tgt: [], hi: [], lo: [], bud: [] };
+  let a = 0, p = 0, t = 0, b = 0, sq = 0, sl = 0;
+  for (let i = 0; i < 12; i++) {
+    p += pm[i]; t += tm[i]; o.py.push(p); o.tgt.push(s.hasTm ? t : null);
+    if (i < n) { a += am[i]; o.real.push(a); o.fc.push(i === n - 1 ? a : null); o.hi.push(i === n - 1 ? a : null); o.lo.push(i === n - 1 ? a : null); }
+    else {
+      a += pm[i] * ratio; sq += pm[i] ** 2; sl += pm[i];
+      const band = Math.sqrt(sd * sd * sq + sdm * sdm * sl * sl);
+      o.real.push(null); o.fc.push(a); o.hi.push(a + band); o.lo.push(a - band);
+    }
+  }
+  o.sd = sd; return o;
+}
+function evoChart(el, s, o) {
+  const n = s.closed, e = evoSeries(s), c = mount(el, 280, { t: 20, r: 74, b: 28, l: 54 });
+  const vals = [...e.hi, ...e.real, ...e.py, ...e.tgt, s.tgt, ...e.lo].filter(v => v != null);
+  const y = d3.scaleLinear().domain([Math.min(0, d3.min(vals)), d3.max(vals) * 1.06]).nice(4).range([c.ih, 0]);
+  const x = d3.scalePoint().domain(d3.range(12)).range([10, c.iw - 6]);
+  yGrid(c, y, axM);
+  d3.range(12).forEach(i => txt(c.g, x(i), c.ih + 17, MONTHS[i], { a: 'middle', f: i < n ? C.mut : C.dim, w: i === n - 1 ? 700 : 400, sans: true }));
+  c.g.append('rect').attr('x', 0).attr('y', 0).attr('width', x(n - 1)).attr('height', c.ih).style('fill', C.real).style('opacity', .05);
+  c.g.append('line').attr('x1', x(n - 1)).attr('x2', x(n - 1)).attr('y1', 0).attr('y2', c.ih).style('stroke', C.axis).attr('stroke-dasharray', '3 3');
+  txt(c.g, x(n - 1) - 6, 10, 'REAL', { a: 'end', s: 10 }); txt(c.g, x(n - 1) + 6, 10, 'FORECAST', { s: 10 });
+  const ln = (arr, col, w, dash) => c.g.append('path').datum(arr.map((v, i) => ({ v, i }))).attr('d', d3.line().defined(d => d.v != null).x(d => x(d.i)).y(d => y(d.v)).curve(d3.curveMonotoneX))
+    .attr('fill', 'none').style('stroke', col).attr('stroke-width', w).attr('stroke-dasharray', dash || null).attr('stroke-linecap', 'round');
+  if (n < 12) c.g.append('path').datum(e.hi).attr('d', d3.area().defined((d, i) => e.hi[i] != null).x((d, i) => x(i)).y0((d, i) => y(e.lo[i])).y1((d, i) => y(e.hi[i])).curve(d3.curveMonotoneX))
+    .style('fill', 'var(--chart-fy27-fill, var(--accent-dim))').style('opacity', 1);
+  ln(e.py, C.py, 1.6, '4 3');
+  if (s.hasTm) ln(e.tgt, C.tgt, 2); else if (s.tgt) { c.g.append('line').attr('x1', 0).attr('x2', c.iw).attr('y1', y(s.tgt)).attr('y2', y(s.tgt)).style('stroke', C.tgt).attr('stroke-width', 1.6).attr('stroke-dasharray', '6 4'); }
+  if (n < 12) ln(e.fc, C.real, 2.2, '6 4');
+  ln(e.real, C.real, 3);
+  e.real.forEach((v, i) => v != null && c.g.append('circle').attr('cx', x(i)).attr('cy', y(v)).attr('r', i === n - 1 ? 5 : 3.2).style('fill', C.real).style('stroke', C.card).attr('stroke-width', 1.5));
+  const ends = [{ v: e.fc[11] != null ? e.fc[11] : e.real[11], l: o.fcLabel || 'FC', c: C.real }, { v: s.hasTm ? e.tgt[11] : s.tgt, l: 'Ppto', c: C.tgt }, { v: e.py[11], l: 'FY26', c: C.py }].filter(d => d.v != null).sort((a, b) => b.v - a.v);
+  let last = -99;
+  ends.forEach(d => { let yy = y(d.v); if (yy - last < 14) yy = last + 14; last = yy; txt(c.g, c.iw + 2, yy + 4, `${d.l} ${(d.v / 1000).toLocaleString('es-ES', { maximumFractionDigits: 2 })}M`, { f: d.c === C.py ? C.dim : C.txt, s: 10.5, w: 600 }); });
+  c.svg.attr('aria-label', `Evolución acumulada de ${o.name}. Forecast de cierre ${axM(ends[0].v)}`);
+  const hl = c.g.append('line').attr('y1', 0).attr('y2', c.ih).style('stroke', C.axis).style('opacity', 0).style('pointer-events', 'none');
+  d3.range(12).forEach(i => {
+    c.g.append('rect').attr('x', x(i) - c.iw / 24).attr('y', 0).attr('width', c.iw / 12).attr('height', c.ih).style('fill', 'transparent')
+      .on('mousemove', ev => {
+        hl.attr('x1', x(i)).attr('x2', x(i)).style('opacity', .6);
+        const act = e.real[i], fc = e.fc[i], t = e.tgt[i], p = e.py[i];
+        tipShow(tipRows(MONTHS[i] + ' · acumulado', [act != null && { c: C.real, l: 'Real', v: fM(act) + ' M€' }, act == null && fc != null && { c: C.real, l: 'Forecast', v: fM(fc) + ' M€' }, act == null && e.lo[i] != null && { l: 'Rango ±1σ', v: `${fM(e.lo[i])} a ${fM(e.hi[i])}` }, t != null && { c: C.tgt, l: 'Ppto', v: fM(t) + ' M€' }, p != null && { c: C.py, l: 'FY26', v: fM(p) + ' M€' }, act != null && t ? { l: 'vs Ppto', v: dRel(act, t).val, cls: dRel(act, t).cls } : null]), ev);
+      }).on('mouseleave', () => { hl.style('opacity', 0); tipHide(); });
+  });
+  return e;
+}
+
+/* Cascada (puente). steps: [{label,val,type:'anchor'|'delta',color?,tip?}] */
+function waterfall(el, steps, o) {
+  const c = mount(el, o.h || 260, { t: 28, r: 10, b: 54, l: 56 });
+  let run = 0; const pts = [];
+  steps.forEach(s => { if (s.type === 'anchor') { s.b = null; s.t = s.val; run = s.val; } else { s.b = run; s.t = run + s.val; run = s.t; } pts.push(s.t); if (s.b != null) pts.push(s.b); });
+  const lo = d3.min(pts), hi = d3.max(pts), span = (hi - lo) || Math.abs(hi) * .05 || 1;
+  let dmin = lo >= 0 ? Math.max(0, lo - span * .9) : lo - span * .15;
+  if (lo >= 0 && dmin < lo * 0.3) dmin = 0;
+  const trunc = dmin > 0, base = dmin > 0 ? dmin : Math.min(0, lo);
+  const y = d3.scaleLinear().domain([dmin, hi + span * .22]).range([c.ih, 0]);
+  const x = d3.scaleBand().domain(d3.range(steps.length)).range([0, c.iw]).padding(.3);
+  yGrid(c, y, o.ax || axM);
+  if (trunc) txt(c.g, 0, -14, 'Eje recortado: no empieza en 0', { s: 10, sans: true, f: C.dim });
+  steps.forEach((s, i) => {
+    const xx = x(i), bw = x.bandwidth();
+    const top = s.type === 'anchor' ? y(s.val) : Math.min(y(s.b), y(s.t));
+    const h = s.type === 'anchor' ? y(base) - y(s.val) : Math.max(3, Math.abs(y(s.b) - y(s.t)));
+    const col = s.type === 'anchor' ? (s.color || C.tgt) : (s.val >= 0 ? C.pos : C.neg);
+    if (i > 0) c.g.append('line').attr('x1', x(i - 1) + bw).attr('x2', xx).attr('y1', y(steps[i - 1].t)).attr('y2', y(steps[i - 1].t)).style('stroke', C.dim).attr('stroke-dasharray', '2 3');
+    growIn(c.g.append('rect').attr('x', xx).attr('y', top).attr('width', bw).attr('height', Math.max(1, h)).attr('rx', 3).style('fill', col).style('opacity', s.type === 'anchor' ? 1 : .88)
+      .style('transform-box', 'fill-box').style('transform-origin', '50% 100%'), i)
+      .on('mousemove', e => tipShow(s.tip || tipRows(s.label, [{ l: s.type === 'anchor' ? 'Valor' : 'Efecto', v: (s.type === 'anchor' ? o.fA(s.val) : o.fD(s.val)) }]), e)).on('mouseleave', tipHide);
+    const lab = s.type === 'anchor' ? o.fA(s.val) : o.fD(s.val);
+    const below = s.type === 'delta' && s.val < 0;
+    txt(c.g, xx + bw / 2, below ? top + h + 14 : top - 6, lab, { a: 'middle', f: C.txt, w: 700 });
+    wrapLabel(s.label, Math.max(8, Math.floor(bw / 6.3))).forEach((ln, k) => txt(c.g, xx + bw / 2, c.ih + 17 + k * 13, ln, { a: 'middle', f: C.mut, sans: true }));
+  });
+  c.svg.attr('aria-label', o.name || 'Cascada');
+}
+
+/* Barras agrupadas: groups [{label, vals:[{k,v,c}]}] */
+function groupBars(el, groups, o) {
+  const c = mount(el, o.h || 220, { t: 18, r: 10, b: 30, l: 42 });
+  const hi = d3.max(groups, g => d3.max(g.vals, v => v.v)) * 1.18 || 1;
+  const y = d3.scaleLinear().domain([0, hi]).nice(4).range([c.ih, 0]);
+  const x0 = d3.scaleBand().domain(groups.map(g => g.label)).range([0, c.iw]).padding(.28);
+  const x1 = d3.scaleBand().domain(groups[0].vals.map(v => v.k)).range([0, x0.bandwidth()]).padding(.1);
+  yGrid(c, y, o.ax || (v => Math.round(v)));
+  groups.forEach((g, gi) => {
+    g.vals.forEach((v, vi) => {
+      growIn(c.g.append('rect').attr('x', x0(g.label) + x1(v.k)).attr('y', y(v.v)).attr('width', Math.min(x1.bandwidth(), 34)).attr('height', c.ih - y(v.v)).attr('rx', 3).style('fill', v.c).style('opacity', v.o || 1)
+        .style('transform-box', 'fill-box').style('transform-origin', '50% 100%'), gi * 2 + vi)
+        .on('mousemove', e => tipShow(tipRows(`${g.label} · ${v.k}`, [{ c: v.c, l: o.unit || 'Valor', v: o.fmt(v.v) }]), e)).on('mouseleave', tipHide);
+      txt(c.g, x0(g.label) + x1(v.k) + Math.min(x1.bandwidth(), 34) / 2, y(v.v) - 5, o.fmt(v.v), { a: 'middle', f: C.txt, s: 10.5, w: 600 });
+    });
+    txt(c.g, x0(g.label) + x0.bandwidth() / 2, c.ih + 18, g.label, { a: 'middle', f: C.mut, sans: true });
+  });
+  c.svg.attr('aria-label', o.name || 'Barras agrupadas');
+}
+
+/* Líneas mensuales de varias series (trayectorias) */
+function lineChart(el, series, o) {
+  const n = o.closed, c = mount(el, o.h || 210, { t: 16, r: 10, b: 26, l: o.l || 44 });
+  const vals = series.flatMap(s => s.v.filter(v => v != null && isFinite(v)));
+  let lo = d3.min(vals), hi = d3.max(vals); const p = (hi - lo) * .22 || Math.abs(hi) * .1 || 1; lo -= p; hi += p;
+  const y = d3.scaleLinear().domain([lo, hi]).nice(4).range([c.ih, 0]);
+  const x = d3.scalePoint().domain(d3.range(12)).range([8, c.iw - 8]);
+  yGrid(c, y, o.ax);
+  d3.range(12).forEach(i => txt(c.g, x(i), c.ih + 17, MONTHS[i], { a: 'middle', f: i < n ? C.mut : C.dim, w: i === n - 1 ? 700 : 400, sans: true }));
+  series.forEach(s => {
+    c.g.append('path').datum(s.v.map((v, i) => ({ v, i }))).attr('d', d3.line().defined(d => d.v != null).x(d => x(d.i)).y(d => y(d.v)).curve(d3.curveMonotoneX))
+      .attr('fill', 'none').style('stroke', s.c).attr('stroke-width', s.w || 2.2).attr('stroke-dasharray', s.dash || null).attr('stroke-linecap', 'round');
+    if (s.dots) s.v.forEach((v, i) => v != null && c.g.append('circle').attr('cx', x(i)).attr('cy', y(v)).attr('r', 3).style('fill', s.c).style('stroke', C.card).attr('stroke-width', 1.4));
+  });
+  const hl = c.g.append('line').attr('y1', 0).attr('y2', c.ih).style('stroke', C.axis).style('opacity', 0).style('pointer-events', 'none');
+  d3.range(12).forEach(i => {
+    c.g.append('rect').attr('x', x(i) - c.iw / 24).attr('y', 0).attr('width', c.iw / 12).attr('height', c.ih).style('fill', 'transparent')
+      .on('mousemove', ev => { hl.attr('x1', x(i)).attr('x2', x(i)).style('opacity', .6); tipShow(tipRows(MONTHS[i], series.map(s => s.v[i] != null && { c: s.c, l: s.name, v: o.fmt(s.v[i]) })), ev); })
+      .on('mouseleave', () => { hl.style('opacity', 0); tipHide(); });
+  });
+  c.svg.attr('aria-label', o.name || 'Evolución mensual');
+}
+
+/* Barras apiladas por mes. layers [{name,v[12],c}] */
+function stackedMonthly(el, layers, o) {
+  const n = o.closed, c = mount(el, o.h || 200, { t: 16, r: 8, b: 26, l: 50 });
+  const tot = d3.range(12).map(i => layers.reduce((s, l) => s + (i < n ? Math.max(0, l.v[i] || 0) : 0), 0));
+  const y = d3.scaleLinear().domain([0, d3.max(tot) * 1.12 || 1]).nice(4).range([c.ih, 0]);
+  const x = d3.scaleBand().domain(d3.range(12)).range([0, c.iw]).padding(.28);
+  yGrid(c, y, axK); xMonths(c, x, n);
+  const bw = Math.min(x.bandwidth(), 30);
+  for (let i = 0; i < n; i++) {
+    let acc = 0;
+    layers.forEach(l => { const v = Math.max(0, l.v[i] || 0); if (!v) return; const y1 = y(acc + v), y0 = y(acc);
+      c.g.append('rect').attr('x', x(i) + (x.bandwidth() - bw) / 2).attr('y', y1).attr('width', bw).attr('height', Math.max(1, y0 - y1 - 1.5)).attr('rx', 2).style('fill', l.c).style('opacity', .92)
+        .on('mousemove', e => tipShow(tipRows(MONTHS[i], layers.map(q => ({ c: q.c, l: q.name, v: f0(Math.max(0, q.v[i] || 0)) + ' k€' }))), e)).on('mouseleave', tipHide);
+      acc += v; });
+  }
+  c.svg.attr('aria-label', o.name || 'Barras apiladas');
+}
+
+/* Barras divergentes por línea: volumen vs productividad vs calendario */
+function divergingGroups(el, groups, o) {
+  const c = mount(el, o.h || 230, { t: 18, r: 10, b: 32, l: 52 });
+  const all = groups.flatMap(g => g.vals.map(v => v.v).concat([g.net]));
+  const lo = Math.min(0, d3.min(all)), hi = Math.max(0, d3.max(all));
+  const y = d3.scaleLinear().domain([lo - (hi - lo) * .1, hi + (hi - lo) * .15]).nice(4).range([c.ih, 0]);
+  const x0 = d3.scaleBand().domain(groups.map(g => g.label)).range([0, c.iw]).padding(.25);
+  const x1 = d3.scaleBand().domain(groups[0].vals.map(v => v.k)).range([0, x0.bandwidth()]).padding(.12);
+  yGrid(c, y, axK);
+  groups.forEach((g, gi) => {
+    g.vals.forEach((v, vi) => {
+      const bw = Math.min(x1.bandwidth(), 28), xx = x0(g.label) + x1(v.k) + (x1.bandwidth() - bw) / 2;
+      growIn(c.g.append('rect').attr('x', xx).attr('y', Math.min(y(v.v), y(0))).attr('width', bw).attr('height', Math.max(1.5, Math.abs(y(v.v) - y(0)))).attr('rx', 2.5).style('fill', v.c).style('opacity', .9)
+        .style('transform-box', 'fill-box').style('transform-origin', v.v >= 0 ? '50% 100%' : '50% 0%'), gi + vi)
+        .on('mousemove', e => tipShow(tipRows(`${g.label}`, [{ c: v.c, l: v.k, v: sign(v.v) + ' k€' }, { l: 'Δ ingresos total', v: sign(g.net) + ' k€' }]), e)).on('mouseleave', tipHide);
+    });
+    const mx = x0(g.label) + x0.bandwidth() / 2;
+    c.g.append('path').attr('d', d3.symbol(d3.symbolDiamond, 60)()).attr('transform', `translate(${mx},${y(g.net)})`).style('fill', C.txt).style('stroke', C.card).attr('stroke-width', 1.5)
+      .on('mousemove', e => tipShow(tipRows(g.label, [{ l: 'Δ ingresos total', v: sign(g.net) + ' k€' }]), e)).on('mouseleave', tipHide);
+    txt(c.g, mx, c.ih + 19, g.label, { a: 'middle', f: C.mut, sans: true });
+  });
+  c.svg.attr('aria-label', o.name || 'Descomposición por línea');
+}
+/* ═══════════════════════════════════════════════════════════════
+   VISTAS · cada función pinta su sección a partir de D (modelo) y S (estado)
+   ═══════════════════════════════════════════════════════════════ */
+const S = {
+  view: 'resumen', cut: null, evoM: 'rev', bridgeM: 'rev', bridgeH: 'ytd', lineM: 'rev', line: 'tot',
+  sort: { k: 'actYTD', dir: -1 }, sigAll: false, editSig: null, sim: null, datosM: 'rev', file: null,
+};
+const MET = { rev: 'Ingresos', gp: 'GP Ejecución', ebitda: 'EBITDA' };
+const metSeries = m => D[m];
+const setView = (id, html) => { const el = $('#v-' + id); el.innerHTML = html; return el; };
+const hd = (t, sub, ctrl) => `<div class="page-hd"><div><h1>${t}</h1><div class="sub">${sub}</div></div>${ctrl ? `<div class="ctrls">${ctrl}</div>` : ''}</div>`;
+const rd = (n, i = 0) => `rise" style="--i:${i}`;
+const pctSigned = x => (x >= 0 ? '+' : '') + (x * 100).toFixed(1) + '%';
+
+/* ─── Notas de contexto en señales (localStorage con fallback en memoria) ─── */
+let NOTES = {};
+try { NOTES = JSON.parse(localStorage.getItem('bu-signal-notes') || '{}') || {}; } catch (e) { NOTES = {}; }
+const saveNotes = () => { try { localStorage.setItem('bu-signal-notes', JSON.stringify(NOTES)); } catch (e) { /* sin almacenamiento */ } };
+
+/* ─── Motor de señales ─── */
+function signals(d) {
+  const out = [], n = d.closed, add = (id, t, x) => out.push({ id, t, x });
+  const T_OK = n <= 3 ? .9 : n <= 6 ? .93 : .97, T_LO = n <= 3 ? .8 : n <= 6 ? .85 : .9, T_HI = n <= 3 ? 1.25 : n <= 6 ? 1.18 : 1.12;
+  const conf = n <= 3 ? 'baja' : n <= 6 ? 'moderada' : n <= 9 ? 'buena' : 'alta';
+  const rA = d.rev.forecast / d.rev.tgt, gA = d.gp.forecast / d.gp.tgt, eA = d.ebitda.forecast / d.ebitda.tgt;
+  const mq = Math.min(4, Math.ceil(n / 3) + 1);
+  if (rA >= 1 && gA >= 1 && eA >= 1) add('cierre', 'green', `Las tres métricas cierran por encima del objetivo en el forecast: ingresos ${pct0(rA)}, GP ${pct0(gA)} y EBITDA ${pct0(eA)} (confianza ${conf}).`);
+  else if (rA < T_LO || eA < T_LO) add('cierre', 'red', `Cierre en riesgo: ingresos al ${pct0(rA)} y EBITDA al ${pct0(eA)} del objetivo. Brecha de ingresos de ${fM(Math.abs(d.rev.tgt - d.rev.forecast))} M€ (confianza ${conf}).`);
+  else if (rA < T_OK || eA < T_OK) add('cierre', 'amber', `Trayectoria mixta: ingresos ${pct0(rA)}, EBITDA ${pct0(eA)} del objetivo. Seguimiento prioritario en Q${mq}.`);
+  [['ingresos', d.rev], ['GP', d.gp], ['EBITDA', d.ebitda]].forEach(([nm, s]) => {
+    if (s.att != null && s.att < TH.warn) add('ytd-' + nm, s.att < .9 ? 'red' : 'amber', `${nm[0].toUpperCase() + nm.slice(1)} YTD al ${pct0(s.att)} del presupuesto (${f0(s.actYTD)} vs ${f0(s.tmYTD)} k€).`);
+  });
+  const gmY = d.gm.ytd, gmP = d.gm.pyYtd, u = d.util.actYTD;
+  if (gA > T_HI) {
+    if (u > .93 && u < 1.5) add('gp', 'amber', `GP al ${pct0(gA)} del objetivo con utilización ${pct(u)}: crecimiento exigente, valida que el margen ${pct(gmY)} aguante.`);
+    else if (gmY > gmP * 1.04) add('gp', 'green', `GP al ${pct0(gA)} del objetivo con mejora de margen (${pct(gmY)} vs ${pct(gmP)} en FY26): crecimiento de calidad.`);
+    else add('gp', 'amber', `GP al ${pct0(gA)} del objetivo (confianza ${conf}): ¿mix favorable o costes diferidos? Revisar en el cierre de Q${mq}.`);
+  } else if (gA < T_LO) add('gp', 'red', `GP en riesgo: ${pct0(gA)} del objetivo, brecha de ${fM(Math.abs(d.gp.tgt - d.gp.forecast))} M€. Revisar cobertura y tarifa.`);
+  /* Líneas: cumplimiento YTD y rachas */
+  const streak = (s, thr) => { let k = 0; for (let i = d.closed - 1; i >= 0; i--) { if (s.tm[i] > 0 && s.am[i] / s.tm[i] < thr) k++; else break; } return k; };
+  d.lines.forEach(l => [['rev', 'ingresos'], ['gp', 'GP']].forEach(([k, nm]) => {
+    const s = l[k]; if (s.att == null || s.tmYTD < 30) return;
+    if (s.att < TH.warn) { const st = streak(s, .9); add(`l-${l.k}-${k}`, s.att < .9 ? 'red' : 'amber', `${l.n}: ${nm} al ${pct0(s.att)} del presupuesto YTD (${f0(s.actYTD)} vs ${f0(s.tmYTD)} k€)${st >= 2 ? `, ${st} meses seguidos por debajo del 90%` : ''}.`); }
+  }));
+  const best = d.lines.filter(l => l.rev.att != null && l.rev.tmYTD > 100).sort((a, b) => b.rev.att - a.rev.att)[0];
+  if (best && best.rev.att >= 1.1) add('best', 'green', `${best.n} lidera: ingresos al ${pct0(best.rev.att)} del presupuesto YTD (${sign(best.rev.actYTD - best.rev.tmYTD)} k€) y GP al ${pct0(best.gp.att || 0)}.`);
+  /* Último mes: colapso de GP en una línea */
+  const lm = d.lines.filter(l => l.gp.lastTm > 20 && l.gp.last / l.gp.lastTm < .6);
+  if (lm.length) {
+    const w = lm.reduce((a, b) => b.gp.last / b.gp.lastTm < a.gp.last / a.gp.lastTm ? b : a), g = w.gp;
+    const prevBad = n >= 2 && g.tm[n - 2] > 20 && g.am[n - 2] / g.tm[n - 2] < .6, cum = w.rev.actYTD > 0 ? g.actYTD / w.rev.actYTD : 0;
+    add('lastm', prevBad || cum < .1 ? 'red' : 'amber', `${w.n}: GP de ${MONTHS[n - 1]} ${f0(g.last)} k€ vs objetivo ${f0(g.lastTm)} k€ (${pct0(g.last / g.lastTm)}). ${prevBad ? 'Segundo mes consecutivo: señal estructural.' : 'Mes suelto, acumulado de la línea con margen ' + pct(cum) + ': puede ser desfase de reconocimiento en proyectos a precio cerrado. Confirmar en detalle de proyecto.'}`);
+  }
+  /* Capacidad */
+  d.lines.filter(l => l.util).forEach(l => { const m = UTIL_MAX[l.k]; if (m && l.util.actYTD > m && l.util.actYTD < 1.5) add('u-' + l.k, 'red', `${l.n}: utilización ${pct(l.util.actYTD)}, por encima del umbral de ${pct0(m)}. Riesgo de sobrecarga: contratar o redistribuir.`); });
+  if (u > .93 && u < 1.5) add('u-bu', 'amber', `Utilización de la BU ${pct(u)}: poco margen de maniobra, vigilar picos y subcontratación.`);
+  const dsub = d.sub.actYTD - d.sub.pyYTD;
+  if (dsub > .02) add('sub', 'amber', `Subcontratación ${pct(d.sub.actYTD)} (${(dsub * 100).toFixed(1)} pp más que en FY26): el mix externo comprime el margen.`);
+  /* Costes por encima de presupuesto */
+  [['Preventa', d.pre], ['Desocupación', d.des], ['OPEX', d.opex]].forEach(([nm, s]) => { if (s.att != null && s.att > 1.08 && Math.abs(s.tmYTD) > 50) add('c-' + nm, 'amber', `${nm}: ${f0(-s.actYTD)} k€ de coste YTD, un ${pct0(s.att - 1)} por encima del presupuesto (${f0(-s.tmYTD)} k€).`); });
+  /* Calidad del crecimiento */
+  const rg = d.rev.pyYTD > 0 ? d.rev.actYTD / d.rev.pyYTD - 1 : 0, gg = d.gp.pyYTD > 0 ? d.gp.actYTD / d.gp.pyYTD - 1 : 0;
+  if (rg > .05 && gg > rg * 1.2) add('cal', 'green', `Crecimiento de calidad: el GP crece ${pct(gg)} frente a ${pct(rg)} de los ingresos.`);
+  else if (rg > .05 && gg < rg * .6 && n >= 4) add('cal', 'amber', `Compresión de margen: ingresos ${pctSigned(rg)} pero GP ${pctSigned(gg)}. Revisar mix y eficiencia por línea.`);
+  add('fc', 'blue', `Forecast de ingresos: run-rate estacional ${fM(d.rev.forecast)} M€, YTD + presupuesto restante ${fM(d.rev.fcBud)} M€, objetivo ${fM(d.rev.tgt)} M€. Confianza ${conf} con ${n} meses cerrados.`);
+  const ord = { red: 0, amber: 1, green: 2, blue: 3 };
+  return out.sort((a, b) => ord[a.t] - ord[b.t]);
+}
+function signalsHtml(d) {
+  const all = signals(d), shown = S.sigAll ? all : all.slice(0, 5);
+  const html = shown.map(s => {
+    const key = d.closed + '|' + s.id, note = NOTES[key];
+    const edit = S.editSig === s.id;
+    return `<div class="sig ${s.t}"><div class="sig-row"><span>${esc(s.x)}</span><button class="sig-btn" type="button" data-act="signote" data-id="${esc(s.id)}" title="Añadir contexto a esta señal" aria-label="Añadir contexto">✎</button></div>${note && !edit ? `<div class="sig-note">Contexto: ${esc(note)} <button class="sig-btn" type="button" data-act="sigdel" data-id="${esc(s.id)}" aria-label="Quitar contexto">✕</button></div>` : ''}${edit ? `<div class="sig-edit"><input type="text" id="sig-in" value="${esc(note || '')}" placeholder="Ej.: previsto en plan" maxlength="200" aria-label="Contexto de la señal"><button class="btn" type="button" data-act="sigsave" data-id="${esc(s.id)}">Guardar</button></div>` : ''}</div>`;
+  }).join('');
+  return `<div class="sig-list">${html}</div>${all.length > 5 ? `<button class="linkbtn" type="button" data-act="sigmore">${S.sigAll ? 'Ver menos' : `Ver las ${all.length} señales`}</button>` : ''}`;
+}
+
+/* ═══ RESUMEN ═══ */
+function vResumen() {
+  const d = D, n = d.closed, rev = d.rev, gp = d.gp, eb = d.ebitda;
+  const ck = (l, s) => `<div class="chipk ${attCls(s.att)}"><span class="cl">${l} vs ppto YTD</span><span class="cv">${s.att != null ? pct0(s.att) : 'n/d'}</span><span class="cs">${fM(s.actYTD)} M€ · ${dRel(s.actYTD, s.pyYTD).val} vs ${PY}</span></div>`;
+  const fcA = rev.forecast / rev.tgt;
+  const hero = `<div class="hero rise"><div><div class="eyebrow">${FY} · cierre a ${d.monthLabel} · ${n} de 12 meses</div>
+    <h2>La BU ha facturado <b>${fM(rev.actYTD)} M€</b>${rev.att != null ? `, un <b>${pct0(rev.att)}</b> del presupuesto YTD,` : ''} con un EBITDA de <b>${fM(eb.actYTD)} M€</b>. El forecast de cierre es <b>${fM(rev.forecast)} M€</b>, el ${pct0(fcA)} del objetivo.</h2></div>
+    <div class="chips">${ck('Ingresos', rev)}${ck('GP', gp)}${ck('EBITDA', eb)}</div></div>`;
+  const kp = (lbl, icon, s, extra) => kpiCard({
+    lbl, icon, val: `${fM(s.actYTD)}<span class="u">M€</span>`, spark: sparkline(s.am, n, 'bar', s.tm),
+    rows: [{ lbl: 'vs Ppto YTD', val: s.att != null ? pct(s.att) : 'n/d', cls: attCls(s.att) }, { lbl: 'vs ' + PY, ...dRel(s.actYTD, s.pyYTD) }, { lbl: 'Forecast cierre', val: pct0(s.forecast / s.tgt) + ' obj.', cls: s.forecast >= s.tgt ? 'pos' : 'amb' }].concat(extra || []),
+    bar: s.att != null ? { p: s.att, l: 'Real ' + fM(s.actYTD) + 'M', r: 'Ppto ' + fM(s.tmYTD) + 'M' } : null,
+  }, extra && extra.i || 0);
+  const kpis = [
+    kp('Ingresos', ICON.eur, rev), kp('GP Ejecución', ICON.gp, gp, [{ lbl: '%GM', val: pct(d.gm.ytd), cls: 'neu' }]),
+    kp('EBITDA Servicios', ICON.eb, eb, [{ lbl: '% s/ingresos', val: pct(eb.actYTD / rev.actYTD), cls: 'neu' }]),
+    kpiCard({ lbl: '%GM Ejecución', icon: ICON.pc, val: pct(d.gm.ytd), spark: sparkline(d.gm.am, n, 'line'), rows: [{ lbl: 'vs Ppto YTD', ...dPP(d.gm.ytd, d.gm.tgtYtd) }, { lbl: 'vs ' + PY, ...dPP(d.gm.ytd, d.gm.pyYtd) }, { lbl: 'Ppto anual', val: pct(d.gm.tgt), cls: 'neu' }] }, 3),
+    kpiCard({ lbl: 'Utilización', icon: ICON.u, val: pct(d.util.actYTD), spark: sparkline(d.util.am, n, 'line'), rows: [{ lbl: 'vs ' + PY, ...dPP(d.util.actYTD, d.util.pyYTD) }, { lbl: 'Horas facturadas', val: f0(d.chgH.actYTD / 1000) + ' k h', cls: 'neu' }] }, 4),
+    kpiCard({ lbl: `Heads (${d.monthLabel})`, icon: ICON.pp, val: `${f0(d.heads.actYTD)}<span class="u">FTE</span>`, spark: sparkline(d.heads.am, n, 'line'), rows: [{ lbl: 'vs ' + PY, ...dRel(d.heads.actYTD, d.heads.pyYTD, { neutral: true }) }, { lbl: 'Contractors', val: f0(d.contr.actYTD), cls: 'neu' }] }, 5),
+  ].join('');
+  const el = setView('resumen', hd('Resumen ejecutivo', `Acumulado a ${d.monthLabel} ${FY} frente a presupuesto y ${PY}. Cambia el mes de cierre arriba para ver la foto de cualquier mes anterior.`) + hero +
+    `<div class="g g-kpi">${kpis}</div>
+    <div class="g g-21">
+      <div class="card ${rd(0, 6)}"><div class="card-hd"><h3>Evolución acumulada</h3>${segHtml('evoM', S.evoM, [['rev', 'Ingresos'], ['gp', 'GP'], ['ebitda', 'EBITDA']])}</div><div class="chart" id="c-evo"></div>
+        <div id="lg-evo"></div><div class="insight" id="evo-ins"></div></div>
+      <div class="card ${rd(0, 7)}"><div class="card-hd"><h3>Qué mirar hoy</h3><span class="meta" id="sig-n"></span></div><div id="sigs"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px"><div class="card-hd"><h3>Evolución mensual</h3>${legend([{ t: 'bar', c: C.real, l: 'Real' }, { t: 'line', c: C.tgt, l: 'Presupuesto' }, { t: 'dash', c: C.py, l: PY }])}</div>
+      <div class="g g-2" style="margin-top:6px">
+        <div><div class="note" style="margin:0 0 4px">Ingresos (k€)</div><div class="chart" id="c-m1"></div></div>
+        <div><div class="note" style="margin:0 0 4px">Gross Profit Ejecución (k€)</div><div class="chart" id="c-m2"></div></div>
+        <div><div class="note" style="margin:0 0 4px">% Gross Margin Ejecución</div><div class="chart" id="c-m3"></div></div>
+        <div><div class="note" style="margin:0 0 4px">EBITDA Servicios (k€)</div><div class="chart" id="c-m4"></div></div></div></div>`);
+  fillBars(el);
+  const s = metSeries(S.evoM), e = evoChart($('#c-evo'), s, { name: MET[S.evoM], fcLabel: 'Forecast' });
+  $('#lg-evo').innerHTML = legend([{ t: 'line', c: C.real, l: 'Real' }, { t: 'dash', c: C.real, l: 'Forecast estacional' }, { t: 'band', c: C.real, l: 'Rango ±1σ' }, { t: 'line', c: C.tgt, l: s.hasTm ? 'Presupuesto acumulado' : 'Objetivo anual' }, { t: 'dash', c: C.py, l: PY }]);
+  const fcEnd = s.forecast, gap = fcEnd - s.tgt;
+  $('#evo-ins').innerHTML = `<b>${MET[S.evoM]}</b>: cierre previsto de <b>${fM(fcEnd)} M€</b> (${pct0(fcEnd / s.tgt)} del objetivo, <b class="${gap >= 0 ? 'pos' : 'neg'}">${sign(gap)} k€</b>)${s.fcBud ? `. Con el presupuesto restante cerraría en <b>${fM(s.fcBud)} M€</b>` : ''}. El rango ±1σ (variabilidad mensual vs ${PY}, mínimo 3%) acota la incertidumbre.`;
+  $('#sigs').innerHTML = signalsHtml(d); $('#sig-n').textContent = signals(d).length + ' señales';
+  const base = { closed: n };
+  monthlyChart($('#c-m1'), { ...base, real: rev.am, tgt: rev.tm, py: rev.pm, kind: 'bar', fmt: f0, ax: axK, name: 'Ingresos' });
+  monthlyChart($('#c-m2'), { ...base, real: gp.am, tgt: gp.tm, py: gp.pm, kind: 'bar', fmt: f0, ax: axK, name: 'GP Ejecución' });
+  monthlyChart($('#c-m3'), { ...base, real: d.gm.am, tgt: d.gm.tm, py: d.gm.pm, kind: 'line', fmt: pct, ax: axP, name: '% Gross Margin' });
+  monthlyChart($('#c-m4'), { ...base, real: eb.am, tgt: eb.tm, py: eb.pm, kind: 'bar', fmt: f0, ax: axK, name: 'EBITDA' });
+}
+
+/* ═══ PUENTE ═══ */
+function bridgeData(m, h) {
+  const d = D, mk = (label, val, tip) => ({ label, val, type: 'delta', tip });
+  const comps = m === 'ebitda' ? [['GP Ejecución', d.gp], ['Desocupación', d.des], ['Preventa', d.pre], ['OPEX', d.opex]] : d.lines.map(l => [l.n, l[m]]);
+  const tot = d[m];
+  const cfg = { ytd: { a: 'Ppto YTD', b: 'Real YTD', A: tot.tmYTD, B: tot.actYTD, f: s => s.actYTD - s.tmYTD, ref: s => s.tmYTD, cur: s => s.actYTD, rl: 'Ppto YTD', cl: 'Real YTD' },
+    fc: { a: 'Objetivo FY', b: 'Forecast', A: tot.tgt, B: tot.forecast, f: s => s.forecast - s.tgt, ref: s => s.tgt, cur: s => s.forecast, rl: 'Objetivo', cl: 'Forecast' },
+    fb: { a: 'Objetivo FY', b: 'YTD + ppto rest.', A: tot.tgt, B: tot.fcBud, f: s => (s.fcBud || 0) - s.tgt, ref: s => s.tgt, cur: s => s.fcBud || 0, rl: 'Objetivo', cl: 'YTD + ppto restante' } }[h];
+  const steps = [{ label: cfg.a, val: cfg.A, type: 'anchor', color: C.tgt }];
+  let acc = 0;
+  comps.forEach(([nm, s]) => { const v = cfg.f(s); acc += v; steps.push(mk(nm, v, tipRows(nm, [{ l: cfg.cl, v: f0(cfg.cur(s)) + ' k€' }, { l: cfg.rl, v: f0(cfg.ref(s)) + ' k€' }, { l: 'Efecto', v: sign(v) + ' k€', cls: v >= 0 ? 'pos' : 'neg' }]))); });
+  const res = (cfg.B - cfg.A) - acc;
+  if (Math.abs(res) > Math.abs(cfg.A) * 0.004) steps.push(mk('Otros / ajuste', res, tipRows('Otros / ajuste', [{ l: 'Efecto', v: sign(res) + ' k€' }, { l: 'Origen', v: 'cada partida extrapola con su propio ritmo' }])));
+  steps.push({ label: cfg.b, val: cfg.B, type: 'anchor', color: C.real });
+  return { steps, gap: cfg.B - cfg.A, A: cfg.A, B: cfg.B, cfg };
+}
+function vPuente() {
+  const d = D, n = d.closed, m = S.bridgeM, h = S.bridgeH, tot = d[m], rem = 12 - n;
+  const b = bridgeData(m, h);
+  const worst = b.steps.filter(s => s.type === 'delta').sort((x, y) => x.val - y.val), best = worst[worst.length - 1];
+  let pace = '';
+  if (rem > 0) {
+    const need = (tot.tgt - tot.actYTD) / rem, cur = tot.actYTD / n, plan = tot.hasTm ? tot.tmRest / rem : null, pyr = sumFrom(tot.pm, n) / rem;
+    const tl = (l, v, s, cls) => `<div class="tile"><div class="tl">${l}</div><div class="tv ${cls || ''}">${f0(v)} k€</div><div class="ts">${s}</div></div>`;
+    const vs = need / cur - 1;
+    pace = `<div class="card ${rd(0, 2)}" style="margin-top:14px"><div class="card-hd"><h3>Ritmo necesario para llegar al objetivo · ${MET[m]}</h3><span class="meta">media mensual de los ${rem} meses restantes</span></div>
+      <div class="tiles">${tl('Necesario por mes', need, `${vs >= 0 ? '+' : ''}${(vs * 100).toFixed(0)}% vs ritmo actual`, vs > .05 ? 'neg' : vs < -.05 ? 'pos' : 'amb')}${tl('Ritmo YTD por mes', cur, `media de ${n} meses`)}${plan != null ? tl('Presupuesto restante por mes', plan, `${(plan / cur - 1 >= 0 ? '+' : '') + ((plan / cur - 1) * 100).toFixed(0)}% vs ritmo actual`) : ''}${tl(PY + ' mismos meses', pyr, `${(pyr / cur - 1 >= 0 ? '+' : '') + ((pyr / cur - 1) * 100).toFixed(0)}% vs ritmo actual`)}</div>
+      <div class="note">Si el ritmo necesario es inferior al actual, el objetivo se alcanza manteniendo el nivel de los meses cerrados. Los ${MET[m]} de los meses restantes dependen de la estacionalidad: usa Escenarios para simularla.</div></div>`;
+  }
+  const lbl = { ytd: 'Real YTD vs presupuesto YTD', fc: 'Forecast run-rate vs objetivo anual', fb: 'YTD + presupuesto restante vs objetivo anual' }[h];
+  const el = setView('puente', hd('Puente de desviación vs objetivo', 'Qué partidas explican la diferencia entre lo planificado y lo esperado. Pasa el ratón por una barra para ver el detalle.',
+    segHtml('bridgeM', m, [['rev', 'Ingresos'], ['gp', 'GP Ejec.'], ['ebitda', 'EBITDA']]) + segHtml('bridgeH', h, [['ytd', 'Hasta hoy'], ['fc', 'Cierre (run-rate)'], ['fb', 'Cierre (ppto restante)']])) +
+    `<div class="card rise" style="margin-top:16px"><div class="card-hd"><h3>${MET[m]}: ${lbl}</h3><span class="meta">k€</span></div><div class="chart" id="c-bridge"></div>
+     <div class="insight">${h === 'ytd' ? 'A cierre de ' + d.monthLabel : 'El forecast'} de <b>${MET[m]}</b> es <b>${fM(b.B)} M€</b> frente a <b>${fM(b.A)} M€</b> de ${h === 'ytd' ? 'presupuesto' : 'objetivo'}: desviación de <b class="${b.gap >= 0 ? 'pos' : 'neg'}">${sign(b.gap)} k€ (${pctSigned(b.gap / b.A)})</b>.${worst.length > 1 ? ` Mayor aportación positiva: <b>${esc(best.label)}</b> (${sign(best.val)} k€). Mayor lastre: <b>${esc(worst[0].label)}</b> (${sign(worst[0].val)} k€).` : ''}</div>
+     <div class="note">${m === 'ebitda' ? 'EBITDA = GP Ejecución + efecto Desocupación + Preventa + OPEX. Los costes son negativos: un efecto positivo significa menos coste del presupuestado.' : 'Cada barra es la diferencia entre la línea y su propio ' + (h === 'ytd' ? 'presupuesto YTD' : 'objetivo anual') + '.'}</div></div>` + pace);
+  waterfall($('#c-bridge'), b.steps, { fA: v => (v / 1000).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + 'M', fD: v => sign(v), name: `Puente de ${MET[m]}`, h: 270 });
+}
+
+/* ═══ P&L ═══ */
+function vPyl() {
+  const d = D, n = d.closed;
+  const rows = [
+    { n: 'Ingresos', s: d.rev }, { n: 'GP Ejecución', s: d.gp, b: 1 }, { n: '% GM ejecución', ratio: [d.gm.ytd, d.gm.tgtYtd, d.gm.pyYtd, d.gm.fc, d.gm.tgt], sub: 1 },
+    { n: 'Desocupación', s: d.des, cost: 1 }, { n: 'Preventa', s: d.pre, cost: 1 }, { n: 'GP Comercial', s: d.gpCom, b: 1 }, { n: 'OPEX servicios', s: d.opex, cost: 1 },
+    { n: 'EBITDA de Servicios', s: d.ebitda, b: 1, tot: 1 },
+    { n: '% EBITDA s/ingresos', ratio: [d.ebitda.actYTD / d.rev.actYTD, d.rev.tmYTD ? d.ebitda.tmYTD / d.rev.tmYTD : 0, d.ebitda.pyYTD / d.rev.pyYTD, d.ebitda.forecast / d.rev.forecast, d.ebitda.tgt / d.rev.tgt], sub: 1 },
+  ];
+  const costCls = a => a == null ? 'neu' : a <= 1 ? 'pos' : a <= 1.07 ? 'amb' : 'neg';
+  const body = rows.map(r => {
+    if (r.ratio) { const [a, t, p, f, g] = r.ratio; return `<tr class="sub"><td>${r.n}</td><td>${pct(a)}</td><td>${pct(t)}</td><td class="${dPP(a, t).cls}">${dPP(a, t).val}</td><td>·</td><td>${pct(p)}</td><td class="${dPP(a, p).cls}">${dPP(a, p).val}</td><td>${pct(f)}</td><td>${pct(g)}</td><td class="${dPP(f, g).cls}">${dPP(f, g).val}</td></tr>`; }
+    const s = r.s, dl = s.actYTD - s.tmYTD, ac = r.cost ? costCls(s.att) : attCls(s.att);
+    const dpy = r.cost ? dRel(-s.actYTD, -s.pyYTD, { inv: true }) : dRel(s.actYTD, s.pyYTD);
+    const fv = s.tgt ? s.forecast / s.tgt : null, fvc = fv == null ? 'neu' : r.cost ? costCls(fv) : attCls(fv);
+    return `<tr class="${r.tot ? 'total' : ''}"><td>${r.n}</td><td>${f0(s.actYTD)}</td><td>${f0(s.tmYTD)}</td><td class="${dl >= 0 ? 'pos' : 'neg'}">${sign(dl)}</td><td><span class="pill ${ac}">${s.att != null ? pct0(s.att) : 'n/d'}</span></td><td>${f0(s.pyYTD)}</td><td class="${dpy.cls}">${dpy.val}</td><td>${f0(s.forecast)}</td><td>${f0(s.tgt)}</td><td><span class="pill ${fvc}">${fv != null ? pct0(fv) : 'n/d'}</span></td></tr>`;
+  }).join('');
+  const steps = [{ label: 'GP Ejecución', val: d.gp.actYTD, type: 'anchor', color: C.real }];
+  [['Desocupación', d.des], ['Preventa', d.pre], ['OPEX', d.opex]].forEach(([nm, s]) => steps.push({ label: nm, val: s.actYTD, type: 'delta', tip: tipRows(nm + ' YTD', [{ l: 'Real', v: f0(s.actYTD) + ' k€' }, { l: 'Ppto', v: f0(s.tmYTD) + ' k€' }, { l: 'Consumo', v: s.att != null ? pct0(s.att) : 'n/d', cls: costCls(s.att) }]) }));
+  steps.push({ label: 'EBITDA', val: d.ebitda.actYTD, type: 'anchor', color: C.real });
+  const el = setView('pyl', hd('P&L y cascada de resultados', `De GP Ejecución a EBITDA, acumulado a ${d.monthLabel}. En las partidas de coste, cumplimiento por debajo de 100% significa gastar menos de lo presupuestado.`) +
+    `<div class="card rise" style="margin-top:16px"><div class="card-hd"><h3>Cuenta de resultados de servicios</h3><span class="meta">k€ · ${n} meses cerrados</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Concepto</th><th>Real YTD</th><th>Ppto YTD</th><th>Δ ppto</th><th>Cumpl.</th><th>${PY} YTD</th><th>Δ ${PY}</th><th>Forecast FY</th><th>Objetivo FY</th><th>FC vs obj.</th></tr></thead><tbody>${body}</tbody></table></div>
+    <div class="note">Δ ppto: positivo es favorable (más ingreso o menos coste). Δ ${PY} en costes muestra el crecimiento del gasto. El forecast de cada partida usa su propio ritmo estacional, por eso la suma de partidas puede diferir ligeramente del EBITDA.</div></div>
+    <div class="g g-2"><div class="card rise" style="--i:2"><div class="card-hd"><h3>Cascada real YTD</h3><span class="meta">k€</span></div><div class="chart" id="c-cas"></div></div>
+    <div class="card rise" style="--i:3"><div class="card-hd"><h3>EBITDA mensual</h3>${legend([{ t: 'bar', c: C.real, l: 'Real' }, { t: 'line', c: C.tgt, l: 'Ppto' }, { t: 'dash', c: C.py, l: PY }])}</div><div class="chart" id="c-eb"></div></div></div>`);
+  waterfall($('#c-cas'), steps, { fA: v => f0(v), fD: v => sign(v), ax: axK, name: 'Cascada de GP a EBITDA', h: 250 });
+  monthlyChart($('#c-eb'), { closed: n, real: d.ebitda.am, tgt: d.ebitda.tm, py: d.ebitda.pm, kind: 'bar', fmt: f0, ax: axK, name: 'EBITDA mensual', h: 250 });
+}
+
+/* ═══ LÍNEAS ═══ */
+function lineEntity() { return S.line === 'tot' ? { n: 'Total BU', rev: D.rev, gp: D.gp } : D.lines.find(l => l.k === S.line) || { n: 'Total BU', rev: D.rev, gp: D.gp }; }
+function vLineas() {
+  const d = D, n = d.closed, m = S.lineM, ent = lineEntity(), s = ent[m], mn = m === 'rev' ? 'Ingresos' : 'Gross Profit';
+  const chips = `<div class="chiprow noprint" role="group" aria-label="Línea">${[['tot', 'Total BU']].concat(d.lines.map(l => [l.k, l.n])).map(([k, nme]) => `<button type="button" class="lchip" data-act="line" data-val="${k}" aria-pressed="${S.line === k}">${esc(nme)}</button>`).join('')}</div>`;
+  const tile = (l, v, sub, cls) => `<div class="tile"><div class="tl">${l}</div><div class="tv ${cls || ''}">${v}</div><div class="ts">${sub}</div></div>`;
+  const gmE = ent.rev.actYTD ? ent.gp.actYTD / ent.rev.actYTD : 0, gmP = ent.rev.pyYTD ? ent.gp.pyYTD / ent.rev.pyYTD : 0, gmT = ent.rev.tmYTD ? ent.gp.tmYTD / ent.rev.tmYTD : 0;
+  const tiles = `<div class="tiles">${tile('Real YTD', f0(s.actYTD) + ' k€', `${dRel(s.actYTD, s.pyYTD).val} vs ${PY}`, '')}${tile('Presupuesto YTD', f0(s.tmYTD) + ' k€', s.att != null ? `<span class="pill ${attCls(s.att)}">${pct0(s.att)} cumplimiento</span>` : 'sin presupuesto')}${tile('Forecast cierre', f0(s.forecast) + ' k€', s.tgt ? `${pct0(s.forecast / s.tgt)} del objetivo (${f0(s.tgt)})` : 'sin objetivo', s.tgt && s.forecast >= s.tgt ? 'pos' : 'amb')}${tile('%GM YTD', pct(gmE), `${dPP(gmE, gmT).val} vs ppto · ${dPP(gmE, gmP).val} vs ${PY}`)}</div>`;
+  /* tabla */
+  const rowsSrc = d.lines.map(l => ({ k: l.k, n: l.n, s: l[m] })).concat([{ k: 'tot', n: 'Total BU', s: d[m], tot: 1 }]);
+  const totAct = d[m].actYTD;
+  const recs = rowsSrc.map(r => ({ ...r, actYTD: r.s.actYTD, mix: totAct ? r.s.actYTD / totAct : 0, tmYTD: r.s.tmYTD, att: r.s.att == null ? -1 : r.s.att, pyYTD: r.s.pyYTD, dpy: r.s.pyYTD ? (r.s.actYTD - r.s.pyYTD) / Math.abs(r.s.pyYTD) : 0, forecast: r.s.forecast, tgt: r.s.tgt, fvo: r.s.tgt ? r.s.forecast / r.s.tgt : 0 }));
+  const lines = recs.filter(r => !r.tot).sort((a, b) => S.sort.k === 'n' ? S.sort.dir * a.n.localeCompare(b.n) : S.sort.dir * (a[S.sort.k] - b[S.sort.k]));
+  const cols = [['n', 'Línea'], ['actYTD', 'Real YTD'], ['mix', 'Mix'], ['tmYTD', 'Ppto YTD'], ['att', 'Cumpl.'], ['pyYTD', PY + ' YTD'], ['dpy', 'Δ ' + PY], ['forecast', 'Forecast FY'], ['tgt', 'Objetivo FY'], ['fvo', 'FC vs obj.']];
+  const th = cols.map(([k, l]) => `<th scope="col" aria-sort="${S.sort.k === k ? (S.sort.dir > 0 ? 'ascending' : 'descending') : 'none'}"><button type="button" data-act="sort" data-k="${k}">${l}</button></th>`).join('');
+  const tr = r => { const dpy = dRel(r.actYTD, r.pyYTD); return `<tr class="click ${r.tot ? 'total' : ''} ${S.line === r.k ? 'sel' : ''}" data-act="line" data-val="${r.k}" tabindex="0"><td>${esc(r.n)}</td><td>${f0(r.actYTD)}</td><td>${(r.mix * 100).toFixed(0)}%${r.tot ? '' : `<span class="mixbar" style="width:${Math.max(0, r.mix * 50)}px"></span>`}</td><td>${r.tmYTD ? f0(r.tmYTD) : 'n/d'}</td><td>${r.att >= 0 ? `<span class="pill ${attCls(r.att)}">${pct0(r.att)}</span>` : 'n/d'}</td><td>${f0(r.pyYTD)}</td><td class="${dpy.cls}">${dpy.val}</td><td>${f0(r.forecast)}</td><td>${r.tgt ? f0(r.tgt) : 'n/d'}</td><td>${r.tgt ? `<span class="pill ${attCls(r.fvo)}">${pct0(r.fvo)}</span>` : 'n/d'}</td></tr>`; };
+  const table = `<div class="tbl-wrap"><table class="tbl"><thead><tr>${th}</tr></thead><tbody>${lines.map(tr).join('')}${tr(recs.find(r => r.tot))}</tbody></table></div>`;
+  /* mapa de calor */
+  const heatRow = (nm, ss, k) => {
+    const cells = d3.range(12).map(i => {
+      if (i >= n) return '<td class="h na">·</td>';
+      const t = ss.tm[i], a = ss.am[i]; if (!t) return '<td class="h na">n/d</td>';
+      const at = a / t, cls = at >= 1.1 ? 'top' : at >= TH.ok ? 'ok' : at >= TH.warn ? 'warn' : 'bad';
+      return `<td class="h ${cls}" data-tip="${esc(tipRows(nm + ' · ' + MONTHS[i], [{ l: 'Real', v: f0(a) + ' k€' }, { l: 'Ppto', v: f0(t) + ' k€' }, { l: 'Cumplimiento', v: pct0(at), cls: attCls(at) }]))}">${pct0(at)}</td>`;
+    }).join('');
+    return `<tr data-line-row="${k}"><td>${esc(nm)}</td>${cells}<td class="h ${ss.att == null ? 'na' : ss.att >= TH.ok ? 'ok' : ss.att >= TH.warn ? 'warn' : 'bad'}"><b>${ss.att != null ? pct0(ss.att) : 'n/d'}</b></td></tr>`;
+  };
+  const heat = `<div class="tbl-wrap"><table class="tbl heat"><thead><tr><th scope="col">Línea</th>${MONTHS.map((x, i) => `<th scope="col" style="${i === n - 1 ? 'color:var(--text)' : ''}">${x}</th>`).join('')}<th scope="col">YTD</th></tr></thead><tbody>${d.lines.map(l => heatRow(l.n, l[m], l.k)).join('')}${heatRow('Total BU', d[m], 'tot')}</tbody></table></div>`;
+  /* último mes */
+  const spot = d.lines.map(l => {
+    const ss = l[m], a = ss.last, t = ss.lastTm, at = t > 0 ? a / t : null, prev = ss.am.slice(0, n - 1).filter(v => v), avg = prev.length ? prev.reduce((x, y) => x + y, 0) / prev.length : 0, tr = avg > 0 ? a / avg - 1 : null;
+    return `<div class="tile"><div class="tl">${esc(l.n)}</div><div class="tv">${f0(a)} k€</div><div class="ts">${at != null ? `<span class="pill ${attCls(at)}">${pct0(at)} del ppto</span>` : 'sin ppto'} ${tr != null ? `<span class="${tr >= -.1 ? 'pos' : 'neg'}">${tr >= 0 ? '▲' : '▼'} ${Math.abs(tr * 100).toFixed(0)}% vs media</span>` : ''}</div><div class="ts">Ppto ${f0(t)} · ${PY} ${f0(ss.lastPy)}</div></div>`;
+  }).join('');
+  const el = setView('lineas', hd('Líneas de negocio', 'Selecciona una línea para ver su detalle mensual. Haz clic en una fila de la tabla para el mismo efecto.', segHtml('lineM', m, [['rev', 'Ingresos'], ['gp', 'Gross Profit']]) ) +
+    `<div class="card rise" style="margin-top:16px"><div class="card-hd"><h3>${esc(ent.n)} · ${mn}</h3>${chips}</div>${tiles}
+      <div class="g g-2" style="margin-top:14px"><div><div class="note" style="margin:0 0 4px">${mn} mensual (k€)</div><div class="chart" id="c-l1"></div></div><div><div class="note" style="margin:0 0 4px">% Gross Margin mensual</div><div class="chart" id="c-l2"></div></div></div>
+      ${legend([{ t: 'bar', c: C.real, l: 'Real' }, { t: 'line', c: C.tgt, l: 'Presupuesto' }, { t: 'dash', c: C.py, l: PY }])}</div>
+    <div class="card rise" style="margin-top:14px;--i:2"><div class="card-hd"><h3>${mn} por línea</h3><span class="meta">k€ · clic en cabecera para ordenar</span></div>${table}</div>
+    <div class="card rise" style="margin-top:14px;--i:3"><div class="card-hd"><h3>Mapa de cumplimiento mensual · ${mn}</h3><span class="meta">real ÷ presupuesto de cada mes</span></div>${heat}
+      <div class="legend"><span class="li"><i class="sw bar" style="--c:color-mix(in srgb,var(--green) 42%,transparent)"></i>≥ 110%</span><span class="li"><i class="sw bar" style="--c:color-mix(in srgb,var(--green) 22%,transparent)"></i>≥ ${pct0(TH.ok)}</span><span class="li"><i class="sw bar" style="--c:color-mix(in srgb,var(--amber) 32%,transparent)"></i>${pct0(TH.warn)} a ${pct0(TH.ok)}</span><span class="li"><i class="sw bar" style="--c:color-mix(in srgb,var(--red) 38%,transparent)"></i>&lt; ${pct0(TH.warn)}</span></div></div>
+    <div class="g g-2"><div class="card rise" style="--i:4"><div class="card-hd"><h3>Último mes cerrado: ${d.monthLabel}</h3><span class="meta">${mn} vs objetivo mensual</span></div><div class="spot">${spot}</div></div>
+    <div class="card rise" style="--i:5"><div class="card-hd"><h3>Origen del ingreso</h3>${legend([{ t: 'bar', c: C.real, l: 'Propio' }, { t: 'bar', c: C.blue, l: 'Otras BU' }, { t: 'bar', c: C.purple, l: 'ROS' }])}</div><div class="chart" id="c-orig"></div></div></div>`);
+  const gmArr = (a, b) => a.map((v, i) => b[i] ? v / b[i] : 0);
+  monthlyChart($('#c-l1'), { closed: n, real: s.am, tgt: s.tm, py: s.pm, kind: 'bar', fmt: f0, ax: axK, name: `${ent.n} ${mn}` });
+  monthlyChart($('#c-l2'), { closed: n, real: gmArr(ent.gp.am, ent.rev.am), tgt: gmArr(ent.gp.tm, ent.rev.tm), py: gmArr(ent.gp.pm, ent.rev.pm), kind: 'line', fmt: pct, ax: axP, name: `${ent.n} margen` });
+  stackedMonthly($('#c-orig'), [{ name: 'Propio', v: d.revOwn.am, c: C.real }, { name: 'Otras BU', v: d.revBU.am, c: C.blue }, { name: 'ROS', v: d.revROS.am, c: C.purple }], { closed: n, name: 'Origen del ingreso' });
+}
+
+/* ═══ CALIDAD DEL CRECIMIENTO ═══ */
+function decomp(revA, revP, fteA, fteP, wdA, wdP) {
+  const dRev = revA - revP, r0 = fteP * wdP ? revP / (fteP * wdP) : 0;
+  const vol = (fteA - fteP) * wdP * r0, cal = fteA * (wdA - wdP) * r0;
+  return { dRev, vol, cal, prod: dRev - vol - cal, r0, r1: fteA * wdA ? revA / (fteA * wdA) : 0 };
+}
+function vCalidad() {
+  const d = D, rev = d.rev, hd_ = d.heads, wdA = d.nwd.actYTD, wdP = d.nwd.pyYTD;
+  const t = decomp(rev.actYTD, rev.pyYTD, hd_.avgYTD, hd_.avgPyYTD, wdA, wdP);
+  const pc = x => t.dRev ? (x / t.dRev * 100).toFixed(0) + '% del Δ' : 'n/d';
+  const kpis = [
+    kpiCard({ lbl: `Δ Ingresos YTD`, icon: ICON.eur, val: `${sign(t.dRev)}<span class="u">k€</span>`, rows: [{ lbl: 'Real', val: fM(rev.actYTD) + 'M' }, { lbl: PY, val: fM(rev.pyYTD) + 'M' }, { lbl: 'Crecimiento', ...dRel(rev.actYTD, rev.pyYTD) }] }, 0),
+    kpiCard({ lbl: 'Efecto volumen', icon: ICON.pp, val: `${sign(t.vol)}<span class="u">k€</span>`, rows: [{ lbl: 'Δ heads (medio)', val: sign(hd_.avgYTD - hd_.avgPyYTD) + ' FTE' }, { lbl: 'Peso', val: pc(t.vol), cls: 'neu' }] }, 1),
+    kpiCard({ lbl: 'Efecto calendario', icon: ICON.cal, val: `${sign(t.cal)}<span class="u">k€</span>`, rows: [{ lbl: 'Δ días lab. netos', val: sign(wdA - wdP) + ' d' }, { lbl: 'Peso', val: pc(t.cal), cls: 'neu' }] }, 2),
+    kpiCard({ lbl: 'Efecto productividad', icon: ICON.gp, val: `${sign(t.prod)}<span class="u">k€</span>`, rows: [{ lbl: 'Ingreso / FTE-día', val: (t.r1 * 1000).toFixed(0) + ' €' }, { lbl: PY, val: (t.r0 * 1000).toFixed(0) + ' €', cls: 'neu' }, { lbl: 'Peso', val: pc(t.prod), cls: t.prod >= 0 ? 'pos' : 'neg' }] }, 3),
+    kpiCard({ lbl: 'Ingreso / FTE (YTD)', icon: ICON.pc, val: `${f0(hd_.avgYTD ? rev.actYTD / hd_.avgYTD : 0)}<span class="u">k€</span>`, rows: [{ lbl: 'vs ' + PY, ...dRel(hd_.avgYTD ? rev.actYTD / hd_.avgYTD : 0, hd_.avgPyYTD ? rev.pyYTD / hd_.avgPyYTD : 0) }, { lbl: 'Utilización', val: pct(d.util.actYTD), cls: 'neu' }] }, 4),
+  ].join('');
+  const steps = [{ label: PY + ' YTD', val: rev.pyYTD, type: 'anchor', color: C.py }, { label: 'Volumen', val: t.vol, type: 'delta' }, { label: 'Calendario', val: t.cal, type: 'delta' }, { label: 'Productividad', val: t.prod, type: 'delta' }, { label: FY + ' YTD', val: rev.actYTD, type: 'anchor', color: C.real }];
+  /* por grupos de negocio (Rec Delivery cuelga del headcount de Delivery) */
+  const L = k => d.lines.find(l => l.k === k);
+  const grp = [{ n: 'Delivery', rev: [L('del').rev, L('rec').rev], h: L('del').head }, { n: 'Managed Services', rev: [L('ms').rev], h: L('ms').head }, { n: 'Resourcing', rev: [L('res').rev], h: L('res').head }];
+  const gdata = grp.map(g => { const a = g.rev.reduce((s, x) => s + x.actYTD, 0), p = g.rev.reduce((s, x) => s + x.pyYTD, 0); const q = decomp(a, p, g.h.avgYTD, g.h.avgPyYTD, wdA, wdP); return { label: g.n, net: q.dRev, vals: [{ k: 'Volumen', v: q.vol, c: C.blue }, { k: 'Calendario', v: q.cal, c: C.amb }, { k: 'Productividad', v: q.prod, c: C.purple }] }; });
+  const mrows = d.lines.map(l => {
+    const rg = l.rev.pyYTD ? l.rev.actYTD / l.rev.pyYTD - 1 : 0, gg = l.gp.pyYTD ? l.gp.actYTD / l.gp.pyYTD - 1 : 0, gm = l.rev.actYTD ? l.gp.actYTD / l.rev.actYTD : 0, gp_ = l.rev.pyYTD ? l.gp.pyYTD / l.rev.pyYTD : 0, q = dPP(gm, gp_);
+    return `<tr><td>${esc(l.n)}</td><td class="${rg >= 0 ? 'pos' : 'neg'}">${pctSigned(rg)}</td><td class="${gg >= 0 ? 'pos' : 'neg'}">${pctSigned(gg)}</td><td>${pct(gm)}</td><td>${pct(gp_)}</td><td class="${q.cls}">${q.val}</td></tr>`;
+  }).join('');
+  const vp = t.dRev ? t.vol / t.dRev * 100 : 0, cp = t.dRev ? t.cal / t.dRev * 100 : 0, pp = t.dRev ? t.prod / t.dRev * 100 : 0;
+  const el = setView('calidad', hd('Calidad del crecimiento', 'Ingresos = personas × días laborables × ingreso por persona y día. Separamos cuánto crecimiento viene de contratar, del calendario y de vender mejor.') +
+    `<div class="g g-kpi">${kpis}</div>
+    <div class="g g-2"><div class="card rise" style="--i:5"><div class="card-hd"><h3>Descomposición del crecimiento de ingresos</h3><span class="meta">vs ${PY} YTD · k€</span></div><div class="chart" id="c-gw"></div>
+      <div class="insight">De los <b>${sign(t.dRev)} k€</b> de crecimiento, <b>${vp.toFixed(0)}%</b> viene de <b>más personas</b>, <b>${cp.toFixed(0)}%</b> del <b>calendario</b> y <b>${pp.toFixed(0)}%</b> de <b>mayor productividad</b> por persona y día.</div></div>
+    <div class="card rise" style="--i:6"><div class="card-hd"><h3>Motor de crecimiento por negocio</h3>${legend([{ t: 'bar', c: C.blue, l: 'Volumen' }, { t: 'bar', c: C.amb, l: 'Calendario' }, { t: 'bar', c: C.purple, l: 'Productividad' }])}</div><div class="chart" id="c-gl"></div><div class="note">El rombo marca el Δ de ingresos total del negocio. Delivery incluye Rec Delivery, que comparte plantilla.</div></div></div>
+    <div class="card rise" style="margin-top:14px;--i:7"><div class="card-hd"><h3>¿Crecemos con rentabilidad?</h3><span class="meta">YTD vs ${PY}</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Línea</th><th>Δ Ingresos</th><th>Δ GP</th><th>%GM ${FY}</th><th>%GM ${PY}</th><th>Δ margen</th></tr></thead><tbody>${mrows}</tbody></table></div>
+    <div class="note">Si el GP crece menos que los ingresos, el margen se comprime: el crecimiento viene con peor mix, más subcontratación o tarifas más bajas.</div></div>`);
+  fillBars(el);
+  waterfall($('#c-gw'), steps, { fA: v => fM(v) + 'M', fD: v => sign(v), ax: axM, name: 'Descomposición del crecimiento', h: 250 });
+  divergingGroups($('#c-gl'), gdata, { name: 'Motor de crecimiento por negocio', h: 250 });
+}
+
+/* ═══ CAPACIDAD ═══ */
+function vCapacidad() {
+  const d = D, n = d.closed, idle = d.availH.actYTD - d.chgH.actYTD, idleP = d.availH.pyYTD - d.chgH.pyYTD;
+  const rate = d.blH.actYTD ? d.revOwn.actYTD * 1000 / d.blH.actYTD : 0, idleV = idle * rate / 1000;
+  const kpis = [
+    kpiCard({ lbl: `Headcount (${d.monthLabel})`, icon: ICON.pp, val: `${f0(d.heads.actYTD)}<span class="u">FTE</span>`, spark: sparkline(d.heads.am, n, 'line'), rows: [{ lbl: 'vs ' + PY, ...dRel(d.heads.actYTD, d.heads.pyYTD, { neutral: true }) }, { lbl: PY, val: f0(d.heads.pyYTD), cls: 'neu' }] }, 0),
+    kpiCard({ lbl: 'Contractors', icon: ICON.pp, val: `${f0(d.contr.actYTD)}<span class="u">FTE</span>`, spark: sparkline(d.contr.am, n, 'line'), rows: [{ lbl: 'vs ' + PY, ...dRel(d.contr.actYTD, d.contr.pyYTD, { neutral: true }) }, { lbl: PY, val: f0(d.contr.pyYTD), cls: 'neu' }] }, 1),
+    kpiCard({ lbl: 'Utilización', icon: ICON.u, val: pct(d.util.actYTD), spark: sparkline(d.util.am, n, 'line'), rows: [{ lbl: 'vs ' + PY, ...dPP(d.util.actYTD, d.util.pyYTD) }, { lbl: PY, val: pct(d.util.pyYTD), cls: 'neu' }] }, 2),
+    kpiCard({ lbl: '% Subcontratación', icon: ICON.pc, val: pct(d.sub.actYTD), spark: sparkline(d.sub.am, n, 'line'), rows: [{ lbl: 'vs ' + PY, ...dPP(d.sub.actYTD, d.sub.pyYTD, { inv: true }) }, { lbl: PY, val: pct(d.sub.pyYTD), cls: 'neu' }] }, 3),
+    kpiCard({ lbl: 'Horas sin facturar (YTD)', icon: ICON.clk, val: `${f0(idle)}<span class="u">h</span>`, rows: [{ lbl: '% de disponibles', val: pct(d.availH.actYTD ? idle / d.availH.actYTD : 0), cls: 'neu' }, { lbl: PY, val: f0(idleP) + ' h', cls: 'neu' }, { lbl: 'Valor teórico', val: `${fM(idleV)} M€`, cls: 'amb' }] }, 4),
+    kpiCard({ lbl: 'Días laborables netos', icon: ICON.cal, val: `${f1(d.nwd.actYTD)}<span class="u">d</span>`, rows: [{ lbl: PY, val: f1(d.nwd.pyYTD), cls: 'neu' }, { lbl: 'Diferencia', val: sign(d.nwd.actYTD - d.nwd.pyYTD) + ' d', cls: 'neu' }] }, 5),
+  ].join('');
+  const withH = d.lines.filter(l => l.head);
+  const trs = withH.map(l => {
+    const du = dPP(l.util.actYTD, l.util.pyYTD), ds = dPP(l.sub.actYTD, l.sub.pyYTD, { inv: true }), dr = dRel(l.rate.actYTD, l.rate.pyYTD), over = UTIL_MAX[l.k] && l.util.actYTD > UTIL_MAX[l.k];
+    return `<tr><td>${esc(l.n)}</td><td>${f0(l.head.actYTD)}</td><td class="${dRel(l.head.actYTD, l.head.pyYTD, { neutral: 1 }).cls}">${sign(l.head.actYTD - l.head.pyYTD)}</td><td class="${over ? 'neg' : ''}">${pct(l.util.actYTD)}</td><td class="${du.cls}">${du.val}</td><td>${pct(l.sub.actYTD)}</td><td class="${ds.cls}">${ds.val}</td><td>${f1(l.rate.actYTD)}</td><td class="${dr.cls}">${dr.val}</td></tr>`;
+  }).join('');
+  const du = dPP(d.util.actYTD, d.util.pyYTD), ds = dPP(d.sub.actYTD, d.sub.pyYTD, { inv: true });
+  const total = `<tr class="total"><td>Total BU</td><td>${f0(d.heads.actYTD)}</td><td>${sign(d.heads.actYTD - d.heads.pyYTD)}</td><td>${pct(d.util.actYTD)}</td><td class="${du.cls}">${du.val}</td><td>${pct(d.sub.actYTD)}</td><td class="${ds.cls}">${ds.val}</td><td>${f1(rate)}</td><td>·</td></tr>`;
+  const el = setView('capacidad', hd('Capacidad y personas', `Plantilla, utilización y subcontratación acumuladas a ${d.monthLabel}. La utilización se pondera por horas disponibles.`) + `<div class="g g-kpi">${kpis}</div>
+    <div class="g g-2"><div class="card rise" style="--i:6"><div class="card-hd"><h3>Headcount por negocio</h3>${legend([{ t: 'bar', c: C.real, l: 'Real ' + d.monthLabel }, { t: 'bar', c: C.py, l: PY + ' ' + d.monthLabel }])}</div><div class="chart" id="c-hd"></div></div>
+    <div class="card rise" style="--i:7"><div class="card-hd"><h3>Plantilla total mensual</h3>${legend([{ t: 'line', c: C.real, l: 'Real' }, { t: 'dash', c: C.py, l: PY }])}</div><div class="chart" id="c-ht"></div></div>
+    <div class="card rise" style="--i:8"><div class="card-hd"><h3>Utilización mensual</h3>${legend([{ t: 'line', c: C.real, l: 'Real' }, { t: 'dash', c: C.py, l: PY }])}</div><div class="chart" id="c-ut"></div></div>
+    <div class="card rise" style="--i:9"><div class="card-hd"><h3>Horas disponibles vs facturadas</h3>${legend([{ t: 'line', c: C.real, l: 'Facturadas' }, { t: 'line', c: C.tgt, l: 'Disponibles' }])}</div><div class="chart" id="c-hr"></div></div></div>
+    <div class="card rise" style="margin-top:14px"><div class="card-hd"><h3>Detalle por negocio</h3><span class="meta">YTD · tarifa en €/h ponderada por horas</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Negocio</th><th>Heads</th><th>Δ ${PY}</th><th>Util.</th><th>Δ util.</th><th>Subc.</th><th>Δ subc.</th><th>Tarifa €/h</th><th>Δ tarifa</th></tr></thead><tbody>${trs}${total}</tbody></table></div>
+    <div class="note">Valor teórico de las horas sin facturar = horas ociosas × ingreso propio medio por hora facturada (${f1(rate)} €/h). Es una cota superior: parte de esa capacidad es vacaciones, formación o preventa.</div></div>`);
+  fillBars(el);
+  groupBars($('#c-hd'), withH.map(l => ({ label: l.s, vals: [{ k: 'Real', v: l.head.actYTD, c: C.real }, { k: PY, v: l.head.pyYTD, c: C.py, o: .75 }] })), { fmt: f0, unit: 'FTE', name: 'Headcount por negocio' });
+  const cut = a => a.map((v, i) => i < n ? v : null), pyv = a => a.map(v => v || null);
+  lineChart($('#c-ht'), [{ name: 'Real', v: cut(d.heads.am), c: C.real, dots: true }, { name: PY, v: pyv(d.heads.pm), c: C.py, dash: '4 3', w: 1.8 }], { closed: n, fmt: f0, ax: v => Math.round(v), name: 'Plantilla mensual' });
+  lineChart($('#c-ut'), [{ name: 'Real', v: cut(d.util.am), c: C.real, dots: true }, { name: PY, v: pyv(d.util.pm), c: C.py, dash: '4 3', w: 1.8 }], { closed: n, fmt: pct, ax: axP, name: 'Utilización mensual' });
+  lineChart($('#c-hr'), [{ name: 'Disponibles', v: cut(d.availH.am), c: C.tgt, dots: true }, { name: 'Facturadas', v: cut(d.chgH.am), c: C.real, dots: true }], { closed: n, fmt: v => f0(v) + ' h', ax: v => (v / 1000).toLocaleString('es-ES', { maximumFractionDigits: 1 }) + 'k', name: 'Horas disponibles y facturadas', l: 46 });
+}
+
+/* ═══ ESCENARIOS ═══ */
+function simInit() {
+  const d = D, n = d.closed, rest = sumFrom(d.rev.pm, n);
+  S.sim = { g: d.rev.ratio - 1, gm: d.gm.ytd, cost: 0, rest, restN: 12 - n };
+}
+function simCalc() {
+  const d = D, n = d.closed, s = S.sim, rem = 12 - n;
+  const revRest = s.rest * (1 + s.g), rev = d.rev.actYTD + revRest;
+  const gpRest = revRest * s.gm, gp = d.gp.actYTD + gpRest;
+  const structYtd = d.ebitda.actYTD - d.gp.actYTD, structRest = (n ? structYtd / n : 0) * rem * (1 + s.cost);
+  const eb = d.ebitda.actYTD + gpRest + structRest;
+  return { rev, gp, eb, revRest, gpRest, structRest, structYtd };
+}
+function vEscenarios() {
+  const d = D, n = d.closed, rem = 12 - n;
+  if (!S.sim || S.sim.restN !== rem) simInit();
+  if (rem === 0) { setView('escenarios', hd('Escenarios', 'El año está cerrado: no hay meses por simular.')); return; }
+  const el = setView('escenarios', hd('Escenarios de cierre de año', `Mueve los tres mandos para simular los ${rem} meses que quedan y ver cómo cierran ingresos, GP y EBITDA frente al objetivo.`) +
+    `<div class="sim"><div class="card rise"><div class="card-hd"><h3>Hipótesis para ${MONTHS.slice(n).join(' · ')}</h3><button class="btn" type="button" data-act="simreset">Restablecer</button></div>
+      <div class="ctl"><label for="s-g">Ingresos vs ${PY} mismos meses <b id="o-g"></b></label><input type="range" id="s-g" data-sim="g" min="-0.2" max="0.6" step="0.005"><div class="hint"><span>Ritmo YTD: <span id="h-g0"></span></span><button class="linkbtn" type="button" data-act="simreq" data-w="rev">Lo necesario para el objetivo de ingresos</button></div></div>
+      <div class="ctl"><label for="s-gm">%GM de ejecución <b id="o-gm"></b></label><input type="range" id="s-gm" data-sim="gm" min="0.2" max="0.45" step="0.0025"><div class="hint"><span>YTD ${pct(d.gm.ytd)} · ppto anual ${pct(d.gm.tgt)}</span><button class="linkbtn" type="button" data-act="simreq" data-w="gp">Lo necesario para el objetivo de GP</button></div></div>
+      <div class="ctl"><label for="s-c">Costes de estructura vs media YTD <b id="o-c"></b></label><input type="range" id="s-c" data-sim="cost" min="-0.3" max="0.5" step="0.01"><div class="hint"><span>Desocupación + preventa + OPEX: <span id="h-c0"></span> k€/mes</span><button class="linkbtn" type="button" data-act="simreq" data-w="eb">Lo necesario para el objetivo de EBITDA</button></div></div>
+      <div class="note">Los ingresos restantes se calculan sobre los de ${PY} en los mismos meses, así que la estacionalidad queda incluida. El EBITDA suma el margen de esos ingresos y los costes de estructura al ritmo mensual del YTD.</div></div>
+    <div class="card rise" style="--i:2"><div class="card-hd"><h3>Resultado del escenario</h3><span class="meta">cierre ${FY} · k€</span></div><div class="res" id="sim-res"></div>
+      <div class="tbl-wrap" style="margin-top:14px"><table class="tbl"><thead><tr><th>Cierre ${FY} (k€)</th><th>Objetivo</th><th>Run-rate</th><th>YTD + ppto rest.</th><th>Escenario</th></tr></thead><tbody id="sim-tbl"></tbody></table></div><div class="insight" id="sim-ins"></div></div></div>`);
+  simUpdate(true);
+}
+function simUpdate(setInputs) {
+  const d = D, s = S.sim, r = simCalc();
+  if (setInputs) { $('#s-g').value = s.g; $('#s-gm').value = s.gm; $('#s-c').value = s.cost; }
+  $('#o-g').textContent = pctSigned(s.g); $('#o-gm').textContent = pct(s.gm); $('#o-c').textContent = (s.cost >= 0 ? '+' : '') + (s.cost * 100).toFixed(0) + '%';
+  $('#h-g0').textContent = pctSigned(d.rev.ratio - 1); $('#h-c0').textContent = f0(-(r.structYtd / d.closed));
+  const items = [['Ingresos', r.rev, d.rev], ['GP Ejecución', r.gp, d.gp], ['EBITDA', r.eb, d.ebitda]];
+  $('#sim-res').innerHTML = items.map(([nm, v, ser]) => { const a = v / ser.tgt, gap = v - ser.tgt; return `<div class="res-row"><div class="rn">${nm}</div><div><div class="rv">${fM(v)} M€ <span class="pill ${a >= 1 ? 'pos' : a >= TH.warn ? 'amb' : 'neg'}">${pct0(a)}</span></div><div class="rs ${gap >= 0 ? 'pos' : 'neg'}">${sign(gap)} k€ vs objetivo (${fM(ser.tgt)} M€)</div></div></div>`; }).join('');
+  $('#sim-tbl').innerHTML = items.map(([nm, v, ser]) => `<tr><td>${nm}</td><td>${f0(ser.tgt)}</td><td>${f0(ser.forecast)}</td><td>${ser.fcBud != null ? f0(ser.fcBud) : 'n/d'}</td><td><b>${f0(v)}</b></td></tr>`).join('');
+  const gOK = r.rev >= d.rev.tgt, eOK = r.eb >= d.ebitda.tgt;
+  $('#sim-ins').innerHTML = `Con estas hipótesis la BU cierra con <b>${fM(r.rev)} M€</b> de ingresos (${gOK ? 'cumple' : 'no llega a'} el objetivo) y <b>${fM(r.eb)} M€</b> de EBITDA (${eOK ? 'cumple' : 'no llega a'} el objetivo, <b class="${r.eb >= d.ebitda.tgt ? 'pos' : 'neg'}">${sign(r.eb - d.ebitda.tgt)} k€</b>).`;
+}
+function simRequired(w) {
+  const d = D, s = S.sim;
+  if (w === 'rev') s.g = clamp((d.rev.tgt - d.rev.actYTD) / s.rest - 1, -.2, .6);
+  else if (w === 'gp') { const revRest = s.rest * (1 + s.g); s.gm = clamp((d.gp.tgt - d.gp.actYTD) / revRest, .2, .45); }
+  else { const r = simCalc(), need = d.ebitda.tgt - d.ebitda.actYTD - r.gpRest, base = (r.structYtd / d.closed) * (12 - d.closed); s.cost = clamp(base ? need / base - 1 : 0, -.3, .5); }
+}
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+/* ═══ DATOS Y CALIDAD ═══ */
+function vDatos() {
+  const d = D, n = d.closed, checks = runChecks(d);
+  const chk = checks.map(c => `<div class="chk ${c.lvl}"><span class="ic" aria-hidden="true">${c.lvl === 'ok' ? '✓' : '!'}</span><span>${esc(c.msg)}</span></div>`).join('');
+  const bad = checks.filter(c => c.lvl !== 'ok').length;
+  const MAP = [['Ingresos total', ROW.rev, d.rev], ['Ingresos propios', ROW.revOwn, d.revOwn], ['Ingresos otras BU', ROW.revBU, d.revBU], ['Ingresos ROS', ROW.revROS, d.revROS],
+    ...d.lines.map((l, i) => ['Ingresos ' + l.n, LINES[i].rev, l.rev]), ['GP Ejecución', ROW.gp, d.gp], ...d.lines.map((l, i) => ['GP ' + l.n, LINES[i].gp, l.gp]),
+    ['GP Desocupación', ROW.gpDes, null], ['Preventa', ROW.pre, d.pre], ['GP Comercial', ROW.gpCom, d.gpCom], ['OPEX servicios', ROW.opex, d.opex], ['EBITDA', ROW.ebitda, d.ebitda],
+    ['% GM total (ppto)', ROW.gmTot, null], ['Heads total', ROW.heads, d.heads], ['Contractors', ROW.contr, d.contr], ['Horas disponibles', ROW.availH, d.availH], ['Horas facturadas', ROW.chgH, d.chgH], ['Horas facturadas por negocio', ROW.blH, d.blH],
+    ['Utilización', ROW.util, d.util], ['% Subcontratación', ROW.sub, d.sub], ['Días laborables netos', ROW.nwd, d.nwd]];
+  const mrows = MAP.map(([nm, r, s]) => `<tr><td>${esc(nm)}</td><td>${r}</td><td style="text-align:left;font-family:var(--sans);color:var(--muted)">${esc(rowLabel(r)) || '<i>vacía</i>'}</td><td>${s ? (s.type === 'ratio' ? pct(s.actYTD) : f0(s.actYTD)) : 'n/d'}</td><td>${s ? (s.pyYTD ? (s.type === 'ratio' ? pct(s.pyYTD) : f0(s.pyYTD)) : '0') : 'n/d'}</td><td>${s && s.tgt ? f0(s.tgt) : 'n/d'}</td></tr>`).join('');
+  const m = S.datosM, s = metSeries(m);
+  const cell = (v, f = f0) => `<td>${v == null ? '·' : f(v)}</td>`;
+  const mt = `<div class="tbl-wrap"><table class="tbl"><thead><tr><th>${MET[m]} (k€)</th>${MONTHS.map(x => `<th>${x}</th>`).join('')}<th>YTD</th><th>FY</th></tr></thead><tbody>
+    <tr><td>Real ${FY}</td>${s.am.map((v, i) => cell(i < n ? v : null)).join('')}<td><b>${f0(s.actYTD)}</b></td><td>${f0(s.forecast)} FC</td></tr>
+    <tr><td>Presupuesto</td>${s.tm.map(v => cell(v || null)).join('')}<td>${f0(s.tmYTD)}</td><td>${f0(s.tgt)}</td></tr>
+    <tr><td>Δ vs ppto</td>${s.am.map((v, i) => i < n && s.tm[i] ? `<td class="${v - s.tm[i] >= 0 ? 'pos' : 'neg'}">${sign(v - s.tm[i])}</td>` : '<td>·</td>').join('')}<td class="${s.actYTD - s.tmYTD >= 0 ? 'pos' : 'neg'}">${sign(s.actYTD - s.tmYTD)}</td><td></td></tr>
+    <tr><td>${PY}</td>${s.pm.map(v => cell(v)).join('')}<td>${f0(s.pyYTD)}</td><td>${f0(s.pyTot)}</td></tr></tbody></table></div>`;
+  const f = S.file || {};
+  setView('datos', hd('Datos y calidad', 'Qué lee el cuadro de mando del Excel y si los números cuadran. Úsalo para detectar cambios de estructura en el fichero.') +
+    `<div class="g g-2"><div class="card rise"><div class="card-hd"><h3>Comprobaciones</h3><span class="pill ${bad ? 'amb' : 'pos'}">${bad ? bad + ' avisos' : 'Todo cuadra'}</span></div>${chk}</div>
+    <div class="card rise" style="--i:1"><div class="card-hd"><h3>Fichero</h3></div><div class="tiles">
+      <div class="tile"><div class="tl">Archivo</div><div class="tv" style="font-size:13px;word-break:break-all">${esc(f.name || 'n/d')}</div><div class="ts">${f.size ? (f.size / 1024).toFixed(0) + ' KB' : ''}</div></div>
+      <div class="tile"><div class="tl">Título (A1)</div><div class="tv" style="font-size:13px">${esc(f.title || 'n/d')}</div><div class="ts">pestaña ANALYTICS</div></div>
+      <div class="tile"><div class="tl">Cierre detectado</div><div class="tv">${d.monthLabel}</div><div class="ts">${d.closedMax} meses con datos · código ${esc(d.periodCode || 'n/d')}</div></div></div>
+      <details class="fold" open><summary>Metodología</summary><div class="note" style="margin-top:4px">
+      <b>Forecast run-rate</b>: YTD real + (total ${PY} − YTD ${PY}) × (YTD real ÷ YTD ${PY}). Mantiene la estacionalidad del año anterior al ritmo actual.<br>
+      <b>YTD + ppto restante</b>: YTD real + presupuesto de los meses que faltan.<br>
+      <b>Rango ±1σ</b>: desviación típica de la ratio mensual real/${PY} en los meses cerrados (mínimo 3%), combinada para los meses restantes.<br>
+      <b>Utilización y tarifas</b>: medias ponderadas por horas (disponibles o facturadas).<br>
+      <b>Headcount</b>: foto del último mes cerrado; en la descomposición del crecimiento se usa el headcount medio.</div></details></div></div>
+    <div class="card rise" style="margin-top:14px;--i:2"><div class="card-hd"><h3>Datos mensuales</h3>${segHtml('datosM', m, [['rev', 'Ingresos'], ['gp', 'GP'], ['ebitda', 'EBITDA']])}</div>${mt}</div>
+    <div class="card rise" style="margin-top:14px;--i:3"><div class="card-hd"><h3>Mapeo de filas del Excel</h3><span class="meta">fila · etiqueta encontrada en la columna A</span></div><div class="tbl-wrap" style="max-height:420px;overflow:auto"><table class="tbl"><thead><tr><th>Concepto</th><th>Fila</th><th style="text-align:left">Etiqueta en el Excel</th><th>Real YTD</th><th>${PY} YTD</th><th>Objetivo FY</th></tr></thead><tbody>${mrows}</tbody></table></div>
+    <div class="note">Si la estructura de la pestaña cambia (filas insertadas o eliminadas), aquí se ve de inmediato qué etiqueta hay ahora en cada fila leída. Los números de fila están al principio de <code>bu_dashboard_v3.html</code>, en la constante ROW y LINES.</div></div>`);
+}
+
+const VIEWS = { resumen: vResumen, puente: vPuente, pyl: vPyl, lineas: vLineas, calidad: vCalidad, capacidad: vCapacidad, escenarios: vEscenarios, datos: vDatos };
+
+/* ─── Resumen en texto (portapapeles) ─── */
+function summaryText() {
+  const d = D, n = d.closed, a = (s) => s.att != null ? pct0(s.att) + ' del ppto' : 'sin ppto';
+  const L = [`BU Data & Analytics AI · ${FY} · cierre a ${d.monthLabel} (${n}/12)`, '',
+    `Ingresos: ${fM(d.rev.actYTD)} M€ (${a(d.rev)}, ${dRel(d.rev.actYTD, d.rev.pyYTD).val} vs ${PY})`,
+    `GP Ejecución: ${fM(d.gp.actYTD)} M€ (${a(d.gp)}, ${dRel(d.gp.actYTD, d.gp.pyYTD).val} vs ${PY}), %GM ${pct(d.gm.ytd)}`,
+    `EBITDA: ${fM(d.ebitda.actYTD)} M€ (${a(d.ebitda)}, ${dRel(d.ebitda.actYTD, d.ebitda.pyYTD).val} vs ${PY})`,
+    `Utilización ${pct(d.util.actYTD)} · Heads ${f0(d.heads.actYTD)} · Subcontratación ${pct(d.sub.actYTD)}`, '',
+    `Forecast de cierre: ingresos ${fM(d.rev.forecast)} M€ (${pct0(d.rev.forecast / d.rev.tgt)} del objetivo), GP ${fM(d.gp.forecast)} M€ (${pct0(d.gp.forecast / d.gp.tgt)}), EBITDA ${fM(d.ebitda.forecast)} M€ (${pct0(d.ebitda.forecast / d.ebitda.tgt)})`, '', 'Señales:']
+    .concat(signals(d).slice(0, 5).map(s => '- ' + s.x));
+  return L.join('\n');
+}
+/* ═══════════════════════════════════════════════════════════════
+   MAIN · eventos, carga de Excel, tema, impresión
+   ═══════════════════════════════════════════════════════════════ */
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* sin almacenamiento */ } },
+  del(k) { try { localStorage.removeItem(k); } catch (e) { /* sin almacenamiento */ } },
+};
+let toastT;
+function toast(msg, err) {
+  const t = $('#toast'); t.textContent = msg; t.className = err ? 'err' : ''; t.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, err ? 7000 : 2800);
+}
+
+/* ─── Render ─── */
+function renderMonths() {
+  $('#months').innerHTML = MONTHS.map((m, i) => `<button type="button" class="m-chip" data-act="cut" data-val="${i + 1}" aria-pressed="${D.closed === i + 1}" ${i + 1 > D.closedMax ? 'disabled' : ''} title="${i + 1 > D.closedMax ? 'Mes sin datos reales' : 'Ver el cierre a ' + m}">${m}</button>`).join('');
+  $('#tb-note').textContent = D.closed < D.closedMax ? `Estás viendo el cierre de ${D.monthLabel}. Último mes con datos: ${MONTHS[D.closedMax - 1]}.` : `Último mes cerrado: ${D.monthLabel}`;
+  $('#period').textContent = `${FY} · ${D.closed}/12 · YTD ${D.monthLabel}`;
+}
+function render(anim = true) {
+  if (!D) return;
+  ANIM = anim; tipHide();
+  try { VIEWS[S.view](); } catch (err) { console.error(err); toast('Error al pintar la vista: ' + err.message, true); }
+  ANIM = true;
+}
+function go(v, push = true) {
+  if (!VIEWS[v]) v = 'resumen';
+  S.view = v; S.editSig = null;
+  $$('.view').forEach(s => s.classList.toggle('active', s.id === 'v-' + v));
+  $$('.nav-item').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === v)));
+  if (push) { try { history.replaceState(null, '', '#' + v); } catch (e) { /* file:// */ } }
+  $('#content').scrollTo({ top: 0, behavior: 'auto' });
+  render();
+}
+function setCut(c) { D = buildData(c); S.cut = D.closed; S.sim = null; renderMonths(); render(); }
+
+/* ─── Carga del Excel ─── */
+function showApp() { $('#empty').hidden = true; $('#views').hidden = false; $('#toolbar').hidden = false; $('#period').hidden = false; $('#btn-copy').hidden = false; $('#btn-print').hidden = false; }
+function parseFile(file) {
+  if (!/\.xlsx?$/i.test(file.name)) { toast('Arrastra un archivo Excel (.xlsx o .xls).', true); return; }
+  if (typeof XLSX === 'undefined') { toast('No se ha podido cargar SheetJS. Copia la carpeta vendor/ junto al HTML o conecta a internet.', true); return; }
+  const rd_ = new FileReader();
+  rd_.onerror = () => toast('No se pudo leer el archivo.', true);
+  rd_.onload = e => {
+    try {
+      const wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+      const ws = wb.Sheets['ANALYTICS'];
+      if (!ws) throw new Error('No se encuentra la pestaña «ANALYTICS». Pestañas: ' + wb.SheetNames.join(', '));
+      const grid = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true, defval: null });
+      setGrid(grid);
+      S.file = { name: file.name, size: file.size, title: String((grid[0] || [])[0] || '') };
+      S.sim = null; S.line = 'tot';
+      D = buildData(null); S.cut = D.closed;
+      $('#file-badge').textContent = file.name; $('#file-badge').title = file.name;
+      showApp(); renderMonths(); go(location.hash.slice(1) in VIEWS ? location.hash.slice(1) : S.view, false);
+      const bad = runChecks(D).filter(c => c.lvl !== 'ok').length;
+      toast(bad ? `Datos cargados con ${bad} aviso${bad > 1 ? 's' : ''}. Revisa «Datos y calidad».` : `Datos cargados: cierre a ${D.monthLabel} ${FY}.`);
+    } catch (err) { console.error(err); toast(err.message, true); }
+  };
+  rd_.readAsArrayBuffer(file);
+}
+
+/* ─── Tema claro/oscuro ─── */
+const root = document.documentElement;
+function themeIcon() {
+  const dark = root.getAttribute('data-theme') === 'dark';
+  $('#theme-icon').innerHTML = dark ? '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>' : '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+}
+function setTheme(t) { root.setAttribute('data-theme', t); themeIcon(); render(); }
+$('#theme-btn').addEventListener('click', e => {
+  if (e.altKey) { store.del('bu-theme'); setTheme(matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); toast('Tema automático (sigue al sistema).'); return; }
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; store.set('bu-theme', next); setTheme(next);
+});
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => { if (!store.get('bu-theme')) setTheme(e.matches ? 'light' : 'dark'); });
+window.addEventListener('bu:stylechange', () => requestAnimationFrame(() => render()));
+themeIcon();
+
+/* ─── Eventos ─── */
+$('#nav').addEventListener('click', e => { const b = e.target.closest('.nav-item'); if (b && D) go(b.dataset.v); });
+$('#nav').addEventListener('keydown', e => {
+  if (!['ArrowDown', 'ArrowUp'].includes(e.key)) return;
+  const items = $$('.nav-item'), i = items.indexOf(document.activeElement); if (i < 0) return;
+  e.preventDefault(); const nx = items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length]; nx.focus();
+});
+$('#content').addEventListener('click', e => {
+  const t = e.target.closest('[data-act]'); if (!t || !D) return;
+  const a = t.dataset.act;
+  if (a === 'cut') return setCut(+t.dataset.val);
+  if (a === 'seg') { S[t.dataset.grp] = t.dataset.val; return render(); }
+  if (a === 'line') { S.line = t.dataset.val; return render(); }
+  if (a === 'sort') { const k = t.dataset.k; S.sort = S.sort.k === k ? { k, dir: -S.sort.dir } : { k, dir: k === 'n' ? 1 : -1 }; return render(); }
+  if (a === 'sigmore') { S.sigAll = !S.sigAll; return render(); }
+  if (a === 'signote') { S.editSig = t.dataset.id; render(); const i = $('#sig-in'); if (i) i.focus(); return; }
+  if (a === 'sigsave') { const v = ($('#sig-in').value || '').trim(), k = D.closed + '|' + t.dataset.id; if (v) NOTES[k] = v; else delete NOTES[k]; saveNotes(); S.editSig = null; return render(); }
+  if (a === 'sigdel') { delete NOTES[D.closed + '|' + t.dataset.id]; saveNotes(); return render(); }
+  if (a === 'simreset') { simInit(); return simUpdate(true); }
+  if (a === 'simreq') { simRequired(t.dataset.w); return simUpdate(true); }
+});
+$('#content').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.matches('tr.click')) { S.line = e.target.dataset.val; render(); }
+  if (e.key === 'Enter' && e.target.id === 'sig-in') { const b = $('[data-act="sigsave"]'); if (b) b.click(); }
+  if (e.key === 'Escape' && S.editSig) { S.editSig = null; render(); }
+});
+$('#content').addEventListener('input', e => { const k = e.target.dataset && e.target.dataset.sim; if (k && S.sim) { S.sim[k] = parseFloat(e.target.value); simUpdate(false); } });
+$('#content').addEventListener('mousemove', e => { const c = e.target.closest('[data-tip]'); if (c) tipShow(c.dataset.tip, e); });
+$('#content').addEventListener('mouseout', e => { if (e.target.closest('[data-tip]') && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-tip]'))) tipHide(); });
+$('#content').addEventListener('scroll', tipHide, { passive: true });
+
+$('#browse').addEventListener('click', () => $('#file-input').click());
+$('#btn-load').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('#file-input').click(); } });
+$('#file-input').addEventListener('change', e => { if (e.target.files[0]) parseFile(e.target.files[0]); e.target.value = ''; });
+let dc = 0;
+document.addEventListener('dragenter', e => { e.preventDefault(); dc++; $('#drag-ov').classList.add('on'); });
+document.addEventListener('dragleave', () => { dc = Math.max(0, dc - 1); if (!dc) $('#drag-ov').classList.remove('on'); });
+document.addEventListener('dragover', e => e.preventDefault());
+document.addEventListener('drop', e => { e.preventDefault(); dc = 0; $('#drag-ov').classList.remove('on'); const f = e.dataTransfer.files[0]; if (f) parseFile(f); });
+
+$('#btn-copy').addEventListener('click', async () => {
+  const t = summaryText();
+  try { await navigator.clipboard.writeText(t); toast('Resumen copiado al portapapeles.'); }
+  catch (err) { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast('Resumen copiado al portapapeles.'); } catch (e2) { toast('No se pudo copiar. Selecciona el texto manualmente.', true); } ta.remove(); }
+});
+$('#btn-print').addEventListener('click', () => window.print());
+let printPrev = null;
+window.addEventListener('beforeprint', () => {
+  if (!D) return;
+  printPrev = { theme: root.getAttribute('data-theme'), view: S.view }; root.setAttribute('data-theme', 'light'); ANIM = false;
+  Object.keys(VIEWS).forEach(v => { S.view = v; try { VIEWS[v](); } catch (err) { console.error(err); } });
+  S.view = printPrev.view; ANIM = true;
+});
+window.addEventListener('afterprint', () => { if (!printPrev) return; root.setAttribute('data-theme', printPrev.theme); printPrev = null; render(false); });
+
+/* Redibujo al cambiar el ancho (sin reanimar) */
+let lastW = 0, rT;
+new ResizeObserver(es => { const w = Math.round(es[0].contentRect.width); if (Math.abs(w - lastW) < 2) return; lastW = w; clearTimeout(rT); rT = setTimeout(() => render(false), 160); }).observe($('#content'));
+
+$('#ver').textContent = VERSION;
+const h0 = location.hash.slice(1); if (VIEWS[h0]) S.view = h0;
+$$('.view').forEach(s => s.classList.toggle('active', s.id === 'v-' + S.view)); $$('.nav-item').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === S.view)));
+
+</script>
+</body>
+</html>
